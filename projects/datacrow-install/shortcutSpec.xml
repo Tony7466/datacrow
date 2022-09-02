@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<shortcuts>
+
+  <programGroup defaultName="Data Crow" location="applications"/>
+
+  <skipIfNotSupported/>
+               
+  <shortcut
+     name="Data Crow 32bit"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$INSTALL_PATH\datacrow32bit.exe"
+     workingDirectory="$INSTALL_PATH"
+     commandLine=""
+     description="Data Crow"
+     iconFile="$INSTALL_PATH\icons\datacrow.ico"
+     initialState="normal"
+     iconIndex="0">
+   </shortcut>
+   
+  <shortcut
+     name="Data Crow 64bit"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$INSTALL_PATH\datacrow64bit.exe"
+     workingDirectory="$INSTALL_PATH"
+     commandLine=""
+     description="Data Crow"
+     iconFile="$INSTALL_PATH\icons\datacrow.ico"
+     initialState="normal"
+     iconIndex="0">
+   </shortcut>
+   
+   <shortcut
+     name="Data Crow Readme"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$INSTALL_PATH\readme\readme.txt"
+     workingDirectory="$INSTALL_PATH"
+     commandLine=""
+     description="Data Crow"
+     initialState="normal"
+     iconIndex="0">
+   </shortcut>
+   
+   <shortcut
+     name="Data Crow Change Log"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$INSTALL_PATH\readme\changelog.txt"
+     workingDirectory="$INSTALL_PATH"
+     commandLine=""
+     description="Data Crow"
+     initialState="normal"
+     iconIndex="0">
+   </shortcut>
+   
+</shortcuts>

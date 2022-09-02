@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="_source"/>
+	<classpathentry kind="lib" path="/datacrow-server/webapp/datacrow/WEB-INF/lib/javax.faces-2.2.9.jar"/>
+	<classpathentry kind="output" path="_classes"/>
+</classpath>

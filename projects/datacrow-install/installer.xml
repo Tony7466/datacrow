@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<installation version="1.0">
+
+    <info>
+        <appname>Data Crow</appname>
+        <appversion>4.1.1</appversion>
+        <authors>
+            <author name="Robert Jan van der Waals" email="rwaals@datacrow.net"/>
+        </authors>
+        <url>http://www.datacrow.net</url>
+        <javaversion>1.7</javaversion>
+    </info>
+    
+    <guiprefs width="600" height="400" resizable="no"/>
+    
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+    
+    <resources>
+        <res id="HTMLLicencePanel.licence" src="datacrow-build/staging/dc-client/readme/gpl.html"/>
+        <res id="HTMLInfoPanel.info" src="datacrow-install/donate.html"/>
+        <res id="shortcutSpec.xml" src="datacrow-install/shortcutSpec.xml"/>
+        <res id="Unix_shortcutSpec.xml" src="datacrow-install/Unix_shortcutSpec.xml"/>
+        <res src="datacrow-install/images/border.png" id="Installer.image.0"/>
+        <res src="datacrow-install/images/border.png" id="Installer.image.1"/>
+        <res src="datacrow-install/images/border.png" id="Installer.image.2"/>
+        <res src="datacrow-install/images/border.png" id="Installer.image.3"/>
+        <res src="datacrow-install/images/border.png" id="Installer.image.4"/>
+        <res src="datacrow-install/images/border.png" id="Installer.image.5"/>
+        <res src="datacrow-install/images/border.png" id="Installer.image.6"/>
+        <res src="datacrow-install/images/border.png" id="Installer.image.7"/>
+    </resources>
+    
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="HTMLLicencePanel"/>
+        <panel classname="HTMLInfoPanel"/>
+        <panel classname="TargetPanel"/> 
+        <panel classname="PacksPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="ShortcutPanel"/>
+        <panel classname="FinishPanel"/>
+    </panels>
+    
+    <packs>
+        <pack name="Data Crow" required="yes" preselected="yes">
+            <description>Data Crow</description>
+            <file src="datacrow-build/staging/dc-client/log4j.properties" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/datacrow32bit.exe" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/datacrow64bit.exe" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/datacrow32bit" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/datacrow64bit" targetdir="$INSTALL_PATH"/>            
+            <file src="datacrow-build/staging/dc-client/datacrow.jar" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/fonts" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/readme" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/services" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/resources" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/reports" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/plugins" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/icons" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/help" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/modules" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/upgrade" targetdir="$INSTALL_PATH"/>
+            <file src="datacrow-build/staging/dc-client/lib/datacrow-core.jar" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/datacrow-server.jar" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/apache-tika" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/bol" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/chart" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/commons" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/hsqldb" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/html" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/jacksum" targetdir="$INSTALL_PATH/lib"/>     
+            <file src="datacrow-build/staging/dc-client/lib/jasper" targetdir="$INSTALL_PATH/lib"/>       
+            <file src="datacrow-build/staging/dc-client/lib/jaudiotagger" targetdir="$INSTALL_PATH/lib"/>   
+            <file src="datacrow-build/staging/dc-client/lib/javahelp" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/jebml" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/json" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/laf" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/log4j" targetdir="$INSTALL_PATH/lib"/>            
+            <file src="datacrow-build/staging/dc-client/lib/pdf" targetdir="$INSTALL_PATH/lib"/> 
+            <file src="datacrow-build/staging/dc-client/lib/tmdb" targetdir="$INSTALL_PATH/lib"/>  
+            <file src="datacrow-build/staging/dc-client/lib/xml" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/xml-rpc" targetdir="$INSTALL_PATH/lib"/>  
+            <file src="datacrow-build/staging/dc-client/lib/zip" targetdir="$INSTALL_PATH/lib"/>
+        </pack>
+    </packs>
+    
+    <native type="izpack" name="ShellLink.dll">
+      <os family="windows" />
+    </native>
+    <native type="izpack" name="ShellLink_x64.dll">
+      <os family="windows" />
+    </native>    
+    
+</installation>
