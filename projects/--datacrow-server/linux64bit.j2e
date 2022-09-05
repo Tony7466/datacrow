@@ -1,1 +1,0 @@
-"C:\Program Files\Jar2Exe Wizard\j2ewiz" /jar C:\Users\RJ\Data\Development\projects\datacrow\empty.jar /o C:\Users\RJ\Data\Development\projects\datacrow\datacrow-server64bit /m net.datacrow.server.DcServer /type console /minjre 1.6 /platform linux /checksum /amd64 /config "option -Xmx1024m" /config "classpath datacrow-server.jar"
