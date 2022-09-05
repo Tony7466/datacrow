@@ -58,7 +58,7 @@ import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
  */
 public class Backup extends Thread {
     
-    private static Logger logger = Logger.getLogger(Backup.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(Backup.class.getName());
 
     private File directory;
     private IBackupRestoreClient client;

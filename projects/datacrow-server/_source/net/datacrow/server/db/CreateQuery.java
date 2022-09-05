@@ -42,7 +42,7 @@ import org.apache.log4j.Logger;
 
 public class CreateQuery extends Query {
 
-    private final static Logger logger = Logger.getLogger(CreateQuery.class.getName());
+    private final static DcLogManager logger = DcLogManager.getLogger(CreateQuery.class.getName());
     
     public CreateQuery(int module) {
         super(null, module);

@@ -47,7 +47,7 @@ import org.apache.log4j.Logger;
  */
 public class DcWebServer {
     
-    private static Logger logger = Logger.getLogger(DcWebServer.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(DcWebServer.class.getName());
     
     private static final String context = "/datacrow";
     

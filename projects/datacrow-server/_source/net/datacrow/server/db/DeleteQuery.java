@@ -47,7 +47,7 @@ import org.apache.log4j.Logger;
 
 public class DeleteQuery extends Query {
     
-    private final static Logger logger = Logger.getLogger(DeleteQuery.class.getName());
+    private final static DcLogManager logger = DcLogManager.getLogger(DeleteQuery.class.getName());
     
     private DcObject dco;
     

@@ -36,7 +36,7 @@ import org.apache.log4j.Logger;
 
 public class DcServerSession {
 	
-	private transient static Logger logger = Logger.getLogger(DcServerSession.class);
+	private transient static DcLogManager logger = DcLogManager.getLogger(DcServerSession.class);
 	
 	private Socket socket;
 	private DcServerSessionRequestHandler ct;

@@ -58,7 +58,7 @@ import net.datacrow.settings.DcSettings;
 
 public class DcServer implements Runnable, IStarterClient, IClient {
 	
-	private static Logger logger;
+	private static DcLogManager logger;
 	
 	protected int port;
 	
@@ -471,7 +471,7 @@ public class DcServer implements Runnable, IStarterClient, IClient {
 
     @Override
     public void notifyLog4jConfigured() {
-        logger = Logger.getLogger(DcServer.class.getName());
+        logger = DcLogManager.getLogger(DcServer.class.getName());
     }
 
     @Override

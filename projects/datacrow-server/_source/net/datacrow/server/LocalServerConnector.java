@@ -69,7 +69,7 @@ import org.apache.log4j.Logger;
  */
 public class LocalServerConnector extends Connector {
 	
-	private static Logger logger = Logger.getLogger(LocalServerConnector.class.getName());
+	private static DcLogManager logger = DcLogManager.getLogger(LocalServerConnector.class.getName());
 	
 	private SecuredUser su;
 	

@@ -66,7 +66,7 @@ import org.apache.log4j.Logger;
  */
 public class SystemUpgrade {
     
-    private static Logger logger = Logger.getLogger(SystemUpgrade.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(SystemUpgrade.class.getName());
     
     private boolean dbInitialized;
     

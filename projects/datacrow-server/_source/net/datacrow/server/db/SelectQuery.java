@@ -42,7 +42,7 @@ import org.apache.log4j.Logger;
 
 public class SelectQuery extends Query {
     
-    private final static Logger logger = Logger.getLogger(SelectQuery.class.getName());
+    private final static DcLogManager logger = DcLogManager.getLogger(SelectQuery.class.getName());
     
     private int[] fields;
     private DataFilter df;

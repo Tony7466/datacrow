@@ -55,7 +55,7 @@ import de.schlichtherle.truezip.socket.sl.IOPoolLocator;
  */
 public class Restore extends Thread {
     
-    private static Logger logger = Logger.getLogger(Restore.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(Restore.class.getName());
     
     private Version version;
     private File source;

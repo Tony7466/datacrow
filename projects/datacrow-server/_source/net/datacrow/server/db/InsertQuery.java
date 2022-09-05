@@ -46,7 +46,7 @@ import org.apache.log4j.Logger;
 
 public class InsertQuery extends Query {
     
-    private final static Logger logger = Logger.getLogger(InsertQuery.class.getName());
+    private final static DcLogManager logger = DcLogManager.getLogger(InsertQuery.class.getName());
     
     private DcObject dco;
     

@@ -44,6 +44,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 import net.datacrow.console.ComponentFactory;
@@ -179,13 +180,13 @@ public class SettingsView extends DcDialog implements ActionListener {
         SettingsPanel nodePanel;
         DefaultMutableTreeNode oChild;
         SettingsPanel nodePanelChild;
-        for (Enumeration<DefaultMutableTreeNode> enumerator = root.children(); enumerator.hasMoreElements(); ) {
-            oCurrent = enumerator.nextElement();
+        for (Enumeration<TreeNode> enumerator = root.children(); enumerator.hasMoreElements(); ) {
+            oCurrent = (DefaultMutableTreeNode)  enumerator.nextElement();
             nodePanel = (SettingsPanel) oCurrent.getUserObject();
             panels.add(nodePanel);
 
-            for (Enumeration<DefaultMutableTreeNode> enumChilds = oCurrent.children(); enumChilds.hasMoreElements(); ) {
-                oChild = enumChilds.nextElement();
+            for (Enumeration<TreeNode> enumChilds = oCurrent.children(); enumChilds.hasMoreElements(); ) {
+                oChild = (DefaultMutableTreeNode) enumChilds.nextElement();
                 nodePanelChild = (SettingsPanel) oChild.getUserObject();
                 panels.add(nodePanelChild);
             }

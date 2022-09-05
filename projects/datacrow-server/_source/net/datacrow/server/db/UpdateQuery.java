@@ -51,7 +51,7 @@ import org.apache.log4j.Logger;
 
 public class UpdateQuery extends Query {
     
-    private final static Logger logger = Logger.getLogger(UpdateQuery.class.getName());
+    private final static DcLogManager logger = DcLogManager.getLogger(UpdateQuery.class.getName());
     
     private DcObject dco;
 

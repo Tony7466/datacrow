@@ -53,7 +53,7 @@ import org.apache.log4j.Logger;
  */
 public class Conversions {
 
-    private static Logger logger = Logger.getLogger(Conversions.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(Conversions.class.getName());
 
     private Collection<Conversion> conversions = new ArrayList<Conversion>();
     private String filename = DcConfig.getInstance().getUpgradeDir() + "conversions.properties";

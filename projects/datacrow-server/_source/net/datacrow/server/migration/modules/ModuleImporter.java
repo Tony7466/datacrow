@@ -64,7 +64,7 @@ import org.apache.log4j.Logger;
  */
 public class ModuleImporter {
     
-    private static Logger logger = Logger.getLogger(ModuleImporter.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(ModuleImporter.class.getName());
 
 	private File file;
 	private Importer importer;

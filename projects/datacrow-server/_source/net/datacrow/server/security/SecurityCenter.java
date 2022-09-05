@@ -62,7 +62,7 @@ import org.apache.log4j.Logger;
  */
 public class SecurityCenter {
     
-    private static Logger logger = Logger.getLogger(SecurityCenter.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(SecurityCenter.class.getName());
     private static SecurityCenter instance = new SecurityCenter();
     
     // all logged on users

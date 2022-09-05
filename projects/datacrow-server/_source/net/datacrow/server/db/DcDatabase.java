@@ -55,7 +55,7 @@ import org.apache.log4j.Logger;
  */
 public class DcDatabase {
 
-    private static Logger logger = Logger.getLogger(DcDatabase.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(DcDatabase.class.getName());
     
     private QueryQueue queue;
     private Version originalVersion;

@@ -64,7 +64,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class Query {
     
-    private final static Logger logger = Logger.getLogger(Query.class.getName());
+    private final static DcLogManager logger = DcLogManager.getLogger(Query.class.getName());
     private final int module;
     
     private SecuredUser su;

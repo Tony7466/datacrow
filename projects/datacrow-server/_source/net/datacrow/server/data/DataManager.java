@@ -63,7 +63,7 @@ import org.apache.log4j.Logger;
  */ 
 public class DataManager {
 
-    private static Logger logger = Logger.getLogger(DataManager.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(DataManager.class.getName());
     
     private static DataManager instance = new DataManager();
     

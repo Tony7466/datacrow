@@ -67,7 +67,7 @@ import org.hsqldb.error.ErrorCode;
  */
 public class DatabaseManager {
 
-    private static Logger logger = Logger.getLogger(DatabaseManager.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(DatabaseManager.class.getName());
     
     private static DatabaseManager instance = new DatabaseManager();
     

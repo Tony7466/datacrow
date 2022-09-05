@@ -36,6 +36,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Iterator;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 import net.datacrow.core.fileimporter.FileImporter;
 import net.datacrow.core.modules.DcModules;
 import net.datacrow.core.objects.DcImageIcon;
@@ -130,7 +132,7 @@ public class EbookImport extends FileImporter {
                 InputStream is = null;
                 try {
                     is = new FileInputStream(new File(filename));
-                    org.xml.sax.ContentHandler textHandler = new BodyContentHandler();
+                    ContentHandler textHandler = new BodyContentHandler();
                     Metadata metadata = new Metadata();
                     ParseContext context = new ParseContext();
                     Parser parser = null;

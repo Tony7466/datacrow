@@ -52,7 +52,7 @@ import org.apache.log4j.Logger;
  */
 public class Conversion {
 
-    private static Logger logger = Logger.getLogger(Conversion.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(Conversion.class.getName());
     
     private int moduleIdx;
     

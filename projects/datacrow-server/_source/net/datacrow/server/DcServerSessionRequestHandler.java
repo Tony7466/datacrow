@@ -80,7 +80,7 @@ import net.datacrow.server.security.SecurityCenter;
 
 public class DcServerSessionRequestHandler extends Thread {
 		
-	private static Logger logger = Logger.getLogger(DcServerSessionRequestHandler.class);
+	private static DcLogManager logger = DcLogManager.getLogger(DcServerSessionRequestHandler.class);
 	
 	private Socket socket;
 	private boolean canceled = false;

@@ -38,7 +38,7 @@ import org.apache.log4j.Logger;
  */
 public class QueryQueue extends Thread {
 
-    private static Logger logger = Logger.getLogger(QueryQueue.class.getName());
+    private static DcLogManager logger = DcLogManager.getLogger(QueryQueue.class.getName());
 
     private final LinkedList<Query> lQueryQueue = new LinkedList<Query>();
     private boolean isLazy = true;
