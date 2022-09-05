@@ -55,7 +55,7 @@ public class DriveManager {
     public static final int _PRECISION_MEDIUM = 1;
     public static final int _PRECISION_HIGHEST = 2;
     
-    private static Logger logger = DcLogManager.getLogger(DriveManager.class.toString());
+    private static Logger logger = DcLogManager.getLogger(DriveManager.class.getName());
 
     private static DriveManager instance = new DriveManager();
     

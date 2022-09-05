@@ -24,7 +24,7 @@ import net.datacrow.core.utilities.CompressedBlockOutputStream;
 
 public class DcServerConnection {
 
-    private transient static Logger logger = DcLogManager.getLogger(DcServerConnection.class.toString());
+    private transient static Logger logger = DcLogManager.getLogger(DcServerConnection.class.getName());
     
     private boolean isAvailable = true;
     

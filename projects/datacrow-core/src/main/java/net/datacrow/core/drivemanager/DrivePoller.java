@@ -41,7 +41,7 @@ import net.datacrow.core.utilities.CoreUtilities;
  */
 public class DrivePoller {
     
-    private static Logger logger = DcLogManager.getLogger(DrivePoller.class.toString());
+    private static Logger logger = DcLogManager.getLogger(DrivePoller.class.getName());
     
     private Task task;
     

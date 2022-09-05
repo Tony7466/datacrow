@@ -1,76 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="_source"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/datacrow-core">
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>
-			<attribute name="module" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
-			<attribute name="module" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="empty.jar"/>
-	<classpathentry kind="lib" path="lib/hsqldb/hsqldb.jar"/>
-	<classpathentry kind="lib" path="lib/hsqldb/sqltool.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/apache-jstl-9.2.1.v20140609.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/ecj-4.4.2.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/servlet-api-3.1.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/tomcat-dbcp.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/tomcat-embed-core.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/tomcat-embed-el.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/tomcat-embed-jasper.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/tomcat-embed-logging-juli.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/tomcat-embed-logging-log4j.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat/tomcat-embed-websocket.jar"/>
-	<classpathentry kind="lib" path="webapp/datacrow/WEB-INF/lib/bootstrap-1.0.10.jar"/>
-	<classpathentry kind="lib" path="webapp/datacrow/WEB-INF/lib/javax.faces-2.2.9.jar"/>
-	<classpathentry kind="lib" path="webapp/datacrow/WEB-INF/lib/primefaces-6.0.jar"/>
-	<classpathentry kind="lib" path="webapp/datacrow/WEB-INF/lib/weld-servlet-2.2.0.Final.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/commons/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/commons/commons-collections4-4.1.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/commons/commons-dbcp2-2.1.1.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/commons/commons-io-2.5.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/commons/commons-lang3-3.6.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/commons/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/commons/commons-pool2-2.4.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/html/cobra.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/html/js.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jacksum/jacksum.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/commons-beanutils-1.8.0.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/commons-digester-2.1.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/commons-discovery-0.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/commons-math-1.0.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/commons-validator-1.3.1.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/commons-vfs-1.0.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/groovy-all-2.0.1.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/jasperreports-6.2.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/jasperreports-fonts-6.2.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/jasperreports-functions-6.2.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jasper/jasperreports-javaflow-6.2.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jaudiotagger/jaudiotagger-2.2.0.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/jebml/jebml.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/json/json-io-2.8.1.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/log4j/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/pdf/bcmail-jdk14-132.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/pdf/bcprov-jdk14-132.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/pdf/fontbox-1.8.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/pdf/ISBNExtractor-1.0.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/pdf/pdfbox-1.8.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/pdf/PDFRenderer.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml/batik-all-1.7.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml/serializer-2.7.0.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml/xalan-2.7.0.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml/xercesImpl-2.7.1.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml/xml-apis-1.3.04.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml/xml-apis-ext-1.3.04.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml/xmlgraphics-commons-1.4.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml/xsltc.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml-rpc/ws-commons-util-1.0.2.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml-rpc/xmlrpc-client-3.1.3.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml-rpc/xmlrpc-common-3.1.3.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/xml-rpc/xmlrpc-server-3.1.3.jar"/>
-	<classpathentry kind="lib" path="U:/Projects/Data Crow/projects/datacrow-core/lib/zip/truezip_7_7_6.jar"/>
-	<classpathentry kind="output" path="_build"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
