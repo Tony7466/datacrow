@@ -127,9 +127,11 @@ public class InsertQuery extends Query {
             
             saveReferences(references, dco.getID());
             
+            InsertQuery insertQuery;
             for (Picture p : pictures) {
                 try {
-                    new InsertQuery(getUser(), p).run();
+                	insertQuery = new InsertQuery(getUser(), p);
+                	insertQuery.run();
                     saveImage(p);
                 } catch (Exception e) {
                     logger.error("An error occured while inserting the following picture: " + p, e);
@@ -146,7 +148,8 @@ public class InsertQuery extends Query {
                 for (DcObject child : dco.getCurrentChildren()) {
                     try {
                         child.setValue(child.getParentReferenceFieldIndex(), dco.getID());
-                        new InsertQuery(getUser(), child).run();
+                        insertQuery = new InsertQuery(getUser(), child);
+                        insertQuery.run();
                     } catch (Exception e) {
                         logger.error("An error occured while inserting the following child object: " + child, e);
                     }                         
@@ -168,11 +171,5 @@ public class InsertQuery extends Query {
         }
         
         return null;
-    }
-    
-    @Override
-    protected void finalize() throws Throwable {
-        clear();
-        super.finalize();
     }
 }

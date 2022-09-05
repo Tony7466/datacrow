@@ -192,10 +192,4 @@ public class DeleteQuery extends Query {
         
         return null;
     }
-    
-    @Override
-    protected void finalize() throws Throwable {
-        clear();
-        super.finalize();
-    }
 }

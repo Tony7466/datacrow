@@ -236,12 +236,17 @@ public class Conversion {
                     moduleIdx, refMod.getIndex(), DcModules.get(moduleIdx).getField(columnName).getIndex()));
         
             DcObject mapping = mappingMod.getItem();
+            
+            InsertQuery insertQuery;
+            
             while (rs.next()) {
                 String ID = rs.getString(1);
                 String referenceID = rs.getString(2);
                 mapping.setValue(DcMapping._A_PARENT_ID, ID);
                 mapping.setValue(DcMapping._B_REFERENCED_ID, referenceID);
-                new InsertQuery(getUser(), mapping).run();
+                
+                insertQuery = new InsertQuery(getUser(), mapping);
+                insertQuery.run();
             }
             
             rs.close();
@@ -267,6 +272,9 @@ public class Conversion {
         try {
             ResultSet rs = DatabaseManager.getInstance().executeSQL(getUser(), sql);
             
+            SelectQuery selectQuery;
+            InsertQuery insertQuery;
+            
             while (rs.next()) {
                 String name = rs.getString(1);
                 
@@ -274,14 +282,18 @@ public class Conversion {
                 DcObject reference = refMod.getItem();
                 reference.setValue(DcProperty._A_NAME, name);
                 
-                List<DcObject> items = new SelectQuery(
-                		getUser(), 
-                		new DataFilter(reference), 
-                		new int[] {DcObject._ID}).run();
+                selectQuery = 
+                		new SelectQuery(
+	                		getUser(), 
+	                		new DataFilter(reference), 
+	                		new int[] {DcObject._ID});
+                
+                List<DcObject> items = selectQuery.run();
                 
                 if (items.size() == 0) {
                     reference.setIDs();
-                    new InsertQuery(getUser(), reference).run();
+                    insertQuery = new InsertQuery(getUser(), reference);
+                    insertQuery.run();
                 }
                 
                 String sql2 = "select item.ID, property.ID from " + refMod.getTableName() + " property " +
@@ -302,9 +314,13 @@ public class Conversion {
                         mapping.setValue(DcMapping._A_PARENT_ID, itemID);
                         mapping.setValue(DcMapping._B_REFERENCED_ID, propertyID);
                         
-                        items = new SelectQuery(getUser(), mapping, null).run();
-                        if (items.size() == 0)
-                            new InsertQuery(getUser(), mapping).run();
+                        selectQuery = new SelectQuery(getUser(), mapping, null);
+                        items = selectQuery.run();
+
+                        if (items.size() == 0) {
+                        	insertQuery = new InsertQuery(getUser(), mapping);
+                        	insertQuery.run();
+                        }
                         
                     } else {
                         String sql3 = "update " + DcModules.get(getModuleIdx()).getTableName() +
@@ -312,7 +328,7 @@ public class Conversion {
                         DatabaseManager.getInstance().execute(getUser(), sql3);
                     }
                 }
-                
+
                 rs2.close();
             }
 

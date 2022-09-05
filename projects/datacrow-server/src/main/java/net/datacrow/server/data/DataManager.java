@@ -401,7 +401,10 @@ public class DataManager {
      * @param fields 
      */
     public List<DcObject> getItems(SecuredUser su, DataFilter df, int[] fields) {
-        return new SelectQuery(su, df, fields).run();
+    	SelectQuery selectQuery =  new SelectQuery(su, df, fields);
+		List<DcObject> items = selectQuery.run();
+		selectQuery.close();
+		return items;
     }
 
     /** 

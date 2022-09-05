@@ -25,12 +25,22 @@
 
 package net.datacrow.server;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.security.DigestInputStream;
+import java.security.DigestOutputStream;
+import java.security.MessageDigest;
+import java.security.Security;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import com.cedarsoftware.util.io.JsonReader;
+import com.cedarsoftware.util.io.JsonWriter;
 
 import net.datacrow.core.DcConfig;
 import net.datacrow.core.DcLogManager;
@@ -65,6 +75,8 @@ import net.datacrow.core.server.response.ServerModulesRequestResponse;
 import net.datacrow.core.server.response.ServerSQLResponse;
 import net.datacrow.core.server.response.ServerSimpleValuesResponse;
 import net.datacrow.core.server.response.ServerValueEnhancersRequestResponse;
+import net.datacrow.core.utilities.CompressedBlockInputStream;
+import net.datacrow.core.utilities.CompressedBlockOutputStream;
 import net.datacrow.server.security.SecurityCenter;
 
 public class DcServerSessionRequestHandler extends Thread {
@@ -93,11 +105,8 @@ public class DcServerSessionRequestHandler extends Thread {
 	@Override
     public void run() {
 		if (isCanceled()) return;
-		
-		
-		// TODO: reimplement request readin. Remove dependency from Json.
         
-		/*this.socket = session.getSocket();
+		this.socket = session.getSocket();
 		
 		InputStream is = null;
 		OutputStream os = null;
@@ -143,7 +152,7 @@ public class DcServerSessionRequestHandler extends Thread {
         	} catch (Exception e) {
         	    logger.debug("An error occured while closing resources", e);
         	}
-        } */
+        }
     }
 	
 	/**
@@ -153,11 +162,6 @@ public class DcServerSessionRequestHandler extends Thread {
 	 * @throws Exception
 	 */
 	private void processRequest(OutputStream os) throws Exception {
-		
-		// TODO: reimplement request writing. Remove dependency from Json.
-		
-		/*
-		
         JsonWriter jw = null;
         
         try {
@@ -199,7 +203,6 @@ public class DcServerSessionRequestHandler extends Thread {
             case ClientRequest._USER_MGT:
                 sr = processUserManagementAction((ClientRequestUser) cr);
                 break;                
-                
             default:
                 logger.error("No handler found for " + cr);
 	        }
@@ -215,7 +218,7 @@ public class DcServerSessionRequestHandler extends Thread {
 	        }
         } catch (IOException ioe) {
         	logger.error("Communication error between server and client", ioe);
-        }*/        
+        }    
 	}
 	
     /** 
