@@ -50,7 +50,7 @@ import net.datacrow.core.utilities.Rating;
  * 
  * @author Robert Jan van der Waals
  */
-public class DcValue implements Serializable, AutoCloseable {
+public class DcValue implements Serializable {
 
     private static final long serialVersionUID = 3222707222963657152L;
 
@@ -362,10 +362,5 @@ public class DcValue implements Serializable, AutoCloseable {
             sb.append(value);
         }
         return sb.toString();
-    }
-
-    @Override
-    public void close() {
-        clear();
     }
 }

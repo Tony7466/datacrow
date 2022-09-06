@@ -27,7 +27,7 @@ package net.datacrow.core.objects;
 
 import java.io.Serializable;
 
-public class DcSimpleValue implements Serializable, AutoCloseable {
+public class DcSimpleValue implements Serializable {
     
     private static final long serialVersionUID = 5332435146147496435L;
 
@@ -74,16 +74,5 @@ public class DcSimpleValue implements Serializable, AutoCloseable {
     @Override
     public String toString() {
         return name;
-    }
-
-    @Override
-    public void close() {
-        ID = null;
-        name = null;
-        
-        if (icon != null) {
-            icon.flush();
-            icon = null;
-        }
     }
 }

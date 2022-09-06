@@ -63,7 +63,7 @@ import net.datacrow.server.data.DataManager;
  * 
  * @author Robert Jan van der Waals
  */
-public abstract class Query implements AutoCloseable {
+public abstract class Query {
     
     private final static Logger logger = DcLogManager.getLogger(Query.class.getName());
     private final int module;
@@ -303,9 +303,4 @@ public abstract class Query implements AutoCloseable {
             logger.error("Could not save [" + imageFile + "]", e);
         }
     }
-    
-    @Override
-    public void close() {
-        clear();
-    }
- }
+}

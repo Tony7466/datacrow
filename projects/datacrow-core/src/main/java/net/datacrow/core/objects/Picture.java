@@ -43,7 +43,7 @@ import net.datacrow.core.utilities.CoreUtilities;
  * 
  * @author Robert Jan van der Waals
  */
-public class Picture extends DcObject implements AutoCloseable {
+public class Picture extends DcObject {
 
     private static final long serialVersionUID = 2871103592900195025L;
 
@@ -265,9 +265,4 @@ public class Picture extends DcObject implements AutoCloseable {
         
         return equals;
    }
-
-	@Override
-	public void close() {
-		unload();
-	}    
 }

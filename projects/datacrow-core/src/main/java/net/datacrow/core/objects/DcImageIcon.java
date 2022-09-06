@@ -36,7 +36,7 @@ import org.apache.logging.log4j.Logger;
 import net.datacrow.core.DcLogManager;
 import net.datacrow.core.utilities.CoreUtilities;
 
-public class DcImageIcon extends ImageIcon implements AutoCloseable {
+public class DcImageIcon extends ImageIcon {
 
 	private static final long serialVersionUID = 5371441182570021920L;
 
@@ -147,17 +147,5 @@ public class DcImageIcon extends ImageIcon implements AutoCloseable {
     	}
         
     	return bytes;
-    }
-    
-    @Override
-    public void close() {
-        try {
-            flush();
-            Image img = getImage();
-            if (img != null)
-                img.flush();
-        } catch (Exception e) {
-            logger.error(e, e);
-        }
     }
 }

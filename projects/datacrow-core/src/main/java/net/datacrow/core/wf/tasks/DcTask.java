@@ -34,7 +34,7 @@ import net.datacrow.core.modules.DcModules;
 import net.datacrow.core.objects.DcObject;
 import net.datacrow.core.utilities.CoreUtilities;
 
-public abstract class DcTask implements Runnable, AutoCloseable {
+public abstract class DcTask implements Runnable {
 
     public static int _TYPE_DELETE_TASK = 0;
 	public static int _TYPE_SAVE_TASK = 1;
@@ -154,17 +154,4 @@ public abstract class DcTask implements Runnable, AutoCloseable {
 	public boolean isCanceled() {
     	return canceled;
     }
-	
-    @Override
-    public void close() {
-        if (items != null) {
-            items.clear();
-            items = null;
-        }
-        
-        if (clients != null) {
-            clients.clear();
-            clients = null;
-        }
-    }	
 }
