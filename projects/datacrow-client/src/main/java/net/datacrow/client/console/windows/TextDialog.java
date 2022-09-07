@@ -44,9 +44,9 @@ import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.menu.TextEditMenu;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class TextDialog extends DcDialog implements ActionListener {
 

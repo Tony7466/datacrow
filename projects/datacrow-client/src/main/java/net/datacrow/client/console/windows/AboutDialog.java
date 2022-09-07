@@ -34,19 +34,20 @@ import java.net.URL;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcPictureField;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcResources;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcResources;
 
 public class AboutDialog extends DcDialog {
 
-    private static Logger logger = Logger.getLogger(AboutDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(AboutDialog.class.getName());
     
     public AboutDialog() {
         super(GUI.getInstance().getRootFrame());

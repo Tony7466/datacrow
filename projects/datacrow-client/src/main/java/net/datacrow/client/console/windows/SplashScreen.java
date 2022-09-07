@@ -36,9 +36,9 @@ import javax.swing.JWindow;
 
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.objects.DcImageIcon;
 import net.datacrow.client.util.Utilities;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.objects.DcImageIcon;
 
 public final class SplashScreen extends JWindow {
 

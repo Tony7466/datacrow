@@ -44,13 +44,13 @@ import javax.swing.JScrollPane;
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcLongTextField;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.modules.DcMediaModule;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.modules.DcMediaModule;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class ItemTypeDialog extends DcDialog implements ActionListener {
 

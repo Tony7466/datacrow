@@ -32,11 +32,11 @@ import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.components.DcMenu;
 import net.datacrow.client.console.components.DcMenuItem;
 import net.datacrow.client.console.components.panels.tree.TreePanel;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.console.IMasterView;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.Settings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.console.IMasterView;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.Settings;
 
 public class ContainerTreePanelMenuBar extends TreePanelMenuBar {
 

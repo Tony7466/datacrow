@@ -36,18 +36,19 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcUrlField;
-import net.datacrow.client.core.http.HttpConnectionUtil;
-import net.datacrow.client.core.resources.DcResources;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.http.HttpConnectionUtil;
+import net.datacrow.core.resources.DcResources;
 
 public class OpenFromUrlDialog extends DcDialog implements ActionListener {
 
-    private static Logger logger = Logger.getLogger(OpenFromUrlDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(OpenFromUrlDialog.class.getName());
     
     private DcUrlField input = ComponentFactory.getURLField(500);
     

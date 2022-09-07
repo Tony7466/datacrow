@@ -35,40 +35,41 @@ import java.util.Collection;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.components.DcPopupMenu;
 import net.datacrow.client.console.views.View;
 import net.datacrow.client.console.windows.BrowserDialog;
 import net.datacrow.client.console.windows.drivemanager.DriveManagerSingleItemMatcher;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.UserMode;
-import net.datacrow.client.core.drivemanager.DriveManager;
-import net.datacrow.client.core.drivemanager.FileInfo;
-import net.datacrow.client.core.fileimporter.FileImporter;
-import net.datacrow.client.core.fileimporter.FileImporters;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.modules.DcPropertyModule;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.objects.ValidationException;
-import net.datacrow.client.core.plugin.InvalidPluginException;
-import net.datacrow.client.core.plugin.Plugin;
-import net.datacrow.client.core.plugin.Plugins;
-import net.datacrow.client.core.reporting.Reports;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-import net.datacrow.client.core.utilities.CoreUtilities;
 import net.datacrow.client.plugins.PluginHelper;
-import net.datacrow.client.settings.definitions.DcFieldDefinition;
 import net.datacrow.client.util.Utilities;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.UserMode;
+import net.datacrow.core.drivemanager.DriveManager;
+import net.datacrow.core.drivemanager.FileInfo;
+import net.datacrow.core.fileimporter.FileImporter;
+import net.datacrow.core.fileimporter.FileImporters;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.modules.DcPropertyModule;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.objects.ValidationException;
+import net.datacrow.core.plugin.InvalidPluginException;
+import net.datacrow.core.plugin.Plugin;
+import net.datacrow.core.plugin.Plugins;
+import net.datacrow.core.reporting.Reports;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
 
 public class ViewPopupMenu extends DcPopupMenu implements ActionListener {
 
-    private static Logger logger = Logger.getLogger(ViewPopupMenu.class.getName());
+    private static Logger logger = DcLogManager.getLogger(ViewPopupMenu.class.getName());
     
     private DcObject dco;
     

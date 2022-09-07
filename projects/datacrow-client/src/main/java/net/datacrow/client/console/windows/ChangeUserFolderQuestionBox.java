@@ -35,10 +35,10 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcCheckBox;
 import net.datacrow.client.console.windows.messageboxes.QuestionBox;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class ChangeUserFolderQuestionBox extends QuestionBox {
 

@@ -32,17 +32,18 @@ import javax.swing.JMenuItem;
 import javax.swing.JRootPane;
 import javax.swing.JToolBar;
 
-import net.datacrow.client.console.ComponentFactory;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.UserMode;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.objects.DcTemplate;
-import net.datacrow.client.core.plugin.InvalidPluginException;
-import net.datacrow.client.core.plugin.Plugin;
-import net.datacrow.client.core.plugin.Plugins;
-import net.datacrow.client.core.server.Connector;
+import org.apache.logging.log4j.Logger;
 
-import org.apache.log4j.Logger;
+import net.datacrow.client.console.ComponentFactory;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.UserMode;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.objects.DcTemplate;
+import net.datacrow.core.plugin.InvalidPluginException;
+import net.datacrow.core.plugin.Plugin;
+import net.datacrow.core.plugin.Plugins;
+import net.datacrow.core.server.Connector;
 
 /**
  * Helps in placing plugins in menus and on toolbars. Is capable on deciding, with the
@@ -52,7 +53,7 @@ import org.apache.log4j.Logger;
  */
 public class PluginHelper {
     
-    private static Logger logger = Logger.getLogger(PluginHelper.class.getName());
+    private static Logger logger = DcLogManager.getLogger(PluginHelper.class.getName());
 
     public static void registerKey(JRootPane pane, String key) {
         registerKey(pane, key, -1, -1, -1);

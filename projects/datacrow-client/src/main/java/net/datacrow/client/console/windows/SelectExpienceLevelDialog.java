@@ -38,9 +38,9 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcLongTextField;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.UserMode;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.UserMode;
+import net.datacrow.core.resources.DcResources;
 
 public class SelectExpienceLevelDialog extends DcDialog implements ActionListener {
 

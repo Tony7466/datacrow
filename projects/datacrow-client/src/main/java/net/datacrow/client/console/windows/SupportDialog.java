@@ -35,18 +35,19 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFileField;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class SupportDialog extends DcDialog implements ActionListener {
     
-    private static Logger logger = Logger.getLogger(SupportDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(SupportDialog.class.getName());
 
     private DcFileField fldTarget = ComponentFactory.getFileField(false, true);
     

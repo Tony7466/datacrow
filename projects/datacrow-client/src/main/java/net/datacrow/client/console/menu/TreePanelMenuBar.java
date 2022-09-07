@@ -36,7 +36,7 @@ import net.datacrow.client.console.components.DcMenu;
 import net.datacrow.client.console.components.DcMenuBar;
 import net.datacrow.client.console.components.DcMenuItem;
 import net.datacrow.client.console.components.panels.tree.TreePanel;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.resources.DcResources;
 
 public class TreePanelMenuBar extends DcMenuBar implements ActionListener {
     

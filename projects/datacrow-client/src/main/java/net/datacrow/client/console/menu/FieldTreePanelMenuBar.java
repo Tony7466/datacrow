@@ -32,7 +32,7 @@ import net.datacrow.client.console.components.DcMenu;
 import net.datacrow.client.console.components.DcMenuItem;
 import net.datacrow.client.console.components.panels.tree.TreePanel;
 import net.datacrow.client.console.windows.GroupByDialog;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.resources.DcResources;
 
 public class FieldTreePanelMenuBar extends TreePanelMenuBar {
 

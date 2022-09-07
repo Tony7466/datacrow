@@ -49,19 +49,19 @@ import net.datacrow.client.console.components.DcColorSelector;
 import net.datacrow.client.console.components.panels.NavigationPanel;
 import net.datacrow.client.console.components.renderers.CheckBoxTableCellRenderer;
 import net.datacrow.client.console.components.tables.DcTable;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.CoreUtilities;
-import net.datacrow.client.settings.DcSettings;
-import net.datacrow.client.settings.Settings;
-import net.datacrow.client.settings.definitions.DcFieldDefinition;
-import net.datacrow.client.settings.definitions.IDefinitions;
-import net.datacrow.client.settings.definitions.QuickViewFieldDefinition;
-import net.datacrow.client.settings.definitions.QuickViewFieldDefinitions;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.settings.DcSettings;
+import net.datacrow.core.utilities.settings.Settings;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
+import net.datacrow.core.utilities.settings.definitions.IDefinitions;
+import net.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinition;
+import net.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinitions;
 
 public class QuickViewSettingsDialog extends DcDialog implements ActionListener {
 
@@ -228,7 +228,7 @@ public class QuickViewSettingsDialog extends DcDialog implements ActionListener 
             columnEnabled.setCellRenderer(CheckBoxTableCellRenderer.getInstance());
             columnEnabled.setHeaderValue(DcResources.getText("lblEnabled"));
             
-            JComboBox comboDirection = ComponentFactory.getComboBox(
+            JComboBox<Object> comboDirection = ComponentFactory.getComboBox(
                     new String[] {DcResources.getText("lblHorizontal"), DcResources.getText("lblVertical")});
 
             TableColumn columnDirection = table.getColumnModel().getColumn(2);

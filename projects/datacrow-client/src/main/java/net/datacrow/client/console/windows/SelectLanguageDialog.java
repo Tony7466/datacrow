@@ -38,14 +38,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import net.datacrow.client.console.Layout;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
 import net.datacrow.client.util.Utilities;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class SelectLanguageDialog extends NativeDialog implements ActionListener {
 
-    private JComboBox cbLanguage = new JComboBox();
+    private JComboBox<String> cbLanguage = new JComboBox<String>();
     
     public SelectLanguageDialog() {
         super((JFrame) null);

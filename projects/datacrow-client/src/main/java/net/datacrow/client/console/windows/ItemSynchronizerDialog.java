@@ -45,22 +45,22 @@ import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.components.DcProgressBar;
 import net.datacrow.client.console.components.panels.OnlineServicePanel;
 import net.datacrow.client.console.components.panels.OnlineServiceSettingsPanel;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.clients.ISynchronizerClient;
-import net.datacrow.client.core.console.IView;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.services.OnlineServices;
-import net.datacrow.client.core.services.Region;
-import net.datacrow.client.core.services.SearchMode;
-import net.datacrow.client.core.services.Servers;
-import net.datacrow.client.core.services.plugin.IServer;
-import net.datacrow.client.core.synchronizers.Synchronizer;
-import net.datacrow.client.core.synchronizers.Synchronizers;
-import net.datacrow.client.settings.DcSettings;
-import net.datacrow.client.settings.Settings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.clients.ISynchronizerClient;
+import net.datacrow.core.console.IView;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.services.OnlineServices;
+import net.datacrow.core.services.Region;
+import net.datacrow.core.services.SearchMode;
+import net.datacrow.core.services.Servers;
+import net.datacrow.core.services.plugin.IServer;
+import net.datacrow.core.synchronizers.Synchronizer;
+import net.datacrow.core.synchronizers.Synchronizers;
+import net.datacrow.core.utilities.settings.DcSettings;
+import net.datacrow.core.utilities.settings.Settings;
 
 public class ItemSynchronizerDialog extends DcDialog implements ActionListener {
     
@@ -71,7 +71,7 @@ public class ItemSynchronizerDialog extends DcDialog implements ActionListener {
     private JButton buttonClose = ComponentFactory.getButton(DcResources.getText("lblClose"));
     private DcLongTextField textHelp = ComponentFactory.getLongTextField();
     
-    private JComboBox cbItemPickMode = ComponentFactory.getComboBox();
+    private JComboBox<Object> cbItemPickMode = ComponentFactory.getComboBox();
     
     private JCheckBox checkReparseFiles = ComponentFactory.getCheckBox(DcResources.getText("lblReparseMusicFiles"));
     

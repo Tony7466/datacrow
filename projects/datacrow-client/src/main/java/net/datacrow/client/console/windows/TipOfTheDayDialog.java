@@ -44,10 +44,10 @@ import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcButton;
 import net.datacrow.client.console.components.DcCheckBox;
 import net.datacrow.client.console.components.DcHtmlEditorPane;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
 import net.datacrow.client.util.Utilities;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class TipOfTheDayDialog extends DcDialog implements ActionListener {
 

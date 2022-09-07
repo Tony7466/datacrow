@@ -49,13 +49,13 @@ import net.datacrow.client.console.components.DcShortTextField;
 import net.datacrow.client.console.components.lists.DcObjectList;
 import net.datacrow.client.console.components.lists.elements.DcListElement;
 import net.datacrow.client.console.components.lists.elements.DcObjectListElement;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class SelectItemDialog extends DcDialog implements ActionListener, KeyListener, MouseListener {
     

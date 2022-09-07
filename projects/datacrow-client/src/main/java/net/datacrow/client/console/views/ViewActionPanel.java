@@ -37,13 +37,13 @@ import javax.swing.JPanel;
 
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.security.SecuredUser;
-import net.datacrow.client.core.server.Connector;
 import net.datacrow.client.plugins.PluginHelper;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.security.SecuredUser;
+import net.datacrow.core.server.Connector;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class ViewActionPanel extends JPanel implements ActionListener {
 

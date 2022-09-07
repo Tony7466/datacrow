@@ -37,8 +37,8 @@ import javax.swing.filechooser.FileFilter;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.components.DcFileChooser;
 import net.datacrow.client.console.components.panels.BackupFilePreviewPanel;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class BrowserDialog extends JFrame {
 

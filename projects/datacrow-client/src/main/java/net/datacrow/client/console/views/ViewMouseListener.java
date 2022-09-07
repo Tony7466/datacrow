@@ -32,9 +32,9 @@ import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 
 import net.datacrow.client.console.menu.ViewPopupMenu;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class ViewMouseListener implements MouseListener {
     

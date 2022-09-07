@@ -49,16 +49,16 @@ import net.datacrow.client.console.components.panels.NavigationPanel;
 import net.datacrow.client.console.components.renderers.CheckBoxTableCellRenderer;
 import net.datacrow.client.console.components.renderers.EditableTableCellRenderer;
 import net.datacrow.client.console.components.tables.DcTable;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcAssociate;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.Settings;
-import net.datacrow.client.settings.definitions.DcFieldDefinition;
-import net.datacrow.client.settings.definitions.DcFieldDefinitions;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcAssociate;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.Settings;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
 
 public class FieldDefinitionsDialog extends DcDialog implements ActionListener {
 

@@ -32,9 +32,9 @@ import javax.swing.JMenuItem;
 
 import net.datacrow.client.console.components.DcPopupMenu;
 import net.datacrow.client.console.windows.itemforms.DcMinimalisticItemView;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.resources.DcResources;
 
 public class DcPropertyViewPopupMenu extends DcPopupMenu  implements ActionListener {
 

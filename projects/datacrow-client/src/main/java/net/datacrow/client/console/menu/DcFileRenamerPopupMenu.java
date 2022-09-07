@@ -31,12 +31,12 @@ import javax.swing.JMenuItem;
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.components.DcFilePatternField;
 import net.datacrow.client.console.components.DcPopupMenu;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
 
 public class DcFileRenamerPopupMenu extends DcPopupMenu   {
     

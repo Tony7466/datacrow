@@ -31,8 +31,8 @@ import javax.swing.JMenuItem;
 
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.components.DcPictureField;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcResources;
 
 public class DcPictureFieldMenu extends JMenuBar {
     

@@ -36,16 +36,17 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcLongTextField;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
 import net.datacrow.client.util.launcher.URLLauncher;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 /**
  * Donation dialog which can be used to ask the user for a donation.
@@ -54,7 +55,7 @@ import org.apache.log4j.Logger;
  */
 public class DonateDialog extends DcFrame implements ActionListener {
 
-    private static Logger logger = Logger.getLogger(DonateDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(DonateDialog.class.getName());
     
     public DonateDialog() {
         super(DcResources.getText("lblDonate"), IconLibrary._icoDonate);

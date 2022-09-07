@@ -37,16 +37,17 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.plugins.PluginHelper;
 import net.datacrow.client.util.Utilities;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
 
 public class DcDialog extends JDialog implements IDialog {
 
-    private static Logger logger = Logger.getLogger(DcDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(DcDialog.class.getName());
     
     private String helpIndex = null;
     private AtomicBoolean active;

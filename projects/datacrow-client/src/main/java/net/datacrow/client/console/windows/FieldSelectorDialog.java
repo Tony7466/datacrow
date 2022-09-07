@@ -35,20 +35,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFieldSelectorField;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.resources.DcResources;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.resources.DcResources;
 
 public class FieldSelectorDialog extends DcDialog implements ActionListener { 
     
     private static final FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
-    private static Logger logger = Logger.getLogger(FieldSelectorDialog.class.getName());    
+    private static Logger logger = DcLogManager.getLogger(FieldSelectorDialog.class.getName());    
     
     private final int modIdx;
     private DcFieldSelectorField fs;

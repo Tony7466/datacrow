@@ -40,16 +40,16 @@ import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.tables.DcTable;
 import net.datacrow.client.console.windows.itemforms.ItemForm;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.modules.DcPropertyModule;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.objects.DcProperty;
-import net.datacrow.client.core.objects.ValidationException;
-import net.datacrow.client.core.objects.helpers.MusicTrack;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.modules.DcPropertyModule;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.objects.DcProperty;
+import net.datacrow.core.objects.ValidationException;
+import net.datacrow.core.objects.helpers.MusicTrack;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
 
 public class CreateMultipleItemsDialog extends DcDialog implements ActionListener {
     

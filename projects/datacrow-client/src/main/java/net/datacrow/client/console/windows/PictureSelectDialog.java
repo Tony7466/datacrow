@@ -39,15 +39,15 @@ import javax.swing.JPanel;
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcPictureField;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcImageIcon;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcImageIcon;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
 
 public class PictureSelectDialog extends DcDialog implements ActionListener {
     
-    private JComboBox cbFields = ComponentFactory.getComboBox();
+    private JComboBox<Object> cbFields = ComponentFactory.getComboBox();
     private DcObject dco;
     private DcImageIcon image;
     

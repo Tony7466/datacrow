@@ -42,8 +42,8 @@ import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.components.DcMenuItem;
 import net.datacrow.client.console.components.DcPopupMenu;
 import net.datacrow.client.console.components.DcShortTextField;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcResources;
 
 public class DcEditorPopupMenu extends DcPopupMenu implements ActionListener  {
 
@@ -62,10 +62,10 @@ public class DcEditorPopupMenu extends DcPopupMenu implements ActionListener  {
         boolean isEditable = c.isEditable();
         boolean isTextSelected = c.getSelectedText() != null;
 
-        menuCut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
-        menuCopy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
-        menuPaste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
-        menuSelectAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+        menuCut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
+        menuCopy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
+        menuPaste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_DOWN_MASK));
+        menuSelectAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
 
         menuSelectAll.setActionCommand("selectAll");
         menuPaste.setActionCommand("paste");
@@ -115,8 +115,8 @@ public class DcEditorPopupMenu extends DcPopupMenu implements ActionListener  {
                 menuRedo = ComponentFactory.getMenuItem(((DcLongTextField) c).getUndoListener().getRedoAction());
             }
 
-            menuUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
-            menuRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_MASK));
+            menuUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
+            menuRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
 
             this.add(menuUndo);
             this.add(menuRedo);

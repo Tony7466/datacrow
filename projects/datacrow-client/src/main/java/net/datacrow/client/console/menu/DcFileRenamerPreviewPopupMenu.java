@@ -30,7 +30,7 @@ import javax.swing.JMenuItem;
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.components.DcPopupMenu;
 import net.datacrow.client.console.windows.filerenamer.FileRenamerPreviewDialog;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.resources.DcResources;
 
 public class DcFileRenamerPreviewPopupMenu extends DcPopupMenu {
     

@@ -36,8 +36,8 @@ import javax.swing.JButton;
 
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
 
 public class CachedChildView extends View implements ActionListener {
 

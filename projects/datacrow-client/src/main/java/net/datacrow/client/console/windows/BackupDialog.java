@@ -41,25 +41,26 @@ import javax.swing.JTextArea;
 import javax.swing.JToolTip;
 import javax.swing.filechooser.FileFilter;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFileField;
 import net.datacrow.client.console.components.DcMultiLineToolTip;
 import net.datacrow.client.console.components.panels.BackupFilePreviewPanel;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.clients.IBackupRestoreClient;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.server.backup.Backup;
-import net.datacrow.client.server.backup.Restore;
-import net.datacrow.client.settings.DcSettings;
 import net.datacrow.client.util.Utilities;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.clients.IBackupRestoreClient;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
+import net.datacrow.server.backup.Backup;
+import net.datacrow.server.backup.Restore;
 
 public class BackupDialog extends DcDialog implements ActionListener, IBackupRestoreClient {
 
-    private static Logger logger = Logger.getLogger(BackupDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(BackupDialog.class.getName());
     
     private DcFileField fileFieldTarget;
     private DcFileField fileFieldSource;

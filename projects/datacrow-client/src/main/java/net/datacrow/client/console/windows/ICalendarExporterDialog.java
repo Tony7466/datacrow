@@ -43,12 +43,12 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFileField;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.clients.IClient;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.filefilters.DcFileFilter;
-import net.datacrow.client.core.utilities.ical.ICalendarExporter;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.clients.IClient;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.filefilters.DcFileFilter;
+import net.datacrow.core.utilities.ical.ICalendarExporter;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class ICalendarExporterDialog extends DcDialog implements ActionListener, IClient {
     

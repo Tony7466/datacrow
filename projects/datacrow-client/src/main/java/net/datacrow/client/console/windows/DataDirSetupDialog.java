@@ -47,15 +47,15 @@ import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.components.DcProgressBar;
 import net.datacrow.client.console.windows.messageboxes.NativeMessageBox;
 import net.datacrow.client.console.windows.messageboxes.NativeQuestionBox;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.clients.IClient;
-import net.datacrow.client.core.objects.DcImageIcon;
-import net.datacrow.client.core.utilities.CoreUtilities;
-import net.datacrow.client.core.utilities.DataDirectoryCreator;
-import net.datacrow.client.core.utilities.Directory;
-import net.datacrow.client.server.db.DatabaseManager;
-import net.datacrow.client.settings.DcSettings;
 import net.datacrow.client.util.Utilities;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.clients.IClient;
+import net.datacrow.core.objects.DcImageIcon;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.DataDirectoryCreator;
+import net.datacrow.core.utilities.Directory;
+import net.datacrow.core.utilities.settings.DcSettings;
+import net.datacrow.server.db.DatabaseManager;
 
 public class DataDirSetupDialog extends NativeDialog implements ActionListener, IClient {
     
