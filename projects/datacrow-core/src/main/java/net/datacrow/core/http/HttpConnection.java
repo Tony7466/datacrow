@@ -33,6 +33,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import net.datacrow.core.DcRepository;
 import net.datacrow.core.utilities.Base64;
@@ -75,7 +77,7 @@ public class HttpConnection {
      * @throws IOException
      */
     public String getString() throws HttpConnectionException {
-        return getString("UTF-8");
+        return getString(StandardCharsets.UTF_8);
     }
 
     /**
@@ -84,7 +86,7 @@ public class HttpConnection {
      * @return
      * @throws IOException
      */
-    public String getString(String charset) throws HttpConnectionException {
+    public String getString(Charset charset) throws HttpConnectionException {
         try {
             StringBuffer sb = new StringBuffer();
             BufferedInputStream in = new BufferedInputStream(uc.getInputStream());

@@ -26,82 +26,39 @@
 package net.datacrow.core.utilities.html;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import net.datacrow.core.DcLogManager;
 import net.datacrow.core.http.HttpConnectionUtil;
 import net.datacrow.core.utilities.CoreUtilities;
 import net.datacrow.core.utilities.StringUtils;
 
-/**
- * 
- * TODO: this is pretty obsolete class by now and cobra parser is very outdated.. remove?
- * 
- * @author RJ
- *
- */
-
 public class HtmlUtils {
     
     private static Logger logger = DcLogManager.getLogger(HtmlUtils.class.getName());
-    //private static final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    //private static DocumentBuilder builder;
     
-    /*static {
-        try {
-            builder = factory.newDocumentBuilder();
-        } catch (Exception e) {
-            logger.fatal("Cannot get a document builder!", e);
-        }
-    }*/
-
-    public static Document getDocument(URL url, int cleanupLevel) throws Exception {
-        return getDocument(url, "ISO-8859-1");
-    }
-    
-    public static Document getDocument(URL url, String charset) throws Exception {
+    public static Document getDocument(URL url, Charset charset) throws Exception {
         return getDocument(getHtmlCleaned(url, charset, 0));
     }
     
-    public static Document getDocument(URL url, String charset, int cleanupLevel) throws Exception {
+    public static Document getDocument(URL url, Charset charset, int cleanupLevel) throws Exception {
         return getDocument(getHtmlCleaned(url, charset, cleanupLevel));
     }
     
     public static Document getDocument(String html) throws Exception { 
-        
-    	/*
-    	
-    	
-        ByteArrayInputStream in = new ByteArrayInputStream(html.getBytes());
-        
-//        if (logger.isDebugEnabled()) {
-//            CoreUtilities.writeToFile(html.getBytes(), "C:\\Users\\RJ\\Downloads\\online_service_document.xml");
-//        }
-        
-        Reader reader = new InputStreamReader(in);
-        Document document = builder.newDocument();
-        
-        try {
-            HtmlParser parser = new HtmlParser(new org.cobraparser.html.test.SimpleUserAgentContext(), document);
-            parser.parse(reader);
-        } catch (Exception e) {
-            logger.error(e, e);
-        }
-
-        in.close();
-        reader.close(); */
-        
-        return null;
+        Document doc = Jsoup.parse(html);
+        return doc;
     }    
     
-    public static String getHtmlCleaned(URL url, String charset, int cleanupLevel) throws Exception { 
+    public static String getHtmlCleaned(URL url, Charset charset, int cleanupLevel) throws Exception { 
         net.datacrow.core.http.HttpConnection connection = HttpConnectionUtil.getConnection(url);
         String html = connection.getString(charset);
         connection.close();        
@@ -199,7 +156,7 @@ public class HtmlUtils {
             Document document = getDocument(s);
                 
             XPath xpath = XPathFactory.newInstance().newXPath();
-            Node node = (Node) xpath.evaluate("/html/body", document, XPathConstants.NODE);
+            org.w3c.dom.Node node = (org.w3c.dom.Node) xpath.evaluate("/html/body", document, XPathConstants.NODE);
 
             String text = node.getTextContent();
             

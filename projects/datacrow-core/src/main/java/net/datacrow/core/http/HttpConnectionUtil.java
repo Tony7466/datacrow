@@ -27,6 +27,8 @@ package net.datacrow.core.http;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Simplification for retrieving data from a specific address.
@@ -50,7 +52,7 @@ public class HttpConnectionUtil {
      * @throws HttpConnectionException
      */
     public static String retrievePage(String url) throws HttpConnectionException {
-        return retrievePage(getURL(url), "UTF-8");
+        return retrievePage(getURL(url), StandardCharsets.UTF_8);
     }
 
     /**
@@ -59,7 +61,7 @@ public class HttpConnectionUtil {
      * @param charset
      * @throws HttpConnectionException
      */
-    public static String retrievePage(String url, String charset) throws HttpConnectionException {
+    public static String retrievePage(String url, Charset charset) throws HttpConnectionException {
         return retrievePage(getURL(url), charset);
     }
 
@@ -69,7 +71,7 @@ public class HttpConnectionUtil {
      * @throws HttpConnectionException
      */
     public static String retrievePage(URL url) throws HttpConnectionException {
-        return retrievePage(url, "UTF-8");
+        return retrievePage(url, StandardCharsets.UTF_8);
     }
 
     /**
@@ -78,7 +80,7 @@ public class HttpConnectionUtil {
      * @param charset
      * @throws HttpConnectionException
      */
-    public static String retrievePage(URL url, String charset) throws HttpConnectionException {
+    public static String retrievePage(URL url, Charset charset) throws HttpConnectionException {
         HttpConnection connection = new HttpConnection(url);
         String page = connection.getString(charset);
         connection.close();
