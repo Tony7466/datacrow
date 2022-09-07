@@ -3,12 +3,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>vanderwaalsbv.nl</groupId>
+    <parent>
+        <groupId>org.datacrow</groupId>
+        <artifactId>datacrow-main</artifactId>
+        <version>5.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
     <artifactId>datacrow-client</artifactId>
-    <version>5.0</version>
     <name>datacrow-client</name>
     <packaging>jar</packaging>
-
     <url>https://datacrow.org</url>
 
     <properties>
@@ -26,7 +30,7 @@
         </dependency>
 
         <dependency>
-            <groupId>vanderwaalsbv.nl</groupId>
+            <groupId>org.datacrow</groupId>
             <artifactId>datacrow-server</artifactId>
             <version>5.0</version>
         </dependency>
@@ -34,34 +38,28 @@
         <dependency>
             <groupId>javax.help</groupId>
             <artifactId>javahelp</artifactId>
-            <version>2.0.05</version>
         </dependency>
 
         <dependency>
             <groupId>net.jthink</groupId>
             <artifactId>jaudiotagger</artifactId>
-            <version>2.2.5</version>
         </dependency>
 
         <dependency>
             <groupId>com.drewnoakes</groupId>
             <artifactId>metadata-extractor</artifactId>
-            <version>2.18.0</version>
         </dependency>
 
         <!-- Matroska - movie file parser -->
         <dependency>
             <groupId>com.github.kokorin</groupId>
             <artifactId>jebml</artifactId>
-            <version>2.3.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.liferay</groupId>
             <artifactId>org.mp4parser</artifactId>
-            <version>1.9.41.2.LIFERAY-PATCHED-2</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -126,6 +124,22 @@
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
+                    <execution>
+                        <id>copy-commands-client</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.parent.basedir}/datacrow-build/staging/dc-client</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/commands</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
                     <execution>
                         <id>copy-resources-readme-client</id>
                         <phase>validate</phase>
