@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.org                             *
+ *                              info@datacrow.net                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -23,64 +23,44 @@
  *                                                                            *
  ******************************************************************************/
 
-package net.datacrow.server.web;
+package net.datacrow.web;
 
-import java.io.File;
+import java.io.Serializable;
 
-import org.apache.catalina.startup.Tomcat;
+import org.apache.logging.log4j.Level;
 
-import net.datacrow.core.DcConfig;
+import net.datacrow.web.bean.LoginBean;
+import net.datacrow.web.util.WebUtilities;
 
-/**
- * The web server. This is the wrapper around the Jetty server.  
- * 
- * @author Robert Jan van der Waals
- * 
- * TODO: reimplement
- */
-public class DcImageWebServer {
-    
-	private boolean isRunning;
-	private Tomcat server;
-	private int port;
+public abstract class DcBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Creates a new instance.
-	 */
-	public DcImageWebServer(int port) {
-	    this.port = port;
+	private LoginBean loginBean;
+	
+	private LoginBean getLoginBean() {
+        if (loginBean == null) {
+            try {
+                loginBean = (LoginBean) WebUtilities.getBean("loginBean");
+            } catch (Exception e) {
+                WebUtilities.log(Level.ERROR, e);
+            }
+        }
+        return loginBean;
 	}
 	
-	/**
-	 * Indicates if the server is currently up and running.
-	 */
-	public boolean isRunning() {
-        return isRunning;
-    }
-	
-    /**
-     * Stops the server.
-     * @throws Exception
-     */
-	public void stop() throws Exception {
-	   // server.stop();
-        isRunning = false;
+	protected boolean isUserLoggedOn() {
+	    LoginBean lb = getLoginBean();
+	    return lb == null ? false : lb.isLoggedIn();
 	}
 	
-	/**
-	 * Starts the Web Server. The port is configurable.
-	 */
-	public void start() throws Exception {
-        server = new Tomcat();
-        server.setPort(port);
-         
-        String baseDir = DcConfig.getInstance().getImageDir();
-        File contextDir = new File(baseDir);
-        
-        server.addWebapp("/", contextDir.toString());
-        
-        server.start();
-
-        isRunning = true;
+	protected boolean isAuthorized(Object o) {
+        LoginBean lb = getLoginBean();
+        return lb == null ? false : lb.isAuthorized(o);
+	}
+	
+	protected boolean isEditingAllowed(Object o) {
+        LoginBean lb = getLoginBean();
+        return lb == null ? false : lb.isEditingAllowed(o);
 	}
 }

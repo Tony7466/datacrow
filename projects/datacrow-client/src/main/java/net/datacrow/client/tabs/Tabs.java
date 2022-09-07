@@ -27,7 +27,6 @@ package net.datacrow.client.tabs;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,14 +36,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 import net.datacrow.core.DcConfig;
 import net.datacrow.core.DcLogManager;
@@ -55,7 +47,6 @@ import net.datacrow.core.objects.DcImageIcon;
 import net.datacrow.core.resources.DcResources;
 import net.datacrow.core.utilities.Base64;
 import net.datacrow.core.utilities.CoreUtilities;
-import net.datacrow.core.utilities.XMLParser;
 import net.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
 import net.datacrow.core.utilities.settings.definitions.Definition;
 
@@ -117,6 +108,9 @@ public class Tabs {
         boolean success = false;
         
         try {
+            /*
+             * TODO: reimplement in a simpler way
+             * 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             
@@ -152,7 +146,7 @@ public class Tabs {
                 addTab(tab);
             }
             
-            success = true;
+            success = true; */
         
         } catch (Exception e) {
             logger.error("Failed to load tabs from " + file, e);

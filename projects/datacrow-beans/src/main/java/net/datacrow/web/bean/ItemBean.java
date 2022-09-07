@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.org                             *
+ *                              info@datacrow.net                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -23,64 +23,46 @@
  *                                                                            *
  ******************************************************************************/
 
-package net.datacrow.server.web;
+package net.datacrow.web.bean;
 
-import java.io.File;
+import javax.el.ELContext;
+import javax.faces.context.FacesContext;
 
-import org.apache.catalina.startup.Tomcat;
+import org.apache.logging.log4j.Level;
 
 import net.datacrow.core.DcConfig;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.server.Connector;
+import net.datacrow.web.DcBean;
+import net.datacrow.web.model.Item;
+import net.datacrow.web.model.Reference;
+import net.datacrow.web.util.WebUtilities;
 
-/**
- * The web server. This is the wrapper around the Jetty server.  
- * 
- * @author Robert Jan van der Waals
- * 
- * TODO: reimplement
- */
-public class DcImageWebServer {
+public abstract class ItemBean extends DcBean {
+
+    private static final long serialVersionUID = 1L;
     
-	private boolean isRunning;
-	private Tomcat server;
-	private int port;
-	
-	/**
-	 * Creates a new instance.
-	 */
-	public DcImageWebServer(int port) {
-	    this.port = port;
-	}
-	
-	/**
-	 * Indicates if the server is currently up and running.
-	 */
-	public boolean isRunning() {
-        return isRunning;
+    protected Item item;
+    
+    public abstract void setItem(Item item);
+    
+    public void setReference(Reference ref) {
+        Connector conn = DcConfig.getInstance().getConnector();
+        DcObject dco = conn.getItem(ref.getModule(), ref.getId());
+        
+        if (dco != null) {
+            setItem(new Item(dco));
+        } else {
+            WebUtilities.log(Level.WARN, "Could not find item with ID " + ref.getId() + " of module " + ref.getModule());
+        }
     }
-	
-    /**
-     * Stops the server.
-     * @throws Exception
-     */
-	public void stop() throws Exception {
-	   // server.stop();
-        isRunning = false;
-	}
-	
-	/**
-	 * Starts the Web Server. The port is configurable.
-	 */
-	public void start() throws Exception {
-        server = new Tomcat();
-        server.setPort(port);
-         
-        String baseDir = DcConfig.getInstance().getImageDir();
-        File contextDir = new File(baseDir);
-        
-        server.addWebapp("/", contextDir.toString());
-        
-        server.start();
-
-        isRunning = true;
-	}
+    
+    public Item getItem() {
+        return item;
+    }
+    
+    protected ItemsBean getItemsBean() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        return (ItemsBean) elContext.getELResolver().getValue(elContext, null, "itemsBean");
+    }
 }
