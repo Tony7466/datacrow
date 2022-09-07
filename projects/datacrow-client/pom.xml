@@ -32,7 +32,12 @@
         <dependency>
             <groupId>org.datacrow</groupId>
             <artifactId>datacrow-server</artifactId>
-            <version>5.0</version>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jtattoo</groupId>
+            <artifactId>JTattoo</artifactId>
         </dependency>
 
         <dependency>

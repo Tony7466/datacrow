@@ -25,7 +25,7 @@
 		<module>datacrow-server</module>
 		<!-- module>datacrow-beans</module -->
 		<module>datacrow-client</module>
-		<!-- module>datacrow-plugins</module -->
+		<module>datacrow-plugins</module>
 		<!-- module>datacrow-install</module -->
 	</modules>
 
@@ -149,6 +149,14 @@
             <artifactId>Jacksum</artifactId>
             <version>3.1.0</version>
         </dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.jtattoo/JTattoo -->
+		<dependency>
+			<groupId>com.jtattoo</groupId>
+			<artifactId>JTattoo</artifactId>
+			<version>1.6.13</version>
+		</dependency>
+
 
         <!-- Jasper reports -->
         <dependency>

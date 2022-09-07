@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>org.datacrow</groupId>
 			<artifactId>datacrow-core</artifactId>
-			<version>5.0</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

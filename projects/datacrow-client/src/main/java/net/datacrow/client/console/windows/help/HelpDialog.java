@@ -28,6 +28,8 @@ package net.datacrow.client.console.windows.help;
 import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 import javax.help.DefaultHelpBroker;
 import javax.help.HelpSet;
@@ -38,6 +40,7 @@ import org.apache.logging.log4j.Logger;
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.util.Utilities;
+import net.datacrow.core.DcConfig;
 import net.datacrow.core.DcLogManager;
 import net.datacrow.core.DcRepository;
 import net.datacrow.core.IconLibrary;
@@ -56,8 +59,11 @@ public class HelpDialog {
 
 	public HelpDialog(Window window) {
 		try {
-		    
-			ClassLoader cl = HelpDialog.class.getClassLoader();
+			ClassLoader cl = new URLClassLoader(
+			    new URL[] {new URL(
+				    "file:///" + 
+					DcConfig.getInstance().getInstallationDir().replace('\\', '/') + 
+					"help/")});
 			
 			String language = DcSettings.getSetting(DcRepository.Settings.stLanguage).getValueAsString();
 			

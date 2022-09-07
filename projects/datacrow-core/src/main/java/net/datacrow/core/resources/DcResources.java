@@ -84,7 +84,7 @@ public class DcResources {
                 p.load(getClass().getResourceAsStream(propertyFile));
             } catch (Exception ignore) {
                 try {
-                    p.load(getClass().getResourceAsStream("/net/sf/dc/core/resources/" + propertyFile));
+                    p.load(getClass().getResourceAsStream("net/datacrow/core/resources/" + propertyFile));
                 } catch (Exception e) {
                     logger.error("Could not load sustom resource files. Falling back to the default resources.", e);
                 }
