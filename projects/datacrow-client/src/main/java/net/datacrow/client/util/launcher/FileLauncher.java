@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -31,21 +31,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.StringTokenizer;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.CoreUtilities;
-import net.datacrow.client.settings.DcSettings;
-import net.datacrow.client.settings.definitions.ProgramDefinition;
-import net.datacrow.client.settings.definitions.ProgramDefinitions;
-import net.datacrow.client.util.Utilities;
+import org.apache.logging.log4j.Logger;
 
-import org.apache.log4j.Logger;
+import net.datacrow.client.console.GUI;
+import net.datacrow.client.util.Utilities;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.settings.DcSettings;
+import net.datacrow.core.utilities.settings.definitions.ProgramDefinition;
+import net.datacrow.core.utilities.settings.definitions.ProgramDefinitions;
 
 public class FileLauncher extends Launcher {
 
-	private static Logger logger = Logger.getLogger(FileLauncher.class.getName());
+	private static Logger logger = DcLogManager.getLogger(FileLauncher.class.getName());
 	
     private String filename;
     private File file;

@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -28,24 +28,25 @@ package net.datacrow.client.console.wizards.itemimport;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.panels.TaskPanel;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.clients.IItemImporterClient;
-import net.datacrow.client.core.migration.itemimport.ItemImporter;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.objects.ValidationException;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-import net.datacrow.client.settings.DcSettings;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.clients.IItemImporterClient;
+import net.datacrow.core.migration.itemimport.ItemImporter;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.objects.ValidationException;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class ItemImporterTaskPanel extends ItemImporterWizardPanel implements IItemImporterClient  {
 
-	private static Logger logger = Logger.getLogger(ItemImporterTaskPanel.class.getName());
+	private static Logger logger = DcLogManager.getLogger(ItemImporterTaskPanel.class.getName());
 	
 	private int created = 0;
 	private int updated = 0;

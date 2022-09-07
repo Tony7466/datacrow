@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -32,14 +32,14 @@ import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.wizards.IWizardPanel;
 import net.datacrow.client.console.wizards.Wizard;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.modules.ModuleJar;
-import net.datacrow.client.core.modules.xml.XmlField;
-import net.datacrow.client.core.modules.xml.XmlModule;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.modules.ModuleJar;
+import net.datacrow.core.modules.xml.XmlField;
+import net.datacrow.core.modules.xml.XmlModule;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class AlterModuleWizard extends Wizard {
     

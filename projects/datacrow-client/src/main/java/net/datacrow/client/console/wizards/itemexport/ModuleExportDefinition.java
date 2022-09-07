@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -27,7 +27,7 @@ package net.datacrow.client.console.wizards.itemexport;
 
 import java.io.File;
 
-import net.datacrow.client.core.migration.itemexport.ItemExporter;
+import net.datacrow.core.migration.itemexport.ItemExporter;
 
 public class ModuleExportDefinition {
     

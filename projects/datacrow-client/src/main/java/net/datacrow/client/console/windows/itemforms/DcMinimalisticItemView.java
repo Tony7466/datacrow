@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -470,7 +470,7 @@ public class DcMinimalisticItemView extends DcFrame implements ActionListener, M
         String filter = txtFilter.getText();
         
         if (filter.trim().length() == 0) {
-            ((DcListModel) list.getModel()).clear();
+            ((DcListModel<Object>) list.getModel()).clear();
             list.addElements(all);
         } else {
             List<DcListElement> filtered = new ArrayList<DcListElement>();
@@ -480,8 +480,7 @@ public class DcMinimalisticItemView extends DcFrame implements ActionListener, M
                     filtered.add(el);
             }
         
-            // DO NOT USE LIST.CLEAR() - will cleared the stored elements and force a reload of the items.
-            ((DcListModel) list.getModel()).clear();
+            ((DcListModel<Object>) list.getModel()).clear();
             list.addElements(filtered);
         }
     }    

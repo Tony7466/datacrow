@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -32,10 +32,9 @@ import java.util.StringTokenizer;
 
 import net.datacrow.client.util.Utilities;
 
-@SuppressWarnings("unchecked")
-public class FreedbReadResult implements Comparable {
+public class FreedbReadResult implements Comparable<FreedbReadResult> {
     
-    private Hashtable fields;
+    private Hashtable<String, Object> fields;
     private boolean exactMatch;
 
     public FreedbReadResult(String freedbReadResult, String genre) {
@@ -44,7 +43,7 @@ public class FreedbReadResult implements Comparable {
     }
 
     public FreedbReadResult(String freedbReadResult, boolean exactMatch) {
-        this.fields = new Hashtable();
+        this.fields = new Hashtable<String, Object>();
         this.exactMatch = exactMatch;
         
         this.fields.put("DISCID", "");
@@ -123,7 +122,7 @@ public class FreedbReadResult implements Comparable {
 		String[] info = ((String) this.fields.get("DTITLE")).split(" / ", 2);
 	    this.fields.put("ARTIST", info[0]);
 	    this.fields.put("ALBUM", (info.length > 1) ? info[1] : "");
-	    this.fields.put("TRACKNUMBER", new Integer(((String[])this.fields.get("EXTT")).length));
+	    this.fields.put("TRACKNUMBER", Integer.valueOf(((String[])this.fields.get("EXTT")).length));
     }
     
     public Integer[] getTrackLengths(String[] answers, int startPos, int endPos, int playlength) {
@@ -136,7 +135,7 @@ public class FreedbReadResult implements Comparable {
                 if (offset!= 0) offsets.add(Integer.valueOf(offset));
             }
             
-            Integer lastOffset = new Integer(playlength * 75);
+            Integer lastOffset = Integer.valueOf(playlength * 75);
             offsets.add(lastOffset);
     
             Integer[] offsetsArray = new Integer[offsets.size()];
@@ -151,7 +150,7 @@ public class FreedbReadResult implements Comparable {
         Integer[] offsetlengths = new Integer[tracks];
         for (int i = 0; i < offsetlengths.length; i++) {
             offsetlengths[i] = 
-               new Integer((offsets[i + 1].intValue() - offsets[i].intValue()) / 75); 
+            		Integer.valueOf((offsets[i + 1].intValue() - offsets[i].intValue()) / 75); 
         }
         return offsetlengths;
     }
@@ -261,12 +260,11 @@ public class FreedbReadResult implements Comparable {
     }
 	
 	@Override
-    public int compareTo(Object o) {
-		if (o == null) {
+    public int compareTo(FreedbReadResult freedbReadResult) {
+		if (freedbReadResult == null)
 			return 1;
-        }
         
-		FreedbReadResult rr = (FreedbReadResult) o;
+		FreedbReadResult rr =  freedbReadResult;
 		
 		if (this.getQuality() == rr.getQuality()) {
 		    // We have an ex-aequo, trying to determine the winner by 

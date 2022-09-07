@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -28,11 +28,13 @@ package net.datacrow.client.fileimporter.movie;
 import java.io.RandomAccessFile;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+
+import net.datacrow.core.DcLogManager;
 
 class FilePropertiesOGM extends FileProperties {
 
-    private static Logger logger = Logger.getLogger(FilePropertiesOGM.class.getName());
+    private static Logger logger = DcLogManager.getLogger(FilePropertiesOGM.class.getName());
     
     private final int End = 0x0373;
     private final int vide = 0x65646976;

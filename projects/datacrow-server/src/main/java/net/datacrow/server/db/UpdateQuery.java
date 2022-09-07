@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -61,7 +61,7 @@ public class UpdateQuery extends Query {
     }
     
     @Override
-    protected void clear() {
+    public void clear() {
         super.clear();
         dco = null;
     }

@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -403,7 +403,7 @@ public class DataManager {
     public List<DcObject> getItems(SecuredUser su, DataFilter df, int[] fields) {
     	SelectQuery selectQuery =  new SelectQuery(su, df, fields);
 		List<DcObject> items = selectQuery.run();
-		selectQuery.close();
+		selectQuery.clear();
 		return items;
     }
 

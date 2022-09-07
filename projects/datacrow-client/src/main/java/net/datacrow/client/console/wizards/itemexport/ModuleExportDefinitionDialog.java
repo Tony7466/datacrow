@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -38,13 +38,13 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFileField;
 import net.datacrow.client.console.windows.DcDialog;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.resources.DcResources;
 
 public class ModuleExportDefinitionDialog extends DcDialog implements ActionListener {
 
     private DcFileField ffTarget;
-    private JComboBox cbModules;
-    private JComboBox cbExporters;
+    private JComboBox<Object> cbModules;
+    private JComboBox<Object> cbExporters;
     
     private boolean canceled = false;
     

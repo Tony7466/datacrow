@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -38,17 +38,17 @@ import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.wizards.Wizard;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.modules.DcAssociateModule;
-import net.datacrow.client.core.modules.DcMediaModule;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcPropertyModule;
-import net.datacrow.client.core.modules.xml.XmlModule;
-import net.datacrow.client.core.objects.DcAssociate;
-import net.datacrow.client.core.objects.DcMediaObject;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.objects.DcProperty;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.modules.DcAssociateModule;
+import net.datacrow.core.modules.DcMediaModule;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcPropertyModule;
+import net.datacrow.core.modules.xml.XmlModule;
+import net.datacrow.core.objects.DcAssociate;
+import net.datacrow.core.objects.DcMediaObject;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.objects.DcProperty;
+import net.datacrow.core.resources.DcResources;
 
 public class PanelModuleType extends ModuleWizardPanel {
 

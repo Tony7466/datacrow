@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -44,8 +44,8 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.windows.DcDialog;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcResources;
 
 public class MessageBox extends DcDialog implements ActionListener, KeyListener {
 

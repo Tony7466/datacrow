@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -55,12 +55,12 @@ import net.datacrow.client.console.components.tables.DcTable;
 import net.datacrow.client.console.menu.DcFileRenamerPreviewPopupMenu;
 import net.datacrow.client.console.menu.FileRenamerMenu;
 import net.datacrow.client.console.windows.DcDialog;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.filerenamer.FilePattern;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.filerenamer.FilePattern;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class FileRenamerPreviewDialog extends DcDialog implements ActionListener, MouseListener {
 

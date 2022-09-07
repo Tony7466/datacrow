@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -43,8 +43,8 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.windows.DcDialog;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcResources;
 
 public class QuestionBox extends DcDialog implements ActionListener {
 
@@ -53,8 +53,6 @@ public class QuestionBox extends DcDialog implements ActionListener {
     private JButton buttonNo;
     private boolean affirmative = false;
     
-//    private final JLabel labelIcon = ComponentFactory.getLabel("");
-
     public QuestionBox(String message) {
         super(GUI.getInstance().getRootFrame());
         init(message);

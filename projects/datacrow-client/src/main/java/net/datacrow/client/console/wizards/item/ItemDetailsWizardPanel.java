@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -30,8 +30,8 @@ import java.awt.Insets;
 
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.windows.itemforms.ItemForm;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
 
 public class ItemDetailsWizardPanel extends ItemWizardPanel {
 

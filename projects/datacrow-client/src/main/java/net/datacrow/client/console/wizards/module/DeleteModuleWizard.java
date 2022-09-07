@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -29,30 +29,31 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.wizards.IWizardPanel;
 import net.datacrow.client.console.wizards.Wizard;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcMediaModule;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.modules.ModuleJar;
-import net.datacrow.client.core.modules.xml.XmlField;
-import net.datacrow.client.core.modules.xml.XmlModule;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcMediaObject;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-import net.datacrow.client.settings.DcSettings;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcMediaModule;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.modules.ModuleJar;
+import net.datacrow.core.modules.xml.XmlField;
+import net.datacrow.core.modules.xml.XmlModule;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcMediaObject;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class DeleteModuleWizard extends Wizard {
 
-    private static Logger logger = Logger.getLogger(DeleteModuleWizard.class.getName());
+    private static Logger logger = DcLogManager.getLogger(DeleteModuleWizard.class.getName());
     
     public DeleteModuleWizard() {
         super();

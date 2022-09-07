@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -40,15 +40,15 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import net.datacrow.client.console.ComponentFactory;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcResources;
 
 public class NavigationPanel extends JPanel implements ActionListener {
     
     private DatePickerDialog parent;
 
-    private JComboBox monthBox;
-    private JComboBox yearBox;
+    private JComboBox<Object> monthBox;
+    private JComboBox<Object> yearBox;
     
     private static String[] months;
     private static Integer[] years;
@@ -122,7 +122,7 @@ public class NavigationPanel extends JPanel implements ActionListener {
     }
     
     private void setMonthComboBox(Calendar c) {
-        monthBox.setModel(new DefaultComboBoxModel(months));
+        monthBox.setModel(new DefaultComboBoxModel<Object>(months));
         monthBox.setSelectedIndex(c.get(Calendar.MONTH));
     }
     
@@ -133,7 +133,7 @@ public class NavigationPanel extends JPanel implements ActionListener {
             years[j] = i;
         }
         
-        yearBox.setModel(new DefaultComboBoxModel(years));
+        yearBox.setModel(new DefaultComboBoxModel<Object>(years));
         yearBox.setSelectedItem(years[50]);
     }
 
@@ -163,12 +163,14 @@ public class NavigationPanel extends JPanel implements ActionListener {
             parent.updateScreen(c);
         } else {
             if (e.getActionCommand().equals("monthChanged")) {
-                JComboBox cb = (JComboBox)src;
+                @SuppressWarnings("unchecked")
+				JComboBox<Object> cb = (JComboBox<Object>) src;
                 c.set(Calendar.MONTH, cb.getSelectedIndex());
             }
     
             if (e.getActionCommand().equals("yearChanged")) {
-                JComboBox cb = (JComboBox)src;
+            	@SuppressWarnings("unchecked")
+                JComboBox<Object> cb = (JComboBox<Object>)src;
                 c.set(Calendar.YEAR, years[cb.getSelectedIndex()].intValue());
                 setYearComboBox(c);
             }

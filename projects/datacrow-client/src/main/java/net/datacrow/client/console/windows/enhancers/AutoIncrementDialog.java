@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -41,28 +41,29 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.windows.DcDialog;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.data.DataFilters;
-import net.datacrow.client.core.data.DcResultSet;
-import net.datacrow.client.core.enhancers.AutoIncrementer;
-import net.datacrow.client.core.enhancers.IValueEnhancer;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-import net.datacrow.client.settings.definitions.DcFieldDefinition;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.data.DataFilters;
+import net.datacrow.core.data.DcResultSet;
+import net.datacrow.core.enhancers.AutoIncrementer;
+import net.datacrow.core.enhancers.IValueEnhancer;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
 
 public class AutoIncrementDialog extends DcDialog implements ActionListener {
 
-    private static Logger logger = Logger.getLogger(AutoIncrementDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(AutoIncrementDialog.class.getName());
     
     private AutoIncrementSettingsPanel pSettings = new AutoIncrementSettingsPanel();
     
@@ -70,10 +71,10 @@ public class AutoIncrementDialog extends DcDialog implements ActionListener {
     
     private boolean canceled = false;
     
-    private JComboBox comboModus = ComponentFactory.getComboBox();
-    private JComboBox comboOrderBy1 = ComponentFactory.getComboBox();
-    private JComboBox comboOrderBy2 = ComponentFactory.getComboBox();
-    private JComboBox comboOrderBy3 = ComponentFactory.getComboBox();
+    private JComboBox<Object> comboModus = ComponentFactory.getComboBox();
+    private JComboBox<Object> comboOrderBy1 = ComponentFactory.getComboBox();
+    private JComboBox<Object> comboOrderBy2 = ComponentFactory.getComboBox();
+    private JComboBox<Object> comboOrderBy3 = ComponentFactory.getComboBox();
     
     private JButton buttonSave = ComponentFactory.getButton(DcResources.getText("lblSave"));
     private JButton buttonClose = ComponentFactory.getButton(DcResources.getText("lblClose"));

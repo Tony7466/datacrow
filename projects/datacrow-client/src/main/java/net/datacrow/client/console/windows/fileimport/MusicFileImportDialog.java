@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -34,9 +34,9 @@ import javax.swing.JPanel;
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcRadioButton;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.fileimporter.FileImporter;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.fileimporter.FileImporter;
+import net.datacrow.core.resources.DcResources;
 
 public class MusicFileImportDialog extends FileImportDialog {
 

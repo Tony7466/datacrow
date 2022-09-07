@@ -6,7 +6,7 @@
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
  *                       (c) 2003 The Data Crow team                          *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                                                                            *
  *       This library is free software; you can redistribute it and/or        *
@@ -30,14 +30,15 @@ package net.datacrow.client.util.freedb;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.datacrow.client.core.DcConfig;
+import org.apache.logging.log4j.Logger;
 
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
 
 
 public class DiscIDUtil {
 	
-	private static Logger logger = Logger.getLogger(DiscIDUtil.class.getName());
+	private static Logger logger = DcLogManager.getLogger(DiscIDUtil.class.getName());
     
     private boolean success = false;
     

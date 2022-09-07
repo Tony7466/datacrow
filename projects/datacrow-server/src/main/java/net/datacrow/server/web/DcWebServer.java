@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -36,17 +36,17 @@ public class DcWebServer {
     
     //private static DcLogManager logger = DcLogManager.getLogger(DcWebServer.class.getName());
     
-    private static final String context = "/datacrow";
+    //private static final String context = "/datacrow";
     
 	private boolean isRunning;
 	//private Tomcat server;
-	private int port;
+	//private int port;
 	
 	/**
 	 * Creates a new instance.
 	 */
 	public DcWebServer(int port) {
-	    this.port = port;
+	    //this.port = port;
 	}
 	
 	/**

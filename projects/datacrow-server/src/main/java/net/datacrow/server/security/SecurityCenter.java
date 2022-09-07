@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -291,7 +291,7 @@ public class SecurityCenter {
             
             InsertQuery query = new InsertQuery(su, user);
             query.run();
-            query.close();
+            query.clear();
             
             admin.destroy();
         } catch (Exception e) {
@@ -387,7 +387,7 @@ public class SecurityCenter {
             CreateQuery query = new CreateQuery(DcModules._USER);
             query.setLog(false);
             query.run();
-            query.close();
+            query.clear();
         } catch (Exception se) {
         	logger.debug(se, se);
         }
@@ -395,11 +395,11 @@ public class SecurityCenter {
         CreateQuery query = new CreateQuery(DcModules._PICTURE);
         query.setLog(false);
         query.run();
-        query.close();
+        query.clear();
 
         query = new CreateQuery(DcModules._PERMISSION);
         query.setLog(false);
         query.run();
-        query.close();
+        query.clear();
     }
 }

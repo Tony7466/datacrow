@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -27,17 +27,18 @@ package net.datacrow.client.fileimporter.movie;
 
 import java.io.RandomAccessFile;
 
-import net.datacrow.client.core.utilities.CoreUtilities;
-
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.ebml.io.FileDataSource;
-import org.ebml.matroska.MatroskaDocType;
 import org.ebml.matroska.MatroskaFile;
 import org.ebml.matroska.MatroskaFileTrack;
+import org.ebml.matroska.MatroskaFileTrack.TrackType;
+
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.utilities.CoreUtilities;
 
 class FilePropertiesMKV extends FileProperties {
     
-    private static Logger logger = Logger.getLogger(FilePropertiesMKV.class.getName());
+    private static Logger logger = DcLogManager.getLogger(FilePropertiesMKV.class.getName());
 
     @Override
 	protected void process(RandomAccessFile raf, String filename) throws Exception {
@@ -56,28 +57,28 @@ class FilePropertiesMKV extends FileProperties {
     		if (mkf.getTrackList() != null) {
     		    
         		for (MatroskaFileTrack track : mkf.getTrackList()) {
-        		    if (track.TrackType ==  MatroskaDocType.track_video) {
-        		        setVideoResolution(track.Video_PixelWidth + "x" + track.Video_PixelHeight);
-        		        setVideoCodec(track.CodecID);
-        		        setName(track.Name);
+        		    if (track.getTrackType() ==  TrackType.VIDEO) {
+        		        setVideoResolution(track.getVideo().getDisplayWidth() + "x" + track.getVideo().getDisplayHeight());
+        		        setVideoCodec(track.getCodecID());
+        		        setName(track.getName());
         		        
-        		        if (track.Language != null) {
-            		        String language = CoreUtilities.getLanguage(track.Language);
-            		        language = language == null || language.length() == 0 ? track.Language : language;
+        		        if (track.getLanguage() != null) {
+            		        String language = CoreUtilities.getLanguage(track.getLanguage());
+            		        language = language == null || language.length() == 0 ? track.getLanguage() : language;
             		        setLanguage(language);
         		        }
-        		    } else if (track.TrackType ==  MatroskaDocType.track_subtitle) {
+        		    } else if (track.getTrackType() ==  TrackType.SUBTITLE) {
         		        String subtitles = getSubtitles();
         		        subtitles += subtitles.length() > 0 ? ", " : "";
         		        
-                        String language = CoreUtilities.getLanguage(track.Name);
-                        language = language == null || language.length() == 0 ? track.Name : track.Name;
+                        String language = CoreUtilities.getLanguage(track.getName());
+                        language = language == null || language.length() == 0 ? track.getName() : track.getName();
         		        subtitles += language;
         		        setSubtitles(subtitles);
         		        
-        		    } else if (track.TrackType ==  MatroskaDocType.track_audio) {
-        		        setAudioChannels(track.Audio_Channels);
-        		        setAudioCodec(track.CodecID);
+        		    } else if (track.getTrackType() ==  TrackType.AUDIO) {
+        		        setAudioChannels(track.getAudio().getChannels());
+        		        setAudioCodec(track.getCodecID());
         		    }
         		}
     		}

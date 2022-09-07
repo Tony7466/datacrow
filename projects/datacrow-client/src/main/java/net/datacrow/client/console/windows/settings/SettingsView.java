@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -299,8 +299,8 @@ public class SettingsView extends DcDialog implements ActionListener {
 		public InformationPanel() {
             // Build the panel
             JLabel labelProduct = ComponentFactory.getLabel(DcConfig.getInstance().getVersion().getFullString());
-            JLabel urlField = ComponentFactory.getLabel("vanderwaalsbv.nl");
-            JLabel labelEmail = ComponentFactory.getLabel("datacrow@vanderwaalsbv.nl");
+            JLabel urlField = ComponentFactory.getLabel("datacrow.org");
+            JLabel labelEmail = ComponentFactory.getLabel("info@datacrow.org");
 
             this.setLayout(Layout.getGBL());
 

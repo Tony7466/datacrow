@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -25,13 +25,13 @@
 
 package net.datacrow.client.fileimporter;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
 import com.drew.imaging.jpeg.JpegMetadataReader;
 import com.drew.imaging.jpeg.JpegProcessingException;
+import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.iptc.IptcDirectory;
@@ -44,7 +44,6 @@ import net.datacrow.core.objects.Picture;
 import net.datacrow.core.objects.helpers.Image;
 import net.datacrow.core.resources.DcResources;
 import net.datacrow.core.utilities.CoreUtilities;
-import net.datacrow.core.utilities.Directory;
 
 /**
  * Imports image files.
@@ -94,7 +93,7 @@ public class ImageImporter extends FileImporter {
             
             Picture pic = (Picture) DcModules.get(DcModules._PICTURE).getItem();
             DcImageIcon icon;
-            if (filename.toLowerCase().endsWith(".svg")) {
+           /* if (filename.toLowerCase().endsWith(".svg")) {
                 SVGtoBufferedImageConverter converter = new SVGtoBufferedImageConverter();
                 BufferedImage bi = converter.renderSVG(filename);
                 icon = new DcImageIcon(CoreUtilities.getScaledImage(new DcImageIcon(bi), 400, 400));
@@ -102,10 +101,10 @@ public class ImageImporter extends FileImporter {
                 icon.setFilename(filename);
                 icon.save();
                 bi.flush();
-            } else {
+            } else { */
                 icon = new DcImageIcon(CoreUtilities.getScaledImage(new DcImageIcon(filename), 400, 400));
                 pic.setValue(Picture._G_EXTERNAL_FILENAME, filename);
-            }
+            //}
             
             int width = icon.getIconWidth();
             int height = icon.getIconHeight();
@@ -126,8 +125,8 @@ public class ImageImporter extends FileImporter {
             
             try {
                 Metadata metadata = JpegMetadataReader.readMetadata(jpegFile);
-                if (metadata.containsDirectory(ExifIFD0Directory.class)) {
-                    Directory exifDirectory = metadata.getDirectory(ExifIFD0Directory.class);
+                if (metadata.containsDirectoryOfType(ExifIFD0Directory.class)) {
+                    Directory exifDirectory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
                     
                     try {
                         String camera = exifDirectory.getString(ExifIFD0Directory.TAG_MODEL);
@@ -152,9 +151,9 @@ public class ImageImporter extends FileImporter {
                     } catch (Exception me) {}
                 }
                 
-                if (metadata.containsDirectory(IptcDirectory.class)) {
+                if (metadata.containsDirectoryOfType(IptcDirectory.class)) {
                     try {
-                        Directory iptcDirectory = metadata.getDirectory(IptcDirectory.class);
+                        Directory iptcDirectory = metadata.getFirstDirectoryOfType(IptcDirectory.class);
                         String city = iptcDirectory.getString(IptcDirectory.TAG_CITY);
                         String country = iptcDirectory.getString(IptcDirectory.TAG_COUNTRY_OR_PRIMARY_LOCATION_NAME);
                         String state = iptcDirectory.getString(IptcDirectory.TAG_PROVINCE_OR_STATE);

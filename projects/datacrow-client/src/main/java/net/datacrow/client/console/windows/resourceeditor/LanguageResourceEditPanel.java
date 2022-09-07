@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -49,13 +49,13 @@ import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcButton;
 import net.datacrow.client.console.components.DcShortTextField;
 import net.datacrow.client.console.components.tables.DcTable;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.resources.DcLanguageResource;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.CoreUtilities;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.resources.DcLanguageResource;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.CoreUtilities;
 
 public class LanguageResourceEditPanel extends JPanel implements KeyListener, ActionListener {
     

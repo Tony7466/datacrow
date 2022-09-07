@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -31,8 +31,8 @@ import java.awt.Insets;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFieldSelectorField;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
 
 public class ItemExporterSelectFieldsPanel extends ItemExporterWizardPanel {
 

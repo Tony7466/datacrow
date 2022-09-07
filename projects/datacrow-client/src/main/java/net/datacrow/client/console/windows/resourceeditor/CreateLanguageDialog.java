@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -41,13 +41,13 @@ import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcShortTextField;
 import net.datacrow.client.console.windows.DcDialog;
-import net.datacrow.client.core.resources.DcLanguageResource;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.resources.DcLanguageResource;
+import net.datacrow.core.resources.DcResources;
 
 public class CreateLanguageDialog extends DcDialog implements ActionListener{
     
     private DcShortTextField txtName = ComponentFactory.getShortTextField(25);
-    private JComboBox cbLanguages = ComponentFactory.getLanguageCombobox();
+    private JComboBox<Object> cbLanguages = ComponentFactory.getLanguageCombobox();
     
     private String language; 
     

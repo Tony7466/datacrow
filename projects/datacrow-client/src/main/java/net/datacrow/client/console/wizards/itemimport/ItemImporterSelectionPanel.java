@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -35,9 +35,9 @@ import javax.swing.JRadioButton;
 
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
-import net.datacrow.client.core.migration.itemimport.ItemImporter;
-import net.datacrow.client.core.migration.itemimport.ItemImporters;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.migration.itemimport.ItemImporter;
+import net.datacrow.core.migration.itemimport.ItemImporters;
+import net.datacrow.core.resources.DcResources;
 
 public class ItemImporterSelectionPanel extends ItemImporterWizardPanel {
 

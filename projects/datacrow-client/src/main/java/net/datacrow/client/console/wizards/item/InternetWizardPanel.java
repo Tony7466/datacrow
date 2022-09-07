@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -37,10 +37,10 @@ import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.windows.onlinesearch.OnlineSearchForm;
 import net.datacrow.client.console.wizards.IWizardPanel;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.services.Servers;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.services.Servers;
 
 public class InternetWizardPanel extends ItemWizardPanel implements IWizardPanel, MouseListener {
 

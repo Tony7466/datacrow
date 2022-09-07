@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -43,9 +43,9 @@ import javax.swing.event.ListSelectionListener;
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcList;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcLanguageResource;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcLanguageResource;
+import net.datacrow.core.resources.DcResources;
 
 public class LanguageResourcePanel extends JPanel implements ListSelectionListener {
 

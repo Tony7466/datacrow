@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -33,21 +33,22 @@ import javax.help.DefaultHelpBroker;
 import javax.help.HelpSet;
 import javax.swing.JFrame;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
 import net.datacrow.client.util.Utilities;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class HelpDialog {
 
     private static String helpIndex = "dc.general.introduction";
 
-    private static Logger logger = Logger.getLogger(HelpDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(HelpDialog.class.getName());
     
     public static void setHelpIndex(String helpIndex) {
     	HelpDialog.helpIndex = helpIndex;

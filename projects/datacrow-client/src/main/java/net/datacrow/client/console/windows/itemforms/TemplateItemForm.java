@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -27,8 +27,8 @@ package net.datacrow.client.console.windows.itemforms;
 
 import javax.swing.SwingUtilities;
 
-import net.datacrow.client.core.objects.DcObject;
 import net.datacrow.client.util.task.WindowUpdater;
+import net.datacrow.core.objects.DcObject;
 
 public class TemplateItemForm extends ItemForm {
     

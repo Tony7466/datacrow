@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -154,7 +154,7 @@ public class FilterDialog extends DcFrame implements ActionListener {
     
     private class ManageFiltersPanel extends JPanel implements ActionListener {
         
-        private JComboBox comboFilters;
+        private JComboBox<Object> comboFilters;
         private DcShortTextField textName;
         
         public ManageFiltersPanel() {

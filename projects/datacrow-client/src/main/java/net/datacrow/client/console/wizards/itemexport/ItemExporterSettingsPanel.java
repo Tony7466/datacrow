@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -33,9 +33,9 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFileField;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.CoreUtilities;
-import net.datacrow.client.core.utilities.filefilters.DcFileFilter;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.filefilters.DcFileFilter;
 
 public class ItemExporterSettingsPanel extends ItemExporterWizardPanel {
 

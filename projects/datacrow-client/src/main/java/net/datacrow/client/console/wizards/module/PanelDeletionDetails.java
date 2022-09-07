@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -34,20 +34,21 @@ import javax.swing.JTextPane;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.wizards.Wizard;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.modules.xml.XmlModule;
-import net.datacrow.client.core.resources.DcResources;
 import net.datacrow.client.util.Utilities;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.modules.xml.XmlModule;
+import net.datacrow.core.resources.DcResources;
 
 public class PanelDeletionDetails extends ModuleWizardPanel {
 
-    private static Logger logger = Logger.getLogger(PanelDeletionDetails.class.getName());
+    private static Logger logger = DcLogManager.getLogger(PanelDeletionDetails.class.getName());
     
     private JTextPane details = ComponentFactory.getTextPane();
     private HTMLEditorKit kit = new HTMLEditorKit();

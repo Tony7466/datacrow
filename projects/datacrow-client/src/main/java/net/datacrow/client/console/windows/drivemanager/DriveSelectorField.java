@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -43,7 +43,7 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcMultiLineToolTip;
 import net.datacrow.client.console.components.IComponent;
-import net.datacrow.client.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.CoreUtilities;
 
 public class DriveSelectorField extends JComponent implements IComponent {
 

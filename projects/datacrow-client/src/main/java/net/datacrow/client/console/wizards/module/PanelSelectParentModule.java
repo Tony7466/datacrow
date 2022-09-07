@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -26,8 +26,8 @@
 package net.datacrow.client.console.wizards.module;
 
 import net.datacrow.client.console.wizards.Wizard;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.resources.DcResources;
 
 public class PanelSelectParentModule extends PanelSelectModule {
 

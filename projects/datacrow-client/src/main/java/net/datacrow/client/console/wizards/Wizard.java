@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -46,10 +46,10 @@ import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.windows.DcFrame;
 import net.datacrow.client.console.wizards.item.InternetWizardPanel;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.resources.DcResources;
 
 /**
  * Base for all GUI wizards of Data Crow. The wizard is used to navigate through

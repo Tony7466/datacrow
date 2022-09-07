@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -41,13 +41,13 @@ import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.wizards.Wizard;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.modules.DcMediaModule;
-import net.datacrow.client.core.modules.DcMediaParentModule;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.modules.DcParentModule;
-import net.datacrow.client.core.modules.xml.XmlModule;
-import net.datacrow.client.core.resources.DcResources;
+import net.datacrow.core.modules.DcMediaModule;
+import net.datacrow.core.modules.DcMediaParentModule;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.modules.DcParentModule;
+import net.datacrow.core.modules.xml.XmlModule;
+import net.datacrow.core.resources.DcResources;
 
 public class PanelChildModule extends ModuleWizardPanel {
 

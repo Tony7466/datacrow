@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -29,11 +29,13 @@ import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+
+import net.datacrow.core.DcLogManager;
 
 public class FilePropertiesMovie  {
     
-    private static Logger logger = Logger.getLogger(FilePropertiesMovie.class.getName());
+    private static Logger logger = DcLogManager.getLogger(FilePropertiesMovie.class.getName());
     
     private static final int[][] MAGIC_BYTES = { 
         { 0x00, 0x00, 0x01, 0xb3 }, // MPEG (video)

@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -33,15 +33,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.http.HttpConnection;
-import net.datacrow.client.core.http.HttpConnectionUtil;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.objects.helpers.MusicAlbum;
-import net.datacrow.client.core.objects.helpers.MusicTrack;
-import net.datacrow.client.core.resources.DcResources;
 import net.datacrow.client.util.Utilities;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.http.HttpConnection;
+import net.datacrow.core.http.HttpConnectionUtil;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.objects.helpers.MusicAlbum;
+import net.datacrow.core.objects.helpers.MusicTrack;
+import net.datacrow.core.resources.DcResources;
 
 public class Freedb {
     
@@ -100,7 +100,7 @@ public class Freedb {
      * @param id full disc id
      * @throws Exception
      */
-    public net.datacrow.client.core.objects.DcObject[] query(String id) throws Exception {
+    public net.datacrow.core.objects.DcObject[] query(String id) throws Exception {
         //Create the command to be sent to freedb
         String command = getReadCommand(id);
         //Send the command, and read the answer
@@ -251,12 +251,12 @@ public class Freedb {
         setGenres(audioCD, result.getCategory());        
         
         int year = Utilities.getIntegerValue(result.getYear());
-        audioCD.setValue(MusicAlbum._C_YEAR, new Integer(year));
+        audioCD.setValue(MusicAlbum._C_YEAR, Integer.valueOf(year));
         
         for (int i = 0; i < result.getTracksNumber(); i++) {
             DcObject track = DcModules.get(DcModules._MUSIC_TRACK).getItem();
             String lyric = result.getTrackComment(i);
-            track.setValue(MusicTrack._F_TRACKNUMBER, new Integer(i + 1));
+            track.setValue(MusicTrack._F_TRACKNUMBER, Integer.valueOf(i + 1));
             track.setValue(MusicTrack._A_TITLE, result.getTrackTitle(i));
             track.setValue(MusicTrack._M_LYRIC, lyric);
             track.setValue(MusicTrack._J_PLAYLENGTH, result.getTrackSeconds(i));

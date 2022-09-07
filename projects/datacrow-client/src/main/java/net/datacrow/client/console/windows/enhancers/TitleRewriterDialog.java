@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -40,32 +40,33 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.windows.DcDialog;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.console.IMasterView;
-import net.datacrow.client.core.data.DataFilter;
-import net.datacrow.client.core.data.DataFilterEntry;
-import net.datacrow.client.core.data.Operator;
-import net.datacrow.client.core.enhancers.IValueEnhancer;
-import net.datacrow.client.core.enhancers.TitleRewriter;
-import net.datacrow.client.core.enhancers.ValueEnhancers;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcMediaObject;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.console.IMasterView;
+import net.datacrow.core.data.DataFilter;
+import net.datacrow.core.data.DataFilterEntry;
+import net.datacrow.core.data.Operator;
+import net.datacrow.core.enhancers.IValueEnhancer;
+import net.datacrow.core.enhancers.TitleRewriter;
+import net.datacrow.core.enhancers.ValueEnhancers;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcMediaObject;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
 
 public class TitleRewriterDialog extends DcDialog implements ActionListener {
 
-    private static Logger logger = Logger.getLogger(TitleRewriterDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(TitleRewriterDialog.class.getName());
     
     private boolean canceled = false;
     

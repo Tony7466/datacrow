@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -43,39 +43,40 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFileField;
 import net.datacrow.client.console.windows.DcFrame;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.clients.IItemExporterClient;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.reporting.Report;
-import net.datacrow.client.core.reporting.ReportGenerator;
-import net.datacrow.client.core.reporting.ReportType;
-import net.datacrow.client.core.reporting.Reports;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
 import net.datacrow.client.util.launcher.FileLauncher;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.clients.IItemExporterClient;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.reporting.Report;
+import net.datacrow.core.reporting.ReportGenerator;
+import net.datacrow.core.reporting.ReportType;
+import net.datacrow.core.reporting.Reports;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 /**
  * @author Robert Jan van der Waals
  */
 public class ReportingDialog extends DcFrame implements IItemExporterClient, ActionListener {
 
-    private static Logger logger = Logger.getLogger(ReportingDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(ReportingDialog.class.getName());
     
     private JButton buttonRun = ComponentFactory.getButton(DcResources.getText("lblRun"));
     private JButton buttonStop = ComponentFactory.getButton(DcResources.getText("lblStop"));
     private JButton buttonClose = ComponentFactory.getButton(DcResources.getText("lblClose"));
     private JButton buttonResults = ComponentFactory.getButton(DcResources.getText("lblOpenReport"));
 
-    private JComboBox cbReports = ComponentFactory.getComboBox();
-    private JComboBox cbReportType = ComponentFactory.getComboBox();
+    private JComboBox<Object> cbReports = ComponentFactory.getComboBox();
+    private JComboBox<Object> cbReportType = ComponentFactory.getComboBox();
 
     private JTextArea textLog = ComponentFactory.getTextArea();
     private JProgressBar progressBar = new JProgressBar();

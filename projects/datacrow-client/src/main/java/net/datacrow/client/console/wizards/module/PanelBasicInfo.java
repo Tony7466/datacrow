@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -34,6 +34,8 @@ import java.io.FileOutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcCheckBox;
@@ -42,21 +44,20 @@ import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.components.DcShortTextField;
 import net.datacrow.client.console.wizards.Wizard;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.modules.DcAssociateModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.modules.DcPropertyModule;
-import net.datacrow.client.core.modules.xml.XmlModule;
-import net.datacrow.client.core.objects.DcImageIcon;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.CoreUtilities;
 import net.datacrow.client.util.Utilities;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.modules.DcAssociateModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.modules.DcPropertyModule;
+import net.datacrow.core.modules.xml.XmlModule;
+import net.datacrow.core.objects.DcImageIcon;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.CoreUtilities;
 
 public class PanelBasicInfo extends ModuleWizardPanel {
 
-    private static Logger logger = Logger.getLogger(PanelBasicInfo.class.getName());
+    private static Logger logger = DcLogManager.getLogger(PanelBasicInfo.class.getName());
     
     private DcIconSelectField pic32;
     private DcIconSelectField pic16;

@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -71,10 +71,10 @@ public class DefineFilterEntryPanel extends JPanel implements MouseListener, Act
     private JComponent c;
     private JButton buttonAdd;
     
-    private JComboBox comboAndOr;
-    private JComboBox comboFields;
-    private JComboBox comboOperators;
-    private JComboBox comboModules;
+    private JComboBox<Object> comboAndOr;
+    private JComboBox<Object> comboFields;
+    private JComboBox<Object> comboOperators;
+    private JComboBox<Object> comboModules;
     
     private DcFilterEntryList list;
     
@@ -104,7 +104,7 @@ public class DefineFilterEntryPanel extends JPanel implements MouseListener, Act
         	if (field.getValueType() == DcRepository.ValueTypes._DCOBJECTCOLLECTION && 
         	    value instanceof Collection) {
         	    
-        		Collection c = (Collection) value;
+        		Collection<?> c = (Collection<?>) value;
         		value = c.size() == 1 ? value = c.toArray()[0] : null;
         	} 
         	
@@ -298,11 +298,10 @@ public class DefineFilterEntryPanel extends JPanel implements MouseListener, Act
     private void build() {
         setLayout(Layout.getGBL());
         
-        // create the comboboxes
-        comboFields = ComponentFactory.getComboBox(new DefaultComboBoxModel());
-        comboOperators = ComponentFactory.getComboBox(new DefaultComboBoxModel());
-        comboModules = ComponentFactory.getComboBox(new DefaultComboBoxModel());
-        comboAndOr = ComponentFactory.getComboBox(new DefaultComboBoxModel());
+        comboFields = ComponentFactory.getComboBox(new DefaultComboBoxModel<Object>());
+        comboOperators = ComponentFactory.getComboBox(new DefaultComboBoxModel<Object>());
+        comboModules = ComponentFactory.getComboBox(new DefaultComboBoxModel<Object>());
+        comboAndOr = ComponentFactory.getComboBox(new DefaultComboBoxModel<Object>());
         
         comboAndOr.addItem(DcResources.getText("lblAnd"));
         comboAndOr.setEnabled(false);
@@ -320,7 +319,6 @@ public class DefineFilterEntryPanel extends JPanel implements MouseListener, Act
         comboOperators.addActionListener(this);
         comboOperators.setActionCommand("operatorSelected");
         
-        // create the list
         list = new DcFilterEntryList();
         list.addMouseListener(this);
 
@@ -331,7 +329,6 @@ public class DefineFilterEntryPanel extends JPanel implements MouseListener, Act
         panelInput = new JPanel();
         panelInput.setLayout(Layout.getGBL());
         
-        // create the buttons
         buttonAdd = ComponentFactory.getButton(DcResources.getText("lblAdd"));
         buttonAdd.addActionListener(this);
         buttonAdd.setActionCommand("addEntry");

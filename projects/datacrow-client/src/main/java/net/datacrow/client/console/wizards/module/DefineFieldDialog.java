@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -53,13 +53,13 @@ import net.datacrow.client.console.components.DcShortTextField;
 import net.datacrow.client.console.windows.DcDialog;
 import net.datacrow.client.console.wizards.Wizard;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.modules.xml.XmlField;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.CoreUtilities;
-import net.datacrow.client.settings.definitions.DcFieldDefinition;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.modules.xml.XmlField;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
 
 public class DefineFieldDialog extends DcDialog implements ActionListener {
     
@@ -69,7 +69,7 @@ public class DefineFieldDialog extends DcDialog implements ActionListener {
     private DcCheckBox checkSearchable;
     private DcNumberField numberMaxLength;
 
-    private JComboBox comboTabs;
+    private JComboBox<Object> comboTabs;
     private DcCheckBox checkRequired;
     private DcCheckBox checkDescriptive;
     private DcCheckBox checkKeyField;
@@ -77,8 +77,8 @@ public class DefineFieldDialog extends DcDialog implements ActionListener {
     private JLabel lblReferences = ComponentFactory.getLabel(DcResources.getText("lblReferencedModule"));
     private JLabel lblMaxLength = ComponentFactory.getLabel(DcResources.getText("lblMaxTextLength"));
     
-    private JComboBox comboReference;
-    private JComboBox comboFieldType;
+    private JComboBox<Object> comboReference;
+    private JComboBox<Object> comboFieldType;
     
     private Collection<String> excludedNames;
     private XmlField field;

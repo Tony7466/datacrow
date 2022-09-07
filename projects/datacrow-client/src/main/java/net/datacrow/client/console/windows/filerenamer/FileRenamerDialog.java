@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -48,36 +48,37 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcFileField;
 import net.datacrow.client.console.components.DcFilePatternField;
 import net.datacrow.client.console.windows.DcFrame;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.console.IView;
-import net.datacrow.client.core.filerenamer.FilePattern;
-import net.datacrow.client.core.filerenamer.FilePatternPart;
-import net.datacrow.client.core.filerenamer.FilePatterns;
-import net.datacrow.client.core.filerenamer.FileRenamer;
-import net.datacrow.client.core.filerenamer.IFileRenamerListener;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-import net.datacrow.client.core.utilities.CoreUtilities;
-import net.datacrow.client.settings.DcSettings;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.console.IView;
+import net.datacrow.core.filerenamer.FilePattern;
+import net.datacrow.core.filerenamer.FilePatternPart;
+import net.datacrow.core.filerenamer.FilePatterns;
+import net.datacrow.core.filerenamer.FileRenamer;
+import net.datacrow.core.filerenamer.IFileRenamerListener;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class FileRenamerDialog extends DcFrame implements ActionListener, IFileRenamerListener {
 
     private static final int _ALL = 0;
     private static final int _SELECTED = 1;
     
-    private static Logger logger = Logger.getLogger(FileRenamerDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(FileRenamerDialog.class.getName());
     
     private final DcFilePatternField patternFld;
     
@@ -85,7 +86,7 @@ public class FileRenamerDialog extends DcFrame implements ActionListener, IFileR
     private final JProgressBar progressBar = new JProgressBar();
 
     private final JLabel labelPatterms = ComponentFactory.getLabel(DcResources.getText("lblExistingPatterns"));
-    private final JComboBox cbPatterns = ComponentFactory.getComboBox();
+    private final JComboBox<Object> cbPatterns = ComponentFactory.getComboBox();
     
     private final JButton buttonDeletePattern = ComponentFactory.getIconButton(IconLibrary._icoRemove);
     private final JButton buttonApplyPattern = ComponentFactory.getIconButton(IconLibrary._icoAccept);
@@ -95,7 +96,7 @@ public class FileRenamerDialog extends DcFrame implements ActionListener, IFileR
     private final JButton buttonStart = ComponentFactory.getButton(DcResources.getText("lblStart"));
     private final JButton buttonStop = ComponentFactory.getButton(DcResources.getText("lblStop"));
     
-    private final JComboBox cbItemPickMode = ComponentFactory.getComboBox();
+    private final JComboBox<Object> cbItemPickMode = ComponentFactory.getComboBox();
     
     private final JRadioButton rbOriginalLoc = 
         ComponentFactory.getRadioButton(DcResources.getText("lblUseOriginalLocation"), null);

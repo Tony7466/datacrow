@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -25,44 +25,20 @@
 
 package net.datacrow.client.fileimporter;
 
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.util.Iterator;
-
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.sax.BodyContentHandler;
-
-import org.chabanois.isbn.extractor.FileISBNExtractor;
-import org.chabanois.isbn.extractor.ISBNCandidates;
-import org.chabanois.isbn.extractor.PDFBoxTextExtractor;
-
-import com.sun.pdfview.PDFFile;
-import com.sun.pdfview.PDFPage;
-
 import net.datacrow.core.fileimporter.FileImporter;
 import net.datacrow.core.modules.DcModules;
-import net.datacrow.core.objects.DcImageIcon;
 import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.resources.DcResources;
-import net.datacrow.core.utilities.CoreUtilities;
-import net.datacrow.core.utilities.isbn.ISBN;
 
 /**
  * E-Book (Electronical Book) file imporerter.
  * 
  * @author Robert Jan van der Waals
+ * 
+ * TODO: re-evaluate & reimplement
  */
 public class EbookImport extends FileImporter {
 
-    private static Logger logger = Logger.getLogger(EbookImport.class.getName());
+    //private static Logger logger = DcLogManager.getLogger(EbookImport.class.getName());
     
     public EbookImport() {
         super(DcModules._BOOK);
@@ -99,10 +75,9 @@ public class EbookImport extends FileImporter {
         return true;
     }    
     
-    @SuppressWarnings("deprecation")
 	@Override
     public DcObject parse(String filename, int directoryUsage) {
-        DcObject book = DcModules.get(DcModules._BOOK).getItem();
+    /*    DcObject book = DcModules.get(DcModules._BOOK).getItem();
         
         try {
             book.setValue(Book._A_TITLE, getName(filename, directoryUsage));
@@ -247,6 +222,8 @@ public class EbookImport extends FileImporter {
             logger.error(err, err);
             getClient().notify(DcResources.getText("msgCouldNotReadInfoFrom", filename));
         }
-        return book;
+        return book; */
+    	
+    	return null;
     }
 }

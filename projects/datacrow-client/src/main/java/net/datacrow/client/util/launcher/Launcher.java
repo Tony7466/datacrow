@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -31,11 +31,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+
+import net.datacrow.core.DcLogManager;
 
 public abstract class Launcher {
 
-	private static Logger logger = Logger.getLogger(Launcher.class.getName());
+	private static Logger logger = DcLogManager.getLogger(Launcher.class.getName());
 	
 	public abstract void launch();
 	

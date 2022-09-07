@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -37,10 +37,10 @@ import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcCheckBox;
 import net.datacrow.client.console.components.DcLongTextField;
 import net.datacrow.client.console.components.DcShortTextField;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.Settings;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.Settings;
 
 public class LocalArtSettingsPanel extends JPanel {
 

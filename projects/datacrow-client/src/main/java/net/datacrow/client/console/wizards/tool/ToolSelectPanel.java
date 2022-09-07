@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -32,25 +32,26 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.DcPluginField;
 import net.datacrow.client.console.wizards.Wizard;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.fileimporter.FileImporters;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.plugin.InvalidPluginException;
-import net.datacrow.client.core.plugin.Plugin;
-import net.datacrow.client.core.plugin.Plugins;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.fileimporter.FileImporters;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.plugin.InvalidPluginException;
+import net.datacrow.core.plugin.Plugin;
+import net.datacrow.core.plugin.Plugins;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
 
 public class ToolSelectPanel extends ToolSelectBasePanel implements ActionListener {
 
-    private static Logger logger = Logger.getLogger(ToolSelectPanel.class.getName());
+    private static Logger logger = DcLogManager.getLogger(ToolSelectPanel.class.getName());
     
     public ToolSelectPanel(Wizard wizard) {
         super(wizard);

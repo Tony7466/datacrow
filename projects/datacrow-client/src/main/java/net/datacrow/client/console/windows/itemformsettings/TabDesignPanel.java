@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -35,17 +35,15 @@ import javax.swing.JPanel;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.panels.FieldSelectionPanel;
 import net.datacrow.client.console.components.panels.IFieldSelectionListener;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.CoreUtilities;
-import net.datacrow.client.settings.definitions.DcFieldDefinition;
-import net.datacrow.client.settings.definitions.DcFieldDefinitions;
 import net.datacrow.client.tabs.Tab;
-
-import org.apache.commons.lang3.StringUtils;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
 
 public class TabDesignPanel extends JPanel implements IFieldSelectionListener {
     
@@ -110,7 +108,7 @@ public class TabDesignPanel extends JPanel implements IFieldSelectionListener {
     private List<DcField> getAvailableFields() {
         List<DcField> fields = new ArrayList<DcField>();
         for (DcFieldDefinition def : module.getFieldDefinitions().getDefinitions()) {
-            if (isAllowed(def.getIndex()) && StringUtils.isEmpty(def.getTab()))
+            if (isAllowed(def.getIndex()) && CoreUtilities.isEmpty(def.getTab()))
                 fields.add(module.getField(def.getIndex()));
         }
         return fields;

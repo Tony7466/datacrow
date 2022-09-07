@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -26,9 +26,9 @@
 package net.datacrow.client.console.windows.itemforms;
 
 import net.datacrow.client.console.GUI;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.objects.template.Templates;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.objects.template.Templates;
 
 public class TemplateForm extends DcMinimalisticItemView {
 

@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -34,23 +34,24 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.TableColumn;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.tables.DcTable;
 import net.datacrow.client.console.components.tables.DcTableModel;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.migration.itemimport.ItemImporter;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcObject;
-import net.datacrow.client.core.resources.DcResources;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.migration.itemimport.ItemImporter;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcObject;
+import net.datacrow.core.resources.DcResources;
 
 public class ItemImporterMappingPanel extends ItemImporterWizardPanel {
 
-	private static Logger logger = Logger.getLogger(ItemImporterMappingPanel.class.getName());
+	private static Logger logger = DcLogManager.getLogger(ItemImporterMappingPanel.class.getName());
 	
     private ItemImporterWizard wizard;
     private DcTable table;
@@ -126,7 +127,7 @@ public class ItemImporterMappingPanel extends ItemImporterWizardPanel {
         columnName.setHeaderValue(DcResources.getText("lblSourceName"));
 
         TableColumn columnField = table.getColumnModel().getColumn(2);
-        JComboBox comboFields = ComponentFactory.getComboBox();
+        JComboBox<Object> comboFields = ComponentFactory.getComboBox();
         columnField.setHeaderValue(DcResources.getText("lblTargetName"));
 
         for (DcField field : wizard.getModule().getFields()) {

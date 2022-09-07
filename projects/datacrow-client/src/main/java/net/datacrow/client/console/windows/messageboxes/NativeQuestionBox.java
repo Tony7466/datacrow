@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -42,8 +42,8 @@ import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.windows.NativeDialog;
-import net.datacrow.client.core.IconLibrary;
 import net.datacrow.client.util.Utilities;
+import net.datacrow.core.IconLibrary;
 
 public class NativeQuestionBox extends NativeDialog implements ActionListener {
 

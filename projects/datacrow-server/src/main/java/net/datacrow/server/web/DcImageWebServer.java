@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -36,13 +36,13 @@ public class DcImageWebServer {
     
 	private boolean isRunning;
 	//private Tomcat server;
-	private int port;
+	//private int port;
 	
 	/**
 	 * Creates a new instance.
 	 */
 	public DcImageWebServer(int port) {
-	    this.port = port;
+	    //this.port = port;
 	}
 	
 	/**

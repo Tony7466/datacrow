@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -25,39 +25,38 @@
 
 package net.datacrow.client.fileimporter.movie;
 
-import com.coremedia.iso.IsoFile;
-import com.coremedia.iso.boxes.FileTypeBox;
-import com.coremedia.iso.boxes.HandlerBox;
-import com.coremedia.iso.boxes.MediaBox;
-import com.coremedia.iso.boxes.MediaHeaderBox;
-import com.coremedia.iso.boxes.MovieBox;
-import com.coremedia.iso.boxes.MovieHeaderBox;
-import com.coremedia.iso.boxes.TrackHeaderBox;
-import com.coremedia.iso.boxes.sampleentry.AudioSampleEntry;
-import com.coremedia.iso.boxes.sampleentry.VisualSampleEntry;
-import com.googlecode.mp4parser.boxes.mp4.ESDescriptorBox;
-import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.AudioSpecificConfig;
-import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.DecoderConfigDescriptor;
-import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.ESDescriptor;
-import com.coremedia.iso.boxes.BitRateBox;
-
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.mp4parser.IsoFile;
+import org.mp4parser.boxes.iso14496.part1.objectdescriptors.AudioSpecificConfig;
+import org.mp4parser.boxes.iso14496.part1.objectdescriptors.DecoderConfigDescriptor;
+import org.mp4parser.boxes.iso14496.part1.objectdescriptors.ESDescriptor;
+import org.mp4parser.boxes.iso14496.part12.FileTypeBox;
+import org.mp4parser.boxes.iso14496.part12.HandlerBox;
+import org.mp4parser.boxes.iso14496.part12.MovieBox;
+import org.mp4parser.boxes.iso14496.part12.MovieHeaderBox;
+import org.mp4parser.boxes.iso14496.part14.ESDescriptorBox;
+import org.mp4parser.boxes.sampleentry.AudioSampleEntry;
+
+import net.datacrow.core.DcLogManager;
 
 class FilePropertiesMP4 extends FileProperties {
 
-    private static Logger logger = Logger.getLogger(FilePropertiesMP4.class.getName());
+    private static Logger logger = DcLogManager.getLogger(FilePropertiesMP4.class.getName());
 
     private IsoFile isoFile;
 
     public static Boolean checkIfMp4File(RandomAccessFile dataStream) {
-        try {
+    	
+    	IsoFile isoFile = null;
+    	
+    	try {
             dataStream.seek(0);
-            IsoFile isoFile = new IsoFile(dataStream.getChannel());
+            isoFile = new IsoFile(dataStream.getChannel());
 
             MovieBox mbox = isoFile.getMovieBox();
             // that seems to be an mp4 file container if the moviebox is not
@@ -66,6 +65,8 @@ class FilePropertiesMP4 extends FileProperties {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        } finally {
+        	try { if (isoFile != null) isoFile.close(); } catch (IOException ignore) {}
         }
     }
 
@@ -75,10 +76,9 @@ class FilePropertiesMP4 extends FileProperties {
         dataStream.seek(0);
 
         FileChannel fc = dataStream.getChannel();
-        this.isoFile = new IsoFile(fc);
+        this.isoFile = new org.mp4parser.IsoFile(fc);
 
         FileTypeBox ftypBox = isoFile.getBoxes(FileTypeBox.class).get(0);
-
         String majorBrand = ftypBox.getMajorBrand();
 
         if (majorBrand.equals("mp42")) {
@@ -129,12 +129,16 @@ class FilePropertiesMP4 extends FileProperties {
 
     private void parseVideoDetails(HandlerBox videoHandlerBox) {
         try {
+        	
+        	/*
+        	 * 
+        	 * TODO: reimplement - GetParent no longer exists
+        	
             logger.debug("Video track found!");
 
             // get track header box
-            MediaBox mediaBox = (MediaBox) videoHandlerBox.getParent();
-            TrackHeaderBox trackHeaderBox = mediaBox.getParent()
-                    .getBoxes(TrackHeaderBox.class).get(0);
+            MediaBox mediaBox = (MediaBox) videoHandlerBox.Get();
+            TrackHeaderBox trackHeaderBox = mediaBox.getParent().getBoxes(TrackHeaderBox.class).get(0);
 
             // get width and height
             // we need integers in the further process
@@ -190,19 +194,15 @@ class FilePropertiesMP4 extends FileProperties {
                 this.setVideoCodec(videoCodec);
 
                 // check if a bitrate box is present
-
-                List<com.coremedia.iso.boxes.BitRateBox> btrtBoxes = vse
-                        .getBoxes(BitRateBox.class);
+                List<BitRateBox> btrtBoxes = vse .getBoxes(BitRateBox.class);
 
                 if (!btrtBoxes.isEmpty()) {
                     BitRateBox btrt = btrtBoxes.get(0);
                     // convert the bitrate from bps to Kbps
-                    int avgBitRate = (int) Math
-                            .round(btrt.getAvgBitrate() / 1000.0);
-
+                    int avgBitRate = (int) Math.round(btrt.getAvgBitrate() / 1000.0);
                     this.setVideoBitRate(avgBitRate);
                 }
-            }
+            } */
         } catch (Exception e) {
             logger.error("Could not parse video details of file " + this.getFilename(), e);
         }
@@ -210,22 +210,15 @@ class FilePropertiesMP4 extends FileProperties {
 
     private void parseAudioDetails(IsoFile isoFile) {
         try {
-            List<AudioSampleEntry> aseList = isoFile.getBoxes(
-                    AudioSampleEntry.class, true);
+            List<AudioSampleEntry> aseList = isoFile.getBoxes(AudioSampleEntry.class, true);
 
             if (!aseList.isEmpty()) {
-
                 AudioSampleEntry ase = aseList.get(0);
-
-                ESDescriptorBox esBox = ase.getBoxes(ESDescriptorBox.class)
-                        .get(0);
-
+                ESDescriptorBox esBox = ase.getBoxes(ESDescriptorBox.class).get(0);
                 ESDescriptor esd = esBox.getEsDescriptor();
 
                 DecoderConfigDescriptor dcd = esd.getDecoderConfigDescriptor();
-
                 AudioSpecificConfig asc = dcd.getAudioSpecificInfo();
-
                 String audioCodec;
 
                 switch (asc.getAudioObjectType()) {

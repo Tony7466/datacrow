@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -28,17 +28,18 @@ package net.datacrow.client.util.launcher;
 import java.awt.Desktop;
 import java.net.URL;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.utilities.CoreUtilities;
-import net.datacrow.client.settings.DcSettings;
+import org.apache.logging.log4j.Logger;
 
-import org.apache.log4j.Logger;
+import net.datacrow.client.console.GUI;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.CoreUtilities;
+import net.datacrow.core.utilities.settings.DcSettings;
 
 public class URLLauncher extends Launcher {
 
-	private static Logger logger = Logger.getLogger(URLLauncher.class.getName());
+	private static Logger logger = DcLogManager.getLogger(URLLauncher.class.getName());
 	
 	private URL url;
 	

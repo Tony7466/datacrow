@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -40,35 +40,35 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import net.datacrow.client.console.ComponentFactory;
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.console.Layout;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.DcThread;
-import net.datacrow.client.core.IconLibrary;
-import net.datacrow.client.core.data.DcResultSet;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcMapping;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.core.server.Connector;
-
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
+import net.datacrow.client.console.ComponentFactory;
+import net.datacrow.client.console.GUI;
+import net.datacrow.client.console.Layout;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.DcThread;
+import net.datacrow.core.IconLibrary;
+import net.datacrow.core.data.DcResultSet;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcMapping;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.server.Connector;
 
 public class ChartPanel extends JPanel implements ActionListener {
     
-    private static Logger logger = Logger.getLogger(ChartPanel.class.getName());
+    private static Logger logger = DcLogManager.getLogger(ChartPanel.class.getName());
     
-    private JComboBox comboFields;
-    private JComboBox comboTypes;
+    private JComboBox<Object> comboFields;
+    private JComboBox<Object> comboTypes;
     private JButton btnAccept = ComponentFactory.getIconButton(IconLibrary._icoAccept);
     
     private ThreadGroup tg = new ThreadGroup("chart-builders");

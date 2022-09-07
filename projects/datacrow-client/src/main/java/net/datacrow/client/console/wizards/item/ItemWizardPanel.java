@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 
 import net.datacrow.client.console.wizards.IWizardPanel;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.objects.DcObject;
+import net.datacrow.core.objects.DcObject;
 
 public abstract class ItemWizardPanel extends JPanel implements IWizardPanel {
 

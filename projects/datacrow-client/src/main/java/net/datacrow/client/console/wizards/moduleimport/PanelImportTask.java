@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -28,19 +28,20 @@ package net.datacrow.client.console.wizards.moduleimport;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.panels.TaskPanel;
 import net.datacrow.client.console.wizards.WizardException;
 import net.datacrow.client.console.wizards.itemimport.ItemImporterTaskPanel;
-import net.datacrow.client.core.clients.IModuleWizardClient;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.server.migration.modules.ModuleImporter;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.clients.IModuleWizardClient;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.server.migration.modules.ModuleImporter;
 
 public class PanelImportTask extends ModuleImportWizardPanel implements IModuleWizardClient {
 
-    private static Logger logger = Logger.getLogger(ItemImporterTaskPanel.class.getName());
+    private static Logger logger = DcLogManager.getLogger(ItemImporterTaskPanel.class.getName());
     
     private TaskPanel tp = new TaskPanel(TaskPanel._DUPLICATE_PROGRESSBAR);
     

@@ -8,7 +8,7 @@
 	<version>5.0</version>
 
 	<name>datacrow-server</name>
-	<url>https://vanderwaalsbv.nl/datacrow</url>
+	<url>https://datacrow.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

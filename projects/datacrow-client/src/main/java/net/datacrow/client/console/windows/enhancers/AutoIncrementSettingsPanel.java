@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -44,16 +44,16 @@ import net.datacrow.client.console.GUI;
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.renderers.CheckBoxTableCellRenderer;
 import net.datacrow.client.console.components.tables.DcTable;
-import net.datacrow.client.core.DcRepository;
-import net.datacrow.client.core.enhancers.AutoIncrementer;
-import net.datacrow.client.core.enhancers.ValueEnhancers;
-import net.datacrow.client.core.modules.DcModule;
-import net.datacrow.client.core.modules.DcModules;
-import net.datacrow.client.core.objects.DcField;
-import net.datacrow.client.core.objects.DcMediaObject;
-import net.datacrow.client.core.resources.DcResources;
-import net.datacrow.client.settings.DcSettings;
-import net.datacrow.client.settings.definitions.DcFieldDefinition;
+import net.datacrow.core.DcRepository;
+import net.datacrow.core.enhancers.AutoIncrementer;
+import net.datacrow.core.enhancers.ValueEnhancers;
+import net.datacrow.core.modules.DcModule;
+import net.datacrow.core.modules.DcModules;
+import net.datacrow.core.objects.DcField;
+import net.datacrow.core.objects.DcMediaObject;
+import net.datacrow.core.resources.DcResources;
+import net.datacrow.core.utilities.settings.DcSettings;
+import net.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
 
 public class AutoIncrementSettingsPanel extends JPanel {
 
@@ -162,7 +162,7 @@ public class AutoIncrementSettingsPanel extends JPanel {
         cFillGaps.setCellRenderer(CheckBoxTableCellRenderer.getInstance());
 
         TableColumn cStep = table.getColumnModel().getColumn(3);
-        JComboBox comboWeight = ComponentFactory.getComboBox();
+        JComboBox<Object> comboWeight = ComponentFactory.getComboBox();
         for (int i = 1; i < 101; i++)
             comboWeight.addItem(i);
 

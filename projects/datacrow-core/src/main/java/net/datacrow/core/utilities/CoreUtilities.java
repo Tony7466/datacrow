@@ -6,7 +6,7 @@
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
  *                       (c) 2003 The Data Crow team                          *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                                                                            *
  *       This library is free software; you can redistribute it and/or        *

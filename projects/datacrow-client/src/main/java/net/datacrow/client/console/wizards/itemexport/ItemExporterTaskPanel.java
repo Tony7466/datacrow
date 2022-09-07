@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -28,18 +28,19 @@ package net.datacrow.client.console.wizards.itemexport;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import org.apache.logging.log4j.Logger;
+
 import net.datacrow.client.console.Layout;
 import net.datacrow.client.console.components.panels.TaskPanel;
 import net.datacrow.client.console.wizards.WizardException;
-import net.datacrow.client.core.clients.IItemExporterClient;
-import net.datacrow.client.core.migration.itemexport.ItemExporter;
-import net.datacrow.client.core.resources.DcResources;
-
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcLogManager;
+import net.datacrow.core.clients.IItemExporterClient;
+import net.datacrow.core.migration.itemexport.ItemExporter;
+import net.datacrow.core.resources.DcResources;
 
 public class ItemExporterTaskPanel extends ItemExporterWizardPanel implements IItemExporterClient  {
 
-	private static Logger logger = Logger.getLogger(ItemExporterTaskPanel.class.getName());
+	private static Logger logger = DcLogManager.getLogger(ItemExporterTaskPanel.class.getName());
 	
 	private TaskPanel tp = new TaskPanel(TaskPanel._SINGLE_PROGRESSBAR);
 	

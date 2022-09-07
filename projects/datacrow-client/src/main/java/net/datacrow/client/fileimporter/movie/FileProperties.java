@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -33,13 +33,14 @@ import java.io.RandomAccessFile;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import net.datacrow.client.core.DcConfig;
+import org.apache.logging.log4j.Logger;
 
-import org.apache.log4j.Logger;
+import net.datacrow.core.DcConfig;
+import net.datacrow.core.DcLogManager;
 
 abstract class FileProperties {
     
-    private static Logger logger = Logger.getLogger(FileProperties.class.getName());
+    private static Logger logger = DcLogManager.getLogger(FileProperties.class.getName());
 
     public static final int _TYPE_AUDIO_CODEC = 0;
     public static final int _TYPE_VIDEO_CODEC = 1;

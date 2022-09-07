@@ -5,7 +5,7 @@
  *                               <-<-\ __ /->->                               *
  *                               Data /  \ Crow                               *
  *                                   ^    ^                                   *
- *                              info@datacrow.net                             *
+ *                              info@datacrow.org                             *
  *                                                                            *
  *                       This file is part of Data Crow.                      *
  *       Data Crow is free software; you can redistribute it and/or           *
@@ -36,10 +36,16 @@ import javax.swing.JTextArea;
 
 import net.datacrow.client.console.ComponentFactory;
 import net.datacrow.client.console.Layout;
-import net.datacrow.client.core.DcConfig;
-import net.datacrow.client.core.utilities.log.ITextPaneAppenderListener;
+import net.datacrow.core.DcConfig;
 
-public class LogPanel extends JPanel implements ITextPaneAppenderListener {
+/**
+ * 
+ * TODO: needs to be reimplemented
+ * 
+ * @author RJ
+ *
+ */
+public class LogPanel extends JPanel { //implements ITextPaneAppenderListener {
     
     private JTextArea logger;
     private JLabel labelVersion = ComponentFactory.getLabel(DcConfig.getInstance().getVersion().getFullString());
@@ -62,7 +68,6 @@ public class LogPanel extends JPanel implements ITextPaneAppenderListener {
         }
     }
     
-    @Override
     public void add(String message) {
         logger.insert("\r\n", 0);
         logger.insert(message, 0);
