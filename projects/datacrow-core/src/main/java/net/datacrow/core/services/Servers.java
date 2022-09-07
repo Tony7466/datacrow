@@ -85,6 +85,8 @@ public class Servers {
     	
     	initialized = true;
     	
+    	
+    	/*
         ServiceClassLoader scl = new ServiceClassLoader(DcConfig.getInstance().getServicesDir());
         registered.clear();
         
@@ -110,7 +112,7 @@ public class Servers {
                     logger.error(e, e);
                 }
             }
-        }
+        } */
     }
 
     /**
