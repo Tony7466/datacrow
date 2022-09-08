@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
 
-<installation version="1.0">
+<izpack:installation version="5.0"
+                     xmlns:izpack="http://izpack.org/schema/installation"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
 
     <info>
         <appname>Data Crow</appname>
-        <appversion>4.1.1</appversion>
+        <appversion>@{myproduct.version}</appversion>
         <authors>
             <author name="Robert Jan van der Waals" email="rwaals@datacrow.net"/>
         </authors>
         <url>http://www.datacrow.net</url>
-        <javaversion>1.7</javaversion>
+        <javaversion>1.8</javaversion>
     </info>
+    
+    <variables>
+    	<variable name="myproduct.version.variable" value="@{myproduct.version}"/>
+    </variables>
     
     <guiprefs width="600" height="400" resizable="no"/>
     
@@ -47,12 +54,10 @@
     <packs>
         <pack name="Data Crow" required="yes" preselected="yes">
             <description>Data Crow</description>
+			<file src="datacrow-build/staging/dc-client/lib/datacrow-core-@{myproduct.version}.jar" targetdir="$INSTALL_PATH/lib"/>
+            <file src="datacrow-build/staging/dc-client/lib/datacrow-server-@{myproduct.version}.jar" targetdir="$INSTALL_PATH/lib"/>
+			<file src="datacrow-build/staging/dc-client/datacrow-client-@{myproduct.version}.jar" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/log4j.properties" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/datacrow32bit.exe" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/datacrow64bit.exe" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/datacrow32bit" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/datacrow64bit" targetdir="$INSTALL_PATH"/>            
-            <file src="datacrow-build/staging/dc-client/datacrow.jar" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/fonts" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/readme" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/services" targetdir="$INSTALL_PATH"/>
@@ -63,35 +68,16 @@
             <file src="datacrow-build/staging/dc-client/help" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/modules" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/upgrade" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/lib/datacrow-core.jar" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/datacrow-server.jar" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/apache-tika" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/bol" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/chart" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/commons" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/hsqldb" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/html" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/jacksum" targetdir="$INSTALL_PATH/lib"/>     
-            <file src="datacrow-build/staging/dc-client/lib/jasper" targetdir="$INSTALL_PATH/lib"/>       
-            <file src="datacrow-build/staging/dc-client/lib/jaudiotagger" targetdir="$INSTALL_PATH/lib"/>   
-            <file src="datacrow-build/staging/dc-client/lib/javahelp" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/jebml" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/json" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/laf" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/log4j" targetdir="$INSTALL_PATH/lib"/>            
-            <file src="datacrow-build/staging/dc-client/lib/pdf" targetdir="$INSTALL_PATH/lib"/> 
-            <file src="datacrow-build/staging/dc-client/lib/tmdb" targetdir="$INSTALL_PATH/lib"/>  
-            <file src="datacrow-build/staging/dc-client/lib/xml" targetdir="$INSTALL_PATH/lib"/>
-            <file src="datacrow-build/staging/dc-client/lib/xml-rpc" targetdir="$INSTALL_PATH/lib"/>  
-            <file src="datacrow-build/staging/dc-client/lib/zip" targetdir="$INSTALL_PATH/lib"/>
+            <fileset dir="datacrow-build/staging/dc-client/lib" targetdir="${INSTALL_PATH}/lib"/>
         </pack>
     </packs>
     
-    <native type="izpack" name="ShellLink.dll">
-      <os family="windows" />
-    </native>
-    <native type="izpack" name="ShellLink_x64.dll">
-      <os family="windows" />
-    </native>    
-    
-</installation>
+    <natives>
+	    <native type="izpack" name="ShellLink.dll">
+	      <os family="windows" />
+	    </native>
+	    <native type="izpack" name="ShellLink_x64.dll">
+	      <os family="windows" />
+	    </native>    
+    </natives>
+</izpack:installation>

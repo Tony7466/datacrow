@@ -32,11 +32,7 @@ import org.apache.catalina.startup.Tomcat;
 import net.datacrow.core.DcConfig;
 
 /**
- * The web server. This is the wrapper around the Jetty server.  
- * 
  * @author Robert Jan van der Waals
- * 
- * TODO: reimplement
  */
 public class DcImageWebServer {
     
@@ -63,7 +59,7 @@ public class DcImageWebServer {
      * @throws Exception
      */
 	public void stop() throws Exception {
-	   // server.stop();
+	    server.stop();
         isRunning = false;
 	}
 	

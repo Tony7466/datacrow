@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.datacrow</groupId>
         <artifactId>datacrow-main</artifactId>
-        <version>5.0</version>
+        <version>4.3</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -31,6 +31,15 @@
             <name>JitPack Just-in-Time Repository</name>
             <url>https://jitpack.io/</url>
         </repository>
+
+
+        <repository>
+            <id>Primefaces</id>
+            <name>Primeface</name>
+            <url>https://repository.primefaces.org/</url>
+        </repository>
+
+
     </repositories>
 
     <dependencies>
@@ -57,45 +66,29 @@
             <groupId>com.cedarsoftware</groupId>
             <artifactId>json-io</artifactId>
         </dependency>
-        
-        <!-- web server -->
+
+        <!-- Tomcat -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-el</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-websocket</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-logging-log4j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-logging-juli</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>xalan</groupId>
-            <artifactId>serializer</artifactId>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper</artifactId>
         </dependency>
         <dependency>
-            <groupId>xalan</groupId>
-            <artifactId>xalan</artifactId>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper-el</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jsp-api</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -161,22 +154,6 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.1.0</version>
                 <executions>
-                    <execution>
-                        <id>copy-resources-webapp-server</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.parent.basedir}/datacrow-build/staging/dc-server/webapp</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/webapp</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
                     <execution>
                         <id>copy-resources-upgrade-server</id>
                         <phase>validate</phase>

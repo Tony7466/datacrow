@@ -54,7 +54,6 @@ import net.datacrow.server.db.DatabaseInvalidException;
 import net.datacrow.server.db.DatabaseManager;
 import net.datacrow.server.security.SecurityCenter;
 import net.datacrow.server.web.DcImageWebServer;
-import net.datacrow.server.web.DcWebServer;
 
 public class DcServer implements Runnable, IStarterClient, IClient {
 	
@@ -70,7 +69,6 @@ public class DcServer implements Runnable, IStarterClient, IClient {
     
     private static DcServer server;
     private static DcImageWebServer imgServer;
-    private static DcWebServer webServer;
     
     private static boolean enableWebServer = false;
 	
@@ -206,11 +204,6 @@ public class DcServer implements Runnable, IStarterClient, IClient {
                 
                 imgServer = new DcImageWebServer(imageServerPort);
                 
-                if (enableWebServer) {
-	                webServer = new DcWebServer(webServerPort);
-	                webServer.setup();
-                }
-                
                 // if the logger failed starting is unnecessary
                 if (logger != null) {
                     logger.info("Server has been started, ready for client connections.");
@@ -240,14 +233,6 @@ public class DcServer implements Runnable, IStarterClient, IClient {
         Thread st = new Thread(server);
         st.start();
 
-        if (enableWebServer) {
-	        try {
-	            webServer.start();
-	        } catch (Exception e) {
-	            logger.error(e, e);
-	        }
-        }
-            
         try {
             imgServer.start();
         } catch (Exception e) {
@@ -297,12 +282,6 @@ public class DcServer implements Runnable, IStarterClient, IClient {
         System.out.println("Specifies the port to be used by the image server.");
         System.out.println("Example: java -jar datacrow-server.jar -imageserverport:9001");        
         System.out.println("");
-        System.out.println("");
-        System.out.println("-webserverport:<port number>");
-        System.out.println("Specifies the port to be used by the web server.");
-        System.out.println("The web server is only available in case a port numer is supplied.");
-        System.out.println("Example: java -jar datacrow-server.jar -webserverport:8080");        
-        System.out.println("");            
         System.out.println("-debug");
         System.out.println("Debug mode for additional system event information.");
         System.out.println("Example: java -jar datacrow-server.jar -debug");   

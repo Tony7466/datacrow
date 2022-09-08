@@ -7,31 +7,15 @@
   <skipIfNotSupported/>
                
   <shortcut
-     name="Data Crow 32bit"
+     name="Data Crow"
      programGroup="yes"
      desktop="yes"
      applications="no"
      startMenu="no"
      startup="no"
-     target="$INSTALL_PATH\datacrow32bit.exe"
-     workingDirectory="$INSTALL_PATH"
-     commandLine=""
-     description="Data Crow"
-     iconFile="$INSTALL_PATH\icons\datacrow.ico"
-     initialState="normal"
-     iconIndex="0">
-   </shortcut>
-   
-  <shortcut
-     name="Data Crow 64bit"
-     programGroup="yes"
-     desktop="yes"
-     applications="no"
-     startMenu="no"
-     startup="no"
-     target="$INSTALL_PATH\datacrow64bit.exe"
-     workingDirectory="$INSTALL_PATH"
-     commandLine=""
+     target="javaw"
+     commandLine="-jar &quot;$INSTALL_PATH\datacrow-client-${myproduct.version.variable}.jar&quot;"
+     workingDirectory=""
      description="Data Crow"
      iconFile="$INSTALL_PATH\icons\datacrow.ico"
      initialState="normal"
