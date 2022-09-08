@@ -25,43 +25,24 @@
 
 package net.datacrow.server.web;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.catalina.Context;
-import org.apache.catalina.startup.Tomcat;
-import org.apache.logging.log4j.Logger;
-
-import net.datacrow.core.DcConfig;
-import net.datacrow.core.DcLogManager;
-import net.datacrow.core.modules.DcModule;
-import net.datacrow.core.modules.DcModules;
-import net.datacrow.core.objects.DcImageIcon;
-import net.datacrow.core.utilities.CoreUtilities;
-import net.datacrow.core.utilities.Directory;
-
 /**
- * The web server. This is the wrapper around the Jetty server.  
- * 
- * TODO: reimplement
- * 
- * @author Robert Jan van der Waals
+ * @deprecated
  */
 public class DcWebServer {
     
-    private static Logger logger = DcLogManager.getLogger(DcWebServer.class.getName());
+//    private static Logger logger = DcLogManager.getLogger(DcWebServer.class.getName());
     
-    private static final String context = "/datacrow";
+//    private static final String context = "/datacrow";
     
 	private boolean isRunning;
-	private Tomcat server;
-	private int port;
+//	private Tomcat server;
+//	private int port;
 	
 	/**
 	 * Creates a new instance.
 	 */
 	public DcWebServer(int port) {
-	    this.port = port;
+	    //this.port = port;
 	}
 	
 	/**
@@ -74,6 +55,7 @@ public class DcWebServer {
 	public void setup() {
         //logger.info("Starting to set up the web root");
         
+	    /*
         File webDir = new File(DcConfig.getInstance().getWebDir(), "datacrow/");
         webDir.mkdirs();
         
@@ -99,10 +81,11 @@ public class DcWebServer {
         createIcons();
         createStyleSheet();
         
-        logger.info("Web root has been set up");
+        logger.info("Web root has been set up"); */
 	}
 	
 
+	/*
 	private void createIcons() {
 	    File webDir = new File(DcConfig.getInstance().getWebDir(), "datacrow/");
 	    File dir = new File(webDir, "/resources/default/images/");
@@ -182,14 +165,14 @@ public class DcWebServer {
         } catch (Exception e) {
             logger.error("Could not write icon to disk: " + filename, e);
         }
-    }
+    } */
 
     /**
      * Stops the server.
      * @throws Exception
      */
 	public void stop() throws Exception {
-	    server.stop();
+	    //server.stop();
         isRunning = false;
 	}
 	
@@ -197,7 +180,7 @@ public class DcWebServer {
 	 * Starts the Web Server. The port is configurable.
 	 */
 	public void start() throws Exception {
-        server = new Tomcat();
+        /*server = new Tomcat();
         server.setPort(port);
         
         String baseDir = DcConfig.getInstance().getWebDir();
@@ -211,6 +194,6 @@ public class DcWebServer {
         
         server.start();
 
-        isRunning = true;
+        isRunning = true; */
 	} 
 }
