@@ -31,26 +31,9 @@
             <name>JitPack Just-in-Time Repository</name>
             <url>https://jitpack.io/</url>
         </repository>
-
-
-        <repository>
-            <id>Primefaces</id>
-            <name>Primeface</name>
-            <url>https://repository.primefaces.org/</url>
-        </repository>
-
-
     </repositories>
 
     <dependencies>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.datacrow</groupId>
             <artifactId>datacrow-core</artifactId>
