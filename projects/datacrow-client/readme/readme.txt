@@ -6,8 +6,8 @@
 
 Created by Robert Jan van der Waals
 
-Contact me at info@datacrow.net
-Find me at http://www.datacrow.net
+Contact me at info@datacrow.org
+Find me at https://datacrow.org
            http://sourceforge.net/projects/datacrow
 
 

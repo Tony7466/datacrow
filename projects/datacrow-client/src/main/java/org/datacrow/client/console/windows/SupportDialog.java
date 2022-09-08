@@ -31,20 +31,30 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.Logger;
 import org.datacrow.client.console.ComponentFactory;
+import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.components.DcFileField;
+import org.datacrow.core.DcConfig;
+import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.utilities.Directory;
 import org.datacrow.core.utilities.settings.DcSettings;
 
 public class SupportDialog extends DcDialog implements ActionListener {
     
-    //private static Logger logger = DcLogManager.getLogger(SupportDialog.class.getName());
+    private static Logger logger = DcLogManager.getLogger(SupportDialog.class.getName());
 
     private DcFileField fldTarget = ComponentFactory.getFileField(false, true);
     
@@ -62,10 +72,6 @@ public class SupportDialog extends DcDialog implements ActionListener {
     }
     
     private void createPackage() {
-    	// TODO: fix this zip file entry stuff
-    	
-    	/*
-        
         File file = fldTarget.getFile();
         
         if (file == null) {
@@ -76,58 +82,50 @@ public class SupportDialog extends DcDialog implements ActionListener {
             File zipFileName = new File(file, "dc_support.zip");
             zipFileName.delete();
             
+            FileOutputStream fos = new FileOutputStream(zipFileName);
+            ZipOutputStream zipOut = new ZipOutputStream(fos);            
+            
             DcConfig dcc = DcConfig.getInstance();
             
-            File f = new File(dcc.getDataDir(), "data_crow.log");
-            if (f.exists())
-                addEntry(new File(zipFileName, f.getName()), f);
+            addEntry(new Directory(dcc.getDataDir(), true, new String[] {"log", "1"}), zipOut, "log");
+            addEntry(new Directory(DcConfig.getInstance().getApplicationSettingsDir(), true, null), zipOut, "settings");
+            addEntry(new Directory(DcConfig.getInstance().getModuleSettingsDir(), true, null), zipOut, "modules");
+            addEntry(new Directory(DcConfig.getInstance().getDatabaseDir(), true, null), zipOut, "database");
             
-            f = new File(dcc.getDataDir(), "data_crow.log.1");
-            if (f.exists())
-                addEntry(new File(zipFileName, f.getName()), f);
-            
-            Directory dir = new Directory(DcConfig.getInstance().getApplicationSettingsDir(), true, null);
-            for (String s : dir.read()) {
-                f = new File(s);
-                addEntry(new File(zipFileName, f.getName()), f);
-            }
-            
-            dir = new Directory(DcConfig.getInstance().getModuleSettingsDir(), true, null);
-            for (String s : dir.read()) {
-                f = new File(s);
-                addEntry(new File(zipFileName, f.getName()), f);
-            }
-            
-            dir = new Directory(DcConfig.getInstance().getDatabaseDir(), true, null);
-            for (String s : dir.read()) {
-                f = new File(s);
-                addEntry(new File(zipFileName, f.getName()), f);
-            }
-            
-            TVFS.umount();
-            
+            zipOut.close();
+            fos.close();           
+
             GUI.getInstance().displayMessage(DcResources.getText("msgSupportFileCreated", zipFileName.toString()));
             
         } catch (Exception e) {
             GUI.getInstance().displayErrorMessage(DcResources.getText("msgErrorCreatingSupportFile", e.getMessage()));
             logger.error(e, e);
         }
-        */
     }
     
-    private void addEntry(File zipName, File source) {
-    	// TODO: fix this zip file entry stuff
-    	
-    /*
-    	
+    private void addEntry(Directory dir, ZipOutputStream zipOut, String folder) {
     	try {
-            TFile src = new TFile(source);
-            TFile dst = new TFile(zipName);
-            src.cp_rp(dst);
+    	    zipOut.putNextEntry(new ZipEntry(folder + "/"));
+            zipOut.closeEntry();
+    	    
+            File f;
+            for (String s : dir.read()) {
+                f = new File(s);
+
+                ZipEntry zipEntry = new ZipEntry(folder + "/" + f.getName());
+                zipOut.putNextEntry(zipEntry);
+                byte[] bytes = new byte[1024];
+                int length;
+                
+                FileInputStream fis = new FileInputStream(f);
+                while((length = fis.read(bytes)) >= 0) {
+                    zipOut.write(bytes, 0, length);
+                }
+                fis.close();
+            }
         } catch (IOException e) {
-            logger.error("An error occured while adding " + source + " to the support zip file", e);
+            logger.error("An error occured while adding " + folder + " files to the support zip file", e);
         }
-        */
     }
     
     private void build() {
