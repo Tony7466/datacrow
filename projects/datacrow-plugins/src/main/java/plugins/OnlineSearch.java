@@ -32,15 +32,15 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.modules.DcModule;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
-import net.datacrow.core.services.OnlineServices;
-import net.datacrow.core.services.Servers;
+import org.datacrow.client.console.GUI;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.modules.DcModule;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.services.OnlineServices;
+import org.datacrow.core.services.Servers;
 
 public class OnlineSearch extends Plugin {
 

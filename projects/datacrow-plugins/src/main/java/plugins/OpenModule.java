@@ -30,11 +30,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.core.modules.DcModules;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
+import org.datacrow.client.console.GUI;
+import org.datacrow.core.modules.DcModules;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
 
 public class OpenModule extends Plugin {
 	

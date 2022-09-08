@@ -31,16 +31,16 @@ import javax.swing.ImageIcon;
 
 import org.apache.logging.log4j.Logger;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.core.DcLogManager;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.console.ISimpleItemView;
-import net.datacrow.core.modules.DcModule;
-import net.datacrow.core.modules.DcPropertyModule;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
+import org.datacrow.client.console.GUI;
+import org.datacrow.core.DcLogManager;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.console.ISimpleItemView;
+import org.datacrow.core.modules.DcModule;
+import org.datacrow.core.modules.DcPropertyModule;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
 
 public class ManageItem extends Plugin {
     

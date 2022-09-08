@@ -35,32 +35,32 @@ import javax.swing.KeyStroke;
 
 import org.apache.logging.log4j.Logger;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.console.windows.BrowserDialog;
-import net.datacrow.client.console.windows.itemforms.ItemForm;
-import net.datacrow.core.DcConfig;
-import net.datacrow.core.DcLogManager;
-import net.datacrow.core.DcRepository;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.UserMode;
-import net.datacrow.core.clients.IFileImportClient;
-import net.datacrow.core.console.UIComponents;
-import net.datacrow.core.fileimporter.FileImporter;
-import net.datacrow.core.fileimporter.FileImporters;
-import net.datacrow.core.modules.DcModule;
-import net.datacrow.core.objects.DcField;
-import net.datacrow.core.objects.DcImageIcon;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.objects.Picture;
-import net.datacrow.core.objects.ValidationException;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
-import net.datacrow.core.server.Connector;
-import net.datacrow.core.services.Region;
-import net.datacrow.core.services.SearchMode;
-import net.datacrow.core.services.plugin.IServer;
-import net.datacrow.core.utilities.filefilters.DcFileFilter;
+import org.datacrow.client.console.GUI;
+import org.datacrow.client.console.windows.BrowserDialog;
+import org.datacrow.client.console.windows.itemforms.ItemForm;
+import org.datacrow.core.DcConfig;
+import org.datacrow.core.DcLogManager;
+import org.datacrow.core.DcRepository;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.UserMode;
+import org.datacrow.core.clients.IFileImportClient;
+import org.datacrow.core.console.UIComponents;
+import org.datacrow.core.fileimporter.FileImporter;
+import org.datacrow.core.fileimporter.FileImporters;
+import org.datacrow.core.modules.DcModule;
+import org.datacrow.core.objects.DcField;
+import org.datacrow.core.objects.DcImageIcon;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.objects.Picture;
+import org.datacrow.core.objects.ValidationException;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.server.Connector;
+import org.datacrow.core.services.Region;
+import org.datacrow.core.services.SearchMode;
+import org.datacrow.core.services.plugin.IServer;
+import org.datacrow.core.utilities.filefilters.DcFileFilter;
 
 public class AttachFileInfo extends Plugin implements IFileImportClient {
     

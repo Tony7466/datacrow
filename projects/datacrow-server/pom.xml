@@ -45,12 +45,18 @@
             <artifactId>hsqldb</artifactId>
         </dependency>
 
+        <!-- JSON serializer -->        
         <dependency>
-            <groupId>com.cedarsoftware</groupId>
-            <artifactId>json-io</artifactId>
-        </dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>        
 
         <!-- Tomcat -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
@@ -71,7 +77,6 @@
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jsp-api</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -84,7 +89,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>net.datacrow.server.DcServer</mainClass>
+                            <mainClass>org.datacrow.server.DcServer</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>

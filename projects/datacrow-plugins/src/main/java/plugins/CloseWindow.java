@@ -10,15 +10,15 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.console.MainFrame;
-import net.datacrow.client.console.windows.DcDialog;
-import net.datacrow.client.console.windows.DcFrame;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
+import org.datacrow.client.console.GUI;
+import org.datacrow.client.console.MainFrame;
+import org.datacrow.client.console.windows.DcDialog;
+import org.datacrow.client.console.windows.DcFrame;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
 
 public class CloseWindow extends Plugin {
 

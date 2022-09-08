@@ -7,16 +7,16 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.core.DcConfig;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.data.DataFilter;
-import net.datacrow.core.modules.DcModule;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
-import net.datacrow.core.server.Connector;
+import org.datacrow.client.console.GUI;
+import org.datacrow.core.DcConfig;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.data.DataFilter;
+import org.datacrow.core.modules.DcModule;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.server.Connector;
 
 public class UndoFilter extends Plugin {
     

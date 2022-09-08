@@ -33,15 +33,15 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.console.IView;
-import net.datacrow.core.modules.DcModule;
-import net.datacrow.core.modules.DcModules;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
+import org.datacrow.client.console.GUI;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.console.IView;
+import org.datacrow.core.modules.DcModule;
+import org.datacrow.core.modules.DcModules;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
 
 public class FileLauncher extends Plugin {
 	
@@ -74,7 +74,7 @@ public class FileLauncher extends Plugin {
             else if (getModule().getIndex() == DcModules._MEDIA) 
             	dco.load(new int[] {DcObject._ID, dco.getFileField().getIndex()});
             
-            new net.datacrow.client.util.launcher.FileLauncher(dco.getFilename()).launch();
+            new org.datacrow.client.util.launcher.FileLauncher(dco.getFilename()).launch();
     	}
     }
     

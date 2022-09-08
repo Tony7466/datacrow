@@ -29,15 +29,15 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.console.windows.FindReplaceDialog;
-import net.datacrow.core.DcConfig;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
-import net.datacrow.core.server.Connector;
+import org.datacrow.client.console.GUI;
+import org.datacrow.client.console.windows.FindReplaceDialog;
+import org.datacrow.core.DcConfig;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.server.Connector;
 
 public class FindReplace extends Plugin {
 

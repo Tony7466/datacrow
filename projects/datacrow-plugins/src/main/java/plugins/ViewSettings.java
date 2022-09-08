@@ -34,17 +34,17 @@ import javax.swing.KeyStroke;
 
 import org.apache.logging.log4j.Logger;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.console.windows.settings.CardViewSettingsDialog;
-import net.datacrow.client.console.windows.settings.TableViewSettingsDialog;
-import net.datacrow.core.DcLogManager;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.console.IMasterView;
-import net.datacrow.core.console.IView;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
+import org.datacrow.client.console.GUI;
+import org.datacrow.client.console.windows.settings.CardViewSettingsDialog;
+import org.datacrow.client.console.windows.settings.TableViewSettingsDialog;
+import org.datacrow.core.DcLogManager;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.console.IMasterView;
+import org.datacrow.core.console.IView;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
 
 public class ViewSettings extends Plugin {
 

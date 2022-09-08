@@ -1,4 +1,37 @@
 -----------------------------------------------------------------------------------------
+Data Crow version 4.3                                              Released on 2022-xx-xx
+-----------------------------------------------------------------------------------------
+
+[Fixed]
+- Java 18 incompatibility issues have been fixed.
+
+[Updates]
+- Java version support has been changed from Java 1.7 to Java 18.
+- Upgraded Log4J to the latest version. The old library was a huge security risk 
+  and had to be replaced.
+- Build process has been moved to Maven (thanks to: flag-courier).
+- Code has been moved from net.datacrow to org.datacrow.
+- Java Help was upgraded to 2.05
+- jAudiotagger was upgraded to 2.2.5
+- Matroska File parser has been upgraded to 2.3.1
+- MP4 Parser has been upgraded to 1.9.41.2
+- Bouncycastle has been upgraded to 1.7
+- Jacksum has been upgraded to 3.1
+- JTattoo has been upgraded to 1.6.13
+- TheMovieDB API has been upgraded to 4.3
+- Cobra HTML parser has been replaced by jSoup
+- Jasper Reports has been upgraded to 6.20
+- HSQL DB has been upgraded to 2.7.0
+- JSON-IO library has been dropped (too old)
+- Tomcat Embedded has been upgraded to 10.1.0-M17
+- Libraries not mentioned have been dropped and replaced.
+- Code optimizations to bring Data Crow's code in line with the latest version of Java.
+
+[Removed]
+- The web module has been dropped for now. It would need to be completely rebuild to 
+  run successfully on the latest version of Java. This will be rebuild at a later stage.
+
+-----------------------------------------------------------------------------------------
 Data Crow version 4.2.2 - Maintenance                              Released on 2017-08-23
 -----------------------------------------------------------------------------------------
 

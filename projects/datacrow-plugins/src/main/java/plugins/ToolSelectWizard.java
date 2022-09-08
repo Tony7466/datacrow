@@ -29,11 +29,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
 
 public class ToolSelectWizard extends Plugin {
 
@@ -55,8 +55,8 @@ public class ToolSelectWizard extends Plugin {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        net.datacrow.client.console.wizards.tool.ToolSelectWizard wizard = 
-        		new net.datacrow.client.console.wizards.tool.ToolSelectWizard();
+        org.datacrow.client.console.wizards.tool.ToolSelectWizard wizard = 
+        		new org.datacrow.client.console.wizards.tool.ToolSelectWizard();
         wizard.setVisible(true);
     }
     

@@ -31,14 +31,14 @@ import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.core.DcRepository;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
-import net.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.client.console.GUI;
+import org.datacrow.core.DcRepository;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.utilities.settings.DcSettings;
 
 public class ToggleModuleList extends Plugin {
 

@@ -34,14 +34,14 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.console.windows.reporting.ReportingDialog;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.console.IView;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
+import org.datacrow.client.console.GUI;
+import org.datacrow.client.console.windows.reporting.ReportingDialog;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.console.IView;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
 
 public class Report extends Plugin {
 

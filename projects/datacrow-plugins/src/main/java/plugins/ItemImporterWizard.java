@@ -31,15 +31,15 @@ import java.util.Collection;
 
 import javax.swing.ImageIcon;
 
-import net.datacrow.client.console.windows.ItemTypeDialog;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.UserMode;
-import net.datacrow.core.modules.DcModule;
-import net.datacrow.core.modules.DcModules;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
+import org.datacrow.client.console.windows.ItemTypeDialog;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.UserMode;
+import org.datacrow.core.modules.DcModule;
+import org.datacrow.core.modules.DcModules;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
 
 public class ItemImporterWizard extends Plugin {
 
@@ -72,7 +72,7 @@ public class ItemImporterWizard extends Plugin {
         int moduleIdx = dlg.getSelectedModule();
         
         if (moduleIdx > 0)
-            new net.datacrow.client.console.wizards.itemimport.ItemImporterWizard(moduleIdx).setVisible(true);
+            new org.datacrow.client.console.wizards.itemimport.ItemImporterWizard(moduleIdx).setVisible(true);
     }
     
     @Override

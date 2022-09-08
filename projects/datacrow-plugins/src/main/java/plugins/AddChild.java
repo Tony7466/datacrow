@@ -6,17 +6,17 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import net.datacrow.client.console.GUI;
-import net.datacrow.client.console.views.View;
-import net.datacrow.client.console.windows.itemforms.ItemForm;
-import net.datacrow.core.DcConfig;
-import net.datacrow.core.console.IView;
-import net.datacrow.core.modules.DcModule;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
-import net.datacrow.core.server.Connector;
+import org.datacrow.client.console.GUI;
+import org.datacrow.client.console.views.View;
+import org.datacrow.client.console.windows.itemforms.ItemForm;
+import org.datacrow.core.DcConfig;
+import org.datacrow.core.console.IView;
+import org.datacrow.core.modules.DcModule;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.server.Connector;
 
 public class AddChild extends Plugin {
 

@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 
-import net.datacrow.client.console.windows.security.ChangePasswordDialog;
-import net.datacrow.core.IconLibrary;
-import net.datacrow.core.objects.DcObject;
-import net.datacrow.core.objects.DcTemplate;
-import net.datacrow.core.plugin.Plugin;
-import net.datacrow.core.resources.DcResources;
+import org.datacrow.client.console.windows.security.ChangePasswordDialog;
+import org.datacrow.core.IconLibrary;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcTemplate;
+import org.datacrow.core.plugin.Plugin;
+import org.datacrow.core.resources.DcResources;
 
 public class ChangePassword extends Plugin {
 
