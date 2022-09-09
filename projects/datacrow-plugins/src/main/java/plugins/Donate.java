@@ -34,8 +34,8 @@ import javax.swing.ImageIcon;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.client.util.launcher.URLLauncher;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.IconLibrary;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.DcTemplate;
 import org.datacrow.core.plugin.Plugin;

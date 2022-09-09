@@ -42,7 +42,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcAssociateModule;
 import org.datacrow.core.modules.DcMediaModule;
 import org.datacrow.core.modules.DcModule;

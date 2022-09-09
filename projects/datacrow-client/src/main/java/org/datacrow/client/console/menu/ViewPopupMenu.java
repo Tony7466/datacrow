@@ -45,13 +45,13 @@ import org.datacrow.client.console.windows.drivemanager.DriveManagerSingleItemMa
 import org.datacrow.client.plugins.PluginHelper;
 import org.datacrow.client.util.Utilities;
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.UserMode;
 import org.datacrow.core.drivemanager.DriveManager;
 import org.datacrow.core.drivemanager.FileInfo;
 import org.datacrow.core.fileimporter.FileImporter;
 import org.datacrow.core.fileimporter.FileImporters;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.modules.DcPropertyModule;

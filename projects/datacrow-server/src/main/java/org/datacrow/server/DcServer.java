@@ -36,13 +36,12 @@ import java.util.Properties;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.DcStarter;
 import org.datacrow.core.IStarterClient;
 import org.datacrow.core.clients.IClient;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.modules.upgrade.ModuleUpgrade;
 import org.datacrow.core.security.SecuredUser;
@@ -89,8 +88,6 @@ public class DcServer implements Runnable, IStarterClient, IClient {
         });
         
         System.setProperty("java.awt.headless", "true");
-	    
-	    //BasicConfigurator.configure();
 	    
         String installationDir = "";
         String dataDir = "";
@@ -226,8 +223,10 @@ public class DcServer implements Runnable, IStarterClient, IClient {
         }
     }
 	
-	@Override
-	public void configureLog4j() {}
+    @Override
+    public void configureLog4j(boolean debug) {
+        // reserved for platform specific logging
+    }
 	
 	private void startServer() {
         Thread st = new Thread(server);

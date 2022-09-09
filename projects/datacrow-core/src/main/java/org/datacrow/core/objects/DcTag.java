@@ -26,8 +26,7 @@
 package org.datacrow.core.objects;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 
 

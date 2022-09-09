@@ -35,9 +35,8 @@ import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
-
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.clients.IItemExporterClient;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.migration.itemexport.ItemExporter;
 import org.datacrow.core.migration.itemexport.ItemExporterSettings;
 import org.datacrow.core.migration.itemexport.ItemExporters;

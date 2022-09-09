@@ -38,9 +38,9 @@ import java.util.Map;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.migration.itemimport.CsvImporter;
 import org.datacrow.core.migration.itemimport.ItemImporterHelper;
 import org.datacrow.core.modules.security.PermissionModule;

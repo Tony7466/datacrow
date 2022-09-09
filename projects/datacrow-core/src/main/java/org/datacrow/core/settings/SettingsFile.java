@@ -31,8 +31,7 @@ import java.io.FileOutputStream;
 import java.util.Properties;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 /**
  * Reads and saves data to the Settings File

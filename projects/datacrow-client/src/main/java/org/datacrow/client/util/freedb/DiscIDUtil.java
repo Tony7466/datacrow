@@ -33,7 +33,7 @@ import java.io.InputStream;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 
 public class DiscIDUtil {

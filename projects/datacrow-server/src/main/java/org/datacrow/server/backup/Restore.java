@@ -30,9 +30,9 @@ import java.io.File;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.Version;
 import org.datacrow.core.clients.IBackupRestoreClient;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
 
 /**

@@ -33,7 +33,7 @@ package org.datacrow.core;
  */
 public interface IStarterClient {
     
-    void configureLog4j();
+    void configureLog4j(boolean debug);
     
     /**
      * Indicates that the Log4j logger has been configured.

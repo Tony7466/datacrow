@@ -32,9 +32,9 @@ import javax.swing.ImageIcon;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.client.console.GUI;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.console.ISimpleItemView;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcPropertyModule;
 import org.datacrow.core.objects.DcObject;

@@ -33,7 +33,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.client.connector.ClientToServerConnector;
 import org.datacrow.client.connector.DirectConnector;
 import org.datacrow.client.console.ComponentFactory;
@@ -61,7 +60,6 @@ import org.datacrow.client.synchronizers.MusicAlbumSynchronizer;
 import org.datacrow.client.synchronizers.SoftwareSynchronizer;
 import org.datacrow.client.tabs.Tabs;
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.DcStarter;
 import org.datacrow.core.IStarterClient;
@@ -71,6 +69,7 @@ import org.datacrow.core.data.DcIconCache;
 import org.datacrow.core.data.Operator;
 import org.datacrow.core.drivemanager.DriveManager;
 import org.datacrow.core.fileimporter.FileImporters;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Loan;
@@ -96,8 +95,6 @@ public class DataCrow implements IStarterClient {
 
     public static void main(String[] args) {
         DataCrow.args = args;
-
-        //BasicConfigurator.configure();
 
         DataCrow dc = new DataCrow();
 
@@ -408,16 +405,8 @@ public class DataCrow implements IStarterClient {
     }
 
     @Override
-    public void configureLog4j() {
-    	// TODO: configure this....
-    	
-     /*   Enumeration en = Logger.getRootLogger().getAllAppenders();
-        while (en.hasMoreElements()) {
-            Appender appender = (Appender) en.nextElement();
-            if (appender instanceof TextPaneAppender) {
-                ((TextPaneAppender) appender).addListener(LogPanel.getInstance());
-            }
-        } */
+    public void configureLog4j(boolean debug) {
+        DcLogManager.configureLog4j(debug);
     }
     
     private void installFonts() {

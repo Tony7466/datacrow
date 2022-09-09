@@ -38,8 +38,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcAssociate;
 import org.datacrow.core.objects.DcObject;

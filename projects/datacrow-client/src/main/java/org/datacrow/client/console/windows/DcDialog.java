@@ -43,7 +43,7 @@ import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.plugins.PluginHelper;
 import org.datacrow.client.util.Utilities;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 public class DcDialog extends JDialog implements IDialog {
 

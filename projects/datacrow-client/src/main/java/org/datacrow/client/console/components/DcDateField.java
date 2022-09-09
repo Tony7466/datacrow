@@ -46,8 +46,8 @@ import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.windows.datepicker.DatePickerDialog;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.IconLibrary;
+import org.datacrow.core.log.DcLogManager;
 
 public class DcDateField extends JComponent implements IComponent, ActionListener {
 

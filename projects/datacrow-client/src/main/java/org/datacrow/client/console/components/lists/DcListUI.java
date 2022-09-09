@@ -52,7 +52,7 @@ import javax.swing.plaf.basic.BasicListUI;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.client.console.components.lists.elements.DcListElement;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 public class DcListUI extends BasicListUI {
     

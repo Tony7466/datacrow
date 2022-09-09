@@ -35,7 +35,7 @@ import org.apache.logging.log4j.Logger;
 
 import org.datacrow.client.console.components.panels.DcModuleList;
 import org.datacrow.client.console.windows.security.ModulePermissionPanel;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;

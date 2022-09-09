@@ -17,8 +17,7 @@ import javax.crypto.NoSuchPaddingException;
 
 import org.apache.logging.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.utilities.CompressedBlockInputStream;
 import org.datacrow.core.utilities.CompressedBlockOutputStream;
 

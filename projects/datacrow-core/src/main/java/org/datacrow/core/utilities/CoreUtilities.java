@@ -45,15 +45,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import java.util.TimeZone;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,8 +70,8 @@ import javax.swing.filechooser.FileSystemView;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcAssociate;
@@ -356,15 +360,6 @@ public static String getDatabaseTableName() {
         return s;
     }
 
-//    public static boolean isKeyword(String name) {
-//        String s = name.toUpperCase();
-//        return Tokens.isKeyword(s) || s.equals("CREATE") || s.equals("ALTER") || s.equals("SELECT") ||
-//               s.equals("DROP") || s.equals("TRUNCATE") || s.equals("MODIFY") || s.equals("TABLE") || s.equals("COLUMN");        
-//    }
-    
-
-
-    
     public static boolean isSystemDrive(File drive) {
     	return getSystemDrives().contains(drive);
     }
@@ -388,7 +383,6 @@ public static String getDatabaseTableName() {
         return drives;
     }
     
-
     public static boolean sameImage(byte[] img1, byte[] img2) {
         boolean same = img1.length == img2.length;
         if (same) {
@@ -806,4 +800,12 @@ public static String getDatabaseTableName() {
         return (String) languages.get(iso);
     }
     
+    public static String getTimestamp() {
+        String timestamp = null;
+        Calendar cal = Calendar.getInstance();
+        DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dfm.setTimeZone(TimeZone.getTimeZone("GMT"));
+        timestamp = dfm.format(cal.getTime());
+        return timestamp;
+    }
 }

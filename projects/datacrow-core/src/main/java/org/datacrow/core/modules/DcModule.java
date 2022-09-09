@@ -40,11 +40,11 @@ import javax.swing.KeyStroke;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.console.IMasterView;
 import org.datacrow.core.console.UIComponents;
 import org.datacrow.core.enhancers.IValueEnhancer;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.xml.XmlField;
 import org.datacrow.core.modules.xml.XmlModule;
 import org.datacrow.core.objects.DcAssociate;

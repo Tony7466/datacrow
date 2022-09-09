@@ -30,8 +30,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 /**
  * Movie file representation.

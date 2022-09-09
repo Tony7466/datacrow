@@ -28,8 +28,7 @@ package org.datacrow.client.fileimporter.movie;
 import java.io.RandomAccessFile;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.utilities.CoreUtilities;
 
 class FilePropertiesIFO extends FileProperties {

@@ -46,7 +46,7 @@ import org.datacrow.client.console.wizards.Wizard;
 import org.datacrow.client.console.wizards.WizardException;
 import org.datacrow.client.util.Utilities;
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcAssociateModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.modules.DcPropertyModule;

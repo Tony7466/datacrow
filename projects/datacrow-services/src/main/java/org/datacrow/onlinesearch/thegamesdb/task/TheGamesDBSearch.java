@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.http.HttpConnectionUtil;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.objects.DcObject;

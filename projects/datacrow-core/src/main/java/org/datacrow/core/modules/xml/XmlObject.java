@@ -29,8 +29,7 @@ import java.io.Serializable;
 
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Element;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.InvalidValueException;
 import org.datacrow.core.utilities.XMLParser;
 

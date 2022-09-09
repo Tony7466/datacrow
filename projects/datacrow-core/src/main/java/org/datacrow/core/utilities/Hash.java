@@ -29,9 +29,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.utilities.settings.DcSettings;
 import net.jacksum.JacksumAPI;

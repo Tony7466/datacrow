@@ -50,7 +50,7 @@ import org.datacrow.client.console.components.DcMenuBar;
 import org.datacrow.client.console.components.renderers.CheckBoxTableCellRenderer;
 import org.datacrow.client.console.components.tables.DcTable;
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;

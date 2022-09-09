@@ -31,9 +31,9 @@ import org.apache.logging.log4j.Logger;
 
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.util.PollerTask;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.drivemanager.DriveManager;
 import org.datacrow.core.drivemanager.FileInfo;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.resources.DcResources;
 

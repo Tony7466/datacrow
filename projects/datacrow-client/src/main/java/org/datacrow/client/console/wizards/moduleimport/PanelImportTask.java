@@ -34,8 +34,8 @@ import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.components.panels.TaskPanel;
 import org.datacrow.client.console.wizards.WizardException;
 import org.datacrow.client.console.wizards.itemimport.ItemImporterTaskPanel;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.clients.IModuleWizardClient;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.server.migration.modules.ModuleImporter;
 

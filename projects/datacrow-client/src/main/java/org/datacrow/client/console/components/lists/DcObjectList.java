@@ -50,7 +50,7 @@ import org.datacrow.client.console.components.renderers.DcObjectListRenderer;
 import org.datacrow.client.console.views.IViewComponent;
 import org.datacrow.client.console.views.View;
 import org.datacrow.client.util.ViewUpdater;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;

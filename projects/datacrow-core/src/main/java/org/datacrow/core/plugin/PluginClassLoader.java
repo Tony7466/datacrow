@@ -42,8 +42,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 public class PluginClassLoader extends ClassLoader {
 

@@ -28,8 +28,7 @@ package org.datacrow.server.db;
 import java.util.LinkedList;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 /**
  * Queries are queued here awaiting to be executed. The query queue manages the 

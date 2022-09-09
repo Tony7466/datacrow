@@ -28,8 +28,7 @@ package org.datacrow.server;
 import java.net.Socket;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.security.SecuredUser;
 import org.datacrow.core.security.SecurityException;
 import org.datacrow.core.server.requests.ClientRequest;

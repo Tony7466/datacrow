@@ -33,10 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.data.DataFilter;
 import org.datacrow.core.data.DataFilterConverter;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.security.SecuredUser;
 import org.datacrow.server.data.DataManager;

@@ -32,8 +32,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.utilities.CoreUtilities;
 
 public class DcImageIcon extends ImageIcon {

@@ -46,10 +46,10 @@ import org.apache.logging.log4j.Logger;
 
 import org.datacrow.client.console.components.painter.RectanglePainter;
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.data.DataFilter;
 import org.datacrow.core.data.DataFilterEntry;
 import org.datacrow.core.data.Operator;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcMapping;
 import org.datacrow.core.objects.DcObject;

@@ -46,7 +46,7 @@ import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.components.renderers.CheckBoxTableCellRenderer;
 import org.datacrow.client.console.components.tables.DcTable;
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.ValidationException;

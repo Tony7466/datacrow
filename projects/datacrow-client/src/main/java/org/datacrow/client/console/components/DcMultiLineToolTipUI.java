@@ -40,7 +40,7 @@ import org.apache.logging.log4j.Logger;
 
 import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.util.Utilities;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.utilities.StringUtils;
 
 public class DcMultiLineToolTipUI extends BasicToolTipUI {

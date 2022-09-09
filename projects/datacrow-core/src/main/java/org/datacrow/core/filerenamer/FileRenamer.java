@@ -32,7 +32,7 @@ import java.util.Collection;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.ValidationException;
 import org.datacrow.core.resources.DcResources;

@@ -34,7 +34,6 @@ import java.util.Map;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.data.DataFilter;
 import org.datacrow.core.data.DataFilterEntry;
@@ -43,6 +42,7 @@ import org.datacrow.core.data.DcResultSet;
 import org.datacrow.core.data.Operator;
 import org.datacrow.core.enhancers.IValueEnhancer;
 import org.datacrow.core.enhancers.ValueEnhancers;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;

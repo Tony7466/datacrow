@@ -41,7 +41,7 @@ import org.apache.logging.log4j.Logger;
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.menu.DcEditorMouseListener;
 import org.datacrow.client.console.windows.TextDialog;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 public class DcLongTextField extends JTextArea implements IComponent, MouseListener {
 

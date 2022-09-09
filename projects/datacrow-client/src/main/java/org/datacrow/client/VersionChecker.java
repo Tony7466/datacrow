@@ -36,10 +36,10 @@ import org.apache.logging.log4j.Logger;
 import org.datacrow.client.console.windows.VersionCheckerDialog;
 import org.datacrow.client.util.Utilities;
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.Version;
 import org.datacrow.core.http.HttpConnection;
 import org.datacrow.core.http.HttpConnectionUtil;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
 
 public class VersionChecker extends Thread {

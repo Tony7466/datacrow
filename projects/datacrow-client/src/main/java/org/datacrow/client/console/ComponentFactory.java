@@ -124,10 +124,10 @@ import org.datacrow.client.console.components.renderers.AvailabilityComboBoxRend
 import org.datacrow.client.console.components.renderers.ComboBoxRenderer;
 import org.datacrow.client.console.components.tables.DcTable;
 import org.datacrow.client.util.Utilities;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.console.UIComponents;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcLookAndFeel;

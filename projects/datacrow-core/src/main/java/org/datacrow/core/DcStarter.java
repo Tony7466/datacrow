@@ -26,15 +26,12 @@
 package org.datacrow.core;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
-import java.util.Properties;
 
 import org.apache.logging.log4j.Logger;
-
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.services.Servers;
 import org.datacrow.core.utilities.CoreUtilities;
@@ -91,7 +88,10 @@ public class DcStarter {
                 createClientDirectories();
             }
             
-            initLog4j(dcc.isDebug());
+            client.configureLog4j(dcc.isDebug());
+            logger = DcLogManager.getLogger(DcStarter.class.getName());
+            logger.info("Logger enabled");
+            client.notifyLog4jConfigured();             
             
             printConfiguration();
             
@@ -379,74 +379,6 @@ public class DcStarter {
         } finally {
             file.delete();
         }
-    }
-    
-    /** 
-     * Initializes and configures the Log4j logger.
-     * @param debug debug mode enabled y/n
-     */
-    private void initLog4j(boolean debug) {
-        try {
-            Properties properties = new Properties();
-            
-            File fileLog4j = new File(DcConfig.getInstance().getApplicationSettingsDir(), "log4j.properties");
-
-            if (fileLog4j.exists()) {
-                try {
-                    FileInputStream fis = new FileInputStream(fileLog4j);
-                    properties.load(fis);
-                    fis.close();
-                } catch (Exception e) {
-                    e.printStackTrace(); // logger not available at this stage
-                }
-            }
-                
-            properties.setProperty("log4j.appender.logfile.File", new File(DcConfig.getInstance().getDataDir(), "data_crow.log").toString());
-            properties.setProperty("log4j.appender.stdout", "org.apache.log4j.ConsoleAppender");
-            properties.setProperty("log4j.appender.logfile.layout.ConversionPattern", "%5p [%t] (%F\\:%L) - %m%n");
-            
-            if (DcConfig.getInstance().getOperatingMode() != DcConfig._OPERATING_MODE_SERVER) {
-                properties.setProperty("log4j.appender.textpane", "org.datacrow.core.utilities.log.TextPaneAppender");
-                properties.setProperty("log4j.appender.textpane.layout", "org.apache.log4j.PatternLayout");
-            }
-            
-            properties.setProperty("log4j.appender.stdout.layout.ConversionPattern", "%5p [%t] (%F\\:%L) - %m%n");
-            properties.setProperty("log4j.appender.logfile.MaxFileSize", "500KB");
-            properties.setProperty("log4j.appender.logfile.layout", "org.apache.log4j.PatternLayout");
-            properties.setProperty("log4j.appender.logfile.MaxBackupIndex", "1");
-            properties.setProperty("log4j.appender.stdout.layout", "org.apache.log4j.PatternLayout");
-            properties.setProperty("log4j.appender.logfile", "org.apache.log4j.RollingFileAppender");
-            
-            if (debug) {
-                if (DcConfig.getInstance().getOperatingMode() == DcConfig._OPERATING_MODE_SERVER) 
-                    properties.setProperty("log4j.rootLogger", "debug, logfile, stdout");
-                else 
-                    properties.setProperty("log4j.rootLogger", "debug, textpane, logfile, stdout");
-            } else {
-                if (DcConfig.getInstance().getOperatingMode() == DcConfig._OPERATING_MODE_SERVER) 
-                    properties.setProperty("log4j.rootLogger", "info, logfile, stdout");
-                else 
-                    properties.setProperty("log4j.rootLogger", "info, textpane, logfile");
-            }
-            
-            FileOutputStream fos = new FileOutputStream(DcConfig.getInstance().getApplicationSettingsDir() + "log4j.properties");
-            properties.store(fos, "");
-            fos.close();
-        } catch (Exception e) {
-            System.out.println("Could not find the log4j properties file. " + e);
-        }
-        
-        
-        // TODO: implement the correct XML
-        // PropertyConfigurator.configure(new File(DcConfig.getInstance().getApplicationSettingsDir(), "log4j.properties").toString());
-        
-        logger = DcLogManager.getLogger(DcStarter.class.getName());
-        
-        client.configureLog4j();
-        
-        logger.info("Logger enabled");
-        
-        client.notifyLog4jConfigured();
     }
     
     /**

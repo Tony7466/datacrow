@@ -39,8 +39,8 @@ import java.util.zip.ZipFile;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.IconLibrary;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.xml.XmlModule;
 import org.datacrow.core.modules.xml.XmlModuleWriter;
 import org.datacrow.core.objects.DcImageIcon;

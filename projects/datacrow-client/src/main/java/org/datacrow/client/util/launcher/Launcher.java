@@ -32,8 +32,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 
 public abstract class Launcher {
 

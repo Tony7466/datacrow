@@ -41,9 +41,9 @@ import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.util.Utilities;
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.settings.DcSettings;
 

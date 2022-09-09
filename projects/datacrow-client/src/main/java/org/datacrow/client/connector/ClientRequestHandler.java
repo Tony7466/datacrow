@@ -28,7 +28,7 @@ package org.datacrow.client.connector;
 import java.io.IOException;
 
 import org.apache.logging.log4j.Logger;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.server.requests.ClientRequest;
 import org.datacrow.core.server.response.IServerResponse;
 

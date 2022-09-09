@@ -30,10 +30,10 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.data.DataFilter;
 import org.datacrow.core.data.DataFilterEntry;
 import org.datacrow.core.data.Operator;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.template.Templates;
 import org.datacrow.core.server.Connector;
 

@@ -30,9 +30,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.logging.log4j.Logger;
-
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.clients.IItemImporterClient;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.migration.ItemMigrater;
 import org.datacrow.core.objects.DcObject;
 

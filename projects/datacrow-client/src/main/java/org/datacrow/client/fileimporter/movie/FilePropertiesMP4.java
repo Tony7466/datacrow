@@ -31,6 +31,7 @@ import java.nio.channels.FileChannel;
 import java.util.List;
 
 import org.apache.logging.log4j.Logger;
+import org.datacrow.core.log.DcLogManager;
 import org.mp4parser.IsoFile;
 import org.mp4parser.boxes.iso14496.part1.objectdescriptors.AudioSpecificConfig;
 import org.mp4parser.boxes.iso14496.part1.objectdescriptors.DecoderConfigDescriptor;
@@ -41,8 +42,6 @@ import org.mp4parser.boxes.iso14496.part12.MovieBox;
 import org.mp4parser.boxes.iso14496.part12.MovieHeaderBox;
 import org.mp4parser.boxes.iso14496.part14.ESDescriptorBox;
 import org.mp4parser.boxes.sampleentry.AudioSampleEntry;
-
-import org.datacrow.core.DcLogManager;
 
 class FilePropertiesMP4 extends FileProperties {
 

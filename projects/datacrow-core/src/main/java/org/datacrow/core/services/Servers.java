@@ -31,7 +31,7 @@ import java.util.Map;
 import org.apache.logging.log4j.Logger;
 
 import org.datacrow.core.DcConfig;
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.services.plugin.IServer;
 import org.datacrow.core.services.plugin.ServiceClassLoader;
 

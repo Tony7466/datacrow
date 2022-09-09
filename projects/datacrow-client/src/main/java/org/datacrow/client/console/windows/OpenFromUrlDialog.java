@@ -42,8 +42,8 @@ import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.components.DcUrlField;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.http.HttpConnectionUtil;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
 
 public class OpenFromUrlDialog extends DcDialog implements ActionListener {

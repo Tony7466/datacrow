@@ -32,8 +32,7 @@ import org.ebml.io.FileDataSource;
 import org.ebml.matroska.MatroskaFile;
 import org.ebml.matroska.MatroskaFileTrack;
 import org.ebml.matroska.MatroskaFileTrack.TrackType;
-
-import org.datacrow.core.DcLogManager;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.utilities.CoreUtilities;
 
 class FilePropertiesMKV extends FileProperties {

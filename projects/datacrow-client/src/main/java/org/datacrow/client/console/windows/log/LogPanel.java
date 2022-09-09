@@ -37,6 +37,8 @@ import javax.swing.JTextArea;
 import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.console.Layout;
 import org.datacrow.core.DcConfig;
+import org.datacrow.core.log.DcLog;
+import org.datacrow.core.log.ILogListener;
 
 /**
  * 
@@ -45,7 +47,7 @@ import org.datacrow.core.DcConfig;
  * @author RJ
  *
  */
-public class LogPanel extends JPanel { //implements ITextPaneAppenderListener {
+public class LogPanel extends JPanel implements ILogListener {
     
     private JTextArea logger;
     private JLabel labelVersion = ComponentFactory.getLabel(DcConfig.getInstance().getVersion().getFullString());
@@ -58,6 +60,7 @@ public class LogPanel extends JPanel { //implements ITextPaneAppenderListener {
     
     private LogPanel() {
         buildPanel();
+        DcLog.getInstance().addListener(this);
     }
     
     @Override
@@ -68,6 +71,7 @@ public class LogPanel extends JPanel { //implements ITextPaneAppenderListener {
         }
     }
     
+    @Override
     public void add(String message) {
         logger.insert("\r\n", 0);
         logger.insert(message, 0);

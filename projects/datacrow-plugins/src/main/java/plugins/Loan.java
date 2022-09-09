@@ -33,9 +33,9 @@ import org.apache.logging.log4j.Logger;
 
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.windows.loan.LoanForm;
-import org.datacrow.core.DcLogManager;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.console.IView;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.DcTemplate;
