@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.LinkedBlockingDeque;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
@@ -225,7 +226,7 @@ public class DcServer implements Runnable, IStarterClient, IClient {
 	
     @Override
     public void configureLog4j(boolean debug) {
-        // reserved for platform specific logging
+        DcLogManager.configureLog4j(debug ? Level.DEBUG: Level.INFO, true);
     }
 	
 	private void startServer() {

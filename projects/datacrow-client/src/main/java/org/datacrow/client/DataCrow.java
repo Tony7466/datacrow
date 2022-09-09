@@ -32,6 +32,7 @@ import java.io.File;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.datacrow.client.connector.ClientToServerConnector;
 import org.datacrow.client.connector.DirectConnector;
@@ -406,7 +407,7 @@ public class DataCrow implements IStarterClient {
 
     @Override
     public void configureLog4j(boolean debug) {
-        DcLogManager.configureLog4j(debug);
+        DcLogManager.configureLog4j(debug ? Level.DEBUG : Level.INFO, debug);
     }
     
     private void installFonts() {

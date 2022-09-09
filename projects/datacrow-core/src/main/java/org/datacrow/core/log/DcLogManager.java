@@ -24,7 +24,7 @@ public class DcLogManager {
 		return LogManager.getLogger(clazz);
 	}
 	
-	public static void configureLog4j(boolean debug) {
+	public static void configureLog4j(Level level, boolean console) {
 	    ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
 
         builder.setStatusLevel(Level.WARN);
@@ -47,7 +47,7 @@ public class DcLogManager {
         
         builder.add(appenderBuilder);
 
-        LoggerComponentBuilder loggerComponentBuilder = builder.newLogger("DcLogger", Level.TRACE);
+        LoggerComponentBuilder loggerComponentBuilder = builder.newLogger("DcLogger", level);
         loggerComponentBuilder.add(builder.newAppenderRef("RollingFile"));
         loggerComponentBuilder.addAttribute("additivity", false);
         
@@ -73,8 +73,10 @@ public class DcLogManager {
         // create the new logger
         builder.add(loggerComponentBuilder);
         
-        RootLoggerComponentBuilder rootLoggerComponentBuilder = builder.newRootLogger(Level.TRACE);
-        rootLoggerComponentBuilder.add(builder.newAppenderRef("Console"));
+        RootLoggerComponentBuilder rootLoggerComponentBuilder = builder.newRootLogger(level);
+        
+        if (console) rootLoggerComponentBuilder.add(builder.newAppenderRef("Console"));
+        
         rootLoggerComponentBuilder.add(builder.newAppenderRef("RollingFile"));
         rootLoggerComponentBuilder.add(builder.newAppenderRef("DcLogAppender"));
 
@@ -82,5 +84,7 @@ public class DcLogManager {
 
         BuiltConfiguration config = builder.build();
         Configurator.reconfigure(config);
+        
+        //System.out.println(builder.toXmlConfiguration());
 	}
 }
