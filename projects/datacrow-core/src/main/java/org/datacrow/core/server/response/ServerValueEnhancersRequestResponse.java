@@ -33,7 +33,7 @@ import org.datacrow.core.enhancers.IValueEnhancer;
 import org.datacrow.core.enhancers.ValueEnhancers;
 import org.datacrow.core.objects.DcField;
 
-public class ServerValueEnhancersRequestResponse implements IServerResponse {
+public class ServerValueEnhancersRequestResponse extends ServerResponse {
 
     private static final long serialVersionUID = -1446345813358197043L;
 

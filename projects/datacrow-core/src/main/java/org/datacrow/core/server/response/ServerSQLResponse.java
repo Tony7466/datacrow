@@ -27,7 +27,7 @@ package org.datacrow.core.server.response;
 
 import org.datacrow.core.data.DcResultSet;
 
-public class ServerSQLResponse implements IServerResponse {
+public class ServerSQLResponse extends ServerResponse {
 
 	private static final long serialVersionUID = -978735764038866148L;
 

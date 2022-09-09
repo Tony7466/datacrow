@@ -27,6 +27,6 @@ package org.datacrow.core.server.response;
 
 import java.io.Serializable;
 
-public interface IServerResponse extends Serializable{
+public class ServerResponse implements Serializable {
 
 }

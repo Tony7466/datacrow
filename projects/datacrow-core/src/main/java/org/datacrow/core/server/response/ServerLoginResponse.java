@@ -27,7 +27,7 @@ package org.datacrow.core.server.response;
 
 import org.datacrow.core.security.SecuredUser;
 
-public class ServerLoginResponse implements IServerResponse {
+public class ServerLoginResponse extends ServerResponse {
 
 	private static final long serialVersionUID = 8442261502976241941L;
 

@@ -28,7 +28,7 @@ package org.datacrow.core.server.response;
 import org.datacrow.core.utilities.settings.DcSettings;
 import org.datacrow.core.utilities.settings.Settings;
 
-public class ServerApplicationSettingsRequestResponse implements IServerResponse {
+public class ServerApplicationSettingsRequestResponse extends ServerResponse {
 
     private static final long serialVersionUID = -5876133656204207647L;
     

@@ -25,7 +25,9 @@
 
 package org.datacrow.server;
 
-import java.io.OutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +54,6 @@ import org.datacrow.core.server.requests.ClientRequestSimpleValues;
 import org.datacrow.core.server.requests.ClientRequestUser;
 import org.datacrow.core.server.requests.ClientRequestValueEnhancers;
 import org.datacrow.core.server.response.DefaultServerResponse;
-import org.datacrow.core.server.response.IServerResponse;
 import org.datacrow.core.server.response.ServerActionResponse;
 import org.datacrow.core.server.response.ServerApplicationSettingsRequestResponse;
 import org.datacrow.core.server.response.ServerErrorResponse;
@@ -61,6 +62,7 @@ import org.datacrow.core.server.response.ServerItemRequestResponse;
 import org.datacrow.core.server.response.ServerItemsRequestResponse;
 import org.datacrow.core.server.response.ServerLoginResponse;
 import org.datacrow.core.server.response.ServerModulesRequestResponse;
+import org.datacrow.core.server.response.ServerResponse;
 import org.datacrow.core.server.response.ServerSQLResponse;
 import org.datacrow.core.server.response.ServerSimpleValuesResponse;
 import org.datacrow.core.server.response.ServerValueEnhancersRequestResponse;
@@ -93,38 +95,23 @@ public class DcServerSessionRequestHandler extends Thread {
     public void run() {
 		if (isCanceled()) return;
         
-		/*
-		 * 
-		 * TODO: implement with Jackson
-		 * 
 		this.socket = session.getSocket();
 		
-		InputStream is = null;
-		OutputStream os = null;
-        
+		ObjectInputStream is = null;
+		ObjectOutputStream os = null;
+		
 		try {
-		    
-	        Security.addProvider(new BouncyCastleProvider()); 
-	        MessageDigest hash = MessageDigest.getInstance("SHA1");
-	        is = new CompressedBlockInputStream(new DigestInputStream(socket.getInputStream(), hash));
-	        os = new CompressedBlockOutputStream(new DigestOutputStream(socket.getOutputStream(), hash), 1024);
-        	
-        	JsonReader jr;
-        	JsonReader.setUseUnsafe(true);
+	        os = new ObjectOutputStream(socket.getOutputStream());
+	        is = new ObjectInputStream(socket.getInputStream());
 
-            // this is the connector we'll use on the server.
+	        // this is the connector we'll use on the server.
             // we'll use the actual logged on user credentials for the actions to be performed.
             conn = new LocalServerConnector();
             DcConfig.getInstance().setConnector(conn);
             
             while (!socket.isClosed()) {
                 try {
-                    
-                    var user = new JSONObject(is);
-                    
-                    
-                    cr = (ClientRequest) jr.readObject();
-
+                    cr = (ClientRequest) is.readObject();
                     if (!(cr instanceof ClientRequestLogin) && !(cr instanceof ClientRequestUser)) {
                         conn.setUser(session.getUser(cr));
                     }
@@ -146,7 +133,7 @@ public class DcServerSessionRequestHandler extends Thread {
         	} catch (Exception e) {
         	    logger.debug("An error occured while closing resources", e);
         	}
-        } */
+        }
     }
 	
 	/**
@@ -155,11 +142,9 @@ public class DcServerSessionRequestHandler extends Thread {
 	 * @param cr
 	 * @throws Exception
 	 */
-	private void processRequest(OutputStream os) throws Exception {
-        /*JsonWriter jw = null;
-        
+	private void processRequest(ObjectOutputStream os) throws Exception {
         try {
-        	IServerResponse sr = null;
+            ServerResponse sr = null;
 	        switch (cr.getType()) {
 	        case ClientRequest._REQUEST_ITEMS:
 	        	sr = processItemsRequest((ClientRequestItems) cr);
@@ -202,9 +187,8 @@ public class DcServerSessionRequestHandler extends Thread {
 	        }
 	        
 	        if (sr != null) {
-	            jw = new JsonWriter(os);  
-	            jw.write(sr);
-	            jw.flush();
+	            os.writeObject(sr);
+	            os.flush();
 		        
 		        logger.debug("Send object to client");
 	        } else {
@@ -212,7 +196,7 @@ public class DcServerSessionRequestHandler extends Thread {
 	        }
         } catch (IOException ioe) {
         	logger.error("Communication error between server and client", ioe);
-        }    */
+        } 
 	}
 	
     /** 
@@ -221,7 +205,7 @@ public class DcServerSessionRequestHandler extends Thread {
      * @param cr
      * @throws Exception
      */
-    private IServerResponse processUserManagementAction(ClientRequestUser cr) {
+    private ServerResponse processUserManagementAction(ClientRequestUser cr) {
         if (cr.getActionType() == ClientRequestUser._ACTIONTYPE_CHANGEPASSWORD) {
             SecurityCenter.getInstance().changePassword(cr.getUser(), cr.getPassword());
         } else {
@@ -236,57 +220,57 @@ public class DcServerSessionRequestHandler extends Thread {
 	 * @param cr
 	 * @throws Exception
 	 */
-	private IServerResponse processItemsRequest(ClientRequestItems cr) {
+	private ServerResponse processItemsRequest(ClientRequestItems cr) {
     	List<DcObject> items = conn.getItems(cr.getDataFilter(), cr.getFields());
         ServerItemsRequestResponse sr = new ServerItemsRequestResponse(items);
 	    return sr;
 	}
 	
-   private IServerResponse processItemKeysRequest(ClientRequestItemKeys cr) {
+   private ServerResponse processItemKeysRequest(ClientRequestItemKeys cr) {
         Map<String, Integer> items = conn.getKeys(cr.getDataFilter());
         ServerItemKeysRequestResponse sr = new ServerItemKeysRequestResponse(items);
         return sr;
     }
 	
-	private IServerResponse processLoginRequest(ClientRequestLogin lr) {
+	private ServerResponse processLoginRequest(ClientRequestLogin lr) {
 		SecuredUser su = conn.login(lr.getUsername(), lr.getPassword());
 		return new ServerLoginResponse(su);
 	}
 	
-	private IServerResponse processSQLRequest(ClientRequestExecuteSQL csr) throws Exception {
+	private ServerResponse processSQLRequest(ClientRequestExecuteSQL csr) throws Exception {
 	    DcResultSet result = conn.executeSQL(csr.getSQL());
         return new ServerSQLResponse(result);
     }
 	
-    private IServerResponse processReferencingItemsRequest(ClientRequestReferencingItems crri) throws Exception {
+    private ServerResponse processReferencingItemsRequest(ClientRequestReferencingItems crri) throws Exception {
         List<DcObject> values = conn.getReferencingItems(crri.getModuleIdx(), crri.getID());
         return new ServerItemsRequestResponse(values);
     }
 	
-    private IServerResponse processSimpleValuesRequest(ClientRequestSimpleValues crsv) throws Exception {
+    private ServerResponse processSimpleValuesRequest(ClientRequestSimpleValues crsv) throws Exception {
         List<DcSimpleValue> values = conn.getSimpleValues(crsv.getModule(), crsv.isIncludeIcons());
         return new ServerSimpleValuesResponse(values);
     }
     
-    private IServerResponse processModulesRequest(ClientRequestModules crm) throws Exception {
+    private ServerResponse processModulesRequest(ClientRequestModules crm) throws Exception {
         return new ServerModulesRequestResponse();
     }
     
-    private IServerResponse processApplicationSettingsRequest(ClientRequestApplicationSettings cras) throws Exception {
+    private ServerResponse processApplicationSettingsRequest(ClientRequestApplicationSettings cras) throws Exception {
         return new ServerApplicationSettingsRequestResponse();
     }
     
-    private IServerResponse processValueEnhancersRequest(ClientRequestValueEnhancers cras) throws Exception {
+    private ServerResponse processValueEnhancersRequest(ClientRequestValueEnhancers cras) throws Exception {
         return new ServerValueEnhancersRequestResponse();
     }
 	   
-    private IServerResponse processItemActionRequest(ClientRequestItemAction cr) {
+    private ServerResponse processItemActionRequest(ClientRequestItemAction cr) {
         DcObject dco = cr.getItem();
         
         DcConfig dcc = DcConfig.getInstance();
         Connector conn = dcc.getConnector();
         
-        IServerResponse sr;
+        ServerResponse sr;
         boolean success = false;
         Throwable t = null;
         
@@ -310,7 +294,7 @@ public class DcServerSessionRequestHandler extends Thread {
         return sr;
     }
 	
-	private IServerResponse processItemRequest(ClientRequestItem cr) {
+	private ServerResponse processItemRequest(ClientRequestItem cr) {
 		DcObject result = null;
 		int[] fields = cr.getFields();
 		Object value = cr.getValue();

@@ -46,9 +46,8 @@ public class VersionChecker extends Thread {
 
     private static Logger logger = DcLogManager.getLogger(VersionChecker.class.getName());
 
-    
-    // TODO: change this!
-    private static final String file = "http://www.datacrow.net/version.properties"; 
+    // TODO: upload version.properties to the site
+    private static final String file = "https://www.datacrow.org/version.properties"; 
     
     public static final String _VERSION = "version";
     public static final String _DOWNLOAD_URL = "download_url";

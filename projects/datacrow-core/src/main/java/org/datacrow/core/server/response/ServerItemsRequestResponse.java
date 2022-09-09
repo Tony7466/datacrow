@@ -29,7 +29,7 @@ import java.util.List;
 
 import org.datacrow.core.objects.DcObject;
 
-public class ServerItemsRequestResponse implements IServerResponse {
+public class ServerItemsRequestResponse extends ServerResponse {
 
 	private static final long serialVersionUID = 1324718151380668953L;
 

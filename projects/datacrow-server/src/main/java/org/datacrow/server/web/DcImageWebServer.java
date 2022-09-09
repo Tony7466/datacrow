@@ -27,8 +27,8 @@ package org.datacrow.server.web;
 
 import java.io.File;
 
+import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
-
 import org.datacrow.core.DcConfig;
 
 /**
@@ -77,6 +77,6 @@ public class DcImageWebServer {
         
         server.start();
 
-        isRunning = true;
+        isRunning = true; 
 	}
 }

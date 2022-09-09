@@ -1,25 +1,18 @@
 package org.datacrow.core.server;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
-import java.security.DigestInputStream;
-import java.security.DigestOutputStream;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.security.Security;
 
 import javax.crypto.NoSuchPaddingException;
 
 import org.apache.logging.log4j.Logger;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.datacrow.core.log.DcLogManager;
-import org.datacrow.core.utilities.CompressedBlockInputStream;
-import org.datacrow.core.utilities.CompressedBlockOutputStream;
 
 public class DcServerConnection {
 
@@ -29,24 +22,22 @@ public class DcServerConnection {
     
     private Socket socket;
 
-    private InputStream is;
-    private OutputStream os;
+    private ObjectInputStream is;
+    private ObjectOutputStream os;
     
     public DcServerConnection(Connector conn) throws IOException, SocketException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException {
         socket = new Socket(conn.getServerAddress(), conn.getApplicationServerPort());
         socket.setKeepAlive(true);
         
-        Security.addProvider(new BouncyCastleProvider()); 
-        MessageDigest hash = MessageDigest.getInstance("SHA1");
-        is = new CompressedBlockInputStream(new DigestInputStream(socket.getInputStream(), hash));
-        os = new CompressedBlockOutputStream(new DigestOutputStream(socket.getOutputStream(), hash), 1024);
+        is = new ObjectInputStream(socket.getInputStream());
+        os = new ObjectOutputStream(socket.getOutputStream());
     }
     
-    public InputStream getInputStream() {
+    public ObjectInputStream getInputStream() {
         return is;
     }
     
-    public OutputStream getOutputStream() {
+    public ObjectOutputStream getOutputStream() {
         return os;
     }
     

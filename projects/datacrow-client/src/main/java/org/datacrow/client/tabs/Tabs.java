@@ -27,6 +27,7 @@ package org.datacrow.client.tabs;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,8 +37,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.logging.log4j.Logger;
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.log.DcLogManager;
@@ -47,8 +50,13 @@ import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.Base64;
 import org.datacrow.core.utilities.CoreUtilities;
+import org.datacrow.core.utilities.XMLParser;
 import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
 import org.datacrow.core.utilities.settings.definitions.Definition;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 public class Tabs {
 	
@@ -101,16 +109,12 @@ public class Tabs {
     }
     
     private boolean load(File file) {
-        
         InputStreamReader in = null;
         BufferedReader reader = null;
 
         boolean success = false;
         
         try {
-            /*
-             * TODO: reimplement in a simpler way
-             * 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             
@@ -146,7 +150,7 @@ public class Tabs {
                 addTab(tab);
             }
             
-            success = true; */
+            success = true;
         
         } catch (Exception e) {
             logger.error("Failed to load tabs from " + file, e);

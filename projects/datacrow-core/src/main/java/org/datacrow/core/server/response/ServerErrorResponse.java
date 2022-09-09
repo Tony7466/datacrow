@@ -25,7 +25,7 @@
 
 package org.datacrow.core.server.response;
 
-public class ServerErrorResponse implements IServerResponse {
+public class ServerErrorResponse extends ServerResponse {
 
 	private static final long serialVersionUID = -2329836636255056199L;
 

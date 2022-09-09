@@ -27,7 +27,7 @@ package org.datacrow.core.server.response;
 
 import java.util.Map;
 
-public class ServerItemKeysRequestResponse implements IServerResponse {
+public class ServerItemKeysRequestResponse extends ServerResponse {
 
 	private static final long serialVersionUID = -3958640668849383528L;
 

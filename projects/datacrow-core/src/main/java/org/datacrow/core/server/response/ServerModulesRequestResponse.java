@@ -32,7 +32,7 @@ import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.modules.DcPropertyModule;
 
-public class ServerModulesRequestResponse implements IServerResponse {
+public class ServerModulesRequestResponse extends ServerResponse {
 
 	private static final long serialVersionUID = 8442261502976241941L;
 	

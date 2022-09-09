@@ -26,11 +26,16 @@
 package org.datacrow.client.connector;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import org.apache.logging.log4j.Logger;
+import org.datacrow.core.DcConfig;
 import org.datacrow.core.log.DcLogManager;
+import org.datacrow.core.server.Connector;
+import org.datacrow.core.server.DcServerConnection;
 import org.datacrow.core.server.requests.ClientRequest;
-import org.datacrow.core.server.response.IServerResponse;
+import org.datacrow.core.server.response.ServerResponse;
 
 public class ClientRequestHandler {
 	
@@ -49,35 +54,36 @@ public class ClientRequestHandler {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	@SuppressWarnings("resource")
-    public synchronized IServerResponse process() throws IOException, ClassNotFoundException {
+    public synchronized ServerResponse process() throws IOException, ClassNotFoundException {
 	    
-	    // TODO: reimplement using Jackson
-	    
-	    return null;
-/*		IServerResponse response = null;
-		DcServerConnection connection = null;
-		
-		try {
-    		Connector conn = DcConfig.getInstance().getConnector();
-    		connection = conn.getServerConnection();
-    		connection.setAvailable(false);
-    		
-    		JsonWriter jw = new JsonWriter(connection.getOutputStream());
-    		jw.write(cr);
-    		jw.flush();
-    		
-    		JsonReader jr = new JsonReader(connection.getInputStream());
-    		response = (IServerResponse) jr.readObject();
-    		
-    		logger.debug("Client has received: " + response);
-		} catch (Exception e) {
-		    logger.error("Failed to connect to server", e);
-		}
-		
-		if (connection != null)
-		    connection.setAvailable(true);
-		
-		return response; */
+        ServerResponse response = null;
+        DcServerConnection connection = null;
+        
+        ObjectOutputStream os;
+        ObjectInputStream is;
+        
+        try {
+            Connector conn = DcConfig.getInstance().getConnector();
+            connection = conn.getServerConnection();
+            connection.setAvailable(false);
+            
+            os = connection.getOutputStream();
+            is = connection.getInputStream();
+            
+            os.writeObject(cr);
+            os.flush();
+           // os.close();
+            
+            response = (ServerResponse) is.readObject();
+            
+            logger.debug("Client has received: " + response);
+        } catch (Exception e) {
+            logger.error("Failed to connect to server", e);
+        }
+        
+        if (connection != null)
+            connection.setAvailable(true);
+        
+        return response;
 	}
 }

@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.windows.security.LoginDialog;
 import org.datacrow.client.tabs.Tabs;
@@ -77,7 +76,6 @@ import org.datacrow.core.server.requests.ClientRequestReferencingItems;
 import org.datacrow.core.server.requests.ClientRequestSimpleValues;
 import org.datacrow.core.server.requests.ClientRequestUser;
 import org.datacrow.core.server.requests.ClientRequestValueEnhancers;
-import org.datacrow.core.server.response.IServerResponse;
 import org.datacrow.core.server.response.ServerActionResponse;
 import org.datacrow.core.server.response.ServerApplicationSettingsRequestResponse;
 import org.datacrow.core.server.response.ServerErrorResponse;
@@ -86,6 +84,7 @@ import org.datacrow.core.server.response.ServerItemRequestResponse;
 import org.datacrow.core.server.response.ServerItemsRequestResponse;
 import org.datacrow.core.server.response.ServerLoginResponse;
 import org.datacrow.core.server.response.ServerModulesRequestResponse;
+import org.datacrow.core.server.response.ServerResponse;
 import org.datacrow.core.server.response.ServerSQLResponse;
 import org.datacrow.core.server.response.ServerSimpleValuesResponse;
 import org.datacrow.core.server.response.ServerValueEnhancersRequestResponse;
@@ -172,8 +171,8 @@ public class ClientToServerConnector extends Connector {
 	 * @param cr the client request, containing all the information to process the request on the server
 	 * @return the response from the server
 	 */
-	private IServerResponse processClientRequest(ClientRequest cr) {
-		IServerResponse sr = null;
+	private ServerResponse processClientRequest(ClientRequest cr) {
+	    ServerResponse sr = null;
 
 		try {
 			ClientRequestHandler handler = new ClientRequestHandler(cr);
@@ -476,7 +475,7 @@ public class ClientToServerConnector extends Connector {
     @Override
     public DcResultSet executeSQL(String sql) {
         ClientRequestExecuteSQL csr = new ClientRequestExecuteSQL(su, sql);
-        IServerResponse response = processClientRequest(csr);
+        ServerResponse response = processClientRequest(csr);
         
         DcResultSet result = null;
         if (response != null) {
@@ -491,7 +490,7 @@ public class ClientToServerConnector extends Connector {
 	public boolean deleteItem(DcObject dco) throws ValidationException {
 	    ClientRequestItemAction cr = new ClientRequestItemAction(
 	            getUser(), ClientRequestItemAction._ACTION_DELETE, dco);
-	    IServerResponse response = processClientRequest(cr);
+	    ServerResponse response = processClientRequest(cr);
 	    
 	    boolean success = false;
         if (response != null) {
@@ -510,7 +509,7 @@ public class ClientToServerConnector extends Connector {
         // make sure to load the bytes as the image inside the ImageIcon will not be available on the server.
         dco.loadImageData();
         
-        IServerResponse response = processClientRequest(cr);
+        ServerResponse response = processClientRequest(cr);
         
         boolean success = false;
         if (response != null) {

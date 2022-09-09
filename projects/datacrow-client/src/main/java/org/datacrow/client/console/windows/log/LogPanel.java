@@ -40,13 +40,6 @@ import org.datacrow.core.DcConfig;
 import org.datacrow.core.log.DcLog;
 import org.datacrow.core.log.ILogListener;
 
-/**
- * 
- * TODO: needs to be reimplemented
- * 
- * @author RJ
- *
- */
 public class LogPanel extends JPanel implements ILogListener {
     
     private JTextArea logger;

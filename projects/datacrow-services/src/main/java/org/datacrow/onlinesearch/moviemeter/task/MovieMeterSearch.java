@@ -6,21 +6,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.logging.log4j.Logger;
-import org.datacrow.core.DcRepository;
-import org.datacrow.core.http.HttpConnectionUtil;
 import org.datacrow.core.log.DcLogManager;
-import org.datacrow.core.modules.DcModules;
-import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.objects.DcObject;
-import org.datacrow.core.objects.helpers.Movie;
 import org.datacrow.core.services.IOnlineSearchClient;
 import org.datacrow.core.services.SearchTask;
 import org.datacrow.core.services.plugin.IServer;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.StringUtils;
 import org.datacrow.core.utilities.html.HtmlUtils;
-import org.datacrow.core.utilities.json.JSONArray;
-import org.datacrow.core.utilities.json.JSONObject;
 
 public class MovieMeterSearch extends SearchTask {
     
@@ -44,7 +37,9 @@ public class MovieMeterSearch extends SearchTask {
     @Override
     @SuppressWarnings("rawtypes")
     protected DcObject getItem(Object key, boolean full) throws Exception {
-        DcObject movie = DcModules.get(DcModules._MOVIE).getItem();
+        
+        return null;
+       /* DcObject movie = DcModules.get(DcModules._MOVIE).getItem();
 
         try {
             String url = getAddress() + key + "?api_key=" + apiKey;
@@ -124,7 +119,7 @@ public class MovieMeterSearch extends SearchTask {
         } catch (Exception e) {
             logger.error(e, e);
         }
-        return movie;
+        return movie; */
     }
 
     @Override

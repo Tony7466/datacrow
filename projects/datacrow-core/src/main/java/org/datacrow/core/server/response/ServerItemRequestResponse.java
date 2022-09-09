@@ -27,7 +27,7 @@ package org.datacrow.core.server.response;
 
 import org.datacrow.core.objects.DcObject;
 
-public class ServerItemRequestResponse implements IServerResponse {
+public class ServerItemRequestResponse extends ServerResponse {
 
 	private static final long serialVersionUID = 2612470280934721802L;
 	
