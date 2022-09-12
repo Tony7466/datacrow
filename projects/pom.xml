@@ -9,14 +9,12 @@
     </organization>
 
     <name>main-project</name>
-    <url>https://www.datacrow.net/</url>
+    <url>https://www.datacrow.org/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>18</maven.compiler.target>
         <maven.compiler.source>18</maven.compiler.source>
-
-        <tomcat.version>10.1.0-M17</tomcat.version>    
     </properties>
 
     <modules>
@@ -229,38 +227,12 @@
                 <version>2.7.0</version>
             </dependency>
 
-            <!-- Tomcat -->
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>3.0-alpha-1</version>
-                <scope>provided</scope>
+              <groupId>org.eclipse.jetty</groupId>
+              <artifactId>jetty-server</artifactId>
+              <version>11.0.11</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-core</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-jasper</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat</groupId>
-                <artifactId>tomcat-jasper</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat</groupId>
-                <artifactId>tomcat-jasper-el</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat</groupId>
-                <artifactId>tomcat-jsp-api</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>

@@ -25,26 +25,34 @@
 
 package org.datacrow.server.web;
 
-import java.io.File;
+import java.io.IOException;
 
-import org.apache.catalina.Context;
-import org.apache.catalina.startup.Tomcat;
 import org.datacrow.core.DcConfig;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * @author Robert Jan van der Waals
  */
 public class DcImageWebServer {
     
+    
+    private Server server;
 	private boolean isRunning;
-	private Tomcat server;
-	private int port;
 	
 	/**
 	 * Creates a new instance.
 	 */
 	public DcImageWebServer(int port) {
-	    this.port = port;
+	    this.server = new Server(port);
 	}
 	
 	/**
@@ -67,16 +75,20 @@ public class DcImageWebServer {
 	 * Starts the Web Server. The port is configurable.
 	 */
 	public void start() throws Exception {
-        server = new Tomcat();
-        server.setPort(port);
-         
-        String baseDir = DcConfig.getInstance().getImageDir();
-        File contextDir = new File(baseDir);
-        
-        server.addWebapp("/", contextDir.toString());
-        
-        server.start();
+	    
+	    // Create a ServerConnector to accept connections from clients.
+	    Connector connector = new ServerConnector(server);
 
-        isRunning = true; 
+	    // Add the Connector to the Server
+	    server.addConnector(connector);
+	    
+	    ResourceHandler handler = new ResourceHandler();
+	    handler.setDirAllowed(false);
+	    handler.setResourceBase(DcConfig.getInstance().getImageDir());
+
+	    server.setHandler(handler);
+	    server.start();	    
+        
+	    isRunning = true;
 	}
 }
