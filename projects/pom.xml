@@ -232,6 +232,13 @@
               <artifactId>jetty-server</artifactId>
               <version>11.0.11</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>zt-zip</artifactId>
+                <version>1.15</version>
+                <type>jar</type>
+            </dependency>            
 
         </dependencies>
     </dependencyManagement>

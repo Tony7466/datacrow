@@ -26,17 +26,24 @@
 package org.datacrow.server.backup;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.core.DcConfig;
+import org.datacrow.core.DcRepository;
 import org.datacrow.core.clients.IBackupRestoreClient;
 import org.datacrow.core.log.DcLogManager;
+import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.Directory;
+import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.server.db.DatabaseManager;
 
 
 /**
@@ -47,12 +54,10 @@ import org.datacrow.core.utilities.Directory;
 public class Backup extends Thread {
     
     private static Logger logger = DcLogManager.getLogger(Backup.class.getName());
-
+    
     private File directory;
     private IBackupRestoreClient client;
     private String comment;
-    
-    //private TArchiveDetector ad = new TArchiveDetector("zip", new JarDriver(IOPoolLocator.SINGLETON));
  
     /**
      * Creates a new instance.
@@ -69,9 +74,8 @@ public class Backup extends Thread {
      * Retrieves all the files to be backed up.
      * @return A collection of fully classified filenames.
      */
-    private Collection<String> getFiles() {
-        
-        Collection<String> files = new ArrayList<String>();
+    private File[] getFiles() {
+        Collection<File> files = new ArrayList<File>();
         String paths[] = {
                 DcConfig.getInstance().getApplicationSettingsDir(),
                 DcConfig.getInstance().getModuleSettingsDir(),
@@ -85,9 +89,11 @@ public class Backup extends Thread {
         Directory dir;
         for (String path : paths) {
             dir = new Directory(path, true, null);
-            files.addAll(dir.read());
+            for (String filename : dir.read()) {
+                files.add(new File(filename));
+            }
         }
-        return files;
+        return (File[]) files.toArray(new File[0]);
     }
 
     private String getZipFile(String target) {
@@ -101,31 +107,12 @@ public class Backup extends Thread {
         return zipFile;
     }    
     
-    private void addEntry(String zipName, String source) {
-    	
-    	// TODO: reimplement zip
-    	
-    	/*
-    	
-        try {
-            TConfig.get().setArchiveDetector(ad);
-            TFile src = new TFile(source, ad);
-            TFile dst = new TFile(zipName, ad);
-            src.cp_rp(dst);
-        } catch (IOException e) {
-            client.notifyError(e);
-        } */
-    }
-    
     /**
      * Performs the actual back up and informs the clients on the progress.
      */
     @Override
     public void run() {
     	
-    	// TODO: reimplement zip
-        
-    	/*
         if (!directory.exists())
             directory.mkdirs();
         
@@ -134,57 +121,52 @@ public class Backup extends Thread {
         
         DatabaseManager.getInstance().closeDatabases(true);
 
-        Collection<String> files = getFiles();
-        client.notifyTaskStarted(files.size());
+        File[] files = getFiles();
+        client.notifyTaskStarted(files.length);
+        
+        FileOutputStream fos = null;
+        ZipOutputStream zipOut = null;
         
         try {
             String zipFileName = getZipFile(directory.toString());
             
-            File entry = new TFile(zipFileName + File.separator +  "version.txt", ad);
-            Writer writer = new TFileWriter(entry);
-            try {
-                writer.write(DcConfig.getInstance().getVersion().toString());
-                if (comment.length() > 0)
-                    writer.write("\n" + comment);
-            } catch (IOException e) {
-                client.notifyError(e);
-            } finally {
-                writer.close();
-            }
+            fos = new FileOutputStream(zipFileName);
+            zipOut = new ZipOutputStream(fos);
             
-            String name;
-            for (String filename : files) {
-                
-                name =  filename.substring(DcConfig.getInstance().getDataDir().length() - 
-                        (DcConfig.getInstance().getDataDir().startsWith("/") && !filename.startsWith("/") ? 2 : 1));
-                
-                while (name.startsWith("/") || name.startsWith("\\"))
-                    name = name.substring(1);
-                
-                client.notifyProcessed();
+            // add the version and add the comment entered by the customer
+            zipOut.putNextEntry(new ZipEntry("version.txt"));
+            zipOut.write(DcConfig.getInstance().getVersion().toString().getBytes());
+            
+            if (comment.length() > 0)
+                zipOut.write(("\n" + comment).getBytes());
+            
+            zipOut.closeEntry();
+            
+            // add all the file
+            for (File file : files) {
 
-                addEntry(zipFileName + File.separator + name, filename);
-                
-                client.notify(DcResources.getText("msgCreatingBackupOfFile", filename));
+                zipDirectory(zipOut, file, DcConfig.getInstance().getDataDir());
+                client.notifyProcessed();
                 
                 try {
                     sleep(10);
                 } catch (Exception e) {
                     logger.warn(e, e);
-                }
+                }                
             }
-            
+                
             client.notify(DcResources.getText("msgWritingBackupFile"));
-            
-            TVFS.umount();
-            
             client.notifyWarning(DcResources.getText("msgBackupFinished"));
-            
         } catch (Exception e) {
             client.notify(DcResources.getText("msgBackupError", e.getMessage()));
             client.notifyError(e);
             client.notifyWarning(DcResources.getText("msgBackupFinishedUnsuccessful"));
             client.notify(DcResources.getText("msgBackupFinished"));
+        } finally {
+            try {
+                zipOut.close();
+                fos.close();
+            } catch (Exception ignore) {}
         }
         
         DcSettings.set(DcRepository.Settings.stBackupLocation, directory.toString());
@@ -195,6 +177,41 @@ public class Backup extends Thread {
         client.notifyTaskCompleted(true, null);
         
         client = null;
-        directory = null; */
+        directory = null;
     }
+    
+    private void zipDirectory(ZipOutputStream zipOut, File fileToZip, String parentDirectoryName) throws Exception
+    {
+        if (fileToZip == null || !fileToZip.exists()) 
+            return;
+
+        String zipEntryName = fileToZip.getName();
+
+        String s = fileToZip.getAbsolutePath();
+        zipEntryName =  s.substring(DcConfig.getInstance().getDataDir().length() + 1 - 
+                (DcConfig.getInstance().getDataDir().startsWith("/") && !s.startsWith("/") ? 2 : 1));
+
+        client.notify(DcResources.getText("msgCreatingBackupOfFile", zipEntryName));
+        
+        if (fileToZip.isDirectory()) {
+            if (parentDirectoryName == null)
+                zipEntryName = "";
+
+            for (File file : fileToZip.listFiles()) {
+                zipDirectory(zipOut, file, fileToZip.getAbsolutePath());
+            }
+        } else {
+            byte[] buffer = new byte[1024];
+            
+            FileInputStream fis = new FileInputStream(fileToZip);
+            zipOut.putNextEntry(new ZipEntry(zipEntryName));
+            
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                zipOut.write(buffer, 0, length);
+            }
+            zipOut.closeEntry();
+            fis.close();
+        }
+    }    
 }

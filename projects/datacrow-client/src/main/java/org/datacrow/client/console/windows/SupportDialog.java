@@ -78,12 +78,16 @@ public class SupportDialog extends DcDialog implements ActionListener {
             GUI.getInstance().displayWarningMessage(DcResources.getText("msgSelectTargetFolderFirst"));
         }
         
+        FileOutputStream fos = null;
+        ZipOutputStream zipOut = null;
+        
+        
         try {
             File zipFileName = new File(file, "dc_support.zip");
             zipFileName.delete();
             
-            FileOutputStream fos = new FileOutputStream(zipFileName);
-            ZipOutputStream zipOut = new ZipOutputStream(fos);            
+            fos = new FileOutputStream(zipFileName);
+            zipOut = new ZipOutputStream(fos);            
             
             DcConfig dcc = DcConfig.getInstance();
             
@@ -92,14 +96,16 @@ public class SupportDialog extends DcDialog implements ActionListener {
             addEntry(new Directory(DcConfig.getInstance().getModuleSettingsDir(), true, null), zipOut, "modules");
             addEntry(new Directory(DcConfig.getInstance().getDatabaseDir(), true, null), zipOut, "database");
             
-            zipOut.close();
-            fos.close();           
-
             GUI.getInstance().displayMessage(DcResources.getText("msgSupportFileCreated", zipFileName.toString()));
             
         } catch (Exception e) {
             GUI.getInstance().displayErrorMessage(DcResources.getText("msgErrorCreatingSupportFile", e.getMessage()));
             logger.error(e, e);
+        } finally {
+            try {
+                zipOut.close();
+                fos.close();
+            } catch (Exception ignore) {}
         }
     }
     
