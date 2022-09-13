@@ -45,6 +45,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -68,7 +69,6 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.log.DcLogManager;
@@ -807,5 +807,16 @@ public static String getDatabaseTableName() {
         dfm.setTimeZone(TimeZone.getTimeZone("GMT"));
         timestamp = dfm.format(cal.getTime());
         return timestamp;
+    }
+    
+    public static String readInputStream(InputStream is) throws IOException {
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[8192];
+        int length;
+        while ((length = is.read(buffer)) != -1) {
+            result.write(buffer, 0, length);
+        }
+
+        return result.toString(StandardCharsets.UTF_8);
     }
 }

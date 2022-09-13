@@ -72,13 +72,7 @@
             <groupId>com.omertron</groupId>
             <artifactId>themoviedbapi</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>org.zeroturnaround</groupId>
-            <artifactId>zt-zip</artifactId>
-            <type>jar</type>
-        </dependency>            
-        
+
     </dependencies>
 
     <build>

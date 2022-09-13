@@ -29,18 +29,25 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.InputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.apache.logging.log4j.Logger;
 import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.components.DcLongTextField;
+import org.datacrow.core.log.DcLogManager;
+import org.datacrow.core.utilities.CoreUtilities;
 
 public class BackupFilePreviewPanel extends JPanel implements PropertyChangeListener {
     
-    //private static Logger logger = DcLogManager.getLogger(BackupFilePreviewPanel.class.getName());
+    private static Logger logger = DcLogManager.getLogger(BackupFilePreviewPanel.class.getName());
     
     private DcLongTextField preview = ComponentFactory.getLongTextField();
     
@@ -57,31 +64,31 @@ public class BackupFilePreviewPanel extends JPanel implements PropertyChangeList
             
             preview.setText("");
             
-            //File selection = (File)e.getNewValue();
+            File selection = (File)e.getNewValue();
             
-            /*
-             * 
-             * TODO: reimplement using normal zip
-             * 
+            ZipFile zipFile = null;
+            InputStream is = null;
+            
             try {
-                if (selection == null || !selection.isFile() || selection.toString().toLowerCase().endsWith(".bck")) return;
+                if (selection == null || !selection.isFile()) return;
                 
-                File entry = new TFile(selection.toString() + File.separator + "version.txt");
-                Reader reader = new TFileReader(entry);
-                try {
-                    int data = reader.read();
-                    StringBuffer sb = new StringBuffer();
-                    while(data != -1){
-                        sb.append((char) data);
-                        data = reader.read();
-                    }
-                    preview.setText(sb.toString());
-                } finally {
-                    reader.close();
+                zipFile = new ZipFile(selection);
+                ZipEntry versionEntry = zipFile.getEntry("version.txt");
+
+                if (versionEntry != null) {
+                    is = zipFile.getInputStream(versionEntry);
+                    String s = CoreUtilities.readInputStream(is);                    
+                    preview.setText(s);
                 }
+                
             } catch (Exception exp) {
                 logger.error(exp, exp);
-            } */
+            } finally {
+                try {
+                    if (zipFile != null) zipFile.close();
+                    if (is != null) is.close();
+                } catch (Exception ignore) {}
+            }
         }
     }
     

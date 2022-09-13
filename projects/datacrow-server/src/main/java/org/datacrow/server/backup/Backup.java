@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -132,6 +133,7 @@ public class Backup extends Thread {
             
             fos = new FileOutputStream(zipFileName);
             zipOut = new ZipOutputStream(fos);
+            zipOut.setLevel(Deflater.BEST_COMPRESSION);
             
             // add the version and add the comment entered by the customer
             zipOut.putNextEntry(new ZipEntry("version.txt"));
@@ -156,12 +158,11 @@ public class Backup extends Thread {
             }
                 
             client.notify(DcResources.getText("msgWritingBackupFile"));
-            client.notifyWarning(DcResources.getText("msgBackupFinished"));
+            client.notify(DcResources.getText("msgBackupFinished"));
         } catch (Exception e) {
             client.notify(DcResources.getText("msgBackupError", e.getMessage()));
             client.notifyError(e);
             client.notifyWarning(DcResources.getText("msgBackupFinishedUnsuccessful"));
-            client.notify(DcResources.getText("msgBackupFinished"));
         } finally {
             try {
                 zipOut.close();
@@ -203,15 +204,19 @@ public class Backup extends Thread {
         } else {
             byte[] buffer = new byte[1024];
             
-            FileInputStream fis = new FileInputStream(fileToZip);
-            zipOut.putNextEntry(new ZipEntry(zipEntryName));
-            
-            int length;
-            while ((length = fis.read(buffer)) > 0) {
-                zipOut.write(buffer, 0, length);
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(fileToZip);
+                zipOut.putNextEntry(new ZipEntry(zipEntryName));
+                
+                int length;
+                while ((length = fis.read(buffer)) > 0) {
+                    zipOut.write(buffer, 0, length);
+                }
+            } finally {
+                zipOut.closeEntry();
+                if (fis != null) fis.close();
             }
-            zipOut.closeEntry();
-            fis.close();
         }
     }    
 }

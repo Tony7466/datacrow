@@ -143,8 +143,13 @@ public class BackupDialog extends DcDialog implements ActionListener, IBackupRes
         File source = fileFieldSource.getFile();
         
         if (source != null && !source.isDirectory()) {
-            Restore restore = new Restore(this, source);
-            restore.start();
+            try {
+            
+                Restore restore = new Restore(this, source);
+                restore.start();
+            } catch (Exception e) {
+                notify(DcResources.getText("msgRestoreFileError", new String[] {source.getName(), e.getMessage()}));
+            }
         } else {
             GUI.getInstance().displayWarningMessage("msgSelectBackupFile");
         }
