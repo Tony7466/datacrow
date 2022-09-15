@@ -152,12 +152,31 @@
                 <version>1.6.13</version>
             </dependency>
 
+            <!-- Movie DB API implementation -->
             <dependency>
                 <groupId>com.omertron</groupId>
                 <artifactId>themoviedbapi</artifactId>
                 <version>4.3</version>
             </dependency>
-
+            
+            <!-- Tika parser (PDF, etc) -->
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-core</artifactId>
+                <version>2.4.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-parsers-standard-package</artifactId>
+                <version>2.4.1</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox</artifactId>
+                <version>2.0.26</version>
+            </dependency>            
+            
             <!-- HTML parser -->
             <dependency>
                 <groupId>org.jsoup</groupId>
@@ -173,68 +192,20 @@
             </dependency>
             
             <!-- Jasper reports -->
-<!-- https://mvnrepository.com/artifact/xalan/xalan -->
-<!-- dependency>
-  <groupId>org.apache.commons</groupId>
-  <artifactId>commons-digester3</artifactId>
-  <version>3.2</version>
-  <classifier>with-deps</classifier>
-</dependency -->
-            
             <dependency>
                 <groupId>net.sf.jasperreports</groupId>
                 <artifactId>jasperreports</artifactId>
                 <version>6.20.0</version>
-                <!-- exclusions>
-                    <exclusion>
-                        <groupId>org.codehaus.castor</groupId>
-                        <artifactId>castor-xml</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-collections</groupId>
-                        <artifactId>commons-collections</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.ibm.icu</groupId>
-                        <artifactId>icu4j</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-annotations</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.lucene</groupId>
-                        <artifactId>lucene-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.lucene</groupId>
-                        <artifactId>lucene-analyzers-common</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.lucene</groupId>
-                        <artifactId>lucene-queryparser</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.olap4j</groupId>
-                        <artifactId>olap4j</artifactId>
-                    </exclusion>
-                </exclusions -->
             </dependency>
 
+            <!-- HSQL DB -->
             <dependency>
                 <groupId>org.hsqldb</groupId>
                 <artifactId>hsqldb</artifactId>
                 <version>2.7.0</version>
             </dependency>
 
+            <!-- Jetty -->
             <dependency>
               <groupId>org.eclipse.jetty</groupId>
               <artifactId>jetty-server</artifactId>

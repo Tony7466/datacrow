@@ -53,11 +53,27 @@
             <groupId>com.github.kokorin</groupId>
             <artifactId>jebml</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.liferay</groupId>
             <artifactId>org.mp4parser</artifactId>
         </dependency>
+
+        <!-- Tika document parser -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parsers-standard-package</artifactId>
+        </dependency>
+
+        <!-- Apache PDF parser -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

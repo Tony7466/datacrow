@@ -112,13 +112,6 @@ public class XmlField extends XmlObject {
             moduleReference = reference == null || reference.trim().length() == 0 || reference.equals("{index}") ?
                               xmlModule.getIndex() :  XMLParser.getInt(element, "module-reference");
             module = xmlModule.getIndex();
-            
-            // to manually fix an error which was created by myself; record label was registered as '1' (custom module range).
-            // TODO: remove on major release.
-            if (moduleReference == 1 && index == 19 && module == DcModules._MUSIC_ALBUM) {
-                moduleReference = DcModules._RECORD_LABEL;
-                xmlModule.setChanged(true);
-            }
         }
     }
     

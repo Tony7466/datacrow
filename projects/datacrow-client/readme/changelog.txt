@@ -4,6 +4,10 @@ Data Crow version 4.3                                              Released on 2
 
 [Fixed]
 - Java 18 incompatibility issues have been fixed.
+- Backup and Restore has been fixed
+- Server to client communication has been partially fixed (it's working but the speed is abysmal)
+- Image server is back up again (old implementation was not compatible with the new Java version)
+- Various small compatibility issues have been fixed.
 
 [Updates]
 - Java version support has been changed from Java 1.7 to Java 18.
@@ -23,7 +27,9 @@ Data Crow version 4.3                                              Released on 2
 - Jasper Reports has been upgraded to 6.20
 - HSQL DB has been upgraded to 2.7.0
 - JSON-IO library has been dropped (too old)
-- Tomcat Embedded has been upgraded to 10.1.0-M17
+- Tomcat Embedded has been dropped and has been replaced with the latest version of
+  Jetty. Jetty is solely used as a web service for the hosting of images when making
+  use of the Data Crow server edition.
 - Libraries not mentioned have been dropped and replaced.
 - Code optimizations to bring Data Crow's code in line with the latest version of Java.
 

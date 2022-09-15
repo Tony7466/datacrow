@@ -25,31 +25,51 @@
 
 package org.datacrow.client.fileimporter;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.metadata.TikaCoreProperties;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.sax.BodyContentHandler;
 import org.datacrow.core.fileimporter.FileImporter;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
+import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.helpers.Book;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.utilities.CoreUtilities;
+import org.datacrow.core.utilities.Hash;
+import org.datacrow.core.utilities.StringUtils;
+import org.datacrow.core.utilities.isbn.ISBN;
+import org.datacrow.core.utilities.isbn.InvalidBarCodeException;
 
 /**
- * E-Book (Electronical Book) file imporerter.
- * 
+ * E-Book (Electronical Book) file importer.
  * @author Robert Jan van der Waals
- * 
- * TODO: re-evaluate & reimplement
  */
 public class EbookImport extends FileImporter {
 
-    //private static Logger logger = DcLogManager.getLogger(EbookImport.class.getName());
+    private static Logger logger = DcLogManager.getLogger(EbookImport.class.getName());
     
     public EbookImport() {
         super(DcModules._BOOK);
     }
     
     @Override
-	public FileImporter getInstance() {
-		return new EbookImport();
-	}
+    public FileImporter getInstance() {
+        return new EbookImport();
+    }
 
-	@Override
+    @Override
     public String[] getSupportedFileTypes() {
         return new String[] {
                 "txt",  // N/A
@@ -75,142 +95,114 @@ public class EbookImport extends FileImporter {
         return true;
     }    
     
-	@Override
+    
+    private void findAndSetIsbn(DcObject book, String s) {
+        String isbn = String.valueOf(StringUtils.getContainedNumber(s));
+        boolean isIsbn10 = ISBN.isISBN10(isbn);
+        boolean isIsbn13 = ISBN.isISBN13(isbn);
+        
+        // this can be used later on by the online search
+        if (isIsbn10 || isIsbn13) {
+            try { 
+                String isbn10 = isIsbn10 ? isbn : ISBN.getISBN10(isbn);
+                book.setValue(Book._J_ISBN10, isbn10);    
+            } catch (InvalidBarCodeException ibce) {}
+
+            try { 
+                String isbn13 = isIsbn13 ? isbn : ISBN.getISBN13(isbn);
+                book.setValue(Book._N_ISBN13, isbn13);
+            } catch (InvalidBarCodeException ibce) {}
+        }        
+    }
+    
+    @Override
     public DcObject parse(String filename, int directoryUsage) {
-    /*    DcObject book = DcModules.get(DcModules._BOOK).getItem();
+        DcObject book = DcModules.get(DcModules._BOOK).getItem();
         
         try {
             book.setValue(Book._A_TITLE, getName(filename, directoryUsage));
             book.setValue(Book._SYS_FILENAME, filename);
             
             // check if the filename contains an ISBN
-            String isbn = String.valueOf(StringUtils.getContainedNumber(filename));
-            boolean isIsbn10 = ISBN.isISBN10(isbn);
-            boolean isIsbn13 = ISBN.isISBN13(isbn);
+            findAndSetIsbn(book, filename);
             
-            // this can be used later on by the online search
-            if (isIsbn10 || isIsbn13) {
-                String isbn10 = isIsbn10 ? isbn : ISBN.getISBN10(isbn);
-                String isbn13 = isIsbn13 ? isbn : ISBN.getISBN13(isbn);
-                book.setValue(Book._J_ISBN10, isbn10);
-                book.setValue(Book._N_ISBN13, isbn13);
+            InputStream is = null;
+            try {
+                is = new FileInputStream(new File(filename));
+
+                AutoDetectParser parser = new AutoDetectParser();
+                BodyContentHandler handler = new BodyContentHandler(-1);
+                Metadata metadata = new Metadata();
+
+                parser.parse(is, handler, metadata);
+                
+                String author =  metadata.get(org.apache.tika.metadata.Office.AUTHOR);
+                author = author == null ? metadata.get(TikaCoreProperties.CONTRIBUTOR) : author;
+                
+                String creator = metadata.get(TikaCoreProperties.CREATOR);
+                String description = metadata.get(TikaCoreProperties.DESCRIPTION);
+                String publisher = metadata.get(TikaCoreProperties.PUBLISHER);
+                String pagecount = metadata.get(org.apache.tika.metadata.Office.PAGE_COUNT);
+                String title = metadata.get(TikaCoreProperties.TITLE);
+                    
+                if (!CoreUtilities.isEmpty(author))
+                    book.createReference(Book._G_AUTHOR, author);
+                else if (!CoreUtilities.isEmpty(creator))
+                    book.createReference(Book._G_AUTHOR, creator);
+
+                if (!CoreUtilities.isEmpty(title))
+                    book.setValue(Book._A_TITLE, title);
+
+                if (!CoreUtilities.isEmpty(description))
+                    book.setValue(Book._B_DESCRIPTION, description);
+
+                if (!CoreUtilities.isEmpty(publisher))
+                    book.createReference(Book._F_PUBLISHER, publisher);
+                
+                if (!CoreUtilities.isEmpty(pagecount)) {
+                    try { 
+                        book.setValue(Book._T_NROFPAGES, Long.parseLong(pagecount));
+                    } catch (NumberFormatException nfe) {
+                        logger.debug("Could not parse number of pages for " + pagecount, nfe);
+                    }
+                }
+            } finally {
+                if (is != null) is.close();
             }
             
-            if (!filename.toLowerCase().endsWith("pdf")) {
-                // non PDF files are handled with the Tika library
-                InputStream is = null;
-                try {
-                    is = new FileInputStream(new File(filename));
-                    ContentHandler textHandler = new BodyContentHandler();
-                    Metadata metadata = new Metadata();
-                    ParseContext context = new ParseContext();
-                    Parser parser = null;
-                    if (filename.toLowerCase().endsWith("chm")) {
-                        parser = new org.apache.tika.parser.chm.ChmParser();
-                    } else if (filename.toLowerCase().endsWith("doc") || filename.toLowerCase().endsWith("docx")) {
-                        parser = new org.apache.tika.parser.microsoft.OfficeParser();
-                    } else if (filename.toLowerCase().endsWith("htm") || filename.toLowerCase().endsWith("html")) {
-                        parser = new org.apache.tika.parser.html.HtmlParser();
-                    } else if (filename.toLowerCase().endsWith("odt")) {
-                        parser = new org.apache.tika.parser.odf.OpenDocumentMetaParser();
-                    } else if (filename.toLowerCase().endsWith("epub")) {
-                        parser = new org.apache.tika.parser.epub.EpubParser();
-                    }
-                    
-                    if (parser != null) {
-                        parser.parse(is, textHandler, metadata, context);
-                        
-                        String author = metadata.get(Metadata.AUTHOR);
-                        String creator = metadata.get(Metadata.CREATOR);
-                        
-                        String description = metadata.get(Metadata.DESCRIPTION);
-                        String publisher = metadata.get(Metadata.PUBLISHER);
-                        String pagecount = metadata.get(Metadata.PAGE_COUNT);
-                        String title = metadata.get(Metadata.TITLE);
-                        
-                        if (!CoreUtilities.isEmpty(author))
-                        	book.createReference(Book._G_AUTHOR, author);
-                        else if (!CoreUtilities.isEmpty(creator))
-                        	book.createReference(Book._G_AUTHOR, creator);
-    
-                        if (!CoreUtilities.isEmpty(title))
-                            book.setValue(Book._A_TITLE, title);
-    
-                        if (!CoreUtilities.isEmpty(description))
-                            book.setValue(Book._B_DESCRIPTION, description);
-    
-                        if (!CoreUtilities.isEmpty(publisher))
-                        	book.createReference(Book._F_PUBLISHER, publisher);
-                        
-                        if (!CoreUtilities.isEmpty(pagecount)) {
-                            try { 
-                                book.setValue(Book._T_NROFPAGES, Long.parseLong(pagecount));
-                            } catch (NumberFormatException nfe) {
-                                logger.debug("Could not parse number of pages for " + pagecount, nfe);
-                            }
-                        }
-                    }
-                } finally {
-                    if (is != null) is.close();
-                }
-            } else if (filename.toLowerCase().endsWith("pdf")) {
-                // PDF files are handled the old fashioned way with PDFBox
-                File file = new File(filename);
-                FileISBNExtractor fileISBNExtractor = new FileISBNExtractor();
-                fileISBNExtractor.setSearchMinBytes(30000);
-                fileISBNExtractor.getTextReaderFactory().setPreferredPdfExtractor(new PDFBoxTextExtractor());
-                ISBNCandidates isbnCandidates = fileISBNExtractor.getIsbnCandidates(file);
-                org.chabanois.isbn.extractor.ISBN extractedISBN = isbnCandidates.getHighestScoreISBN();
+            if (filename.toLowerCase().endsWith(".pdf")) {
+                PDDocument pdf = null;
+                PDFRenderer renderer;
                 
-                if (extractedISBN != null ) {
-                    String s = extractedISBN.getIsbn();
-                    if (s != null && s.length() > 0)
-                        book.setValue(Book._N_ISBN13, ISBN.isISBN10(s) ? ISBN.getISBN13(s) : 
-                                                      ISBN.isISBN13(s) ? s : null);
+                try {
+                    pdf = PDDocument.load(new File(filename));
+                    
+                    book.setValue(Book._T_NROFPAGES, Long.valueOf(pdf.getNumberOfPages()));
+    
+                    renderer = new PDFRenderer(pdf);
+                    BufferedImage bim = renderer.renderImageWithDPI(0, 300f, ImageType.RGB);
+                    book.setValue(Book._K_PICTUREFRONT, new DcImageIcon(CoreUtilities.getBytes(new DcImageIcon(bim))));
+                
+                    PDFTextStripper stripper = new PDFTextStripper();
+                    stripper.setStartPage(0);
+                    stripper.setEndPage(4);
+                    String text = new PDFTextStripper().getText(pdf);
+                    
+                    System.out.println(text);
+                    
+                    stripper.setStartPage(pdf.getNumberOfPages() - 4);
+                    stripper.setEndPage(pdf.getNumberOfPages() - 1);
+                    
+                    text += new PDFTextStripper().getText(pdf);
+    
+                    findAndSetIsbn(book, text);
+                    
+                } finally {
+                    if (pdf != null) pdf.close();
                 }
                 
-                RandomAccessFile raf = null;
-                PDFFile pdffile;
-                try {
-                    
-                    raf = new RandomAccessFile(file, "r");
-                    FileChannel channel = raf.getChannel();
-                    ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
-                    channel.close();
-                    
-                    pdffile = new PDFFile(buf);
-                    pdffile.stop(1);
-    
-                    try {
-                        book.setValue(Book._T_NROFPAGES, Long.valueOf(pdffile.getNumPages()));
-                        Iterator<String> it = pdffile.getMetadataKeys();
-                        while (it.hasNext()) {
-                            String key = it.next();
-                            String value = pdffile.getStringMetadata(key);
-                            
-                            if (!CoreUtilities.isEmpty(value)) {
-                                if (key.equalsIgnoreCase("Author"))
-                                	book.createReference(Book._G_AUTHOR, value);
-                                if (key.equalsIgnoreCase("Title") && !value.trim().equalsIgnoreCase("untitled"))
-                                    book.setValue(Book._A_TITLE, value);
-                            }
-                        }
-                    } catch (IOException ioe) {
-                        getClient().notify(DcResources.getText("msgCouldNotReadInfoFrom", filename));
-                    }
-    
-                    // draw the first page to an image
-                    PDFPage page = pdffile.getPage(0);
-                    if (page != null) {
-                        Rectangle rect = new Rectangle(0,0, (int)page.getBBox().getWidth(), (int)page.getBBox().getHeight());
-                        Image front = page.getImage(rect.width, rect.height, rect, null, true, true);
-                        book.setValue(Book._K_PICTUREFRONT, new DcImageIcon(CoreUtilities.getBytes(new DcImageIcon(front))));
-                    }
-                } finally {
-                    if (raf != null) raf.close();
-                }
-            }
-            
+            }                
+
             Hash.getInstance().calculateHash(book);
         } catch (OutOfMemoryError err) {
             logger.error(err, err);
@@ -222,8 +214,6 @@ public class EbookImport extends FileImporter {
             logger.error(err, err);
             getClient().notify(DcResources.getText("msgCouldNotReadInfoFrom", filename));
         }
-        return book; */
-    	
-    	return null;
+        return book;
     }
 }

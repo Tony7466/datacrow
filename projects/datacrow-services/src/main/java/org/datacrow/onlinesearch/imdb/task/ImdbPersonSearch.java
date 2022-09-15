@@ -26,24 +26,15 @@
 package org.datacrow.onlinesearch.imdb.task;
 
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.services.IOnlineSearchClient;
 import org.datacrow.core.services.Region;
 import org.datacrow.core.services.plugin.IServer;
-import org.datacrow.core.utilities.StringUtils;
-import org.datacrow.core.utilities.html.HtmlUtils;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class ImdbPersonSearch extends ImdbSearch {
 
