@@ -26,6 +26,7 @@
 package org.datacrow.client.tabs;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,6 +45,7 @@ import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.Base64;
 import org.datacrow.core.utilities.CoreUtilities;
+import org.datacrow.core.utilities.StringUtils;
 import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
 import org.datacrow.core.utilities.settings.definitions.Definition;
 
@@ -98,26 +100,14 @@ public class Tabs {
     }
     
     private boolean load(File file) {
-        //InputStreamReader in = null;
-        //BufferedReader reader = null;
-
         boolean success = false;
         
-        /*
-         * TODO: rewrite this.. overcomplicated.
-         * 
         try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
+            byte[] b = CoreUtilities.readFile(file);
+            String xml = new String(b, StandardCharsets.UTF_8);
+        
+            String entry;
             
-            in = new InputStreamReader(new FileInputStream(file), "UTF-8");
-            reader = new BufferedReader (in); 
-            InputSource input = new InputSource(reader);
-            Document document = db.parse(input);
-
-            NodeList nodes = document.getDocumentElement().getElementsByTagName("tab");
-            
-            Element e;
             int module;
             int order;
             String name;
@@ -125,36 +115,33 @@ public class Tabs {
             Tab tab;
             DcImageIcon icon = null;
             
-            for (int idx = 0; idx < nodes.getLength(); idx++) {
-                e = (Element) nodes.item(idx);
-                module = XMLParser.getInt(e, Tab._MODULE);
-                name = XMLParser.getString(e, Tab._NAME);
-                order = XMLParser.getInt(e, Tab._ORDER);
-                tmp = XMLParser.getString(e, Tab._ICON);
-                if (tmp != null) {
-                    tmp = tmp.replaceAll("\r", "");
-                    tmp = tmp.replaceAll("\n", "");
+            while (xml.indexOf("<tab>") > 0) {
+                entry = StringUtils.getValueBetween("<tab>", "</tab>", xml);
+                
+                xml = xml.substring(xml.indexOf("</tab>") + 6);
+                
+                module = Integer.valueOf(StringUtils.getValueBetween("<module>", "</module>", entry));
+                name = StringUtils.getValueBetween("<name>", "</name>", entry);
+                order = Integer.valueOf(StringUtils.getValueBetween("<order>", "</order>", entry));
+                
+                tmp = StringUtils.getValueBetween("<icon>", "</icon>", entry);
+                tmp = tmp.replaceAll("\r", "");
+                tmp = tmp.replaceAll("\n", "");                
+                
+                if (!CoreUtilities.isEmpty(tmp)) {
                     icon = CoreUtilities.base64ToImage(tmp);
                 }
-                
+
                 tab = new Tab(module, name, icon);
                 tab.setOrder(order);
                 addTab(tab);
             }
-            
+        
             success = true;
         
         } catch (Exception e) {
             logger.error("Failed to load tabs from " + file, e);
-            
-        } finally {
-            try { 
-                if (in != null) in.close();
-                if (reader != null) reader.close();
-            } catch (Exception e) {
-                logger.debug("error while closing file input stream", e);
-            }
-        } */
+        } 
         
         return success;
     }
