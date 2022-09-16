@@ -10,7 +10,7 @@ Data Crow version 4.3                                              Released on 2
 - Various small compatibility issues have been fixed.
 
 [Updates]
-- Java version support has been changed from Java 1.7 to Java 18.
+- Java version support has been changed from Java v1.7 to Java Second Edition v18 (!)
 - Upgraded Log4J to the latest version. The old library was a huge security risk 
   and had to be replaced.
 - Build process has been moved to Maven (thanks to: flag-courier).
@@ -32,6 +32,11 @@ Data Crow version 4.3                                              Released on 2
   use of the Data Crow server edition.
 - Libraries not mentioned have been dropped and replaced.
 - Code optimizations to bring Data Crow's code in line with the latest version of Java.
+- Tika has been upgraded to upgraded to version 2.4.1.
+- PDFBox has been upgraded to 2.0.26. There a version 3 release candidate which I wanted
+  to adopt but it's not compatible with Tika 2.4.1.
+- Added better ISBN / EAN management and incorporated this into the e-book file import
+  and various other places.
 
 [Removed]
 - The web module has been dropped for now. It would need to be completely rebuild to 
