@@ -25,9 +25,14 @@
 
 package org.datacrow.onlinesearch.amazon.mode;
 
+import org.apache.logging.log4j.Logger;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.utilities.isbn.ISBN;
+import org.datacrow.core.utilities.isbn.InvalidBarCodeException;
 
 public class IsbnSearchMode extends org.datacrow.core.services.IsbnSearchMode {
+    
+    private static Logger logger = DcLogManager.getLogger(IsbnSearchMode.class.getName());
 
     private final String index;
     
@@ -38,13 +43,13 @@ public class IsbnSearchMode extends org.datacrow.core.services.IsbnSearchMode {
 
     @Override
     public String getSearchCommand(String s) {
-        s = super.getSearchCommand(s);
-		String isbn13 = s;
-		try {
-			if (ISBN.isISBN10(s))
-				isbn13 = ISBN.getISBN13(s);
-		} catch (Exception e) {}
+        String isbn = super.getSearchCommand(s);
+        try {
+            isbn = new ISBN(isbn).getIsbn13();
+        } catch (InvalidBarCodeException e) {
+            logger.debug("Invalid ISBN " + isbn, e);
+        }
 		
-		return "Operation=ItemLookup&ItemId=" + isbn13 + "&IdType=ISBN&SearchIndex=" + index;
+		return "Operation=ItemLookup&ItemId=" + isbn + "&IdType=ISBN&SearchIndex=" + index;
     }
 }

@@ -34,6 +34,7 @@ import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.synchronizers.DefaultSynchronizer;
 import org.datacrow.core.synchronizers.Synchronizer;
 import org.datacrow.core.utilities.isbn.ISBN;
+import org.datacrow.core.utilities.isbn.InvalidBarCodeException;
 
 public class BookSynchronizer extends DefaultSynchronizer {
 
@@ -60,21 +61,32 @@ public class BookSynchronizer extends DefaultSynchronizer {
         
         try {
             
-            boolean isISBN10 = ISBN.isISBN10(searchString);
-            boolean isISBN13 = ISBN.isISBN13(searchString);
-            
-            String check = null;
-            if (isISBN10 || isISBN13) {
-                check = isISBN10 ? ISBN.getISBN13(searchString) : searchString;
-            } else {
-                check = dco.isFilled(Book._N_ISBN13) ? (String) dco.getValue(Book._N_ISBN13) :
-                        dco.isFilled(Book._J_ISBN10) ? ISBN.getISBN13((String) dco.getValue(Book._J_ISBN10)) :
-                        null;
+            ISBN isbn = null;
+            try {
+                // check if the search string is an ISBN
+                isbn = new ISBN(searchString);
+            } catch (InvalidBarCodeException ibce) {
+                logger.debug("Search term is not a valid ISBN/EAN [" + searchString + "]");
             }
             
-            if (check != null) {
-                String isbn = (String) result.getValue(Book._N_ISBN13);
-                matches = check.equals(isbn);
+            if (isbn == null) {
+                try {
+                    // check if the book contains a valid ISBN
+                    if (dco.isFilled(Book._N_ISBN13) || dco.isFilled(Book._J_ISBN10) ) {
+                        isbn = new ISBN(
+                                dco.isFilled(Book._N_ISBN13) ? (String) dco.getValue(Book._N_ISBN13) : 
+                               (String) dco.getValue(Book._J_ISBN10));
+                    }
+                } catch (InvalidBarCodeException ibce) {
+                    logger.debug("The existing ISBN/EAN is invalid [" + 
+                            (dco.isFilled(Book._N_ISBN13) ? (String) dco.getValue(Book._N_ISBN13) : 
+                            (String) dco.getValue(Book._J_ISBN10)) + "]");
+                }
+            }
+            
+            if (isbn != null) {
+                String isbn13 = (String) result.getValue(Book._N_ISBN13);
+                matches = isbn.getIsbn13().equals(isbn13);
             }
 
         } catch (Exception e) {

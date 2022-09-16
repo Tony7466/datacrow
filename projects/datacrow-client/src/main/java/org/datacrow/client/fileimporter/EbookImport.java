@@ -48,9 +48,7 @@ import org.datacrow.core.objects.helpers.Book;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.Hash;
-import org.datacrow.core.utilities.StringUtils;
 import org.datacrow.core.utilities.isbn.ISBN;
-import org.datacrow.core.utilities.isbn.InvalidBarCodeException;
 
 /**
  * E-Book (Electronical Book) file importer.
@@ -97,22 +95,11 @@ public class EbookImport extends FileImporter {
     
     
     private void findAndSetIsbn(DcObject book, String s) {
-        String isbn = String.valueOf(StringUtils.getContainedNumber(s));
-        boolean isIsbn10 = ISBN.isISBN10(isbn);
-        boolean isIsbn13 = ISBN.isISBN13(isbn);
-        
-        // this can be used later on by the online search
-        if (isIsbn10 || isIsbn13) {
-            try { 
-                String isbn10 = isIsbn10 ? isbn : ISBN.getISBN10(isbn);
-                book.setValue(Book._J_ISBN10, isbn10);    
-            } catch (InvalidBarCodeException ibce) {}
-
-            try { 
-                String isbn13 = isIsbn13 ? isbn : ISBN.getISBN13(isbn);
-                book.setValue(Book._N_ISBN13, isbn13);
-            } catch (InvalidBarCodeException ibce) {}
-        }        
+        ISBN isbn = new ISBN();
+        if (isbn.parse(s)) {
+            book.setValue(Book._J_ISBN10, isbn.getIsbn10());
+            book.setValue(Book._N_ISBN13, isbn.getIsbn13());
+        }
     }
     
     @Override
@@ -186,14 +173,12 @@ public class EbookImport extends FileImporter {
                     PDFTextStripper stripper = new PDFTextStripper();
                     stripper.setStartPage(0);
                     stripper.setEndPage(4);
-                    String text = new PDFTextStripper().getText(pdf);
-                    
-                    System.out.println(text);
+                    String text = stripper.getText(pdf);
                     
                     stripper.setStartPage(pdf.getNumberOfPages() - 4);
                     stripper.setEndPage(pdf.getNumberOfPages() - 1);
                     
-                    text += new PDFTextStripper().getText(pdf);
+                    text += stripper.getText(pdf);
     
                     findAndSetIsbn(book, text);
                     

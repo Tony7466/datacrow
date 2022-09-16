@@ -37,8 +37,6 @@ import org.datacrow.core.services.SearchMode;
 import org.datacrow.core.services.SearchTaskUtilities;
 import org.datacrow.core.services.plugin.IServer;
 import org.datacrow.core.utilities.isbn.ISBN;
-import org.datacrow.core.utilities.isbn.InvalidBarCodeException;
-
 import org.w3c.dom.Document;
 
 public class AmazonBookSearch extends AmazonSearch {
@@ -104,16 +102,11 @@ public class AmazonBookSearch extends AmazonSearch {
     
     private void setISBN(Document document, DcObject book) {
         String s =  getValue(document, "ItemAttributes/ISBN");
-        try {
-            if (ISBN.isISBN10(s)) {
-                book.setValue(Book._J_ISBN10, s);
-                book.setValue(Book._N_ISBN13, ISBN.getISBN13(s));
-            } else if (ISBN.isISBN13(s)) {
-                book.setValue(Book._N_ISBN13, s);
-                book.setValue(Book._J_ISBN10, ISBN.getISBN10(s));
-            }
-        } catch (InvalidBarCodeException ibe) {
-            listener.addError(ibe);
-        }
+        
+        ISBN isbn = new ISBN();
+        if (isbn.parse(s)) {
+            book.setValue(Book._J_ISBN10, isbn.getIsbn10());
+            book.setValue(Book._N_ISBN13, isbn.getIsbn13());
+        }        
     }
 }

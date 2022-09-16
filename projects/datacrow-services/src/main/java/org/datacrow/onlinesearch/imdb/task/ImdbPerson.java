@@ -26,22 +26,16 @@
 package org.datacrow.onlinesearch.imdb.task;
 
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.logging.log4j.Logger;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Node;
-import org.datacrow.core.http.HttpConnectionUtil;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcAssociate;
-import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.objects.DcObject;
-import org.datacrow.core.utilities.html.HtmlUtils;
+import org.jsoup.nodes.Document;
 
 public class ImdbPerson {
 

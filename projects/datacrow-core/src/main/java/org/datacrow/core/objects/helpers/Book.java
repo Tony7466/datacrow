@@ -30,6 +30,7 @@ import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcMediaObject;
 import org.datacrow.core.objects.ValidationException;
+import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.isbn.ISBN;
 import org.datacrow.core.utilities.isbn.InvalidBarCodeException;
 
@@ -66,19 +67,18 @@ public class Book extends DcMediaObject {
         
         String s10 = (String) getValue(_J_ISBN10);
         String s13 = (String) getValue(_N_ISBN13);
-
-        try {
-            boolean isBarcode13 = ISBN.isISBN13(s13);
-            boolean isBarcode10 = ISBN.isISBN10(s10);
-            if (isBarcode10 && !isBarcode13) {
-                String isbn13 = ISBN.getISBN13(s10);  
-                setValue(_N_ISBN13, isbn13);
-            } else if (isBarcode13 && !isBarcode10) {
-                String isbn10 = ISBN.getISBN10(s13);  
-                setValue(_J_ISBN10, isbn10);
-            }
-        } catch (InvalidBarCodeException ibce) {
-            logger.error("Supplied barcodes are invalid", ibce);
-        }
+        
+        if ((CoreUtilities.isEmpty(s10) && !CoreUtilities.isEmpty(s13)) ||
+            (CoreUtilities.isEmpty(s13) && !CoreUtilities.isEmpty(s10))) {
+            
+            try {
+                ISBN isbn = new ISBN(CoreUtilities.isEmpty(s10) ? s13 : s10);
+        
+                setValue(Book._J_ISBN10, isbn.getIsbn10());
+                setValue(Book._N_ISBN13, isbn.getIsbn13());
+            } catch (InvalidBarCodeException ibce) {
+                logger.error("Supplied barcodes are invalid", ibce);
+            }            
+        }  
     }
 }

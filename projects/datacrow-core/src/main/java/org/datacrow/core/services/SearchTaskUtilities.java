@@ -30,7 +30,6 @@ import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.helpers.Book;
-import org.datacrow.core.utilities.StringUtils;
 import org.datacrow.core.utilities.isbn.ISBN;
 import org.datacrow.core.utilities.isbn.InvalidBarCodeException;
 
@@ -44,7 +43,7 @@ public abstract class SearchTaskUtilities {
         if (task.getMode() instanceof IsbnSearchMode) {
             String query = task.getQuery();
             query = query.replaceAll("x|X", "0");
-            task.setQuery(String.valueOf(StringUtils.getContainedNumber(query)));
+            task.setQuery(String.valueOf(query));
         }
 
         // already using a very specific search mode or the online service does not support 
@@ -56,37 +55,38 @@ public abstract class SearchTaskUtilities {
         
         if (dco == null) return;
         
-        String isbn;
+        
+        ISBN isbn = null;
+        
+        
         if (    dco.getModule().getIndex() == DcModules._BOOK && 
                 (dco.isFilled(Book._N_ISBN13) || dco.isFilled(Book._J_ISBN10))) {
-            
-            isbn = (String) dco.getValue(Book._N_ISBN13);
-            isbn = isbn == null ? (String) dco.getValue(Book._J_ISBN10) : isbn;
-            
-        } else {
-            
-            isbn = String.valueOf(StringUtils.getContainedNumber(task.getQuery()));
+        
+            String s = dco.isFilled(Book._N_ISBN13) ? 
+                    (String) dco.getValue(Book._N_ISBN13) : (String) dco.getValue(Book._J_ISBN10);
+            try {
+                isbn = new ISBN(s);
+            } catch (InvalidBarCodeException ibce) {
+                logger.debug("Currently set ISBN/EAN is invalid: [" + s + "]");
+            }
         }
         
-        boolean isbn10 = ISBN.isISBN10(isbn);
-        boolean isbn13 = ISBN.isISBN13(isbn);
-
+        if (isbn == null) {
+            isbn = new ISBN();
+            isbn.parse(task.getQuery());
+        }
+        
         // If so, set the appropriate search mode
-        try {
-            if (isbn10 || isbn13) {
-                isbn = isbn10 ? ISBN.getISBN13(isbn) : isbn; 
-                if (task.getServer().getSearchModes() != null) {
-                    for (SearchMode m : task.getServer().getSearchModes()) {
-                        if (m instanceof IsbnSearchMode) {
-                            task.setMode(m);
-                            task.setQuery(isbn);
-                            break;
-                        }
+        if (isbn.isValid()) {
+            if (task.getServer().getSearchModes() != null) {
+                for (SearchMode m : task.getServer().getSearchModes()) {
+                    if (m instanceof IsbnSearchMode) {
+                        task.setMode(m);
+                        task.setQuery(isbn.getIsbn13());
+                        break;
                     }
                 }
             }
-        } catch (InvalidBarCodeException e) {
-            logger.error("Invalid barcode " + isbn + ". Online search will be using original information.", e);
-        }        
+        }
     }
 }

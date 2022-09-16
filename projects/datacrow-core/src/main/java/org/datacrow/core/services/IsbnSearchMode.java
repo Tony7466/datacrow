@@ -28,6 +28,7 @@ package org.datacrow.core.services;
 import org.apache.logging.log4j.Logger;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.utilities.isbn.ISBN;
+import org.datacrow.core.utilities.isbn.InvalidBarCodeException;
 
 /**
  * A search mode indicates a specific search such as a title, isbn, ean search.
@@ -50,12 +51,11 @@ public abstract class IsbnSearchMode extends SearchMode {
     public String getIsbn(String s) {
         String isbn = super.getSearchCommand(s);
         try {
-            if (ISBN.isISBN10(isbn))
-                isbn = ISBN.getISBN13(isbn);
-        } catch (Exception e) {
+            isbn = new ISBN(isbn).getIsbn13();
+        } catch (InvalidBarCodeException e) {
             logger.debug("Invalid ISBN " + isbn, e);
         }
-        return s;
+        return isbn;
     }
     
     @Override
