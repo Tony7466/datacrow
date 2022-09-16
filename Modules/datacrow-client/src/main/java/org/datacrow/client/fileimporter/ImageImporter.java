@@ -25,16 +25,12 @@
 
 package org.datacrow.client.fileimporter;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.drew.imaging.jpeg.JpegMetadataReader;
-import com.drew.imaging.jpeg.JpegProcessingException;
-import com.drew.metadata.Directory;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.exif.ExifIFD0Directory;
-import com.drew.metadata.iptc.IptcDirectory;
+import javax.imageio.ImageIO;
 
 import org.datacrow.core.fileimporter.FileImporter;
 import org.datacrow.core.modules.DcModules;
@@ -44,6 +40,13 @@ import org.datacrow.core.objects.Picture;
 import org.datacrow.core.objects.helpers.Image;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.CoreUtilities;
+
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.imaging.jpeg.JpegProcessingException;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifIFD0Directory;
+import com.drew.metadata.iptc.IptcDirectory;
 
 /**
  * Imports image files.
@@ -69,7 +72,7 @@ public class ImageImporter extends FileImporter {
      */
     @Override
     public String[] getSupportedFileTypes() {
-        return new String[] {"jpg", "gif", "jpeg", "png", "svg"};
+        return ImageIO.getReaderFileSuffixes();
     }
     
     @Override
@@ -92,19 +95,9 @@ public class ImageImporter extends FileImporter {
             image.setValue(Image._SYS_FILENAME, filename);
             
             Picture pic = (Picture) DcModules.get(DcModules._PICTURE).getItem();
-            DcImageIcon icon;
-           /* if (filename.toLowerCase().endsWith(".svg")) {
-                SVGtoBufferedImageConverter converter = new SVGtoBufferedImageConverter();
-                BufferedImage bi = converter.renderSVG(filename);
-                icon = new DcImageIcon(CoreUtilities.getScaledImage(new DcImageIcon(bi), 400, 400));
-                filename = File.createTempFile(String.valueOf(CoreUtilities.getUniqueID()), ".png").toString();
-                icon.setFilename(filename);
-                icon.save();
-                bi.flush();
-            } else { */
-                icon = new DcImageIcon(CoreUtilities.getScaledImage(new DcImageIcon(filename), 400, 400));
-                pic.setValue(Picture._G_EXTERNAL_FILENAME, filename);
-            //}
+            BufferedImage bi = ImageIO.read(new File(filename));
+            DcImageIcon icon = new DcImageIcon(CoreUtilities.getScaledImage(new DcImageIcon(bi), 400, 400));
+            pic.setValue(Picture._G_EXTERNAL_FILENAME, filename);
             
             int width = icon.getIconWidth();
             int height = icon.getIconHeight();

@@ -32,7 +32,6 @@ import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,11 +50,11 @@ import java.awt.image.Kernel;
 import java.io.File;
 import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JToolTip;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.menu.DcPictureFieldMenu;
@@ -307,18 +306,9 @@ public class DcPictureField extends JComponent implements IComponent, ActionList
             BrowserDialog dialog = new BrowserDialog("Select a new Image", new PictureFileFilter());
             File file = dialog.showOpenFileDialog(this, null);
             if (file != null && file.isFile()) {
-                
-            	// TODO: see if we want to keep SVG support.
-                //if (file.toString().toLowerCase().endsWith(".svg")) {
-                //    SVGtoBufferedImageConverter converter = new SVGtoBufferedImageConverter();
-                //    BufferedImage bi = converter.renderSVG(file.toString());
-                //    picture = new DcImageIcon(CoreUtilities.getBytes(new DcImageIcon(bi)));
-                //} else {
-                    String filename = file.toString().toLowerCase();
-                    picture = new DcImageIcon(CoreUtilities.getBytes(
-                            Toolkit.getDefaultToolkit().createImage(Utilities.readFile(file)), 
-                            filename.endsWith(".png") ? DcImageIcon._TYPE_PNG : DcImageIcon._TYPE_JPEG));
-                //}
+
+                BufferedImage bi = ImageIO.read(file);
+                picture = new DcImageIcon(CoreUtilities.getBytes(new DcImageIcon(bi)));
                 
                 initialize();
                 changed = true;

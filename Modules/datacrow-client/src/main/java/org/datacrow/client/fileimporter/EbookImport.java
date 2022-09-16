@@ -69,6 +69,8 @@ public class EbookImport extends FileImporter {
 
     @Override
     public String[] getSupportedFileTypes() {
+        // TODO: update with Tika settings
+        
         return new String[] {
                 "txt",  // N/A
                 "chm",  // CHM parser

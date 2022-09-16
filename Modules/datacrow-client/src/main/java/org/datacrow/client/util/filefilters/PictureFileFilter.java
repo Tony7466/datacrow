@@ -26,24 +26,26 @@
 package org.datacrow.client.util.filefilters;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileFilter;
 
-import org.datacrow.core.resources.DcResources;
 import org.datacrow.client.util.Utilities;
+import org.datacrow.core.resources.DcResources;
 
 public class PictureFileFilter extends FileFilter {
 
     @Override
     public boolean accept(File file) {
+        
+        List<String> list = Arrays.asList(ImageIO.getReaderFileSuffixes());  
+        String extension = Utilities.getExtension(file);
+        
         if (file.isDirectory()) {
             return true;
-        } else if (Utilities.getExtension(file).equals("jpg") ||
-                   Utilities.getExtension(file).equals("jpeg")||
-                   Utilities.getExtension(file).equals("png") ||
-                   Utilities.getExtension(file).equals("gif") ||
-                   Utilities.getExtension(file).equals("svg") ||
-                   Utilities.getExtension(file).equals("bmp")) {
+        } else if (list.contains(extension)) {
             return true;
         } else {
             return false;

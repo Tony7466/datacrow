@@ -41,6 +41,7 @@ public class DcImageIcon extends ImageIcon {
 
     private transient static Logger logger = DcLogManager.getLogger(DcImageIcon.class.getName());
 
+    // TODO: check the validity of this
     public static int _TYPE_JPEG = 0;
     public static int _TYPE_PNG = 1;
     
