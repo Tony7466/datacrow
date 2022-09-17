@@ -84,13 +84,17 @@ public class FilePropertiesMovie  {
 			}
 				
 			if (format == null) {
+			    
+			    FilePropertiesMP4 mp4 = new FilePropertiesMP4(ds, filename);
+			    
 			    // no supported format found yet, check for mp4
-		         if (FilePropertiesMP4.checkIfMp4File(ds)) {
-		             format = new FilePropertiesMP4();
-		             format.setFilename(filename);
-		             format.process(ds, filename);
+		         if (mp4.isValid()) {
+		             mp4.process();
 		             supported = true;
+		             format = mp4;
 		         }
+		         
+		         mp4.close();
 			}
 			
 		} catch (Exception e) {

@@ -18,7 +18,7 @@ Data Crow version 4.3                                              Released on 2
 - Java Help was upgraded to 2.05
 - jAudiotagger was upgraded to 2.2.5
 - Matroska File parser has been upgraded to 2.3.1
-- MP4 Parser has been upgraded to 1.9.41.2
+- MP4 Parser has been upgraded to 1.9.41.2 (patch 2)
 - Bouncycastle has been upgraded to 1.7
 - Jacksum has been upgraded to 3.1
 - JTattoo has been upgraded to 1.6.13

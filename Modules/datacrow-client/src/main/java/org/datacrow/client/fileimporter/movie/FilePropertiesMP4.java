@@ -36,45 +36,61 @@ import org.mp4parser.IsoFile;
 import org.mp4parser.boxes.iso14496.part1.objectdescriptors.AudioSpecificConfig;
 import org.mp4parser.boxes.iso14496.part1.objectdescriptors.DecoderConfigDescriptor;
 import org.mp4parser.boxes.iso14496.part1.objectdescriptors.ESDescriptor;
+import org.mp4parser.boxes.iso14496.part12.BitRateBox;
 import org.mp4parser.boxes.iso14496.part12.FileTypeBox;
 import org.mp4parser.boxes.iso14496.part12.HandlerBox;
+import org.mp4parser.boxes.iso14496.part12.MediaHeaderBox;
 import org.mp4parser.boxes.iso14496.part12.MovieBox;
 import org.mp4parser.boxes.iso14496.part12.MovieHeaderBox;
+import org.mp4parser.boxes.iso14496.part12.TrackBox;
+import org.mp4parser.boxes.iso14496.part12.TrackHeaderBox;
 import org.mp4parser.boxes.iso14496.part14.ESDescriptorBox;
 import org.mp4parser.boxes.sampleentry.AudioSampleEntry;
+import org.mp4parser.boxes.sampleentry.VisualSampleEntry;
 
-class FilePropertiesMP4 extends FileProperties {
+public class FilePropertiesMP4 extends FileProperties {
 
     private static Logger logger = DcLogManager.getLogger(FilePropertiesMP4.class.getName());
 
-    private IsoFile isoFile;
-
-    public static Boolean checkIfMp4File(RandomAccessFile dataStream) {
-    	
-    	IsoFile isoFile = null;
-    	
-    	try {
-            dataStream.seek(0);
-            isoFile = new IsoFile(dataStream.getChannel());
-
+    private IsoFile isoFile = null;
+    private RandomAccessFile ds;
+    private String filename;
+    
+    private boolean valid = false;
+    
+    public FilePropertiesMP4(RandomAccessFile ds, String filename) {
+        this.ds = ds;
+        this.filename = filename;
+        
+        try {
+            ds.seek(0);
+            isoFile = new IsoFile(ds.getChannel());
             MovieBox mbox = isoFile.getMovieBox();
-            // that seems to be an mp4 file container if the moviebox is not
-            // null
-            return mbox != null;
+            valid = mbox != null;
         } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-        	try { if (isoFile != null) isoFile.close(); } catch (IOException ignore) {}
+            logger.error("An error occured while trying to check if the source is a valid MP4 file", e);
         }
     }
+    
+    public boolean isValid() {
+    	return valid;
+    }
+    
+    public void close() {
+        try {
+            if (isoFile != null) isoFile.close();
+        } catch (Exception e) {
+            logger.error("An error occurred while closing the iso file", e);
+        }
+        ds = null;
+        isoFile = null;
+        filename = null;
+    }
 
-    @Override
-    protected void process(RandomAccessFile dataStream, String filename) throws Exception {
+    protected void process() throws Exception {
+        ds.seek(0);
 
-        dataStream.seek(0);
-
-        FileChannel fc = dataStream.getChannel();
+        FileChannel fc = ds.getChannel();
         this.isoFile = new org.mp4parser.IsoFile(fc);
 
         FileTypeBox ftypBox = isoFile.getBoxes(FileTypeBox.class).get(0);
@@ -100,21 +116,20 @@ class FilePropertiesMP4 extends FileProperties {
             logger.debug("MovieHeaderBox not found in file " + filename);
         }
 
-        this.processHandlerBoxes(isoFile);
+        this.processHandlerBoxes();
     }
 
-    private void processHandlerBoxes(IsoFile isoFile) {
+    private void processHandlerBoxes() {
 
         try {
-            List<HandlerBox> handlerBoxes = isoFile.getBoxes(HandlerBox.class,
-                    true);
+            List<HandlerBox> handlerBoxes = isoFile.getBoxes(HandlerBox.class, true);
 
             for (HandlerBox handlerBox : handlerBoxes) {
                 if (handlerBox.getHandlerType().equals("vide")) {
-                    this.parseVideoDetails(handlerBox);
+                    this.parseVideoDetails();
 
                 } else if (handlerBox.getHandlerType().equals("soun")) {
-                    this.parseAudioDetails(this.isoFile);
+                    this.parseAudioDetails();
                 } else {
                     logger.debug("Unhandled handler box ("
                             + handlerBox.getHandlerType() + ") found in file"
@@ -126,88 +141,89 @@ class FilePropertiesMP4 extends FileProperties {
         }
     }
 
-    private void parseVideoDetails(HandlerBox videoHandlerBox) {
+    private void parseVideoDetails() {
         try {
-        	
-        	/*
-        	 * 
-        	 * TODO: reimplement - GetParent no longer exists
+            
+            MovieBox mbox = isoFile.getMovieBox(); 
         	
             logger.debug("Video track found!");
+            
+            for (TrackBox mediaBox : mbox.getBoxes(TrackBox.class, true)) {
+                TrackHeaderBox trackHeaderBox = mediaBox.getBoxes(TrackHeaderBox.class, true).get(0);
 
-            // get track header box
-            MediaBox mediaBox = (MediaBox) videoHandlerBox.Get();
-            TrackHeaderBox trackHeaderBox = mediaBox.getParent().getBoxes(TrackHeaderBox.class).get(0);
+                // get width and height
+                // we need integers in the further process
+                int height = (int) trackHeaderBox.getHeight();
+                int width = (int) trackHeaderBox.getWidth();
+                this.setVideoResolution(width + "x" + height);
 
-            // get width and height
-            // we need integers in the further process
-            int height = (int) trackHeaderBox.getHeight();
-            int width = (int) trackHeaderBox.getWidth();
-            this.setVideoResolution(width + "x" + height);
+                MediaHeaderBox mdhd = mediaBox.getBoxes(MediaHeaderBox.class, true).get(0);
 
-            MediaHeaderBox mdhd = mediaBox.getBoxes(MediaHeaderBox.class)
-                    .get(0);
+                if (mdhd != null) {
+                    this.setVideoRate(mdhd.getTimescale());
+                }
 
-            if (mdhd != null) {
-                this.setVideoRate(mdhd.getTimescale());
+                List<VisualSampleEntry> vseList = isoFile.getBoxes(
+                        VisualSampleEntry.class, true);
+
+                if (!vseList.isEmpty()) {
+                    VisualSampleEntry vse = vseList.get(0);
+
+                    String videoCodec;
+
+                    // mp4v"" || ""s263"" || ""avc1"" || ""avc3"" || ""drmi""
+                    switch (vse.getType()) {
+                    case "mp4v":
+                        videoCodec = "MPEG-4 Video (mp4v)";
+                        break;
+                    case "s263":
+                        videoCodec = "3GPP H.263v1 (s263)";
+                        break;
+                    case "avc1":
+                        videoCodec = "AVC (avc1)";
+                        break;
+                    case "avc3":
+                        videoCodec = "AVC (avc3)";
+                        break;
+                    case "hvc1":
+                        videoCodec = "hvc1";
+                        break;
+                    case "hev1":
+                        videoCodec = "hev1";
+                        break;
+                    case "encv":
+                        videoCodec = "Encrypted (encv)";
+                        break;
+                    case "drmi":
+                        videoCodec = "drmi";
+                        break;
+                    default:
+                        videoCodec = "Unknown (" + vse.getType() + ")";
+                    }
+
+                    this.setVideoCodec(videoCodec);
+
+                    // check if a bitrate box is present
+                    List<BitRateBox> btrtBoxes = vse .getBoxes(BitRateBox.class);
+
+                    if (!btrtBoxes.isEmpty()) {
+                        BitRateBox btrt = btrtBoxes.get(0);
+                        // convert the bitrate from bps to Kbps
+                        int avgBitRate = (int) Math.round(btrt.getAvgBitrate() / 1000.0);
+                        this.setVideoBitRate(avgBitRate);
+                    }
+                }
+                
+                break;
+            
             }
-
-            List<VisualSampleEntry> vseList = isoFile.getBoxes(
-                    VisualSampleEntry.class, true);
-
-            if (!vseList.isEmpty()) {
-                VisualSampleEntry vse = vseList.get(0);
-
-                String videoCodec;
-
-                // mp4v"" || ""s263"" || ""avc1"" || ""avc3"" || ""drmi""
-                switch (vse.getType()) {
-                case "mp4v":
-                    videoCodec = "MPEG-4 Video (mp4v)";
-                    break;
-                case "s263":
-                    videoCodec = "3GPP H.263v1 (s263)";
-                    break;
-                case "avc1":
-                    videoCodec = "AVC (avc1)";
-                    break;
-                case "avc3":
-                    videoCodec = "AVC (avc3)";
-                    break;
-                case "hvc1":
-                    videoCodec = "hvc1";
-                    break;
-                case "hev1":
-                    videoCodec = "hev1";
-                    break;
-                case "encv":
-                    videoCodec = "Encrypted (encv)";
-                    break;
-                case "drmi":
-                    videoCodec = "drmi";
-                    break;
-                default:
-                    videoCodec = "Unknown (" + vse.getType() + ")";
-                }
-
-                this.setVideoCodec(videoCodec);
-
-                // check if a bitrate box is present
-                List<BitRateBox> btrtBoxes = vse .getBoxes(BitRateBox.class);
-
-                if (!btrtBoxes.isEmpty()) {
-                    BitRateBox btrt = btrtBoxes.get(0);
-                    // convert the bitrate from bps to Kbps
-                    int avgBitRate = (int) Math.round(btrt.getAvgBitrate() / 1000.0);
-                    this.setVideoBitRate(avgBitRate);
-                }
-            } */
+            
         } catch (Exception e) {
             logger.error("Could not parse video details of file " + this.getFilename(), e);
         }
     }
 
-    private void parseAudioDetails(IsoFile isoFile) {
+    private void parseAudioDetails() {
         try {
             List<AudioSampleEntry> aseList = isoFile.getBoxes(AudioSampleEntry.class, true);
 

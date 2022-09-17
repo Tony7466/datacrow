@@ -69,12 +69,14 @@ public class EbookImport extends FileImporter {
 
     @Override
     public String[] getSupportedFileTypes() {
-        // TODO: update with Tika settings
-        
         return new String[] {
+                "html",
+                "htm",
                 "txt",  // N/A
                 "chm",  // CHM parser
                 "doc",  // Office Parse
+                "docx", // Office Parser
+                "odt",  // Open Office Parser
                 "pdf",  // PDF Box
                 "epub", // EPUB Parser
                 "prc",  
@@ -84,9 +86,8 @@ public class EbookImport extends FileImporter {
                 "html",  // HTML Parser 
                 "htm",   // HTML Parser
                 "prc", 
-                "lit", 
-                "docx",  // Office Parser
-                "odt"    // Open Office Parser
+                "lit",
+                "fb2"
         }; 
     }
     
