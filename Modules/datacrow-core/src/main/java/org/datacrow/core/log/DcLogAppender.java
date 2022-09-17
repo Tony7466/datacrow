@@ -32,7 +32,7 @@ public class DcLogAppender extends AbstractAppender {
             @PluginElement("Layout") Layout<? extends Serializable> layout,
             @PluginElement("Filter") final Filter filter, @PluginAttribute("otherAttribute") String otherAttribute) {
         if (name == null) {
-            LOGGER.error("There is no name provided for MyCustomAppender");
+            LOGGER.error("There is no name provided for the appender");
             return null;
         }
         if (layout == null) {

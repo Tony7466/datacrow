@@ -61,8 +61,8 @@ public final class SecuredUser implements Serializable {
     
     /**
      * Creates a new instance
-     * @param user The user
-     * @param password An his / her password
+     * @param user the user
+     * @param password his / her password
      */
     public SecuredUser(User user, String password) {
         this.user = user;

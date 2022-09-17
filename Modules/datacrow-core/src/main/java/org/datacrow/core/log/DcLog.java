@@ -12,6 +12,8 @@ public class DcLog {
     
     private Collection<ILogListener> listeners;
     
+    private ArrayList<String> backlog = new ArrayList<String>();
+    
     public static DcLog getInstance() {
         return me;
     }
@@ -25,7 +27,21 @@ public class DcLog {
     }
     
     public void notify(LogEvent event) {
-        for (ILogListener listener : listeners)
-            listener.add(CoreUtilities.getTimestamp() + " - " + event.getLevel().name() + " - " + event.getMessage().getFormattedMessage().trim());
+        String msg = 
+                CoreUtilities.getTimestamp() + 
+                " - " + event.getLevel().name() + 
+                " - " + event.getMessage().getFormattedMessage().trim();
+        
+        if (listeners.size() == 0) {
+            backlog.add(msg);
+        }
+        
+        for (ILogListener listener : listeners) {
+            for (String backlogMsg : backlog) 
+                listener.add(backlogMsg);
+            
+            listener.add(msg);
+            backlog.clear();
+        }
     }
 }
