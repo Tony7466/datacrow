@@ -146,6 +146,7 @@
             <artifactId>imageio-clippath</artifactId>
         </dependency>
 
+        <!-- Required for SVG parsing (used by twelvemoneys.imagio) -->
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
@@ -157,6 +158,12 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-bridge</artifactId>
+        </dependency>
+
+        <!-- Gson serializer and deserializer -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
     </dependencies>
 

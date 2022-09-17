@@ -90,6 +90,8 @@ public class DiscIDUtil {
     private String getScript() {
         String exec;
      
+        // TODO: make sure the discid tool is still there..
+        
         DcConfig dcc = DcConfig.getInstance(); 
         if (dcc.getPlatform().isMac()) {
             exec = dcc.getPluginsDir() + "discid/mac/discid";
