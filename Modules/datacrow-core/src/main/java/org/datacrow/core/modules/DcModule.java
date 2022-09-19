@@ -38,7 +38,6 @@ import java.util.Set;
 import javax.swing.KeyStroke;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.console.IMasterView;
@@ -133,8 +132,6 @@ public class DcModule implements Comparable<DcModule>, Serializable {
     
     private org.datacrow.core.utilities.settings.Settings settings;
     
-    private Class<? extends DcObject> objectClass;
-    
     private int childIdx = -1;
     private int parentIdx = -1;
     
@@ -166,7 +163,8 @@ public class DcModule implements Comparable<DcModule>, Serializable {
     private boolean hasImages = false;
     private boolean hasReferences = false;
     
-    private XmlModule xmlModule;
+    private transient XmlModule xmlModule;
+    private String objectClassName;
     
     /**
      * Creates a new instance.
@@ -290,8 +288,9 @@ public class DcModule implements Comparable<DcModule>, Serializable {
         hasInsertView = module.hasInsertView();
         hasSearchView = module.hasSearchView();
         keyStroke = module.getKeyStroke();
-        objectClass = module.getObjectClass();
         hasDependingModules = module.hasDependingModules();
+        
+        objectClassName = module.getObjectClass().getCanonicalName();
         
         icon16filename = module.getIcon16Filename();
         icon32filename = module.getIcon32Filename();
@@ -587,13 +586,14 @@ public class DcModule implements Comparable<DcModule>, Serializable {
      */
     protected DcObject createItem() {
         try {
+            Class<? extends DcObject> clazz = Class.forName(objectClassName).asSubclass(DcObject.class);
             try {
-                return (DcObject) objectClass.getConstructors()[0].newInstance(new Object[] {});    
+                return (DcObject) clazz.getConstructors()[0].newInstance(new Object[] {});    
             } catch (Exception exp) {
-                return (DcObject) objectClass.getConstructors()[0].newInstance(new Object[] {Integer.valueOf(getIndex())});
+                return (DcObject) clazz.getConstructors()[0].newInstance(new Object[] {Integer.valueOf(getIndex())});
             }
         } catch (Exception e) {
-            logger.error("Could not instantiate " + objectClass, e);
+            logger.error("Could not instantiate " + objectClassName, e);
         }
 
         return null;
@@ -719,20 +719,6 @@ public class DcModule implements Comparable<DcModule>, Serializable {
         fields.put(field.getIndex(), field);
     }
     
-//    /**
-//     * Returns all views.
-//     */
-//    public IMasterView[] getViews() {
-//        if (getSearchView() != null && getInsertView() != null)
-//            return new IMasterView[] {getSearchView(), getInsertView()};
-//        else if (getSearchView() != null)
-//            return new IMasterView[] {getSearchView()};
-//        else if (getInsertView() != null)
-//            return new IMasterView[] {getInsertView()};
-//        else
-//        	return new IMasterView[0];
-//    }
-
     /**
      * Retrieves the field definition for the given index.
      * @param index The field index.

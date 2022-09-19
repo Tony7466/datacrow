@@ -33,6 +33,8 @@ public class ServerErrorResponse extends ServerResponse {
 	private String msg;
 	
 	public ServerErrorResponse(Throwable t, String msg) {
+	    super(_RESPONSE_ERROR);
+	    
 		this.t = t;
 		this.msg = msg;
 	}

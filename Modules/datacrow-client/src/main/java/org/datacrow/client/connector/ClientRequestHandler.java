@@ -36,6 +36,7 @@ import org.datacrow.core.server.Connector;
 import org.datacrow.core.server.DcServerConnection;
 import org.datacrow.core.server.requests.ClientRequest;
 import org.datacrow.core.server.response.ServerResponse;
+import org.datacrow.core.server.serialization.SerializationHelper;
 
 public class ClientRequestHandler {
 	
@@ -70,11 +71,11 @@ public class ClientRequestHandler {
             os = connection.getOutputStream();
             is = connection.getInputStream();
             
-            os.writeObject(cr);
+            String json = SerializationHelper.getInstance().serialize(cr);
+            os.writeObject(json);
             os.flush();
-           // os.close();
             
-            response = (ServerResponse) is.readObject();
+            response = SerializationHelper.getInstance().deserializeServerResponse(is);
             
             logger.debug("Client has received: " + response);
         } catch (Exception e) {

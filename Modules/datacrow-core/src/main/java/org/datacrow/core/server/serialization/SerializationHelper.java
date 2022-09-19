@@ -1,16 +1,62 @@
 package org.datacrow.core.server.serialization;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import javax.swing.KeyStroke;
+
+import org.apache.logging.log4j.Logger;
+import org.datacrow.core.enhancers.IValueEnhancer;
+import org.datacrow.core.log.DcLogManager;
+import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.objects.DcObject;
-import org.datacrow.core.server.serialization.serializers.DcObjectSerializer;
+import org.datacrow.core.server.requests.ClientRequest;
+import org.datacrow.core.server.requests.ClientRequestApplicationSettings;
+import org.datacrow.core.server.requests.ClientRequestExecuteSQL;
+import org.datacrow.core.server.requests.ClientRequestItem;
+import org.datacrow.core.server.requests.ClientRequestItemAction;
+import org.datacrow.core.server.requests.ClientRequestItemKeys;
+import org.datacrow.core.server.requests.ClientRequestItems;
+import org.datacrow.core.server.requests.ClientRequestLogin;
+import org.datacrow.core.server.requests.ClientRequestModules;
+import org.datacrow.core.server.requests.ClientRequestReferencingItems;
+import org.datacrow.core.server.requests.ClientRequestSimpleValues;
+import org.datacrow.core.server.requests.ClientRequestValueEnhancers;
+import org.datacrow.core.server.response.DefaultServerResponse;
+import org.datacrow.core.server.response.ServerActionResponse;
+import org.datacrow.core.server.response.ServerApplicationSettingsRequestResponse;
+import org.datacrow.core.server.response.ServerErrorResponse;
+import org.datacrow.core.server.response.ServerItemKeysRequestResponse;
+import org.datacrow.core.server.response.ServerItemRequestResponse;
+import org.datacrow.core.server.response.ServerItemsRequestResponse;
+import org.datacrow.core.server.response.ServerLoginResponse;
+import org.datacrow.core.server.response.ServerModulesRequestResponse;
+import org.datacrow.core.server.response.ServerResponse;
+import org.datacrow.core.server.response.ServerSQLResponse;
+import org.datacrow.core.server.response.ServerSimpleValuesResponse;
+import org.datacrow.core.server.response.ServerValueEnhancersRequestResponse;
+import org.datacrow.core.server.serialization.serializers.AwtColorAdapter;
+import org.datacrow.core.server.serialization.serializers.AwtFontAdapter;
+import org.datacrow.core.server.serialization.serializers.DcObjectAdapter;
+import org.datacrow.core.server.serialization.serializers.FileAdapter;
+import org.datacrow.core.server.serialization.serializers.InterfaceAdapter;
+import org.datacrow.core.server.serialization.serializers.KeyStrokeAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class SerializationHelper {
     
-    private static final SerializationHelper instance;
+    private static Logger logger = DcLogManager.getLogger(SerializationHelper.class.getName());
+
+    private static SerializationHelper instance;
     
-    private Gson builder;
+    // GSON objects are thread-safe
+    private final Gson gson;
+    private final Gson gsonSimple;
     
     static {
         instance = new SerializationHelper();
@@ -20,25 +66,116 @@ public class SerializationHelper {
         return instance;
     }
     
-    public Gson getBuilder() {
-        return builder;
+    public Gson getSimpleGson() {
+        return gsonSimple;
     }
     
+    public Gson getGson() {
+        return gson;
+    }    
+    
     private SerializationHelper() {
-        builder = new GsonBuilder()
+        
+        gson = new GsonBuilder()
                 .disableHtmlEscaping()
-                .registerTypeAdapter(DcObject.class, new DcObjectSerializer())
-                //.registerTypeAdapter(DcValue.class, new DcValueSerializer())
+                .registerTypeAdapter(DcObject.class, new DcObjectAdapter())
+                .registerTypeAdapter(File.class, new FileAdapter())
+                .registerTypeAdapter(Color.class, new AwtColorAdapter())
+                .registerTypeAdapter(Font.class, new AwtFontAdapter())
+                .registerTypeAdapter(KeyStroke.class, new KeyStrokeAdapter())
+                .registerTypeAdapter(IValueEnhancer.class, new InterfaceAdapter()) // generic type mapper
+                .registerTypeAdapter(DcModule.class, new InterfaceAdapter())       // generic type mapper
+                .create();
+
+        gsonSimple = new GsonBuilder()
+                .disableHtmlEscaping()
+                .registerTypeAdapter(DcObject.class, new DcObjectAdapter())
+                .registerTypeAdapter(File.class, new FileAdapter())
+                .registerTypeAdapter(Color.class, new AwtColorAdapter())
+                .registerTypeAdapter(Font.class, new AwtFontAdapter())
+                .registerTypeAdapter(KeyStroke.class, new KeyStrokeAdapter())
                 .create();
     }
     
-    public void serialize(Object o) {
-//        try {
-//            String s = builder.toJson(o);
-//            s=s;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    public String serialize(Object o) {
+        return getGson().toJson(o);
     }
-
+    
+    private static String getJson(ObjectInputStream is) throws IOException, ClassNotFoundException {
+        String json = (String) is.readObject();
+        return json;
+    }
+    
+    public ServerResponse deserializeServerResponse(ObjectInputStream is) throws IOException, ClassNotFoundException {
+        String json = getJson(is);
+        Gson gson = getGson();
+        
+        int type = ServerResponse._RESPONSE_DEFAULT;
+        type = gson.fromJson(json, ServerResponse.class).getType();
+        ServerResponse sr = getGson().fromJson(json, ServerResponse.class);
+        
+        if (type == ServerResponse._RESPONSE_ACTION)
+            sr = gson.fromJson(json, ServerActionResponse.class);
+        else if (type == ServerResponse._RESPONSE_APPLICATION_SETTINGS)
+            sr = gson.fromJson(json, ServerApplicationSettingsRequestResponse.class);
+        else if (type == ServerResponse._RESPONSE_DEFAULT)
+            sr = gson.fromJson(json, DefaultServerResponse.class);
+        else if (type == ServerResponse._RESPONSE_ERROR)
+            sr = gson.fromJson(json, ServerErrorResponse.class);
+        else if (type == ServerResponse._RESPONSE_ITEM_KEYS)
+            sr = gson.fromJson(json, ServerItemKeysRequestResponse.class);
+        else if (type == ServerResponse._RESPONSE_ITEM_REQUEST)
+            sr = gson.fromJson(json, ServerItemRequestResponse.class);
+        else if (type == ServerResponse._RESPONSE_ITEMS_REQUEST)
+            sr = gson.fromJson(json, ServerItemsRequestResponse.class);
+        else if (type == ServerResponse._RESPONSE_LOGIN)
+            sr = gson.fromJson(json, ServerLoginResponse.class);
+        else if (type == ServerResponse._RESPONSE_MODULES)
+            sr = gson.fromJson(json, ServerModulesRequestResponse.class);
+        else if (type == ServerResponse._RESPONSE_SIMPLE_VALUES)
+            sr = gson.fromJson(json, ServerSimpleValuesResponse.class);
+        else if (type == ServerResponse._RESPONSE_SQL)
+            sr = gson.fromJson(json, ServerSQLResponse.class);
+        else if (type == ServerResponse._RESPONSE_VALUE_ENHANCERS)
+            sr = gson.fromJson(json, ServerValueEnhancersRequestResponse.class);
+        else
+            logger.error("No server response implementation found for type [" + type + "]");
+        
+        return sr;
+    }
+    
+    public ClientRequest deserializeClientRequest(ObjectInputStream is) throws IOException, ClassNotFoundException {
+        String json = getJson(is);
+        Gson gson = getGson();
+        
+        ClientRequest cr = gson.fromJson(json, ClientRequest.class);
+        int type = cr.getType();
+        
+        if (type == ClientRequest._REQUEST_APPLICATION_SETTINGS)
+            cr = gson.fromJson(json, ClientRequestApplicationSettings.class);
+        else if (type == ClientRequest._REQUEST_EXECUTE_SQL)
+            cr = gson.fromJson(json, ClientRequestExecuteSQL.class);
+        else if (type == ClientRequest._REQUEST_ITEM)
+            cr = gson.fromJson(json, ClientRequestItem.class);  
+        else if (type == ClientRequest._REQUEST_ITEM_ACTION)
+            cr = gson.fromJson(json, ClientRequestItemAction.class);  
+        else if (type == ClientRequest._REQUEST_ITEM_KEYS)
+            cr = gson.fromJson(json, ClientRequestItemKeys.class);
+        else if (type == ClientRequest._REQUEST_ITEMS)
+            cr = gson.fromJson(json, ClientRequestItems.class);  
+        else if (type == ClientRequest._REQUEST_LOGIN)
+            cr = gson.fromJson(json, ClientRequestLogin.class); 
+        else if (type == ClientRequest._REQUEST_MODULES)
+            cr = gson.fromJson(json, ClientRequestModules.class);
+        else if (type == ClientRequest._REQUEST_REFERENCING_ITEMS)
+            cr = gson.fromJson(json, ClientRequestReferencingItems.class);         
+        else if (type == ClientRequest._REQUEST_SIMPLE_VALUES)
+            cr = gson.fromJson(json, ClientRequestSimpleValues.class); 
+        else if (type == ClientRequest._REQUEST_VALUE_ENHANCERS_SETTINGS)
+            cr = gson.fromJson(json, ClientRequestValueEnhancers.class); 
+        else
+            logger.error("No client request implementation found for type [" + type + "]");
+            
+        return cr;
+    }
 }

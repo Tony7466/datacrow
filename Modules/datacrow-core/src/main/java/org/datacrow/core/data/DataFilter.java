@@ -70,7 +70,6 @@ public class DataFilter implements Serializable {
     
     private List<DcField> order = new ArrayList<DcField>();
     private List<DataFilterEntry> entries = new ArrayList<DataFilterEntry>();
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
    
     /**
      * Creates a filter based on the supplied item.
@@ -240,6 +239,8 @@ public class DataFilter implements Serializable {
      * @throws Exception
      */
     private void parse(String xml) throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        
         module = Integer.parseInt(StringUtils.getValueBetween("<MODULE>", "</MODULE>", xml));
         name = StringUtils.getValueBetween("<NAME>", "</NAME>", xml);
         
@@ -337,6 +338,8 @@ public class DataFilter implements Serializable {
      * Creates a xml definition for this filter.
      */
     public String toStorageString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        
         String storage = "<FILTER>\n";
         
         storage += "<NAME>" + getName() + "</NAME>\n";

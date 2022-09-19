@@ -34,6 +34,8 @@ public class ServerLoginResponse extends ServerResponse {
 	private SecuredUser su;
 	
 	public ServerLoginResponse(SecuredUser su) {
+	    super(_RESPONSE_LOGIN);
+	    
 		this.su = su;
 	}
 	

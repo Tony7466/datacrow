@@ -36,6 +36,8 @@ public class ServerSimpleValuesResponse extends ServerResponse {
     private List<DcSimpleValue> values;
 	
 	public ServerSimpleValuesResponse(List<DcSimpleValue> values) {
+	    super(_RESPONSE_SIMPLE_VALUES);
+	    
 		this.values = values;
 	}
 	

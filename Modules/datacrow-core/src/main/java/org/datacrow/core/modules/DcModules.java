@@ -133,11 +133,6 @@ public class DcModules implements Serializable {
     public static void load() throws ModuleUpgradeException, InvalidModuleXmlException, ModuleJarException {
     	if (DcConfig.getInstance().getOperatingMode() == DcConfig._OPERATING_MODE_CLIENT) {
 
-            // register these (they should be there anyway)
-    	    register(new PermissionModule());
-            register(new UserModule());
-            
-    	    
             // retrieve modules from server
             Connector conn = DcConfig.getInstance().getConnector();
             ServerModulesRequestResponse moduleResponse = conn.getModules();

@@ -38,7 +38,7 @@ import org.datacrow.core.settings.Setting;
 import org.datacrow.core.settings.SettingsFile;
 import org.datacrow.core.utilities.settings.definitions.IDefinitions;
 
-public abstract class Settings implements Serializable {
+public class Settings implements Serializable {
     
 	private static final long serialVersionUID = -33466202843742845L;
 
@@ -59,7 +59,7 @@ public abstract class Settings implements Serializable {
         }
     }
     
-    protected abstract void createGroups();
+    protected void createGroups() {}
     
     public boolean contains(String key) {
         return settings.getSetting(key) != null;

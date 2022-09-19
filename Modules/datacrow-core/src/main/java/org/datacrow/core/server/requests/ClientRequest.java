@@ -49,8 +49,8 @@ public class ClientRequest implements Serializable {
 	private int type;
 	
 	private String clientKey;
-	private String username;
-	private String password;
+	protected String username;
+	protected String password;
 	
 	public ClientRequest(int type, SecuredUser su) {
 		this.type = type;

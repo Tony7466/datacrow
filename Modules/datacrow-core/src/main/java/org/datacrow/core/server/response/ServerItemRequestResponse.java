@@ -34,6 +34,8 @@ public class ServerItemRequestResponse extends ServerResponse {
 	private DcObject dco;
 	
 	public ServerItemRequestResponse(DcObject dco) {
+	    super(_RESPONSE_ITEM_REQUEST);
+	    
 		this.dco = dco;
 	}
 	

@@ -40,6 +40,8 @@ public class ServerValueEnhancersRequestResponse extends ServerResponse {
     private Map<DcField, Collection<IValueEnhancer>> enhancers;
 
 	public ServerValueEnhancersRequestResponse() {
+	    super(_RESPONSE_VALUE_ENHANCERS);
+	    
 	    enhancers = new HashMap<DcField, Collection<IValueEnhancer>>();
 	    enhancers = ValueEnhancers.getEnhancers();
 	}

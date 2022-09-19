@@ -34,6 +34,8 @@ public class ServerSQLResponse extends ServerResponse {
 	private DcResultSet result;
 	
 	public ServerSQLResponse(DcResultSet result) {
+	    super(_RESPONSE_SQL);
+	    
 		this.result = result;
 	}
 	

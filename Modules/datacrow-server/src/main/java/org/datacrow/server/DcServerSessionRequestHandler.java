@@ -66,6 +66,7 @@ import org.datacrow.core.server.response.ServerResponse;
 import org.datacrow.core.server.response.ServerSQLResponse;
 import org.datacrow.core.server.response.ServerSimpleValuesResponse;
 import org.datacrow.core.server.response.ServerValueEnhancersRequestResponse;
+import org.datacrow.core.server.serialization.SerializationHelper;
 import org.datacrow.server.security.SecurityCenter;
 
 public class DcServerSessionRequestHandler extends Thread {
@@ -111,8 +112,11 @@ public class DcServerSessionRequestHandler extends Thread {
             
             while (!socket.isClosed()) {
                 try {
-                    cr = (ClientRequest) is.readObject();
-                    if (!(cr instanceof ClientRequestLogin) && !(cr instanceof ClientRequestUser)) {
+                    
+                    cr = SerializationHelper.getInstance().deserializeClientRequest(is);
+                    
+                    if (    !(cr instanceof ClientRequestLogin) && 
+                            !(cr instanceof ClientRequestUser)) {
                         conn.setUser(session.getUser(cr));
                     }
                     
@@ -187,7 +191,8 @@ public class DcServerSessionRequestHandler extends Thread {
 	        }
 	        
 	        if (sr != null) {
-	            os.writeObject(sr);
+	            String json = SerializationHelper.getInstance().serialize(sr);
+	            os.writeObject(json);
 	            os.flush();
 		        
 		        logger.debug("Send object to client");

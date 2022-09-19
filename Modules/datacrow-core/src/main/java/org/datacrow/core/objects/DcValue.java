@@ -257,6 +257,26 @@ public class DcValue implements Serializable {
         }
     }
     
+    public Object getJsonValue(DcField field) {
+        Object result = value;
+        
+        if (field.getValueType() == DcRepository.ValueTypes._ICON) {
+            if (isChanged() && value instanceof DcImageIcon)
+                result = ((DcImageIcon) value).getCurrentBytes();
+        }
+        
+        if (field.getValueType() == DcRepository.ValueTypes._DATE || 
+            field.getValueType() == DcRepository.ValueTypes._DATETIME) {
+            
+            if (value instanceof Date) {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                result = formatter.format((Date) value);
+            }
+        }
+        
+        return result;
+    }
+    
     private void setValueNative(Object value, DcField field) {
         this.value = value;
         this.changed = true;

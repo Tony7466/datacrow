@@ -56,7 +56,7 @@ public class Templates {
                 	for (DcObject dco : conn.getItems(templateModule.getIndex(), null))
                 		templates.add((DcTemplate) dco);
                 } catch (Exception e) {
-                    logger.error("Could not refresh the taemplate list for " + module, e);
+                    logger.error("Could not refresh the template list for " + module, e);
                 }
             }
         }

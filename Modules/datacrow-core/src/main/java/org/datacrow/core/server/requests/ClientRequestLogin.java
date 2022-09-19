@@ -28,9 +28,6 @@ package org.datacrow.core.server.requests;
 public class ClientRequestLogin extends ClientRequest {
 
 	private static final long serialVersionUID = -3642120478572616447L;
-
-	private final String username;
-	private final String password;
 	
 	public ClientRequestLogin(String username, String password) {
 		super(ClientRequest._REQUEST_LOGIN, null);

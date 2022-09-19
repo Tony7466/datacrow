@@ -32,6 +32,8 @@ public class ServerActionResponse extends ServerResponse {
 	private boolean success;
 	
 	public ServerActionResponse(boolean success) {
+	    super(_RESPONSE_ACTION);
+	    
 		this.success = success;
 	}
 	

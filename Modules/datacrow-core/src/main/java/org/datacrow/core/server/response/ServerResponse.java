@@ -29,4 +29,26 @@ import java.io.Serializable;
 
 public class ServerResponse implements Serializable {
 
+    public static final int _RESPONSE_DEFAULT = 0;
+    public static final int _RESPONSE_ACTION = 1;
+    public static final int _RESPONSE_APPLICATION_SETTINGS = 2;
+    public static final int _RESPONSE_ERROR = 3;
+    public static final int _RESPONSE_ITEM_KEYS = 4;
+    public static final int _RESPONSE_ITEM_REQUEST = 5;
+    public static final int _RESPONSE_ITEMS_REQUEST = 6;
+    public static final int _RESPONSE_LOGIN = 7;
+    public static final int _RESPONSE_MODULES = 8;
+    public static final int _RESPONSE_SIMPLE_VALUES = 9;
+    public static final int _RESPONSE_SQL = 10;
+    public static final int _RESPONSE_VALUE_ENHANCERS = 11;
+    
+    private int type;
+    
+    public ServerResponse(int type) {
+        this.type = type;
+    }
+    
+    public int getType() {
+        return type;
+    }
 }

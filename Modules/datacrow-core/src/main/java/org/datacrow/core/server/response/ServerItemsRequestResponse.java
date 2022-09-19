@@ -36,6 +36,8 @@ public class ServerItemsRequestResponse extends ServerResponse {
 	private List<DcObject> items;
 	
 	public ServerItemsRequestResponse(List<DcObject> items) {
+	    super(_RESPONSE_ITEMS_REQUEST);
+	    
 		this.items = items;
 	}
 	

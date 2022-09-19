@@ -34,6 +34,8 @@ public class ServerItemKeysRequestResponse extends ServerResponse {
 	private Map<String, Integer> items;
 	
 	public ServerItemKeysRequestResponse(Map<String, Integer> items) {
+	    super(_RESPONSE_ITEM_KEYS);
+	    
 		this.items = items;
 	}
 	

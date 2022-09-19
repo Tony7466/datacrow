@@ -51,6 +51,8 @@ import org.datacrow.core.filerenamer.FilePatterns;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
+import org.datacrow.core.modules.security.PermissionModule;
+import org.datacrow.core.modules.security.UserModule;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcMapping;
 import org.datacrow.core.objects.DcObject;
@@ -130,10 +132,14 @@ public class ClientToServerConnector extends Connector {
 	@Override
 	public void initialize() {
 	    try {
+            // the following are required for the login operation to be able to succeed:
+            DcModules.register(new PermissionModule());
+            DcModules.register(new UserModule());
+	        
             login(getUsername(), getPassword());
             
             DcModules.load();
-                
+            
             DataFilters.load();
             FilePatterns.load();
             ValueEnhancers.initialize();

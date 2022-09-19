@@ -40,6 +40,8 @@ public class ServerModulesRequestResponse extends ServerResponse {
 	private List<DcPropertyModule> propertyBaseModules;
 
 	public ServerModulesRequestResponse() {
+	    super(_RESPONSE_MODULES);
+	    
 		propertyBaseModules = new ArrayList<DcPropertyModule>(DcModules.getPropertyBaseModules());
 		modules = new ArrayList<DcModule>(DcModules.getAllModules());
 	}

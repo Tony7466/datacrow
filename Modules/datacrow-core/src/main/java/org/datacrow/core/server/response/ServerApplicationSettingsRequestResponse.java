@@ -35,6 +35,8 @@ public class ServerApplicationSettingsRequestResponse extends ServerResponse {
     private Settings settings;
 
 	public ServerApplicationSettingsRequestResponse() {
+	    super(_RESPONSE_APPLICATION_SETTINGS);
+	    
 		this.settings = DcSettings.getSettings();
 	}
 
