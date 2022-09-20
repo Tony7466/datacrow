@@ -23,7 +23,7 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings;
+package org.datacrow.core.settings;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -33,18 +33,15 @@ import java.io.File;
 import javax.swing.JFrame;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.console.UIComponents;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcLookAndFeel;
-import org.datacrow.core.settings.Setting;
-import org.datacrow.core.settings.SettingsGroup;
 import org.datacrow.core.synchronizers.Synchronizer;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.definitions.ProgramDefinitions;
+import org.datacrow.core.utilities.definitions.ProgramDefinitions;
 
 /**
  * Holder for application settings.
@@ -54,7 +51,7 @@ import org.datacrow.core.utilities.settings.definitions.ProgramDefinitions;
  * 
  * @author Robert Jan van der Waals
  */
-public class DcApplicationSettings extends org.datacrow.core.utilities.settings.Settings {
+public class DcApplicationSettings extends Settings {
     
 	private static final long serialVersionUID = -8489291594837824378L;
 
@@ -91,7 +88,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
         }
         
         logger.debug("Using settings file: " + fileClient);
-        getSettings().setSettingsFile(fileClient);
+        setSettingsFile(fileClient);
 
         if (DcConfig.getInstance().isAllowLoadSettings())
             load();
@@ -110,20 +107,20 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
         SettingsGroup driveMappings = new SettingsGroup(_DriveMappings, "dc.settings.drivemappings");
         SettingsGroup directoriesAsDrives = new SettingsGroup(_DirectoriesAsDrives, "dc.settings.directoriesasdrives");
 
-        getSettings().addGroup(_Module, moduleGroup);
-        getSettings().addGroup(_Regional, regionalGroup);
-        getSettings().addGroup(_General, generalGroup);
-        getSettings().addGroup(_Font, fontGroup);
-        getSettings().addGroup(_HTTP, http);
-        getSettings().addGroup(_SelectionColor, colorGroup);
-        getSettings().addGroup(_FileHandlers, fileHandlers);
-        getSettings().addGroup(_DriveMappings, driveMappings);
-        getSettings().addGroup(_DirectoriesAsDrives, directoriesAsDrives);
-        getSettings().addGroup(_FileHashing, fileHashingGroup);
+        addGroup(_Module, moduleGroup);
+        addGroup(_Regional, regionalGroup);
+        addGroup(_General, generalGroup);
+        addGroup(_Font, fontGroup);
+        addGroup(_HTTP, http);
+        addGroup(_SelectionColor, colorGroup);
+        addGroup(_FileHandlers, fileHandlers);
+        addGroup(_DriveMappings, driveMappings);
+        addGroup(_DirectoriesAsDrives, directoriesAsDrives);
+        addGroup(_FileHashing, fileHashingGroup);
     }
 
     protected void createSettings() {
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stDrivePollerRunOnStartup,
                             Boolean.FALSE,
@@ -133,7 +130,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stICalendarFullExport,
                             Boolean.FALSE,
@@ -143,7 +140,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stServerAddress,
                             "",
@@ -153,7 +150,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stApplicationServerPort,
                             Long.valueOf(9000),
@@ -163,7 +160,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stImageServerPort,
                             Long.valueOf(9001),
@@ -173,7 +170,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stOpenItemsInEditModus,
                             Boolean.TRUE,
@@ -183,7 +180,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             true, 
                             -1));  
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stDoNotAskAgainChangeUserDir,
                             Boolean.FALSE,
@@ -193,7 +190,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));         
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stUsage,
                             Long.valueOf(0),
@@ -203,7 +200,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stImdbMaxActors,
                             Long.valueOf(0),
@@ -213,7 +210,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             true,
                             false, 
                             -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stImdbGetOriginalTitle,
                             Boolean.FALSE,
@@ -223,7 +220,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stAskForDonation,
                             Boolean.TRUE,
@@ -233,7 +230,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));     
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowToolSelectorOnStartup,
                             Boolean.TRUE,
@@ -243,7 +240,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, 
                             -1));   
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stDriveScannerRunOnStartup,
                             Boolean.FALSE,
@@ -252,7 +249,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblRunOnStartup",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stMetacriticRetrieveCriticReviews,
                             Boolean.TRUE,
@@ -261,7 +258,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblRetrieveCriticReviews",
                             false,
                             false, -1));   
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stAmazonRetrieveUserReviews,
                             Boolean.FALSE,
@@ -270,7 +267,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblRetrieveUserReviews",
                             false,
                             false, -1));   
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stAmazonRetrieveFeatureListing,
                             Boolean.FALSE,
@@ -279,7 +276,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblRetrieveFeatureListing",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stAmazonRetrieveEditorialReviews,
                             Boolean.TRUE,
@@ -288,7 +285,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblRetrieveEditorialReviews",
                             false,
                             false, -1));   
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stHighRenderingQuality,
                             Boolean.FALSE,
@@ -297,7 +294,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblHighRenderingQuality",
                             false,
                             true, -1));   
-        getSettings().addSetting(_Regional,
+        addSetting(_Regional,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stLanguage,
                             "",
@@ -306,7 +303,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblLanguage",
                             true,
                             true, -1));   
-        getSettings().addSetting(_Regional,
+        addSetting(_Regional,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stCheckedForJavaVersion,
                             Boolean.FALSE,
@@ -315,7 +312,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblLanguage",
                             false,
                             false, -1));            
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stGracefulShutdown,
                             Boolean.TRUE,
@@ -324,7 +321,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));          
-        getSettings().addSetting(_DriveMappings,
+        addSetting(_DriveMappings,
                 new Setting(DcRepository.ValueTypes._STRINGARRAY,
                             DcRepository.Settings.stDriveMappings,
                             null,
@@ -333,7 +330,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblDriveMappings",
                             false,
                             true, -1));          
-        getSettings().addSetting(_DirectoriesAsDrives,
+        addSetting(_DirectoriesAsDrives,
                 new Setting(DcRepository.ValueTypes._STRINGARRAY,
                             DcRepository.Settings.stDirectoriesAsDrives,
                             null,
@@ -342,7 +339,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblDirectoriesAsDrive",
                             false,
                             true, -1));          
-        getSettings().addSetting(_Module,
+        addSetting(_Module,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stModuleSettings,
                             "",
@@ -351,7 +348,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             true, -1));          
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stBackupLocation,
                             null,
@@ -360,7 +357,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stOnlineSearchSelectedView,
                             Long.valueOf(0),
@@ -369,7 +366,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stTreeNodeHeight,
                             Long.valueOf(20),
@@ -378,7 +375,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));         
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stTableRowHeight,
                             Long.valueOf(25),
@@ -387,7 +384,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));            
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stImportCharacterSet,
                             "UTF-8",
@@ -396,7 +393,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblCharacterSet",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stImportMatchAndMerge,
                             Boolean.TRUE,
@@ -405,7 +402,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblMatchAndMerge",
                             false,
                             false, -1)); 
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stButtonHeight,
                             Long.valueOf(25),
@@ -414,7 +411,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));          
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stInputFieldHeight,
                             Long.valueOf(25),
@@ -423,7 +420,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));             
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stButtonHeight,
                             Long.valueOf(25),
@@ -432,7 +429,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));         
-        getSettings().addSetting(_FileHashing,
+        addSetting(_FileHashing,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stHashType,
                             "md5",
@@ -441,7 +438,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblFileHashType",
                             true,
                             true, -1));
-        getSettings().addSetting(_FileHashing,
+        addSetting(_FileHashing,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stHashMaxFileSizeKb,
                             Long.valueOf(500000000),
@@ -450,7 +447,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblFileHashMaxFileSize",
                             true,
                             true, -1));             
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stWebServerPort,
                             Long.valueOf(8080),
@@ -459,7 +456,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));  
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stImportSeperator,
                             ",",
@@ -468,7 +465,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblValueSeperator",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowTipsOnStartup,
                             Boolean.TRUE,
@@ -477,7 +474,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BIGINTEGER,
                             DcRepository.Settings.stXpMode,
                             -1,
@@ -486,7 +483,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowGroupingPanel,
                             Boolean.TRUE,
@@ -495,7 +492,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));   
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowToolbar,
                             Boolean.TRUE,
@@ -504,7 +501,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));           
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowQuickFilterBar,
                             Boolean.TRUE,
@@ -513,7 +510,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));          
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stGarbageCollectionIntervalMs,
                             0,
@@ -522,7 +519,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_SelectionColor,
+        addSetting(_SelectionColor,
                 new Setting(DcRepository.ValueTypes._COLOR,
                             DcRepository.Settings.stSelectionColor,
                             new Color(255, 255, 153),
@@ -531,7 +528,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             true, -1));
-        getSettings().addSetting(_SelectionColor,
+        addSetting(_SelectionColor,
                 new Setting(DcRepository.ValueTypes._COLOR,
                             DcRepository.Settings.stQuickViewBackgroundColor,
                             Color.WHITE,
@@ -540,7 +537,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._COLOR,
                             DcRepository.Settings.stCardViewBackgroundColor,
                             Color.WHITE,
@@ -549,7 +546,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._COLOR,
                             DcRepository.Settings.stOddRowColor,
                             new Color(227, 226, 226),
@@ -558,7 +555,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._COLOR,
                             DcRepository.Settings.stEvenRowColor,
                             new Color(236, 236, 237),
@@ -567,7 +564,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._COLOR,
                             DcRepository.Settings.stTableHeaderColor,
                             new Color(204, 204, 204),
@@ -578,7 +575,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false, -1));
         
  
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowTableTooltip,
                             true,
@@ -587,7 +584,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblShowTableTooltips",
                             false,
                             true, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stModule,
                             DcModules._SOFTWARE,
@@ -596,7 +593,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             true,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stMassUpdateItemPickMode,
                             Synchronizer._ALL,
@@ -605,7 +602,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             true,
                             false, -1));
-        getSettings().addSetting(_Font,
+        addSetting(_Font,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stFontRendering,
                             Long.valueOf(0),
@@ -614,7 +611,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblFontRendering",
                             true,
                             true, -1)); 
-        getSettings().addSetting(_Font,
+        addSetting(_Font,
                 new Setting(DcRepository.ValueTypes._FONT,
                             DcRepository.Settings.stSystemFontNormal,
                             (DcConfig.getInstance().getPlatform().isWin() ? new Font("Arial Unicode MS", Font.PLAIN, 12) : new Font("Arial", Font.PLAIN, 12)),
@@ -623,7 +620,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblFontNormal",
                             false,
                             true, -1));
-        getSettings().addSetting(_Font,
+        addSetting(_Font,
                 new Setting(DcRepository.ValueTypes._FONT,
                             DcRepository.Settings.stSystemFontBold,
                             (DcConfig.getInstance().getPlatform().isWin() ? new Font("Arial Unicode MS", Font.PLAIN, 12) : new Font("Arial", Font.PLAIN, 12)),
@@ -632,7 +629,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblFontBold",
                             false,
                             true, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LOOKANDFEEL,
                             DcRepository.Settings.stLookAndFeel,
                             new DcLookAndFeel("JTattoo - Fast", "com.jtattoo.plaf.fast.FastLookAndFeel", null, 1),
@@ -641,7 +638,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblLookAndFeel",
                             false,
                             false, -1));        
-        getSettings().addSetting(_HTTP,
+        addSetting(_HTTP,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stProxyServerName,
                             "",
@@ -650,7 +647,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblProxyServerName",
                             true,
                             true, -1));
-        getSettings().addSetting(_HTTP,
+        addSetting(_HTTP,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stProxyServerPort,
                             0,
@@ -659,7 +656,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblProxyServerPort",
                             true,
                             true, -1));
-        getSettings().addSetting(_HTTP,
+        addSetting(_HTTP,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stProxyUserName,
                             "",
@@ -668,7 +665,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblProxyUserName",
                             true,
                             true, -1));
-        getSettings().addSetting(_HTTP,
+        addSetting(_HTTP,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stProxyPassword,
                             "",
@@ -677,7 +674,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblProxyPassword",
                             true,
                             true, -1));
-        getSettings().addSetting(_HTTP,
+        addSetting(_HTTP,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stBrowserPath,
                             "",
@@ -686,7 +683,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblBrowserPath",
                             true,
                             true, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stMergeItemsDialogSize,
                             new Dimension(500, 400),
@@ -695,7 +692,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stNewItemsDialogSize,
                             new Dimension(700, 600),
@@ -704,7 +701,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stMaintainTabsDialogSize,
                             new Dimension(400, 500),
@@ -713,7 +710,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stChartsDialogSize,
                             new Dimension(700, 600),
@@ -722,7 +719,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stExpertFormSize,
                             new Dimension(700, 600),
@@ -731,7 +728,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stLoanAdminFormSize,
                             new Dimension(600, 500),
@@ -740,7 +737,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stServerSettingsDialogSize,
                             new Dimension(400, 300),
@@ -749,7 +746,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stDirectoriesAsDrivesDialogSize,
                             new Dimension(400, 300),
@@ -758,7 +755,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stItemFormSettingsDialogSize,
                             new Dimension(700, 600),
@@ -767,7 +764,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stLogFormSize,
                             new Dimension(590, 600),
@@ -776,7 +773,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stDriveManagerDialogSize,
                             new Dimension(573, 548),
@@ -785,7 +782,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stHelpFormSize,
                             new Dimension(700, 600),
@@ -794,7 +791,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stReferencesDialogSize,
                             new Dimension(300, 600),
@@ -803,7 +800,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stSelectItemDialogSize,
                             new Dimension(300, 600),
@@ -812,7 +809,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stWebServerFrameSize,
                             new Dimension(300, 300),
@@ -821,7 +818,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));    
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stItemWizardFormSize,
                             new Dimension(800, 550),
@@ -830,7 +827,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stToolSelectWizard,
                             new Dimension(500, 600),
@@ -839,7 +836,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));  
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stModuleExportWizardFormSize,
                             new Dimension(800, 550),
@@ -848,7 +845,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));  
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stModuleImportWizardFormSize,
                             new Dimension(800, 550),
@@ -857,7 +854,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stItemExporterWizardFormSize,
                             new Dimension(800, 550),
@@ -866,7 +863,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stItemImporterWizardFormSize,
                             new Dimension(800, 550),
@@ -875,7 +872,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stModuleWizardFormSize,
                             new Dimension(800, 550),
@@ -884,7 +881,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stUpdateAllDialogSize,
                             new Dimension(600, 600),
@@ -893,7 +890,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stFindReplaceDialogSize,
                             new Dimension(400, 200),
@@ -902,7 +899,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stFindReplaceTaskDialogSize,
                             new Dimension(600, 600),
@@ -911,7 +908,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stMainViewSize,
                             new Dimension(1024, 733),
@@ -920,7 +917,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stMainViewState,
                             JFrame.NORMAL,
@@ -929,7 +926,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stMainViewLocation,
                             null,
@@ -938,7 +935,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stTextViewerSize,
                             new Dimension(500, 700),
@@ -948,7 +945,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, -1));
 
-        getSettings().addSetting(_General,
+        addSetting(_General,
                     new Setting(DcRepository.ValueTypes._DIMENSION,
                              DcRepository.Settings.stReportingDialogSize,
                              new Dimension(700, 490),
@@ -957,7 +954,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                              "",
                              false,
                              false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                     new Setting(DcRepository.ValueTypes._DIMENSION,
                              DcRepository.Settings.stModuleSelectDialogSize,
                              new Dimension(600, 400),
@@ -966,7 +963,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                              "",
                              false,
                              false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowModuleList,
                             Boolean.TRUE,
@@ -975,7 +972,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stBroadband,
                             Boolean.TRUE,
@@ -984,7 +981,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stLastDirectoryUsed,
                             "",
@@ -993,7 +990,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowMenuBarLabels,
                             Boolean.TRUE,
@@ -1002,7 +999,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stUpdateAllSelectedItemsOnly,
                             Boolean.TRUE,
@@ -1011,7 +1008,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stShowQuickView,
                             Boolean.TRUE,
@@ -1020,7 +1017,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stDeleteImageFileAfterImport,
                             Boolean.FALSE,
@@ -1029,7 +1026,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblDeleteImageFile",
                             false,
                             true, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stCheckForNewVersion,
                             Boolean.TRUE,
@@ -1038,7 +1035,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "msgVersionCheckOnStartup",
                             false,
                             true, -1));         
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stQuickViewDividerLocation,
                             681,
@@ -1047,7 +1044,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.Settings.stTreeDividerLocation,
                             272,
@@ -1056,7 +1053,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_FileHandlers,
+        addSetting(_FileHandlers,
                 new Setting(DcRepository.ValueTypes._DEFINITIONGROUP,
                             DcRepository.Settings.stProgramDefinitions,
                             new ProgramDefinitions(),
@@ -1066,7 +1063,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             true, -1));
 
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stResourcesEditorViewSize,
                             new Dimension(542, 680),
@@ -1075,7 +1072,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stBackupDialogSize,
                             new Dimension(500, 500),
@@ -1084,7 +1081,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stICalendarExportDialogSize,
                             new Dimension(500, 500),
@@ -1093,7 +1090,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stFileRenamerDialogSize,
                             new Dimension(300, 300),
@@ -1103,7 +1100,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, -1));
 
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stFileRenamerPreviewDialogSize,
                             new Dimension(400, 600),
@@ -1112,7 +1109,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stSortDialogSize,
                             new Dimension(300, 200),
@@ -1121,7 +1118,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.Settings.stGroupByDialogSize,
                             new Dimension(300, 200),
@@ -1130,7 +1127,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stReportFile,
                             "",
@@ -1139,7 +1136,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));
-        getSettings().addSetting(_Regional,
+        addSetting(_Regional,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stDecimalGroupingSymbol,
                             ".",
@@ -1148,7 +1145,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblDecimalGroupingSymbol",
                             true,
                             true, -1));
-        getSettings().addSetting(_Regional,
+        addSetting(_Regional,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.Settings.stDecimalSeparatorSymbol,
                             ",",
@@ -1157,7 +1154,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "lblDecimalSeperatorSymbol",
                             true,
                             true, -1));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stRestoreDatabase,
                             Boolean.TRUE,
@@ -1166,7 +1163,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));          
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stRestoreModules,
                             Boolean.TRUE,
@@ -1175,7 +1172,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));          
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.Settings.stRestoreReports,
                             Boolean.TRUE,
@@ -1185,7 +1182,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             false,
                             false, -1));          
         
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRINGARRAY,
                             DcRepository.Settings.stDriveManagerDrives,
                             null,
@@ -1194,7 +1191,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                             "",
                             false,
                             false, -1));          
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRINGARRAY,
                             DcRepository.Settings.stDriveManagerExcludedDirs,
                             null,
@@ -1215,7 +1212,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                 false,
                 true, -1);
         s.setReadonly(DcConfig.getInstance().getOperatingMode() == DcConfig._OPERATING_MODE_CLIENT);
-        getSettings().addSetting(_General, s);
+        addSetting(_General, s);
         
         s = new Setting(DcRepository.ValueTypes._BOOLEAN,
                 DcRepository.Settings.stCheckUniqueness,
@@ -1226,7 +1223,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                 false,
                 true, -1);
         s.setReadonly(DcConfig.getInstance().getOperatingMode() == DcConfig._OPERATING_MODE_CLIENT);
-        getSettings().addSetting(_General, s);
+        addSetting(_General, s);
         
         s = new Setting(DcRepository.ValueTypes._STRING,
                 DcRepository.Settings.stConnectionString,
@@ -1237,7 +1234,7 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                 false,
                 false, -1);
         s.setReadonly(DcConfig.getInstance().getOperatingMode() == DcConfig._OPERATING_MODE_CLIENT);
-        getSettings().addSetting(_General, s);
+        addSetting(_General, s);
         
         s = new Setting(DcRepository.ValueTypes._STRING,
                 DcRepository.Settings.stDatabaseDriver,
@@ -1248,6 +1245,6 @@ public class DcApplicationSettings extends org.datacrow.core.utilities.settings.
                 false,
                 false, -1);
         s.setReadonly(DcConfig.getInstance().getOperatingMode() == DcConfig._OPERATING_MODE_CLIENT);
-        getSettings().addSetting(_General, s);
+        addSetting(_General, s);
     }
 }

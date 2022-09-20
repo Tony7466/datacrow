@@ -39,10 +39,10 @@ import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.synchronizers.FileSynchronizer;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.Hash;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 /**
  * The Drive Manager of Data Crow. Schedules tasks to scan drives for files,

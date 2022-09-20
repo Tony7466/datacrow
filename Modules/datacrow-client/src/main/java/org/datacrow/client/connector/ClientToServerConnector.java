@@ -28,6 +28,7 @@ package org.datacrow.client.connector;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,6 +74,7 @@ import org.datacrow.core.server.requests.ClientRequestItemAction;
 import org.datacrow.core.server.requests.ClientRequestItemKeys;
 import org.datacrow.core.server.requests.ClientRequestItems;
 import org.datacrow.core.server.requests.ClientRequestLogin;
+import org.datacrow.core.server.requests.ClientRequestModuleSettings;
 import org.datacrow.core.server.requests.ClientRequestModules;
 import org.datacrow.core.server.requests.ClientRequestReferencingItems;
 import org.datacrow.core.server.requests.ClientRequestSimpleValues;
@@ -86,14 +88,15 @@ import org.datacrow.core.server.response.ServerItemRequestResponse;
 import org.datacrow.core.server.response.ServerItemsRequestResponse;
 import org.datacrow.core.server.response.ServerLoginResponse;
 import org.datacrow.core.server.response.ServerModulesRequestResponse;
+import org.datacrow.core.server.response.ServerModulesSettingsResponse;
 import org.datacrow.core.server.response.ServerResponse;
 import org.datacrow.core.server.response.ServerSQLResponse;
 import org.datacrow.core.server.response.ServerSimpleValuesResponse;
 import org.datacrow.core.server.response.ServerValueEnhancersRequestResponse;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.settings.Setting;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.utilities.SystemMonitor;
-import org.datacrow.core.utilities.settings.DcSettings;
-import org.datacrow.core.utilities.settings.Settings;
 import org.datacrow.core.wf.tasks.DcTask;
 
 public class ClientToServerConnector extends Connector {
@@ -214,7 +217,7 @@ public class ClientToServerConnector extends Connector {
             if (response == null) return;
             
             Settings settings = response.getSettings();
-            for (Setting setting : settings.getSettings().getSettings()) {
+            for (Setting setting : settings.getSettings()) {
                 if (DcSettings.getSetting(setting.getKey()).isReadonly())
                     DcSettings.set(setting.getKey(), setting.getValue());
             }
@@ -431,6 +434,14 @@ public class ClientToServerConnector extends Connector {
 		ServerItemRequestResponse response = (ServerItemRequestResponse) processClientRequest(cr);
 		return response != null ? response.getItem() : null;
 	}
+	
+    @Override
+    public HashMap<Integer, Settings> getModuleSettings() {
+        ClientRequestModuleSettings crms = new ClientRequestModuleSettings(su);
+        ServerModulesSettingsResponse response = (ServerModulesSettingsResponse) processClientRequest(crms);
+        return response != null ? response.getSettings() : null;
+        
+    }	
 	
 	@Override
 	public Map<String, Integer> getKeys(DataFilter df) {

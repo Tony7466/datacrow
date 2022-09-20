@@ -21,6 +21,7 @@ import org.datacrow.core.server.requests.ClientRequestItemAction;
 import org.datacrow.core.server.requests.ClientRequestItemKeys;
 import org.datacrow.core.server.requests.ClientRequestItems;
 import org.datacrow.core.server.requests.ClientRequestLogin;
+import org.datacrow.core.server.requests.ClientRequestModuleSettings;
 import org.datacrow.core.server.requests.ClientRequestModules;
 import org.datacrow.core.server.requests.ClientRequestReferencingItems;
 import org.datacrow.core.server.requests.ClientRequestSimpleValues;
@@ -34,6 +35,7 @@ import org.datacrow.core.server.response.ServerItemRequestResponse;
 import org.datacrow.core.server.response.ServerItemsRequestResponse;
 import org.datacrow.core.server.response.ServerLoginResponse;
 import org.datacrow.core.server.response.ServerModulesRequestResponse;
+import org.datacrow.core.server.response.ServerModulesSettingsResponse;
 import org.datacrow.core.server.response.ServerResponse;
 import org.datacrow.core.server.response.ServerSQLResponse;
 import org.datacrow.core.server.response.ServerSimpleValuesResponse;
@@ -83,8 +85,8 @@ public class SerializationHelper {
                 .registerTypeAdapter(Color.class, new AwtColorAdapter())
                 .registerTypeAdapter(Font.class, new AwtFontAdapter())
                 .registerTypeAdapter(KeyStroke.class, new KeyStrokeAdapter())
-                .registerTypeAdapter(IValueEnhancer.class, new InterfaceAdapter()) // generic type mapper
-                .registerTypeAdapter(DcModule.class, new InterfaceAdapter())       // generic type mapper
+                .registerTypeAdapter(IValueEnhancer.class, new InterfaceAdapter())
+                .registerTypeAdapter(DcModule.class, new InterfaceAdapter())
                 .create();
 
         gsonSimple = new GsonBuilder()
@@ -98,7 +100,8 @@ public class SerializationHelper {
     }
     
     public String serialize(Object o) {
-        return getGson().toJson(o);
+        String json = getGson().toJson(o);
+        return json;
     }
     
     private static String getJson(ObjectInputStream is) throws IOException, ClassNotFoundException {
@@ -138,8 +141,10 @@ public class SerializationHelper {
             sr = gson.fromJson(json, ServerSQLResponse.class);
         else if (type == ServerResponse._RESPONSE_VALUE_ENHANCERS)
             sr = gson.fromJson(json, ServerValueEnhancersRequestResponse.class);
+        else if (type == ServerResponse._RESPONSE_MODULE_SETTINGS)
+            sr = gson.fromJson(json, ServerModulesSettingsResponse.class);
         else
-            logger.error("No server response implementation found for type [" + type + "]");
+            logger.fatal("No server response implementation found for type [" + type + "]");
         
         return sr;
     }
@@ -173,8 +178,10 @@ public class SerializationHelper {
             cr = gson.fromJson(json, ClientRequestSimpleValues.class); 
         else if (type == ClientRequest._REQUEST_VALUE_ENHANCERS_SETTINGS)
             cr = gson.fromJson(json, ClientRequestValueEnhancers.class); 
+        else if (type == ClientRequest._REQUEST_MODULE_SETTINGS)
+            cr = gson.fromJson(json, ClientRequestModuleSettings.class);
         else
-            logger.error("No client request implementation found for type [" + type + "]");
+            logger.fatal("No client request implementation found for type [" + type + "]");
             
         return cr;
     }

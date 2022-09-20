@@ -23,19 +23,16 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings.definitions;
+package org.datacrow.core.utilities.definitions;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-public interface IDefinitions extends Serializable {
+public abstract class Definition implements Serializable {
     
-    int getSize();
-    void add(String s);
-    void clear();
-    void add(Collection<Definition> c);
-    void add(Definition definition);
-    boolean exists(Definition definition);
+	private static final long serialVersionUID = 212475213815814453L;
+
+	protected final String seperator = "/&/";
     
-    Collection<? extends Definition> getDefinitions();
+    public abstract String toSettingValue();
+
 }

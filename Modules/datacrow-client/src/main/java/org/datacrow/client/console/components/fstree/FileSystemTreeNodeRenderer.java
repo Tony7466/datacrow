@@ -33,7 +33,7 @@ import javax.swing.JTree;
 import javax.swing.tree.TreeCellRenderer;
 
 import org.datacrow.core.DcRepository;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 class FileSystemTreeNodeRenderer implements TreeCellRenderer {
 

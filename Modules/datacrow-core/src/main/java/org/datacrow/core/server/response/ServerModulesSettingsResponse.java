@@ -23,68 +23,29 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings;
+package org.datacrow.core.server.response;
 
-import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
-import org.datacrow.core.utilities.StringUtils;
+import org.datacrow.core.modules.DcModule;
+import org.datacrow.core.modules.DcModules;
+import org.datacrow.core.settings.Settings;
 
-public class DcTableSettings implements Serializable {
-    
-	private static final long serialVersionUID = -1302562822792157363L;
+public class ServerModulesSettingsResponse extends ServerResponse {
 
-	private int module; 
-    private Map<Integer, Integer> columnWidths = new HashMap<Integer, Integer>();
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Creates a new, empty, definition
-     * @param module
-     */
-    public DcTableSettings(int module) {
-        this.module = module;
-    }
-    
-    public DcTableSettings(String value) {
-        setValue(value);
-    }
-    
-    public int getModuleIdx() {
-        return module;
-    }
+	private HashMap<Integer, Settings> settings = new HashMap<Integer, Settings>();
 
-    public void setColumnWidth(int fieldIdx, int width) {
-        columnWidths.put(Integer.valueOf(fieldIdx), Integer.valueOf(width));
-    }
-    
-    public int getWidth(int fieldIdx) {
-        // 75 is defined as the default width by Swing
-        return columnWidths.containsKey(fieldIdx) ? columnWidths.get(Integer.valueOf(fieldIdx)) : 75;
-    }
-    
-    public String getValue() {
-        return toString();
-    }
+	public ServerModulesSettingsResponse() {
+	    super(_RESPONSE_MODULE_SETTINGS);
+	    
+	    for (DcModule module : DcModules.getAllModules()) {
+	        settings.put(Integer.valueOf(module.getIndex()), module.getSettings());
+	    }
+	}
 
-    private void setValue(String definition) {
-        String s = StringUtils.getValueBetween("[", "]", definition);
-        module = Integer.parseInt(s);
-        
-        for (String value : StringUtils.getValuesBetween("{", "}", definition)) {
-            int field = Integer.parseInt(value.substring(0, value.indexOf(",")));
-            int width = Integer.parseInt(value.substring(value.indexOf(",") + 1));
-            columnWidths.put(Integer.valueOf(field), Integer.valueOf(width));
-        }
-    }
-
-    @Override
-    public String toString() {
-        String s = "[" + module + "]";
-        for (Integer fieldIdx : columnWidths.keySet()) {
-            s += "{" + String.valueOf(fieldIdx.intValue()) + "," + 
-                 String.valueOf(columnWidths.get(fieldIdx).intValue()) + "}";
-        }
-        return s;
-    } 
+	public HashMap<Integer, Settings> getSettings() {
+		return settings;
+	}
 }

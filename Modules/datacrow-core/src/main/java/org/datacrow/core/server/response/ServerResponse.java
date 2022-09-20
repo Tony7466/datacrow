@@ -41,6 +41,7 @@ public class ServerResponse implements Serializable {
     public static final int _RESPONSE_SIMPLE_VALUES = 9;
     public static final int _RESPONSE_SQL = 10;
     public static final int _RESPONSE_VALUE_ENHANCERS = 11;
+    public static final int _RESPONSE_MODULE_SETTINGS = 12;
     
     private int type;
     

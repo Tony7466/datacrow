@@ -31,7 +31,7 @@ import javax.swing.JColorChooser;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class DcColorSelector extends JColorChooser implements IComponent, ChangeListener {
     

@@ -44,7 +44,7 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class CreateTabForm extends DcFrame implements ActionListener {
     

@@ -37,7 +37,7 @@ import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Picture;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class DcCardObjectListElement extends DcObjectListElement {
 

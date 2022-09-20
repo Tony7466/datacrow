@@ -46,7 +46,7 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 /**
  * Donation dialog which can be used to ask the user for a donation.

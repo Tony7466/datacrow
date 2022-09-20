@@ -23,35 +23,27 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings.definitions;
+package org.datacrow.core.utilities.definitions;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.StringTokenizer;
 
-public class QuickViewFieldDefinitions implements IDefinitions {
+public class ProgramDefinitions implements IDefinitions {
 
-	private static final long serialVersionUID = -5067780475246039249L;
+	private static final long serialVersionUID = -8505998507769763398L;
 
-	private Collection<QuickViewFieldDefinition> definitions = new ArrayList<QuickViewFieldDefinition>();
-    
-    private int module;
-    
-    public QuickViewFieldDefinitions(int module) {
-        this.module = module;
-    }
+	Collection<ProgramDefinition> definitions = new ArrayList<ProgramDefinition>();
     
     @Override
     public void add(Collection<Definition> c) {
         for (Definition definition : c)
             add(definition);
     }
-    
+
     @Override
     public void add(Definition definition) {
-        if (!exists(definition)) {
-            definitions.add((QuickViewFieldDefinition) definition);
-        }
+        definitions.add((ProgramDefinition) definition);
     }
 
     @Override
@@ -60,45 +52,43 @@ public class QuickViewFieldDefinitions implements IDefinitions {
     }
 
     @Override
-    public Collection<QuickViewFieldDefinition> getDefinitions() {
-        return definitions;
-    }
-
-    @Override
     public int getSize() {
         return definitions.size();
-    }         
-
-    private void removeDefinition(int field) {
-        QuickViewFieldDefinition definition = null;
-        for (QuickViewFieldDefinition d : definitions) {
-            if (d.getField() == field) {
-                definition = d;
-                break;
-            }
-        }
-        
-        if (definition != null)
-            definitions.remove(definition);
-    }
+    }     
     
+	public ProgramDefinition getDefinition(String extension) {
+	    for (ProgramDefinition definition : definitions) {
+			if (    definition.getExtension().equals(extension) || 
+			        definition.getExtension().endsWith(extension)) 
+				return definition;
+		}
+		return null;
+	}
+	
     @Override
     public boolean exists(Definition definition) {
         return definitions.contains(definition);
-    }        
+    }    	
+	
+	@Override
+    public Collection<ProgramDefinition> getDefinitions() {
+	    return definitions;
+	}
     
     @Override
     public void add(String s) {
         StringTokenizer st = new StringTokenizer(s, "/&/");
-        int field = Integer.parseInt((String) st.nextElement());
-        boolean enabled = Boolean.valueOf((String) st.nextElement()).booleanValue();
-        String direction = (String) st.nextElement();
+        String[] row = {"", "", ""};
         
-        int maxLength = 0;
         if (st.hasMoreElements())
-            maxLength = Integer.parseInt((String) st.nextElement());
+            row[0] = (String) st.nextElement();
+        
+        if (st.hasMoreElements())
+            row[1] = (String) st.nextElement();
 
-        removeDefinition(field);
-        add(new QuickViewFieldDefinition(module, field, enabled, direction, maxLength));
+        if (st.hasMoreElements())
+            row[2] = (String) st.nextElement();
+        
+        add(new ProgramDefinition(row[0], row[1], row[2]));
     }
 }

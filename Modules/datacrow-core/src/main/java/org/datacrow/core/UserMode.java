@@ -25,7 +25,7 @@
 
 package org.datacrow.core;
 
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 /**
  * The user mode determines which actions are available to the user.

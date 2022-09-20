@@ -55,13 +55,13 @@ import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.settings.DcSettings;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcSettings;
-import org.datacrow.core.utilities.settings.Settings;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.IDefinitions;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinitions;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.IDefinitions;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinition;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinitions;
 
 public class QuickViewSettingsDialog extends DcDialog implements ActionListener {
 

@@ -68,12 +68,12 @@ import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Picture;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.server.Connector;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.StringUtils;
-import org.datacrow.core.utilities.settings.DcSettings;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinitions;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinition;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinitions;
 
 public class QuickViewPanel extends JPanel implements ChangeListener, MouseListener {
     

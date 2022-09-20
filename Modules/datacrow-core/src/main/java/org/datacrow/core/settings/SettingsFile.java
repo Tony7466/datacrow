@@ -54,9 +54,14 @@ public class SettingsFile {
         }
 
         try {
-            FileOutputStream fos = new FileOutputStream(settings.getSettingsFile());
-            properties.store(fos, "");
-            fos.close();
+            
+            if (settings.getSettingsFile() != null) {
+                FileOutputStream fos = new FileOutputStream(settings.getSettingsFile());
+                properties.store(fos, "");
+                fos.close();
+            } else {
+                logger.debug("Settings file has not been set (null)");
+            }
         } catch (Exception e) {
             logger.error("Could not save settings to file " + settings.getSettingsFile(), e);
         } 
@@ -71,7 +76,7 @@ public class SettingsFile {
         try {
             File file = settings.getSettingsFile();
             
-            if (file.exists()) {
+            if (file != null && file.exists()) {
                 FileInputStream fis = new FileInputStream(file);
                 properties.load(fis);
                 fis.close();

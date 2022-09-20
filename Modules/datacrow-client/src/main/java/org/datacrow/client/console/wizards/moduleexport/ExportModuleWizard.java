@@ -36,7 +36,7 @@ import org.datacrow.client.console.wizards.module.CreateModuleWizard;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 /**
  * The Module Export Wizard exports a custom module. The wizard is capable of exporting

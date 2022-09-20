@@ -34,7 +34,7 @@ import javax.swing.SwingUtilities;
 import org.datacrow.client.console.menu.ViewPopupMenu;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.objects.DcObject;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class ViewMouseListener implements MouseListener {
     

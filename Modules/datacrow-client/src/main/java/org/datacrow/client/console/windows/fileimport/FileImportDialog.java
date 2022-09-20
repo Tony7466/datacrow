@@ -65,9 +65,9 @@ import org.datacrow.core.services.Region;
 import org.datacrow.core.services.SearchMode;
 import org.datacrow.core.services.Servers;
 import org.datacrow.core.services.plugin.IServer;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.filefilters.FileNameFilter;
-import org.datacrow.core.utilities.settings.Settings;
 
 
 public class FileImportDialog extends DcFrame implements ActionListener {

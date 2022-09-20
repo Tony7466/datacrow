@@ -31,8 +31,8 @@ import java.util.Collection;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.services.Region;
 import org.datacrow.core.services.plugin.IServer;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.settings.Setting;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public abstract class ImdbServer implements IServer {
 

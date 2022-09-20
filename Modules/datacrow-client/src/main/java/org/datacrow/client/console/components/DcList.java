@@ -39,7 +39,7 @@ import javax.swing.JToolTip;
 import javax.swing.ListCellRenderer;
 
 import org.datacrow.core.DcRepository;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class DcList extends JList<Object> {
 

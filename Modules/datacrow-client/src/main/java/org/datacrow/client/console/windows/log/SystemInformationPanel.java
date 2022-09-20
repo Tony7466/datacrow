@@ -37,7 +37,7 @@ import org.datacrow.client.util.Utilities;
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class SystemInformationPanel extends JPanel {
     

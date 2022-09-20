@@ -23,47 +23,19 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings.definitions;
+package org.datacrow.core.utilities.definitions;
 
-import org.datacrow.core.utilities.CoreUtilities;
+import java.io.Serializable;
+import java.util.Collection;
 
-public class ProgramDefinition extends Definition {
-
-	private static final long serialVersionUID = -1751426625622194638L;
-
-	private String extension = "";
-	private String program = "";
-	private String parameters = "";
-	
-	public ProgramDefinition(String extension, String program, String parameters) {
-		this.extension = extension;
-		this.program = program;
-		this.parameters = parameters;
-	}
-	
-	public boolean hasParameters() {
-	    return !CoreUtilities.isEmpty(parameters);
-	}
-	
-	public String getExtension() {
-		return extension;
-	}
-
-	public String getProgram() {
-		return program;
-	}
-
-    public String getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public String toSettingValue() {
-        return extension + "/&/" + program + "/&/" + parameters;
-    }    
+public interface IDefinitions extends Serializable {
     
-    @Override
-	public String toString() {
-		return "[" + extension + "] " + program + " " + parameters;
-	}
+    int getSize();
+    void add(String s);
+    void clear();
+    void add(Collection<Definition> c);
+    void add(Definition definition);
+    boolean exists(Definition definition);
+    
+    Collection<? extends Definition> getDefinitions();
 }

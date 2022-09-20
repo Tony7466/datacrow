@@ -34,25 +34,42 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
+import org.apache.logging.log4j.Logger;
+import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcLookAndFeel;
-import org.datacrow.core.utilities.settings.definitions.IDefinitions;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.utilities.definitions.IDefinitions;
 
-/**
- * Contains all Settings Groups and there settings. 
- * The Settings class is the only class which needs to be referenced
- * to add groups, add settings, get settings and get values of settings.
- * 
- * @author Robert Jan van der Waals
- */
 public class Settings implements Serializable {
+    
+	private static final long serialVersionUID = -33466202843742845L;
 
-	private static final long serialVersionUID = -5005244859315267321L;
+	private static Logger logger = DcLogManager.getLogger(Settings.class.getName());
 
-	private File settingsFile = new File("unnamed.ini");
+    private File settingsFile;
     private LinkedHashMap<String, SettingsGroup> groups = new LinkedHashMap<String, SettingsGroup>();
+	
+    public Settings() {
+        createGroups();
+    }
+    
+    protected void load() {
+        try {
+            SettingsFile.load(this);
+        } catch (Exception e) {
+            logger.error(DcResources.getText("msgFailedToLoadUserSettings"), e);
+        }
+    }
     
     /**
-     * Adds a group to the hashtable. A group may contain sub-groups.
+     * Retrieves all the top level groups
+     */    
+    public LinkedHashMap<String, SettingsGroup> getSettingsGroups() {
+        return groups;   
+    }
+    
+    /**
+     * Adds a group to the hash table. A group may contain sub-groups.
      * Only the parent, to which a sub-group belongs, should be added.
      * 
      * @param key unique identifier for this group
@@ -84,6 +101,8 @@ public class Settings implements Serializable {
             if (group.getKey().equals(key))
                 return group; 
         }
+        
+        logger.debug("Settings group with key [" + key + "] does not exist");
         return null;
     }
 
@@ -147,14 +166,6 @@ public class Settings implements Serializable {
     } 
     
     /**
-     * Returns the value of the setting as an integer
-     */
-    public int getInt(String key) {
-        Object o = getValue(key);
-        return o != null ? ((Integer) o).intValue() : -1;
-    }
-
-    /**
      * Returns the value of the setting as a boolean
      */
     public boolean getBoolean(String key) {
@@ -197,12 +208,7 @@ public class Settings implements Serializable {
             setting.setStringAsValue(s);
     }
 
-    /**
-     * Retrieves all the top level groups
-     */    
-    public LinkedHashMap<String, SettingsGroup> getSettingsGroups() {
-        return groups;   
-    }
+    protected void createGroups() {}
 
     /**
      * Retrieves all settings groups without an hierarchy
@@ -226,5 +232,33 @@ public class Settings implements Serializable {
             settings.addAll(group.getSettings().values());
         
         return settings;
+    }
+    
+    public boolean contains(String key) {
+        return getSetting(key) != null;
+    }
+    
+    public void save() {
+        SettingsFile.save(this);
+    }    
+    
+    public Object get(String key) {
+        return getValue(key);
+    }
+
+    public void set(String key, Object value) {
+        setValue(key, value);
+    }
+
+    public long getLong(String key) {
+        Object o = get(key);
+        return o instanceof Long ? ((Long) o).longValue() : 0l;
+    }    
+    
+    public int getInt(String key) {
+        Object o = get(key);
+        o = o == null ? -1 : o;
+        return o instanceof Integer ? ((Integer) o).intValue() :
+               o instanceof Long ? ((Long) o).intValue() : 0;
     }
 }

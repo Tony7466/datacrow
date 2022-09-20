@@ -39,7 +39,7 @@ import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Loan;
 import org.datacrow.core.plugin.InvalidPluginException;
 import org.datacrow.core.plugin.Plugins;
-import org.datacrow.core.utilities.settings.Settings;
+import org.datacrow.core.settings.Settings;
 
 /**
  * Represents loan items.

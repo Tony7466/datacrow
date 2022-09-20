@@ -42,8 +42,8 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.clients.IBackupRestoreClient;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.Directory;
-import org.datacrow.core.utilities.settings.DcSettings;
 import org.datacrow.server.db.DatabaseManager;
 
 

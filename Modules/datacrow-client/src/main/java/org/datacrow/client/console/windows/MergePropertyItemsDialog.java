@@ -63,8 +63,8 @@ import org.datacrow.core.objects.DcTemplate;
 import org.datacrow.core.objects.template.Templates;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.server.Connector;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public class MergePropertyItemsDialog extends DcDialog implements ActionListener, IClient {
     

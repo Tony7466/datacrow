@@ -47,7 +47,7 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.objects.DcMediaObject;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Picture;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public abstract class DcObjectListHwElement extends DcObjectListElement {
     

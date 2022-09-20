@@ -39,7 +39,7 @@ import org.datacrow.core.IconLibrary;
 import org.datacrow.core.drivemanager.DriveManager;
 import org.datacrow.core.drivemanager.JobAlreadyRunningException;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class DrivePollerPanel extends DriveManagerPanel {
 

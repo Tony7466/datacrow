@@ -62,8 +62,8 @@ import org.datacrow.core.IconLibrary;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public class ModuleListPanel extends JPanel {
     

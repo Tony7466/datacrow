@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
@@ -50,12 +49,12 @@ import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.server.Connector;
 import org.datacrow.core.server.response.ServerModulesRequestResponse;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.settings.Setting;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.StringUtils;
 import org.datacrow.core.utilities.filefilters.FileNameFilter;
-import org.datacrow.core.utilities.settings.DcModuleSettings;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 /**
  * This class registers and manages all modules present within Data Crow. 
@@ -148,17 +147,25 @@ public class DcModules implements Serializable {
 	        	propertyBaseModules.put(m.getIndex(), m);
 	        }
 
-	        // reset the module settings
-	        DcModuleSettings ms;
-	        for (DcModule m : modules.values()) {
-	            m.getSettings().getSettings().setSettingsFile(
-	                    new File(DcConfig.getInstance().getModuleSettingsDir(), m.getName().toLowerCase() + ".properties"));
-	            ms = new DcModuleSettings(m);
-	            for (Setting setting : ms.getSettings().getSettings()) {
-	                if (!setting.isReadonly()) 
-	                    m.setSetting(setting.getKey(), setting.getValue());
-	            }   
-	        }
+	        // now that modules have been loaded (without any settings) the settings need to be requested for;
+            HashMap<Integer, Settings> modSettings = conn.getModuleSettings();
+            
+            Settings settings;
+            DcModule module;
+            
+            // apply the settings to the module:
+            for (Integer i : modSettings.keySet()) {
+                settings = modSettings.get(i);
+                module = DcModules.get(i.intValue());
+                settings.setSettingsFile(
+                        new File(DcConfig.getInstance().getModuleSettingsDir(), module.getName().toLowerCase() + ".properties"));
+
+                module.initializeSettings();
+                
+                for (Setting setting : settings.getSettings()) {
+                    if (!setting.isReadonly()) module.setSetting(setting.getKey(), setting.getValue());
+                }   
+            }
     	} else {
 	        propertyBaseModules.clear();
 	        modules.clear();

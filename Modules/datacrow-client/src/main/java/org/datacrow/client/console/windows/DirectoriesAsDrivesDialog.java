@@ -40,7 +40,7 @@ import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.components.DcDirectoriesAsDrivesField;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class DirectoriesAsDrivesDialog extends DcDialog implements ActionListener {
 

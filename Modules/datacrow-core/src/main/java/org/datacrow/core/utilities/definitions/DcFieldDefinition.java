@@ -23,7 +23,7 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings.definitions;
+package org.datacrow.core.utilities.definitions;
 
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.modules.DcModules;

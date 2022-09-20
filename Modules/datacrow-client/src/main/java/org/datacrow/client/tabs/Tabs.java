@@ -46,8 +46,8 @@ import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.Base64;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.StringUtils;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.Definition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.Definition;
 
 public class Tabs {
 	

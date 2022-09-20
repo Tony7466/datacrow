@@ -54,7 +54,7 @@ import org.datacrow.core.objects.helpers.ExternalReference;
 import org.datacrow.core.objects.helpers.Media;
 import org.datacrow.core.security.SecuredUser;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
 import org.datacrow.server.db.DatabaseManager;
 import org.datacrow.server.db.SelectQuery;
 

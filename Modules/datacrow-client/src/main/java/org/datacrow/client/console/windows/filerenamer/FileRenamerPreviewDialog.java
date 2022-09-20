@@ -60,7 +60,7 @@ import org.datacrow.core.filerenamer.FilePattern;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class FileRenamerPreviewDialog extends DcDialog implements ActionListener, MouseListener {
 

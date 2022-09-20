@@ -37,8 +37,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import org.datacrow.core.DcRepository;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.Base64;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 /**
  * This class wraps a {@link HttpURLConnection} and offers detailed methods for 

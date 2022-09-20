@@ -23,7 +23,7 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings;
+package org.datacrow.core.settings;
 
 import java.awt.Dimension;
 import java.io.File;
@@ -49,12 +49,10 @@ import org.datacrow.core.objects.helpers.Movie;
 import org.datacrow.core.objects.helpers.MusicAlbum;
 import org.datacrow.core.objects.helpers.Software;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.settings.Setting;
-import org.datacrow.core.settings.SettingsGroup;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinitions;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinitions;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinition;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinitions;
 
 /**
  * Module specific settings.
@@ -63,7 +61,7 @@ import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinition
  * 
  * @author Robert Jan van der Waals
  */
-public class DcModuleSettings extends org.datacrow.core.utilities.settings.Settings {
+public class DcModuleSettings extends Settings {
     
 	private static final long serialVersionUID = 8052899124466678552L;
 
@@ -80,20 +78,18 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
         createSystemSettings(module);
         createDefinitions(module);
         
-        org.datacrow.core.settings.Settings settings = getSettings();
-
         // load the default settings (if available)
         String filename = module.getName().toLowerCase() + ".properties";
         File file = new File(new File(DcConfig.getInstance().getInstallationDir(), "modules"), filename);
         if (file.exists()) {
             // this is here for backwards compatibility
-            settings.setSettingsFile(file);
+            setSettingsFile(file);
             load();
         }
 
         // load the user settings
         if (DcConfig.getInstance().isAllowLoadSettings()) {
-            settings.setSettingsFile(new File(DcConfig.getInstance().getModuleSettingsDir(), module.getName().toLowerCase() + ".properties"));
+            setSettingsFile(new File(DcConfig.getInstance().getModuleSettingsDir(), module.getName().toLowerCase() + ".properties"));
             load();
         }
         
@@ -122,7 +118,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
         _General = "lblGroupGeneral";
         
         SettingsGroup generalGroup = new SettingsGroup(_General, "dc.Settings.GeneralSettings");
-        getSettings().addGroup(_General, generalGroup);
+        addGroup(_General, generalGroup);
     }
     
     private void createDefinitions(DcModule module) {
@@ -133,7 +129,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
             qvDefinitions.add(new QuickViewFieldDefinition(field.getModule(), field.getIndex(), enabled, DcResources.getText("lblHorizontal"), 0));
         }
         
-        getSettings().addSetting(_General,
+        addSetting(_General,
 			    new Setting(DcRepository.ValueTypes._DEFINITIONGROUP,
 		                    DcRepository.ModuleSettings.stQuickViewFieldDefinitions,
 		                    qvDefinitions,
@@ -142,7 +138,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
 		                    "",
 		                    false,
 		                    false, module.getIndex()));
-         getSettings().addSetting(_General,
+         addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stFileImportRecursive,
                             Boolean.FALSE,
@@ -151,7 +147,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._TABLESETTINGS,
                             DcRepository.ModuleSettings.stTableSettings,
                             new DcTableSettings(module.getIndex()),
@@ -160,7 +156,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stShowPicturesInSeparateTabs,
                             Boolean.TRUE,
@@ -169,7 +165,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stExportFields,
                             null,
@@ -178,7 +174,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stMassUpdateUseOriginalServiceSettings,
                             Boolean.FALSE,
@@ -187,7 +183,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stMassUpdateAlwaysUseFirst,
                             Boolean.FALSE,
@@ -196,7 +192,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stMassUpdateServer,
                             null,
@@ -205,7 +201,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex())); 
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stMassUpdateMode,
                             null,
@@ -214,7 +210,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));    
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stMassUpdateRegion,
                             null,
@@ -223,7 +219,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));          
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BIGINTEGER,
                             DcRepository.ModuleSettings.stDefaultSearchView,
                             IMasterView._LIST_VIEW,
@@ -232,7 +228,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex())); 
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BIGINTEGER,
                             DcRepository.ModuleSettings.stDefaultInsertView,
                             IMasterView._TABLE_VIEW,
@@ -247,7 +243,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
     protected void createSettings(DcModule module) {
         
         if (module.isFileBacked()) {
-            getSettings().addSetting(_General,
+            addSetting(_General,
                     new Setting(DcRepository.ValueTypes._STRING,
                                 DcRepository.ModuleSettings.stFileRenamerPattern,
                                 "",
@@ -260,7 +256,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
         }
         
         if (module.getIndex() == DcModules._CONTAINER) {
-            getSettings().addSetting(_General,
+            addSetting(_General,
                     new Setting(DcRepository.ValueTypes._LONG,
                                 DcRepository.ModuleSettings.stTreePanelShownItems,
                                 DcModules._ITEM,
@@ -270,7 +266,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                                 false,
                                 false,
                                 module.getIndex()));
-            getSettings().addSetting(_General,
+            addSetting(_General,
                     new Setting(DcRepository.ValueTypes._BOOLEAN,
                                 DcRepository.ModuleSettings.stContainerTreePanelFlat,
                                 Boolean.FALSE,
@@ -315,7 +311,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
             	picFieldOrder[i++] = field.getIndex();
         }
         
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stCardViewPictureOrder,
                             picFieldOrder,
@@ -325,7 +321,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stTableColumnOrder,
                             order,
@@ -335,7 +331,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stCardViewItemDescription,
                             new int[] {DcObject._SYS_DISPLAYVALUE},
@@ -345,7 +341,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stTitleCleanup,
                             "axxo,dvdrip,cdrip,dvd-rip,cd-rip",
@@ -355,7 +351,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stTitleCleanupRegex,
                             "",
@@ -365,7 +361,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stImportLocalArt,
                             module.getIndex() == DcModules._SOFTWARE ? Boolean.FALSE : Boolean.TRUE,
@@ -375,7 +371,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stFileImportUseOnlineService,
                             Boolean.TRUE,
@@ -385,7 +381,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.ModuleSettings.stFileImportDirectoryUsage,
                             Long.valueOf(0),
@@ -395,7 +391,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stFileImportOnlineService,
                             null,
@@ -405,7 +401,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stFileImportOnlineServiceMode,
                             null,
@@ -415,7 +411,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false,
                             module.getIndex()));   
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stFileImportOnlineServiceRegion,
                             null,
@@ -424,7 +420,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));           
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stImportLocalArtRecurse,
                             Boolean.TRUE,
@@ -433,7 +429,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,        
+        addSetting(_General,        
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stOnlineSearchQueryFullDetailsInitially,
                             Boolean.TRUE,
@@ -442,7 +438,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stImportLocalArtFrontKeywords,
                             "front,cover,case",
@@ -451,7 +447,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stImportLocalArtBackKeywords,
                             "back",
@@ -460,7 +456,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stImportLocalArtMediaKeywords,
                             "cd,dvd,media",
@@ -469,7 +465,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stOnlineSearchFormSize,
                             new Dimension(700, 600),
@@ -478,7 +474,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stSearchOrder,
                             new int[] {},
@@ -487,7 +483,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stItemFormSize,
                             new Dimension(700, 600),
@@ -496,7 +492,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stFilterDialogSize,
                             new Dimension(700, 400),
@@ -505,7 +501,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));   
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stFieldSettingsDialogSize,
                             new Dimension(500, 300),
@@ -514,7 +510,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stCardViewSettingsDialogSize,
                             new Dimension(500, 400),
@@ -523,7 +519,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex())); 
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stTableViewSettingsDialogSize,
                             new Dimension(500, 400),
@@ -532,7 +528,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stGroupedBy,
                             new int[] {},
@@ -541,7 +537,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stQuickViewSettingsDialogSize,
                             new Dimension(500, 300),
@@ -550,7 +546,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stLoanFormSize,
                             new Dimension(500, 500),
@@ -559,7 +555,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                new Setting(DcRepository.ValueTypes._DIMENSION,
                            DcRepository.ModuleSettings.stImportCDDialogSize,
                            new Dimension(600, 900),
@@ -568,7 +564,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                            "",
                            false,
                            false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stImportCDContainer,
                             null,
@@ -577,7 +573,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stImportCDStorageMedium,
                             null,
@@ -586,7 +582,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stFileImportDialogSize,
                             new Dimension(550, 600),
@@ -595,7 +591,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stSynchronizerDialogSize,
                             new Dimension(550, 600),
@@ -604,7 +600,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));  
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stFieldSettingsDialogSize,
                             new Dimension(500, 300),
@@ -613,7 +609,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stOnlineSearchFormSize,
                             new Dimension(700, 600),
@@ -622,7 +618,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stSimpleItemViewSize,
                             new Dimension(450, 550),
@@ -631,7 +627,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stSimpleItemFormSize,
                             new Dimension(450, 550),
@@ -640,7 +636,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));  
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stOnlineSearchFieldSettingsDialogSize,
                             new Dimension(600, 450),
@@ -649,7 +645,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._LONG,
                             DcRepository.ModuleSettings.stQuickFilterDefaultField,
                             Long.valueOf(DcObject._ID),
@@ -658,7 +654,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));           
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stOnlineSearchSubItems,
                             Boolean.FALSE,
@@ -667,7 +663,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             DcResources.getText("lblOnlineSearchSubItems"),
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stOnlineSearchDefaultServer,
                             null,
@@ -676,7 +672,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stOnlineSearchDefaultRegion,
                             null,
@@ -685,7 +681,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._STRING,
                             DcRepository.ModuleSettings.stOnlineSearchDefaultMode,
                             null,
@@ -694,7 +690,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stAutoAddPerfectMatch,
                             false,
@@ -704,7 +700,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             false,
                             false, module.getIndex())); 
         
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stEnabled,
                             true,
@@ -713,7 +709,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex())); 
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._DIMENSION,
                             DcRepository.ModuleSettings.stOnlineSearchFieldSettingsDialogSize,
                             new Dimension(600, 450),
@@ -722,7 +718,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._BOOLEAN,
                             DcRepository.ModuleSettings.stOnlineSearchOverwrite,
                             false,
@@ -731,7 +727,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));        
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stOnlineSearchFieldOverwriteSettings,
                             new int[] {},
@@ -740,7 +736,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                             "",
                             false,
                             false, module.getIndex()));
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stOnlineSearchRetrievedFields,
                             module.getFieldIndices(),
@@ -761,7 +757,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
         for (Integer i : cWebFormFields)
             webFormFields[counter++] = i.intValue();
         
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stWebItemFormFields,
                             webFormFields,
@@ -820,7 +816,7 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
         for (Integer i : cWebOverviewFields)
             webOverviewFields[counter++] = i.intValue();
         
-        getSettings().addSetting(_General,
+        addSetting(_General,
                 new Setting(DcRepository.ValueTypes._INTEGERARRAY,
                             DcRepository.ModuleSettings.stWebOverviewFields,
                             webOverviewFields,
@@ -853,6 +849,6 @@ public class DcModuleSettings extends org.datacrow.core.utilities.settings.Setti
                 false,
                 false, module.getIndex());
         s.setReadonly(DcConfig.getInstance().getOperatingMode() == DcConfig._OPERATING_MODE_CLIENT);
-        getSettings().addSetting(_General, s);
+        addSetting(_General, s);
     }
 }

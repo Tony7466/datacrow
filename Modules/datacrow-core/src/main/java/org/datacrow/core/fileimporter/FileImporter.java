@@ -53,12 +53,12 @@ import org.datacrow.core.server.Connector;
 import org.datacrow.core.services.Region;
 import org.datacrow.core.services.SearchMode;
 import org.datacrow.core.services.plugin.IServer;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.synchronizers.Synchronizer;
 import org.datacrow.core.synchronizers.Synchronizers;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.Directory;
 import org.datacrow.core.utilities.StringUtils;
-import org.datacrow.core.utilities.settings.Settings;
 
 /**
  * Base for all file importers. A file importer is capable of scanning a specific

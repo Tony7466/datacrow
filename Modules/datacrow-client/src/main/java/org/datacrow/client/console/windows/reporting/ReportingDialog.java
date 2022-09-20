@@ -61,7 +61,7 @@ import org.datacrow.core.reporting.ReportGenerator;
 import org.datacrow.core.reporting.ReportType;
 import org.datacrow.core.reporting.Reports;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 /**
  * @author Robert Jan van der Waals

@@ -99,7 +99,7 @@ import org.datacrow.core.services.OnlineServices;
 import org.datacrow.core.services.Servers;
 import org.datacrow.core.utilities.Base64;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
 import org.datacrow.core.wf.tasks.DcTask;
 import org.datacrow.core.wf.tasks.DeleteItemTask;
 import org.datacrow.core.wf.tasks.SaveItemTask;

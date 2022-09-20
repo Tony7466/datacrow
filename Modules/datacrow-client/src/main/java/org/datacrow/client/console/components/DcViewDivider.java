@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 import javax.swing.border.Border;
 
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class DcViewDivider extends JSplitPane {
     

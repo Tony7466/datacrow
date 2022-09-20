@@ -63,10 +63,10 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcImageIcon;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.Base64;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.StringUtils;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public class Utilities {
     

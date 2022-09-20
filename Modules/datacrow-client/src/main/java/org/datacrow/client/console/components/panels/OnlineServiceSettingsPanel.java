@@ -44,7 +44,7 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.Settings;
+import org.datacrow.core.settings.Settings;
 
 public class OnlineServiceSettingsPanel extends JPanel implements ActionListener {
     

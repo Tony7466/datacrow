@@ -26,6 +26,7 @@
 package org.datacrow.core.server;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,7 @@ import org.datacrow.core.objects.ValidationException;
 import org.datacrow.core.objects.helpers.User;
 import org.datacrow.core.security.SecuredUser;
 import org.datacrow.core.server.response.ServerModulesRequestResponse;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.wf.tasks.DcTask;
 
 public abstract class Connector {
@@ -117,6 +119,8 @@ public abstract class Connector {
 	public abstract void deleteModule(int moduleIdx);
 	
 	public abstract ServerModulesRequestResponse getModules();
+	
+	public abstract HashMap<Integer, Settings> getModuleSettings();
 
     public abstract void initialize();
     
@@ -151,6 +155,7 @@ public abstract class Connector {
 	public abstract void executeTask(DcTask task);
 	
 	public abstract boolean deleteItem(DcObject dco) throws ValidationException;
+	
 	public abstract boolean saveItem(DcObject dco) throws ValidationException;
 	
 	public abstract Collection<Picture> getPictures(String parentID);

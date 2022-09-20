@@ -35,8 +35,8 @@ import org.datacrow.core.services.IOnlineSearchClient;
 import org.datacrow.core.services.Region;
 import org.datacrow.core.services.SearchMode;
 import org.datacrow.core.services.SearchTask;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.settings.Setting;
-import org.datacrow.core.utilities.settings.DcSettings;
 import org.datacrow.onlinesearch.imdb.task.ImdbMovieSearch;
 
 public class ImdbMovieServer extends ImdbServer {

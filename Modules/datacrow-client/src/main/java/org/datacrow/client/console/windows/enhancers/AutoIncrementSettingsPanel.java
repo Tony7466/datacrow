@@ -52,8 +52,8 @@ import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcMediaObject;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
+import org.datacrow.core.settings.DcSettings;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
 
 public class AutoIncrementSettingsPanel extends JPanel {
 

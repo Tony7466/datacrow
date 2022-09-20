@@ -23,7 +23,7 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings.definitions;
+package org.datacrow.core.utilities.definitions;
 
 import java.util.ArrayList;
 import java.util.Collection;

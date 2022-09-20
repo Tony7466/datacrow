@@ -42,10 +42,10 @@ import org.datacrow.core.modules.ModuleJar;
 import org.datacrow.core.modules.xml.XmlField;
 import org.datacrow.core.modules.xml.XmlModule;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
-import org.datacrow.core.utilities.settings.Settings;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
+import org.datacrow.core.settings.DcSettings;
+import org.datacrow.core.settings.Settings;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinitions;
 
 public class CreateModuleWizard extends Wizard {
 

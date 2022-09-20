@@ -73,12 +73,12 @@ import org.datacrow.core.services.OnlineServices;
 import org.datacrow.core.services.SearchMode;
 import org.datacrow.core.services.SearchTask;
 import org.datacrow.core.services.plugin.IServer;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.synchronizers.Synchronizer;
 import org.datacrow.core.synchronizers.Synchronizers;
 import org.datacrow.core.utilities.StringUtils;
 import org.datacrow.core.utilities.cuecat.CueCatCode;
 import org.datacrow.core.utilities.cuecat.CueCatDecoder;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public class OnlineSearchForm extends DcFrame implements IOnlineSearchClient, ActionListener, MouseListener, ChangeListener {
 

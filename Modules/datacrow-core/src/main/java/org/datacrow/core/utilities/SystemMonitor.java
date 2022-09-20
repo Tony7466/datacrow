@@ -28,7 +28,7 @@ package org.datacrow.core.utilities;
 import org.apache.logging.log4j.Logger;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.log.DcLogManager;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 /**
  * The system monitor checks the available resources and logs information about the 

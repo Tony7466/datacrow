@@ -46,7 +46,7 @@ import org.datacrow.core.console.ITreePanel;
 import org.datacrow.core.console.IView;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class GroupingPane extends JPanel implements ChangeListener, IGroupingPane {
 

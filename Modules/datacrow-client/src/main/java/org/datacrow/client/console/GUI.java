@@ -81,7 +81,7 @@ import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.services.OnlineServices;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class GUI {
 	
@@ -302,7 +302,7 @@ public class GUI {
     public void openSettingsView() {
           SettingsView view = new SettingsView(
                   DcResources.getText("lblDataCrowSettings"), 
-                  DcSettings.getSettings().getSettings());
+                  DcSettings.getSettings());
           
           ImageIcon icon = new DcImageIcon(DcConfig.getInstance().getInstallationDir() + "icons/logo.jpg");
           view.setDisclaimer(icon);

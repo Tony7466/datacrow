@@ -45,7 +45,7 @@ import org.datacrow.core.data.DataFilters;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class SortingDialog extends DcDialog implements ActionListener {
 

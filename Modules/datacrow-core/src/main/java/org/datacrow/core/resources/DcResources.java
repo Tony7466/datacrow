@@ -37,8 +37,8 @@ import org.apache.logging.log4j.Logger;
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.log.DcLogManager;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 /**
  * This class gives access to all labels, messages and tooltips for all languages.

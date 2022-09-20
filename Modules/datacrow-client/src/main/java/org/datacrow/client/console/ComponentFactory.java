@@ -133,7 +133,8 @@ import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcLookAndFeel;
 import org.datacrow.core.plugin.Plugin;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
+
 import net.jacksum.JacksumAPI;
 
 /**

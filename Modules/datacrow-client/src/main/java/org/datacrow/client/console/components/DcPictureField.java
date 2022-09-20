@@ -68,10 +68,10 @@ import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.objects.Picture;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.Base64;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.filefilters.DcFileFilter;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public class DcPictureField extends JComponent implements IComponent, ActionListener, MouseListener {
 

@@ -75,9 +75,9 @@ import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Loan;
 import org.datacrow.core.server.Connector;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.synchronizers.Synchronizers;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 /**
  * This is the starting point of the application.

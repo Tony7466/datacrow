@@ -47,8 +47,8 @@ import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.Layout;
 import org.datacrow.client.console.components.tables.DcTable;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.definitions.ProgramDefinition;
-import org.datacrow.core.utilities.settings.definitions.ProgramDefinitions;
+import org.datacrow.core.utilities.definitions.ProgramDefinition;
+import org.datacrow.core.utilities.definitions.ProgramDefinitions;
 
 public class DcProgramDefinitionsField extends JComponent implements IComponent, ActionListener, MouseListener {
 	

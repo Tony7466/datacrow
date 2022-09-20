@@ -34,8 +34,8 @@ import org.apache.logging.log4j.Logger;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.services.Servers;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 /**
  * The DcStarter class holds the generic startup routine for Data Crow and is used by 
@@ -101,7 +101,7 @@ public class DcStarter {
             }
             
             new DcResources().initialize();
-            org.datacrow.core.utilities.settings.DcSettings.initialize();
+            org.datacrow.core.settings.DcSettings.initialize();
             
             checkPlatform();
             

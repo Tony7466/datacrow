@@ -35,7 +35,6 @@ public class DcObjectAdapter implements JsonDeserializer<DcObject>, JsonSerializ
         JsonElement jvalue;
         List<JsonElement> jvalues = new ArrayList<JsonElement>();
         
-        
         DcValue v;
         for (DcField field :  src.getFields()) {
             if (src.isFilled(field.getIndex()) && !field.isUiOnly()) {

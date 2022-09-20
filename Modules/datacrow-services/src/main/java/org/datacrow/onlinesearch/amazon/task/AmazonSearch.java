@@ -55,8 +55,8 @@ import org.datacrow.core.services.Region;
 import org.datacrow.core.services.SearchMode;
 import org.datacrow.core.services.SearchTask;
 import org.datacrow.core.services.plugin.IServer;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.html.HtmlUtils;
-import org.datacrow.core.utilities.settings.DcSettings;
 import org.datacrow.onlinesearch.amazon.SignedRequestsHelper;
 import org.datacrow.onlinesearch.amazon.mode.ItemLookupSearchMode;
 

@@ -48,6 +48,7 @@ import org.datacrow.core.server.requests.ClientRequestItemAction;
 import org.datacrow.core.server.requests.ClientRequestItemKeys;
 import org.datacrow.core.server.requests.ClientRequestItems;
 import org.datacrow.core.server.requests.ClientRequestLogin;
+import org.datacrow.core.server.requests.ClientRequestModuleSettings;
 import org.datacrow.core.server.requests.ClientRequestModules;
 import org.datacrow.core.server.requests.ClientRequestReferencingItems;
 import org.datacrow.core.server.requests.ClientRequestSimpleValues;
@@ -62,6 +63,7 @@ import org.datacrow.core.server.response.ServerItemRequestResponse;
 import org.datacrow.core.server.response.ServerItemsRequestResponse;
 import org.datacrow.core.server.response.ServerLoginResponse;
 import org.datacrow.core.server.response.ServerModulesRequestResponse;
+import org.datacrow.core.server.response.ServerModulesSettingsResponse;
 import org.datacrow.core.server.response.ServerResponse;
 import org.datacrow.core.server.response.ServerSQLResponse;
 import org.datacrow.core.server.response.ServerSimpleValuesResponse;
@@ -185,7 +187,10 @@ public class DcServerSessionRequestHandler extends Thread {
                 break;
             case ClientRequest._USER_MGT:
                 sr = processUserManagementAction((ClientRequestUser) cr);
-                break;                
+                break;
+            case ClientRequest._REQUEST_MODULE_SETTINGS:
+                sr = processModuleSettingsRequest((ClientRequestModuleSettings) cr);
+                break;                   
             default:
                 logger.error("No handler found for " + cr);
 	        }
@@ -268,6 +273,10 @@ public class DcServerSessionRequestHandler extends Thread {
     private ServerResponse processValueEnhancersRequest(ClientRequestValueEnhancers cras) throws Exception {
         return new ServerValueEnhancersRequestResponse();
     }
+    
+    private ServerModulesSettingsResponse processModuleSettingsRequest(ClientRequestModuleSettings crms) {
+        return new ServerModulesSettingsResponse();
+    }     
 	   
     private ServerResponse processItemActionRequest(ClientRequestItemAction cr) {
         DcObject dco = cr.getItem();

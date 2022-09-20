@@ -55,7 +55,7 @@ import org.datacrow.core.objects.DcMapping;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.server.Connector;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class FindReplaceTaskDialog extends DcDialog implements ActionListener, IClient {
 

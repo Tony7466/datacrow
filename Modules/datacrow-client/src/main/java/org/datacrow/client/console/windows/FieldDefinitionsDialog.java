@@ -56,9 +56,9 @@ import org.datacrow.core.objects.DcAssociate;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.Settings;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
+import org.datacrow.core.settings.Settings;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinitions;
 
 public class FieldDefinitionsDialog extends DcDialog implements ActionListener {
 

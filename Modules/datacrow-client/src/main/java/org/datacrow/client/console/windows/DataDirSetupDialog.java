@@ -51,10 +51,10 @@ import org.datacrow.client.util.Utilities;
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.clients.IClient;
 import org.datacrow.core.objects.DcImageIcon;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.CoreUtilities;
 import org.datacrow.core.utilities.DataDirectoryCreator;
 import org.datacrow.core.utilities.Directory;
-import org.datacrow.core.utilities.settings.DcSettings;
 import org.datacrow.server.db.DatabaseManager;
 
 public class DataDirSetupDialog extends NativeDialog implements ActionListener, IClient {

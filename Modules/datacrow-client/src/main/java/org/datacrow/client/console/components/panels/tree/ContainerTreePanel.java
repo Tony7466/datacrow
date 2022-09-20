@@ -53,8 +53,8 @@ import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.helpers.Container;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.server.Connector;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.Settings;
 
 /**
  * Hierarchical container view.

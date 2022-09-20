@@ -42,8 +42,8 @@ import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinitions;
 
 public class TabDesignPanel extends JPanel implements IFieldSelectionListener {
     

@@ -98,12 +98,12 @@ import org.datacrow.core.objects.Loan;
 import org.datacrow.core.objects.Picture;
 import org.datacrow.core.objects.helpers.Media;
 import org.datacrow.core.server.Connector;
+import org.datacrow.core.settings.DcSettings;
+import org.datacrow.core.settings.DcTableSettings;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcSettings;
-import org.datacrow.core.utilities.settings.DcTableSettings;
-import org.datacrow.core.utilities.settings.Settings;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinitions;
 
 public class DcTable extends JTable implements IViewComponent, MouseListener {
 

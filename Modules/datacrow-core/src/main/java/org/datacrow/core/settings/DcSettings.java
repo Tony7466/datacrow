@@ -23,7 +23,7 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.utilities.settings;
+package org.datacrow.core.settings;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,8 +32,7 @@ import java.awt.Font;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcLookAndFeel;
-import org.datacrow.core.settings.Setting;
-import org.datacrow.core.utilities.settings.definitions.IDefinitions;
+import org.datacrow.core.utilities.definitions.IDefinitions;
 
 /**
  * Wrapper for the application settings.

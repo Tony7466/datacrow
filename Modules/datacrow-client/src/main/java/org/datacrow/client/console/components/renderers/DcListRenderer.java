@@ -36,7 +36,7 @@ import javax.swing.border.Border;
 
 import org.datacrow.client.console.components.lists.elements.DcObjectListElement;
 import org.datacrow.core.DcRepository;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class DcListRenderer<V> extends DefaultListCellRenderer  {
 

@@ -28,11 +28,12 @@ package org.datacrow.server;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.data.DataFilter;
@@ -58,7 +59,8 @@ import org.datacrow.core.security.SecuredUser;
 import org.datacrow.core.security.SecurityException;
 import org.datacrow.core.server.Connector;
 import org.datacrow.core.server.response.ServerModulesRequestResponse;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.wf.tasks.DcTask;
 import org.datacrow.server.data.DataManager;
 import org.datacrow.server.db.DatabaseManager;
@@ -301,7 +303,6 @@ public class LocalServerConnector extends Connector {
 		}
 		
 		t.start();
-		
 	}
 
 	@Override
@@ -316,9 +317,14 @@ public class LocalServerConnector extends Connector {
 	
     @Override
     public ServerModulesRequestResponse getModules() {
-    	return null;
+        throw new NotImplementedException("This request type has not been implemented for this connector");
     }
 
+    @Override
+    public HashMap<Integer, Settings> getModuleSettings() {
+        throw new NotImplementedException("This request type has not been implemented for this connector");
+    }
+    
     @Override
     public Map<DcField, Collection<IValueEnhancer>> getValueEnhancers() {
         return ValueEnhancers.getEnhancers();

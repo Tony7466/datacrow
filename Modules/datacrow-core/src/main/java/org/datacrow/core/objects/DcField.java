@@ -36,8 +36,8 @@ import org.datacrow.core.enhancers.IValueEnhancer;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.modules.xml.XmlField;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinitions;
 
 /**
  * Fields are part of a Data Crow module. A field defines how it is represented in the

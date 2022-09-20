@@ -56,9 +56,9 @@ import org.datacrow.client.console.components.panels.tree.DcDefaultMutableTreeNo
 import org.datacrow.client.console.windows.DcDialog;
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.settings.SettingsFile;
 import org.datacrow.core.settings.SettingsGroup;
-import org.datacrow.core.settings.Settings;
 
 /**
  * Tree view with panels. Loads and saves settings

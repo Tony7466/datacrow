@@ -43,7 +43,7 @@ import org.datacrow.core.modules.ModuleJar;
 import org.datacrow.core.modules.xml.XmlField;
 import org.datacrow.core.modules.xml.XmlModule;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class RelateModuleWizard extends Wizard {
 

@@ -42,8 +42,8 @@ import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Picture;
 import org.datacrow.core.server.Connector;
-import org.datacrow.core.utilities.settings.DcSettings;
-import org.datacrow.core.utilities.settings.Settings;
+import org.datacrow.core.settings.DcSettings;
+import org.datacrow.core.settings.Settings;
 
 /**
  * A list element which is capable of displaying a DcObject.

@@ -38,7 +38,7 @@ import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.components.DcFileChooser;
 import org.datacrow.client.console.components.panels.BackupFilePreviewPanel;
 import org.datacrow.core.DcRepository;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class BrowserDialog extends JFrame {
 

@@ -64,8 +64,8 @@ import org.datacrow.core.plugin.Plugin;
 import org.datacrow.core.plugin.Plugins;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.server.Connector;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public class DcToolBar extends JToolBar implements ActionListener, MouseListener, KeyListener {
     

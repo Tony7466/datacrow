@@ -45,6 +45,7 @@ public class ClientRequest implements Serializable {
 	public static final int _REQUEST_MODULES = 9;
 	public static final int _REQUEST_APPLICATION_SETTINGS = 10;
 	public static final int _REQUEST_VALUE_ENHANCERS_SETTINGS = 11;
+	public static final int _REQUEST_MODULE_SETTINGS = 12;
 
 	private int type;
 	

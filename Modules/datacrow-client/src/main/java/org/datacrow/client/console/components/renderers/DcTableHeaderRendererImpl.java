@@ -36,7 +36,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.console.components.DcMultiLineToolTip;
 import org.datacrow.core.DcRepository;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public abstract class DcTableHeaderRendererImpl extends DefaultTableCellRenderer {
 

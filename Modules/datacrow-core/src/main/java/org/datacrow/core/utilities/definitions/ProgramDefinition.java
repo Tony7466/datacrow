@@ -23,24 +23,47 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.core.server.response;
+package org.datacrow.core.utilities.definitions;
 
-import org.datacrow.core.settings.DcSettings;
-import org.datacrow.core.settings.Settings;
+import org.datacrow.core.utilities.CoreUtilities;
 
-public class ServerApplicationSettingsRequestResponse extends ServerResponse {
+public class ProgramDefinition extends Definition {
 
-    private static final long serialVersionUID = -5876133656204207647L;
-    
-    private Settings settings;
+	private static final long serialVersionUID = -1751426625622194638L;
 
-	public ServerApplicationSettingsRequestResponse() {
-	    super(_RESPONSE_APPLICATION_SETTINGS);
-	    
-		this.settings = DcSettings.getSettings();
+	private String extension = "";
+	private String program = "";
+	private String parameters = "";
+	
+	public ProgramDefinition(String extension, String program, String parameters) {
+		this.extension = extension;
+		this.program = program;
+		this.parameters = parameters;
+	}
+	
+	public boolean hasParameters() {
+	    return !CoreUtilities.isEmpty(parameters);
+	}
+	
+	public String getExtension() {
+		return extension;
 	}
 
-	public Settings getSettings() {
-	    return settings;
+	public String getProgram() {
+		return program;
+	}
+
+    public String getParameters() {
+        return parameters;
+    }
+
+    @Override
+    public String toSettingValue() {
+        return extension + "/&/" + program + "/&/" + parameters;
+    }    
+    
+    @Override
+	public String toString() {
+		return "[" + extension + "] " + program + " " + parameters;
 	}
 }

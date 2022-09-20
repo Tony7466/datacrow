@@ -57,12 +57,13 @@ import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.security.SecuredUser;
 import org.datacrow.core.server.Connector;
 import org.datacrow.core.services.Servers;
+import org.datacrow.core.settings.DcModuleSettings;
+import org.datacrow.core.settings.Settings;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.DcModuleSettings;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinition;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinitions;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinitions;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinition;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinitions;
 
 /**
  * A module represents items. The module dictates among other things where the 
@@ -130,7 +131,7 @@ public class DcModule implements Comparable<DcModule>, Serializable {
     private boolean isNew = false;
     private boolean isDefaultDataLoaded = false;
     
-    private org.datacrow.core.utilities.settings.Settings settings;
+    private transient Settings settings;
     
     private int childIdx = -1;
     private int parentIdx = -1;
@@ -971,7 +972,7 @@ public class DcModule implements Comparable<DcModule>, Serializable {
      * The module settings.
      * @see DcRepository.ModuleSettings
      */
-    public org.datacrow.core.utilities.settings.Settings getSettings() {
+    public org.datacrow.core.settings.Settings getSettings() {
         return settings;
     }
     

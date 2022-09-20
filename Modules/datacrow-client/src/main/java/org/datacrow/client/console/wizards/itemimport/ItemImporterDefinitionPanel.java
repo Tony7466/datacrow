@@ -41,9 +41,9 @@ import org.datacrow.client.console.components.DcFileField;
 import org.datacrow.client.console.components.IComponent;
 import org.datacrow.client.console.wizards.WizardException;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.settings.Setting;
 import org.datacrow.core.utilities.filefilters.DcFileFilter;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public class ItemImporterDefinitionPanel extends ItemImporterWizardPanel {
 

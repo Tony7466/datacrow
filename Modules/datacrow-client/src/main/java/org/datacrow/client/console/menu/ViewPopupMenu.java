@@ -65,7 +65,7 @@ import org.datacrow.core.reporting.Reports;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.server.Connector;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
 
 public class ViewPopupMenu extends DcPopupMenu implements ActionListener {
 

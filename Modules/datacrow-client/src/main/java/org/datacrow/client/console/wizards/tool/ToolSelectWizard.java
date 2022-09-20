@@ -39,7 +39,7 @@ import org.datacrow.client.console.wizards.Wizard;
 import org.datacrow.client.console.wizards.WizardException;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class ToolSelectWizard extends Wizard {
 

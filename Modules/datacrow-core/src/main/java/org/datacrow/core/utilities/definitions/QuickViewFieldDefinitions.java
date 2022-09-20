@@ -23,67 +23,82 @@
  *                                                                            *
  ******************************************************************************/
 
-package org.datacrow.client.console.components.lists.elements;
+package org.datacrow.core.utilities.definitions;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.StringTokenizer;
 
-import javax.swing.JPanel;
+public class QuickViewFieldDefinitions implements IDefinitions {
 
-import org.datacrow.client.console.components.DcLabel;
-import org.datacrow.core.DcRepository;
-import org.datacrow.core.objects.DcTemplate;
-import org.datacrow.core.objects.Picture;
-import org.datacrow.core.resources.DcResources;
-import org.datacrow.core.settings.DcSettings;
+	private static final long serialVersionUID = -5067780475246039249L;
 
-public class DcTemplateListElement extends DcObjectListElement {
-
-    private static final FlowLayout layout = new FlowLayout(FlowLayout.LEFT);
-    private JPanel panelInfo;
+	private Collection<QuickViewFieldDefinition> definitions = new ArrayList<QuickViewFieldDefinition>();
     
-    public DcTemplateListElement(int module) {
-        super(module);
+    private int module;
+    
+    public QuickViewFieldDefinitions(int module) {
+        this.module = module;
     }
     
     @Override
-    public void setBackground(Color color) {
-        super.setBackground(color);
-        if (panelInfo != null)
-            panelInfo.setBackground(color);
-    }     
+    public void add(Collection<Definition> c) {
+        for (Definition definition : c)
+            add(definition);
+    }
     
     @Override
-    public Collection<Picture> getPictures() {
-        return new ArrayList<Picture>();
+    public void add(Definition definition) {
+        if (!exists(definition)) {
+            definitions.add((QuickViewFieldDefinition) definition);
+        }
     }
 
     @Override
-    public void build() {
-        setLayout(layout);
+    public void clear() {
+        definitions.clear();
+    }
+
+    @Override
+    public Collection<QuickViewFieldDefinition> getDefinitions() {
+        return definitions;
+    }
+
+    @Override
+    public int getSize() {
+        return definitions.size();
+    }         
+
+    private void removeDefinition(int field) {
+        QuickViewFieldDefinition definition = null;
+        for (QuickViewFieldDefinition d : definitions) {
+            if (d.getField() == field) {
+                definition = d;
+                break;
+            }
+        }
         
-        DcTemplate template = (DcTemplate) dco;
-        
-        String label = dco.getDisplayString(DcTemplate._SYS_TEMPLATENAME); 
-        if (template.isDefault()) 
-            label += " (" + DcResources.getText("lblDefault") + ")";
-        
-        DcLabel lbl = new DcLabel(label);
-        lbl.setPreferredSize(new Dimension(800, fieldHeight));
-        lbl.setFont(DcSettings.getFont(DcRepository.Settings.stSystemFontNormal));
-        
-        panelInfo = getPanel();
-        panelInfo.add(lbl);
-        panelInfo.setPreferredSize(new Dimension(800, fieldHeight));
-        add(panelInfo);
-    } 
+        if (definition != null)
+            definitions.remove(definition);
+    }
     
-	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
-		panelInfo = null;
-	}
+    @Override
+    public boolean exists(Definition definition) {
+        return definitions.contains(definition);
+    }        
+    
+    @Override
+    public void add(String s) {
+        StringTokenizer st = new StringTokenizer(s, "/&/");
+        int field = Integer.parseInt((String) st.nextElement());
+        boolean enabled = Boolean.valueOf((String) st.nextElement()).booleanValue();
+        String direction = (String) st.nextElement();
+        
+        int maxLength = 0;
+        if (st.hasMoreElements())
+            maxLength = Integer.parseInt((String) st.nextElement());
+
+        removeDefinition(field);
+        add(new QuickViewFieldDefinition(module, field, enabled, direction, maxLength));
+    }
 }

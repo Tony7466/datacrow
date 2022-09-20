@@ -192,7 +192,7 @@ public class ModuleExporter {
 					}
 
 					// settings export
-					file = module.getSettings().getSettings().getSettingsFile();
+					file = module.getSettings().getSettingsFile();
 					module.getSettings().save();
 					if (file.exists()) {
 					    content = CoreUtilities.readFile(file);

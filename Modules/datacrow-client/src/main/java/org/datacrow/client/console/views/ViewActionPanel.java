@@ -43,7 +43,7 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.security.SecuredUser;
 import org.datacrow.core.server.Connector;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
 
 public class ViewActionPanel extends JPanel implements ActionListener {
 

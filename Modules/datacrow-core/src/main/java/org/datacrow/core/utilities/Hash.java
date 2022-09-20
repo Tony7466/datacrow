@@ -32,7 +32,8 @@ import org.apache.logging.log4j.Logger;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcObject;
-import org.datacrow.core.utilities.settings.DcSettings;
+import org.datacrow.core.settings.DcSettings;
+
 import net.jacksum.JacksumAPI;
 import net.jacksum.algorithms.AbstractChecksum;
 

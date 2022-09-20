@@ -81,8 +81,8 @@ import org.datacrow.core.objects.DcMapping;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Picture;
 import org.datacrow.core.objects.helpers.Permission;
+import org.datacrow.core.settings.DcSettings;
 import org.datacrow.core.utilities.comparators.DcObjectComparator;
-import org.datacrow.core.utilities.settings.DcSettings;
 
 public class CoreUtilities {
     

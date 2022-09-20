@@ -40,12 +40,11 @@ import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.objects.DcLookAndFeel;
 import org.datacrow.core.resources.DcResources;
 import org.datacrow.core.utilities.StringUtils;
-import org.datacrow.core.utilities.settings.DcTableSettings;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinitions;
-import org.datacrow.core.utilities.settings.definitions.Definition;
-import org.datacrow.core.utilities.settings.definitions.IDefinitions;
-import org.datacrow.core.utilities.settings.definitions.ProgramDefinitions;
-import org.datacrow.core.utilities.settings.definitions.QuickViewFieldDefinitions;
+import org.datacrow.core.utilities.definitions.DcFieldDefinitions;
+import org.datacrow.core.utilities.definitions.Definition;
+import org.datacrow.core.utilities.definitions.IDefinitions;
+import org.datacrow.core.utilities.definitions.ProgramDefinitions;
+import org.datacrow.core.utilities.definitions.QuickViewFieldDefinitions;
 
 /**
  * A Settings definition. The setting is always added to a file

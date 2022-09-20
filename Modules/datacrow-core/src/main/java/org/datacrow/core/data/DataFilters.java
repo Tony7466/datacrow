@@ -42,7 +42,7 @@ import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.utilities.CoreUtilities;
-import org.datacrow.core.utilities.settings.definitions.DcFieldDefinition;
+import org.datacrow.core.utilities.definitions.DcFieldDefinition;
 
 
 /**
