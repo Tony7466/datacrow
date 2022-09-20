@@ -1,4 +1,4 @@
-package org.datacrow.core.server.serialization.serializers;
+package org.datacrow.core.server.serialization.adapters;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

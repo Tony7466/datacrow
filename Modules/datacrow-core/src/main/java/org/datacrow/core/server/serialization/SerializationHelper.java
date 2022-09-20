@@ -40,12 +40,15 @@ import org.datacrow.core.server.response.ServerResponse;
 import org.datacrow.core.server.response.ServerSQLResponse;
 import org.datacrow.core.server.response.ServerSimpleValuesResponse;
 import org.datacrow.core.server.response.ServerValueEnhancersRequestResponse;
-import org.datacrow.core.server.serialization.serializers.AwtColorAdapter;
-import org.datacrow.core.server.serialization.serializers.AwtFontAdapter;
-import org.datacrow.core.server.serialization.serializers.DcObjectAdapter;
-import org.datacrow.core.server.serialization.serializers.FileAdapter;
-import org.datacrow.core.server.serialization.serializers.InterfaceAdapter;
-import org.datacrow.core.server.serialization.serializers.KeyStrokeAdapter;
+import org.datacrow.core.server.serialization.adapters.AwtColorAdapter;
+import org.datacrow.core.server.serialization.adapters.AwtFontAdapter;
+import org.datacrow.core.server.serialization.adapters.SettingsAdapter;
+import org.datacrow.core.server.serialization.adapters.DcObjectAdapter;
+import org.datacrow.core.server.serialization.adapters.FileAdapter;
+import org.datacrow.core.server.serialization.adapters.InterfaceAdapter;
+import org.datacrow.core.server.serialization.adapters.KeyStrokeAdapter;
+import org.datacrow.core.settings.DcModuleSettings;
+import org.datacrow.core.settings.Settings;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -87,6 +90,8 @@ public class SerializationHelper {
                 .registerTypeAdapter(KeyStroke.class, new KeyStrokeAdapter())
                 .registerTypeAdapter(IValueEnhancer.class, new InterfaceAdapter())
                 .registerTypeAdapter(DcModule.class, new InterfaceAdapter())
+                .registerTypeAdapter(Settings.class, new SettingsAdapter())
+                .enableComplexMapKeySerialization()
                 .create();
 
         gsonSimple = new GsonBuilder()
@@ -96,6 +101,9 @@ public class SerializationHelper {
                 .registerTypeAdapter(Color.class, new AwtColorAdapter())
                 .registerTypeAdapter(Font.class, new AwtFontAdapter())
                 .registerTypeAdapter(KeyStroke.class, new KeyStrokeAdapter())
+                .registerTypeAdapter(DcModuleSettings.class, new SettingsAdapter())
+                .registerTypeAdapter(Settings.class, new SettingsAdapter())
+                .enableComplexMapKeySerialization()
                 .create();
     }
     

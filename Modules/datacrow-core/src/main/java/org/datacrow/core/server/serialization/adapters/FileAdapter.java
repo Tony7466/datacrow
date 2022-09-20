@@ -1,6 +1,6 @@
-package org.datacrow.core.server.serialization.serializers;
+package org.datacrow.core.server.serialization.adapters;
 
-import java.awt.Color;
+import java.io.File;
 import java.lang.reflect.Type;
 
 import com.google.gson.JsonDeserializationContext;
@@ -11,23 +11,25 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-public class AwtColorAdapter implements JsonDeserializer<Color>, JsonSerializer<Color> {
-
+public class FileAdapter implements JsonDeserializer<File>, JsonSerializer<File> {
+    
     public JsonElement serialize(
-            Color src, 
+            File src, 
             Type typeOfSrc, 
             JsonSerializationContext context) {
         
         JsonObject jdco = new JsonObject();
-        jdco.addProperty("rgb", src.getRGB());
+        
+        jdco.addProperty("absolutepath", src.getAbsolutePath());
+        
         return jdco;
     }
-    
-    public Color deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext)
+
+    public File deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext)
             throws JsonParseException {
 
         JsonObject jsonObject = json.getAsJsonObject();
-        int rgb = jsonObject.get("rgb").getAsInt();
-        return new Color(rgb);
+        String absFilename = jsonObject.get("absolutepath").getAsString();
+        return new File(absFilename);
     }
 }

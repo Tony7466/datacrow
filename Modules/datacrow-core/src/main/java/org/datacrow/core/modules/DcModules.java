@@ -163,7 +163,8 @@ public class DcModules implements Serializable {
                 module.initializeSettings();
                 
                 for (Setting setting : settings.getSettings()) {
-                    if (!setting.isReadonly()) module.setSetting(setting.getKey(), setting.getValue());
+                    if (!setting.isReadonly()) 
+                        module.setSetting(setting.getKey(), setting.getValue());
                 }   
             }
     	} else {

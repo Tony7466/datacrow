@@ -1,4 +1,4 @@
-package org.datacrow.core.server.serialization.serializers;
+package org.datacrow.core.server.serialization.adapters;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;

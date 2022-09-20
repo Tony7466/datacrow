@@ -66,6 +66,8 @@ public class DcModuleSettings extends Settings {
 	private static final long serialVersionUID = 8052899124466678552L;
 
 	private String _General = "lblGroupGeneral";
+	
+	private int moduleIdx;
     
     /**
      * Initializes and loads all module settings
@@ -73,6 +75,8 @@ public class DcModuleSettings extends Settings {
      */
     public DcModuleSettings(DcModule module) {
         super();
+        
+        moduleIdx = module.getIndex();
         
         createSettings(module);
         createSystemSettings(module);
@@ -111,6 +115,10 @@ public class DcModuleSettings extends Settings {
             fields[i++] = field.intValue();
         
         set(DcRepository.ModuleSettings.stOnlineSearchFieldOverwriteSettings, fields);
+    }
+    
+    public int getModuleIdx() {
+        return moduleIdx;
     }
 
     @Override

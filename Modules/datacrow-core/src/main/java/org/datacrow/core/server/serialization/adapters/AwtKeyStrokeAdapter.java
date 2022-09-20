@@ -1,4 +1,4 @@
-package org.datacrow.core.server.serialization.serializers;
+package org.datacrow.core.server.serialization.adapters;
 
 import java.awt.AWTKeyStroke;
 import java.lang.reflect.Type;

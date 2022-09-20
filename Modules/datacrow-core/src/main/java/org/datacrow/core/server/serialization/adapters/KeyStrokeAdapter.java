@@ -1,7 +1,8 @@
-package org.datacrow.core.server.serialization.serializers;
+package org.datacrow.core.server.serialization.adapters;
 
-import java.io.File;
 import java.lang.reflect.Type;
+
+import javax.swing.KeyStroke;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -11,25 +12,25 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-public class FileAdapter implements JsonDeserializer<File>, JsonSerializer<File> {
+public class KeyStrokeAdapter implements JsonDeserializer<KeyStroke>, JsonSerializer<KeyStroke> {
     
     public JsonElement serialize(
-            File src, 
+            KeyStroke src, 
             Type typeOfSrc, 
             JsonSerializationContext context) {
         
         JsonObject jdco = new JsonObject();
-        
-        jdco.addProperty("absolutepath", src.getAbsolutePath());
-        
+        jdco.addProperty("keycode", src.getKeyCode());
+        jdco.addProperty("modifiers", src.getModifiers());
         return jdco;
     }
 
-    public File deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext)
+    public KeyStroke deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext)
             throws JsonParseException {
 
         JsonObject jsonObject = json.getAsJsonObject();
-        String absFilename = jsonObject.get("absolutepath").getAsString();
-        return new File(absFilename);
+        int keyCode = jsonObject.get("keycode").getAsInt();
+        int modifiers = jsonObject.get("modifiers").getAsInt();
+        return KeyStroke.getKeyStroke(keyCode, modifiers);
     }
 }
