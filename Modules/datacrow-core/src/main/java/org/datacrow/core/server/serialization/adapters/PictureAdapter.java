@@ -97,7 +97,7 @@ public class PictureAdapter implements JsonDeserializer<Picture>, JsonSerializer
             pic.setValue(Picture._G_EXTERNAL_FILENAME, jo.get("externalfilename").getAsString());
         
         if (jo.has("imageBytes")) {
-            String base64 = jo.get("externalfilename").getAsString();
+            String base64 = jo.get("imageBytes").getAsString();
             DcImageIcon icon = new DcImageIcon(Base64.decode(base64.toCharArray()));
             pic.setValue(Picture._D_IMAGE, icon);
         }

@@ -6,7 +6,6 @@ import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.DcValue;
-import org.datacrow.core.objects.helpers.Software;
 import org.datacrow.core.server.serialization.helpers.DcFieldValue;
 
 import com.google.gson.JsonArray;
@@ -30,27 +29,20 @@ public class DcObjectAdapter implements JsonDeserializer<DcObject>, JsonSerializ
         src.loadImageData();
         
         jdco.addProperty("moduleIdx", src.getModuleIdx());
+        jdco.addProperty("isnew", src.isNew());
         
         JsonArray array = new JsonArray();
         
         DcValue v;
         for (DcField field :  src.getFields()) {
-           // if (!field.isUiOnly()) {
-                
-                v = src.getValueDef(field.getIndex());
-                DcFieldValue value = new DcFieldValue(
-                        field.getModule(),
-                        field.getIndex(), 
-                        v.getValue(), 
-                        v.isChanged());
-                
-                if (field.getIndex() == Software._P_SCREENSHOTONE) {
-                    System.out.println();
-                }
-                
-                
-                array.add(context.serialize(value));
-           // }
+            v = src.getValueDef(field.getIndex());
+            DcFieldValue value = new DcFieldValue(
+                    field.getModule(),
+                    field.getIndex(), 
+                    v.getValue(), 
+                    v.isChanged());
+            
+            array.add(context.serialize(value));
         }
         
         jdco.add("values", array);
@@ -63,6 +55,7 @@ public class DcObjectAdapter implements JsonDeserializer<DcObject>, JsonSerializ
 
         JsonObject jsonObject = json.getAsJsonObject();
         int moduleIdx = jsonObject.get("moduleIdx").getAsInt();
+        boolean isnew = jsonObject.get("isnew").getAsBoolean();
 
         DcObject dco = DcModules.get(moduleIdx).getItem();
         
@@ -71,9 +64,12 @@ public class DcObjectAdapter implements JsonDeserializer<DcObject>, JsonSerializ
         DcFieldValue fieldValue;
         for (JsonElement value : values) {
             fieldValue = jsonDeserializationContext.deserialize(value, DcFieldValue.class);
+            
             dco.setValue(fieldValue.getFieldIndex(), fieldValue.getValue());
             dco.setChanged(fieldValue.getFieldIndex(), fieldValue.isChanged());
         }
+        
+        dco.setNew(isnew);
             
         return dco;
     }

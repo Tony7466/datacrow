@@ -173,6 +173,8 @@ public class View extends DcPanel implements ListSelectionListener, IView {
         DcObject dco = getSelectedItem();
         
         if (dco != null) {
+            dco.reload();
+            
             ItemForm frm = GUI.getInstance().getItemForm(
                     getModule().getIndex(), 
                     readonly, 

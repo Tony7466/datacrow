@@ -2,8 +2,10 @@ package org.datacrow.core.server.serialization.adapters;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.apache.logging.log4j.Logger;
 import org.datacrow.core.DcRepository;
@@ -36,37 +38,47 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
         
         JsonObject jdco = new JsonObject();
         
-        jdco.addProperty("fieldindex", src.getFieldIndex());
-        jdco.addProperty("moduleindex", src.getModuleIndex());
-        jdco.addProperty("changed", src.isChanged());
-        
-        DcField field = DcModules.get(src.getModuleIndex()).getField(src.getFieldIndex());
-        
-        Object value = src.getValue();
-        JsonElement je;
-        if (value instanceof DcObject) {
-            je = context.serialize(value, DcObject.class);
-        if (value instanceof Picture)
-            je = context.serialize(value, Picture.class);
-        } else if (value instanceof Number) {
-            je = context.serialize(value.toString());
-        } else if (value instanceof Date) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            je = context.serialize(formatter.format((Date) value));
-        } else if (
-            field.getValueType() == DcRepository.ValueTypes._DCOBJECTCOLLECTION &&
-            value instanceof Collection) {
-
-            JsonArray references = new JsonArray();
-            for (DcMapping mapping : (Collection<DcMapping>) value) {
-                 references.add(context.serialize(mapping.getReferencedObject()));
-            }
-            je = context.serialize(references);
-        } else {
-            je = context.serialize(value);
-        }
+        try {
+            jdco.addProperty("fieldindex", src.getFieldIndex());
+            jdco.addProperty("moduleindex", src.getModuleIndex());
+            jdco.addProperty("changed", src.isChanged());
             
-        jdco.add("fieldvalue", je);
+            DcField field = DcModules.get(src.getModuleIndex()).getField(src.getFieldIndex());
+            
+            Object value = src.getValue();
+            JsonElement je = null;
+            if (value instanceof Picture)
+                je = context.serialize(value, Picture.class);
+            else if (value instanceof DcObject) {
+                je = context.serialize(value, DcObject.class);
+            } else if (value instanceof Number) {
+                je = context.serialize(value.toString());
+            } else if (value instanceof Date) {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                je = context.serialize(formatter.format((Date) value));
+            } else if (
+                field.getValueType() == DcRepository.ValueTypes._DCOBJECTCOLLECTION &&
+                value instanceof Collection) {
+    
+                JsonArray references = new JsonArray();
+                JsonObject ref;
+                
+                for (DcMapping mapping : (Collection<DcMapping>) value) {
+                    ref = (JsonObject) context.serialize(mapping.getReferencedObject(), DcObject.class);
+                    ref.addProperty("referenceParentId", (String) mapping.getValue(DcMapping._A_PARENT_ID));
+                    references.add(ref);
+                }
+                
+                je = context.serialize(references);
+            } else {
+                je = context.serialize(value);
+            }
+            
+            jdco.add("fieldvalue", je);
+        } catch (Exception e) {
+            logger.error("An error occurred during serialization of value [" + src.getValue() + "] "
+                    + " for module [" + src.getModuleIndex() + "], Field: [" + src.getFieldIndex() + "]", e);
+        }
         
         return jdco;
     }
@@ -83,7 +95,6 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
         Object result = null;
         
         JsonElement e = jsonObject.get("fieldvalue");
-        
         if (e != null) { 
             if (field.getValueType() == DcRepository.ValueTypes._DCOBJECTREFERENCE) {
                 JsonObject jo = jsonObject.getAsJsonObject("fieldvalue");
@@ -97,7 +108,30 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
             } else if (field.getValueType() == DcRepository.ValueTypes._DOUBLE) { 
                 result = Double.valueOf(e.getAsString());   
             } else if (field.getValueType() == DcRepository.ValueTypes._DCOBJECTCOLLECTION) {
-                result = null;
+                JsonArray array = (JsonArray) e;
+                Iterator<?> iter = array.iterator();
+                
+                JsonObject joRef;
+                DcObject ref;
+                Collection<DcMapping> mappings = new ArrayList<DcMapping>();
+                DcMapping mapping;
+                String parentId;
+                while (iter.hasNext()) {
+                    joRef = (JsonObject) iter.next();
+                    
+                    parentId = joRef.get("referenceParentId").getAsString();
+                    joRef.remove("referenceParentId");
+                    
+                    ref = context.deserialize(joRef, DcObject.class);
+                    
+                    mapping = new DcMapping(field.getReferenceIdx());
+                    mapping.setReference(ref);
+                    
+                    mapping.setValue(DcMapping._A_PARENT_ID, parentId);
+                    mapping.setValue(DcMapping._B_REFERENCED_ID, ref.getID());
+                    mappings.add(mapping);
+                }
+                result = mappings;
             } else if (field.getValueType() == DcRepository.ValueTypes._STRING) {
                 result = e.getAsString();
             } else if (field.getValueType() == DcRepository.ValueTypes._BOOLEAN) {
@@ -108,8 +142,10 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
                 try {
                     result = formatter.parse(jsonObject.get("fieldvalue").getAsString());
                 } catch (Exception exp) {
-                    logger.debug("Could not parse datem from [" + jsonObject.get("fieldvalue").getAsString() + "]", exp);
+                    logger.debug("Could not parse date from [" + jsonObject.get("fieldvalue").getAsString() + "]", exp);
                 }
+            } else {
+                result = jsonObject.get("fieldvalue").getAsString();
             }
         }
             
