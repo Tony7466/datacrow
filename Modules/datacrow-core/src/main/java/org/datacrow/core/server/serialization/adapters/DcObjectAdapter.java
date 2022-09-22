@@ -1,17 +1,13 @@
 package org.datacrow.core.server.serialization.adapters;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.DcValue;
-import org.datacrow.core.server.serialization.SerializationHelper;
 import org.datacrow.core.server.serialization.helpers.DcFieldValue;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -30,26 +26,28 @@ public class DcObjectAdapter implements JsonDeserializer<DcObject>, JsonSerializ
         
         JsonObject jdco = new JsonObject();
         
+        src.loadImageData();
+        
         jdco.addProperty("moduleIdx", src.getModuleIdx());
         
-        JsonElement jvalue;
-        List<JsonElement> jvalues = new ArrayList<JsonElement>();
+        JsonArray array = new JsonArray();
         
         DcValue v;
         for (DcField field :  src.getFields()) {
-            if (src.isFilled(field.getIndex()) && !field.isUiOnly()) {
+            if (!field.isUiOnly()) {
+                
                 v = src.getValueDef(field.getIndex());
                 DcFieldValue value = new DcFieldValue(
+                        field.getModule(),
                         field.getIndex(), 
-                        v.getJsonValue(field), 
+                        v.getValue(), 
                         v.isChanged());
-                jvalue = context.serialize(value);
-                jvalues.add(jvalue);
+                
+                array.add(context.serialize(value));
             }
         }
-
-        JsonElement tree = SerializationHelper.getInstance().getGson().toJsonTree(jvalues);
-        jdco.add("values", tree);
+        
+        jdco.add("values", array);
         
         return jdco;
     }
@@ -64,15 +62,13 @@ public class DcObjectAdapter implements JsonDeserializer<DcObject>, JsonSerializ
         
         JsonArray values = jsonObject.getAsJsonArray("values");
         
-        Gson gson = SerializationHelper.getInstance().getGson();
         DcFieldValue fieldValue;
         for (JsonElement value : values) {
-            fieldValue = gson.fromJson(value, DcFieldValue.class);
-            
-            dco.setValue(fieldValue.getIndex(), fieldValue.getValue());
-            dco.setChanged(fieldValue.getIndex(), fieldValue.isChanged());
+            fieldValue = jsonDeserializationContext.deserialize(value, DcFieldValue.class);
+            dco.setValue(fieldValue.getFieldIndex(), fieldValue.getValue());
+            dco.setChanged(fieldValue.getFieldIndex(), fieldValue.isChanged());
         }
-
+            
         return dco;
     }
 }

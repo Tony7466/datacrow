@@ -2,18 +2,24 @@ package org.datacrow.core.server.serialization.helpers;
 
 public class DcFieldValue {
     
-    private int index;
+    private int fieldIndex;
+    private int moduleIndex;
     private Object value;
     private boolean changed;
     
-    public DcFieldValue(int index, Object value, boolean changed) {
-        this.index = index;
+    public DcFieldValue(int moduleIndex, int fieldIndex, Object value, boolean changed) {
+        this.fieldIndex = fieldIndex;
+        this.moduleIndex = moduleIndex;
         this.value = value;
         this.changed = changed;
     }
     
-    public int getIndex() {
-        return index;
+    public int getFieldIndex() {
+        return fieldIndex;
+    }
+
+    public int getModuleIndex() {
+        return moduleIndex;
     }
     
     public Object getValue() {

@@ -42,11 +42,13 @@ import org.datacrow.core.server.response.ServerSimpleValuesResponse;
 import org.datacrow.core.server.response.ServerValueEnhancersRequestResponse;
 import org.datacrow.core.server.serialization.adapters.AwtColorAdapter;
 import org.datacrow.core.server.serialization.adapters.AwtFontAdapter;
-import org.datacrow.core.server.serialization.adapters.SettingsAdapter;
+import org.datacrow.core.server.serialization.adapters.DcFieldValueAdapter;
 import org.datacrow.core.server.serialization.adapters.DcObjectAdapter;
 import org.datacrow.core.server.serialization.adapters.FileAdapter;
 import org.datacrow.core.server.serialization.adapters.InterfaceAdapter;
 import org.datacrow.core.server.serialization.adapters.KeyStrokeAdapter;
+import org.datacrow.core.server.serialization.adapters.SettingsAdapter;
+import org.datacrow.core.server.serialization.helpers.DcFieldValue;
 import org.datacrow.core.settings.DcModuleSettings;
 import org.datacrow.core.settings.Settings;
 
@@ -84,6 +86,7 @@ public class SerializationHelper {
         gson = new GsonBuilder()
                 .disableHtmlEscaping()
                 .registerTypeAdapter(DcObject.class, new DcObjectAdapter())
+                .registerTypeAdapter(DcFieldValue.class, new DcFieldValueAdapter())
                 .registerTypeAdapter(File.class, new FileAdapter())
                 .registerTypeAdapter(Color.class, new AwtColorAdapter())
                 .registerTypeAdapter(Font.class, new AwtFontAdapter())
@@ -91,19 +94,20 @@ public class SerializationHelper {
                 .registerTypeAdapter(IValueEnhancer.class, new InterfaceAdapter())
                 .registerTypeAdapter(DcModule.class, new InterfaceAdapter())
                 .registerTypeAdapter(Settings.class, new SettingsAdapter())
-                .enableComplexMapKeySerialization()
+                .setPrettyPrinting()
                 .create();
 
         gsonSimple = new GsonBuilder()
                 .disableHtmlEscaping()
                 .registerTypeAdapter(DcObject.class, new DcObjectAdapter())
+                .registerTypeAdapter(DcFieldValue.class, new DcFieldValueAdapter())
                 .registerTypeAdapter(File.class, new FileAdapter())
                 .registerTypeAdapter(Color.class, new AwtColorAdapter())
                 .registerTypeAdapter(Font.class, new AwtFontAdapter())
                 .registerTypeAdapter(KeyStroke.class, new KeyStrokeAdapter())
                 .registerTypeAdapter(DcModuleSettings.class, new SettingsAdapter())
                 .registerTypeAdapter(Settings.class, new SettingsAdapter())
-                .enableComplexMapKeySerialization()
+                .setPrettyPrinting()
                 .create();
     }
     

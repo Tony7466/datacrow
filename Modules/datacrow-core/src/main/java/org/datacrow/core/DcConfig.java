@@ -188,7 +188,6 @@ public class DcConfig {
 	 * Clears this configuration from all values (NULL).
 	 */
 	public void clear() {
-//		setInstallationDir(null);
       	setImageDir(null);
       	setIconsDir(null);
       	setModuleDir(null);
@@ -362,7 +361,7 @@ public class DcConfig {
 	}
 
 	/**
-	 * Returns the lugins directory (fully qualified path). Typically this folder is located
+	 * Returns the plugins directory (fully qualified path). Typically this folder is located
      * within the installation directory of Data Crow.
 	 * @return the plugins directory, holding the plugin class and JAR files.
 	 */

@@ -87,7 +87,7 @@ public class DcObject implements Comparable<DcObject>, Serializable {
     
     private Map<Integer, DcValue> values = new HashMap<Integer, DcValue>();
     
-    protected List<DcObject> children = new ArrayList<DcObject>();
+    protected transient List<DcObject> children = new ArrayList<DcObject>();
 
     private transient boolean validate = true;
     private transient boolean updateGUI = true;

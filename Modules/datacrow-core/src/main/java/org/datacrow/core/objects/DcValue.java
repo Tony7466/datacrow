@@ -33,7 +33,6 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.apache.logging.log4j.Logger;
-
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.console.UIComponents;
@@ -255,26 +254,6 @@ public class DcValue implements Serializable {
                 }
             }
         }
-    }
-    
-    public Object getJsonValue(DcField field) {
-        Object result = value;
-        
-        if (field.getValueType() == DcRepository.ValueTypes._ICON) {
-            if (isChanged() && value instanceof DcImageIcon)
-                result = ((DcImageIcon) value).getCurrentBytes();
-        }
-        
-        if (field.getValueType() == DcRepository.ValueTypes._DATE || 
-            field.getValueType() == DcRepository.ValueTypes._DATETIME) {
-            
-            if (value instanceof Date) {
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                result = formatter.format((Date) value);
-            }
-        }
-        
-        return result;
     }
     
     private void setValueNative(Object value, DcField field) {
