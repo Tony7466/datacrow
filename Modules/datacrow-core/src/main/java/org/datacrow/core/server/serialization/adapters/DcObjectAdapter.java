@@ -6,6 +6,7 @@ import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.DcValue;
+import org.datacrow.core.objects.helpers.Software;
 import org.datacrow.core.server.serialization.helpers.DcFieldValue;
 
 import com.google.gson.JsonArray;
@@ -34,7 +35,7 @@ public class DcObjectAdapter implements JsonDeserializer<DcObject>, JsonSerializ
         
         DcValue v;
         for (DcField field :  src.getFields()) {
-            if (!field.isUiOnly()) {
+           // if (!field.isUiOnly()) {
                 
                 v = src.getValueDef(field.getIndex());
                 DcFieldValue value = new DcFieldValue(
@@ -43,8 +44,13 @@ public class DcObjectAdapter implements JsonDeserializer<DcObject>, JsonSerializ
                         v.getValue(), 
                         v.isChanged());
                 
+                if (field.getIndex() == Software._P_SCREENSHOTONE) {
+                    System.out.println();
+                }
+                
+                
                 array.add(context.serialize(value));
-            }
+           // }
         }
         
         jdco.add("values", array);

@@ -10,7 +10,6 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcField;
-import org.datacrow.core.objects.DcImageIcon;
 import org.datacrow.core.objects.DcMapping;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.objects.Picture;
@@ -47,23 +46,19 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
         JsonElement je;
         if (value instanceof DcObject) {
             je = context.serialize(value, DcObject.class);
-        }  else if (value instanceof DcImageIcon) {
-            je = context.serialize(value, DcImageIcon.class);            
-        }  else if (value instanceof Picture) {
-            value = ((Picture) value).getValue(Picture._D_IMAGE);
-            je = context.serialize(value, DcImageIcon.class);
+        if (value instanceof Picture)
+            je = context.serialize(value, Picture.class);
         } else if (value instanceof Number) {
             je = context.serialize(value.toString());
         } else if (value instanceof Date) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             je = context.serialize(formatter.format((Date) value));
         } else if (
-                field.getValueType() == DcRepository.ValueTypes._DCOBJECTCOLLECTION &&
-                value instanceof Collection) {
+            field.getValueType() == DcRepository.ValueTypes._DCOBJECTCOLLECTION &&
+            value instanceof Collection) {
 
             JsonArray references = new JsonArray();
             for (DcMapping mapping : (Collection<DcMapping>) value) {
-                // TODO: check if this calls the DcObjectAdapter;
                  references.add(context.serialize(mapping.getReferencedObject()));
             }
             je = context.serialize(references);
@@ -93,20 +88,9 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
             if (field.getValueType() == DcRepository.ValueTypes._DCOBJECTREFERENCE) {
                 JsonObject jo = jsonObject.getAsJsonObject("fieldvalue");
                 result = jo != null ? context.deserialize(jo, DcObject.class) : null;
-            } else if (field.getValueType() == DcRepository.ValueTypes._IMAGEICON ||
-                       field.getValueType() == DcRepository.ValueTypes._PICTURE) {
-                
+            } else if (field.getValueType() == DcRepository.ValueTypes._PICTURE) {
                 JsonObject jo = jsonObject.getAsJsonObject("fieldvalue");
-                if (jo != null) {
-                    result = context.deserialize(jsonObject.getAsJsonObject("fieldvalue"), DcImageIcon.class);
-                    
-                    if (field.getValueType() == DcRepository.ValueTypes._PICTURE) {
-                        // TODO: we need a specialize adapter for pictures....
-                        Picture pic = new Picture();
-                        pic.setValue(Picture._D_IMAGE, result);
-                        result = pic;
-                    }
-                }
+                if (jo != null) result = context.deserialize(jsonObject.getAsJsonObject("fieldvalue"), Picture.class);
             } else if (field.getValueType() == DcRepository.ValueTypes._BIGINTEGER ||
                        field.getValueType() == DcRepository.ValueTypes._LONG) {
                 result = Long.valueOf(e.getAsString());

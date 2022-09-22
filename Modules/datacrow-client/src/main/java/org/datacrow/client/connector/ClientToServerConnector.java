@@ -122,10 +122,15 @@ public class ClientToServerConnector extends Connector {
 		
 		cleanup();
 	    
-	    for (DcServerConnection connection : connections) {
-	        if (connection.isActive() && connection.isAvailable())
-	            return connection;
-	    }
+        for (DcServerConnection connection : connections) {
+            try {
+                if (connection.isActive() && connection.isAvailable())
+                    return connection;
+            } catch (Exception e) {
+                logger.error("An unexpected error occurred while checking existing connections. Creating a new connection", e);
+                if (connection != null) connections.remove(connection);
+            }
+        }
 	    
 	    DcServerConnection connection = new DcServerConnection(this);
 	    connections.add(connection);

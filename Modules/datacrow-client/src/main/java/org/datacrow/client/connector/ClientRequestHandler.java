@@ -28,6 +28,7 @@ package org.datacrow.client.connector;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.SocketException;
 
 import org.apache.logging.log4j.Logger;
 import org.datacrow.core.DcConfig;
@@ -78,6 +79,17 @@ public class ClientRequestHandler {
             response = SerializationHelper.getInstance().deserializeServerResponse(is);
             
             logger.debug("Client has received: " + response);
+        } catch (SocketException se) {
+            try {
+                wait(1000);
+            } catch (InterruptedException ie) {
+                logger.debug("Failed to wait for 1 second after connection error", ie);
+            }
+            
+            connection.disconnect();
+            // retry
+            process();
+            
         } catch (Exception e) {
             logger.error("Failed to connect to server", e);
         }
