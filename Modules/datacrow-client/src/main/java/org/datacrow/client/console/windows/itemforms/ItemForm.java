@@ -619,7 +619,6 @@ public class ItemForm extends DcFrame implements ActionListener, IClient {
         JComponent component;
         Object value;
         for (DcField field : fields.keySet()) {
-            
             component = fields.get(field);
             value = ComponentFactory.getValue(component);
             value = value == null ? "" : value;
@@ -676,8 +675,8 @@ public class ItemForm extends DcFrame implements ActionListener, IClient {
         		// this is now a client side validation check. It will be performed again by the server (in server client mode),
         		// if the requests makes it through.
 	        	dco.checkIntegrity();
-	        	
-	            task = new SaveItemTask();
+
+	        	task = new SaveItemTask();
 	            task.addItem(dco);
 	            task.addClient(this);
 	            task.addClient(new UIClient(update ? UIClient._UPDATE : UIClient._INSERT, dco, true, true));

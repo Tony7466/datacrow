@@ -710,13 +710,8 @@ public class DcObject implements Comparable<DcObject>, Serializable {
             if (index == _SYS_EXTERNAL_REFERENCES && getValue(index) != null && o != null ) {
                 mergeReferences((Collection<DcMapping>) o);
             } else if (field.getValueType() == DcRepository.ValueTypes._DCOBJECTCOLLECTION) {
-                
-                try {
-                    o = CoreUtilities.sort((List<DcObject>) o);
-                    value.setValue(o, field);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                o = CoreUtilities.sort((List<DcObject>) o);
+                value.setValue(o, field);
             } else {
                 value.setValue(o, field);
             }
@@ -1324,9 +1319,6 @@ public class DcObject implements Comparable<DcObject>, Serializable {
                 return id1.equals(id2);
             else 
                 return false;
-        } else {
-            logger.debug("Should not check for equality this way", new Exception());
-            equals = super.equals(o);
         }
         
         return equals;

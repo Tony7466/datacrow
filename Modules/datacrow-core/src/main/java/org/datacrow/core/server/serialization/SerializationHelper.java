@@ -13,6 +13,7 @@ import org.datacrow.core.enhancers.IValueEnhancer;
 import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.objects.DcSimpleValue;
 import org.datacrow.core.objects.Picture;
 import org.datacrow.core.server.requests.ClientRequest;
 import org.datacrow.core.server.requests.ClientRequestApplicationSettings;
@@ -45,6 +46,7 @@ import org.datacrow.core.server.serialization.adapters.AwtColorAdapter;
 import org.datacrow.core.server.serialization.adapters.AwtFontAdapter;
 import org.datacrow.core.server.serialization.adapters.DcFieldValueAdapter;
 import org.datacrow.core.server.serialization.adapters.DcObjectAdapter;
+import org.datacrow.core.server.serialization.adapters.DcSimpleValueAdapter;
 import org.datacrow.core.server.serialization.adapters.FileAdapter;
 import org.datacrow.core.server.serialization.adapters.InterfaceAdapter;
 import org.datacrow.core.server.serialization.adapters.KeyStrokeAdapter;
@@ -90,6 +92,7 @@ public class SerializationHelper {
                 .registerTypeAdapter(Picture.class, new PictureAdapter())
                 .registerTypeAdapter(DcObject.class, new DcObjectAdapter())
                 .registerTypeAdapter(DcFieldValue.class, new DcFieldValueAdapter())
+                .registerTypeAdapter(DcSimpleValue.class, new DcSimpleValueAdapter())
                 .registerTypeAdapter(File.class, new FileAdapter())
                 .registerTypeAdapter(Color.class, new AwtColorAdapter())
                 .registerTypeAdapter(Font.class, new AwtFontAdapter())
@@ -105,6 +108,7 @@ public class SerializationHelper {
                 .registerTypeAdapter(Picture.class, new PictureAdapter())
                 .registerTypeAdapter(DcObject.class, new DcObjectAdapter())
                 .registerTypeAdapter(DcFieldValue.class, new DcFieldValueAdapter())
+                .registerTypeAdapter(DcSimpleValue.class, new DcSimpleValueAdapter())
                 .registerTypeAdapter(File.class, new FileAdapter())
                 .registerTypeAdapter(Color.class, new AwtColorAdapter())
                 .registerTypeAdapter(Font.class, new AwtFontAdapter())

@@ -65,7 +65,10 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
                 
                 for (DcMapping mapping : (Collection<DcMapping>) value) {
                     ref = (JsonObject) context.serialize(mapping.getReferencedObject(), DcObject.class);
-                    ref.addProperty("referenceParentId", (String) mapping.getValue(DcMapping._A_PARENT_ID));
+                    
+                    if (mapping.isFilled(DcMapping._A_PARENT_ID))
+                        ref.addProperty("referenceParentId", (String) mapping.getValue(DcMapping._A_PARENT_ID));
+                    
                     references.add(ref);
                 }
                 
@@ -119,8 +122,12 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
                 while (iter.hasNext()) {
                     joRef = (JsonObject) iter.next();
                     
-                    parentId = joRef.get("referenceParentId").getAsString();
-                    joRef.remove("referenceParentId");
+                    parentId = null;
+                    
+                    if (joRef.has("referenceParentId")) {
+                        parentId = joRef.get("referenceParentId").getAsString();
+                        joRef.remove("referenceParentId");
+                    }
                     
                     ref = context.deserialize(joRef, DcObject.class);
                     
