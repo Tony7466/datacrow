@@ -124,7 +124,7 @@ public class DcFieldValueAdapter implements JsonDeserializer<DcFieldValue>, Json
                     
                     ref = context.deserialize(joRef, DcObject.class);
                     
-                    mapping = new DcMapping(field.getReferenceIdx());
+                    mapping = new DcMapping(DcModules.getMappingModIdx(moduleIndex, ref.getModuleIdx(), fieldIndex));
                     mapping.setReference(ref);
                     
                     mapping.setValue(DcMapping._A_PARENT_ID, parentId);
