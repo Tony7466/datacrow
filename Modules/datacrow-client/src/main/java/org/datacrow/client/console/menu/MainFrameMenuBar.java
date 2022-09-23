@@ -312,22 +312,5 @@ public class MainFrameMenuBar extends org.datacrow.client.console.components.DcM
             this.add(menuPlugins);
         
         this.add(menuHelp);
-        
-        
-        DcButton btTwitter = ComponentFactory.getIconButton(IconLibrary._icoTwitter);
-        btTwitter.addActionListener(new TwitterActionListener());
-        this.add(btTwitter);
-    }
-    
-    private class TwitterActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            try {
-                URLLauncher launcher = new URLLauncher(new URL("http://twitter.com/data_crow"));
-                launcher.launch();
-            } catch (Exception e) {
-                logger.error(e, e);
-            }
-        }
     }
 }

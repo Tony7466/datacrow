@@ -4,12 +4,19 @@ Data Crow version 4.3                                              Released on 2
 
 [Fixed]
 - Java 18 incompatibility issues have been fixed.
-- Backup and Restore has been fixed
-- Server to client communication has been partially fixed (it's working but the speed is abysmal)
-- Image server is back up again (old implementation was not compatible with the new Java version)
+- Backup and Restore has been fixed. It now uses Java standard functionality to create
+  and restore backups. 
+- Server to client communication has been fixed. The old implementation has been removed
+  and server to client communication has been replaced with a Gson-backed functionality.
+  The old code used a by now obsolete library. Gson is well maintained and it allowed me
+  to pick and select if and how items, pictures, etc are communicated between the client
+  and the server. This also means that the speed has been improved significantly. 
+- Image server is back up again (old implementation was not compatible with the new Java 
+  version)
 - Various small compatibility issues have been fixed.
+- e-Book import has been fixed.
 
-[Updates]
+[Changed / Updated]
 - Java version support has been changed from Java v1.7 to Java Second Edition v18 (!)
 - Upgraded Log4J to the latest version. The old library was a huge security risk 
   and had to be replaced.

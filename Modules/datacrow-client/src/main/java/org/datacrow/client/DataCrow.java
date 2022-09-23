@@ -41,7 +41,6 @@ import org.datacrow.client.console.GUI;
 import org.datacrow.client.console.MainFrame;
 import org.datacrow.client.console.windows.ChangeUserFolderQuestionBox;
 import org.datacrow.client.console.windows.DataDirSetupDialog;
-import org.datacrow.client.console.windows.DonateDialog;
 import org.datacrow.client.console.windows.SelectLanguageDialog;
 import org.datacrow.client.console.windows.TipOfTheDayDialog;
 import org.datacrow.client.console.windows.drivemanager.DriveManagerDialog;
@@ -343,10 +342,11 @@ public class DataCrow implements IStarterClient {
             int usage = DcSettings.getInt(DcRepository.Settings.stUsage) + 1;
             DcSettings.set(DcRepository.Settings.stUsage, Long.valueOf(usage));
 
-            boolean itsTime = usage == 15 || usage == 150 || usage == 1000
-                    || usage == 1500 || usage == 500 || usage == 50;
-            if (itsTime && DcSettings.getBoolean(DcRepository.Settings.stAskForDonation))
-                new DonateDialog().setVisible(true);
+            // TODO: maybe later;
+            //boolean itsTime = usage == 15 || usage == 150 || usage == 1000
+            //        || usage == 1500 || usage == 500 || usage == 50;
+            //if (itsTime && DcSettings.getBoolean(DcRepository.Settings.stAskForDonation))
+            //    new DonateDialog().setVisible(true);
 
             if (DcSettings.getBoolean(DcRepository.Settings.stDriveScannerRunOnStartup)) {
                 DriveManagerDialog.getInstance();
