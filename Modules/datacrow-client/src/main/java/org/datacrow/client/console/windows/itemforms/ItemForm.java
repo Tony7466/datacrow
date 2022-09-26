@@ -420,7 +420,6 @@ public class ItemForm extends DcFrame implements ActionListener, IClient {
                 newValue = object.getValue(index);
     
                 if (newValue instanceof Picture) {
-                    @SuppressWarnings("resource")
 					Picture pic = ((Picture) newValue);
                     boolean isEdited = pic.isEdited();
                     boolean isDeleted = pic.isDeleted();

@@ -38,6 +38,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.metadata.TikaCoreProperties;
 import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
 import org.apache.tika.sax.BodyContentHandler;
 import org.datacrow.core.fileimporter.FileImporter;
 import org.datacrow.core.log.DcLogManager;
@@ -123,8 +124,9 @@ public class EbookImport extends FileImporter {
                 AutoDetectParser parser = new AutoDetectParser();
                 BodyContentHandler handler = new BodyContentHandler(-1);
                 Metadata metadata = new Metadata();
+                ParseContext conext = new ParseContext();
 
-                parser.parse(is, handler, metadata);
+                parser.parse(is, handler, metadata, conext);
                 
                 String author =  metadata.get(org.apache.tika.metadata.Office.AUTHOR);
                 author = author == null ? metadata.get(TikaCoreProperties.CONTRIBUTOR) : author;

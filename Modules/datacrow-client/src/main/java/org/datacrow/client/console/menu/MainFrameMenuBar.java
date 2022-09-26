@@ -26,26 +26,18 @@
 package org.datacrow.client.console.menu;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
 import java.util.Collection;
 
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 
-import org.apache.logging.log4j.Logger;
-
 import org.datacrow.client.console.ComponentFactory;
-import org.datacrow.client.console.components.DcButton;
 import org.datacrow.client.console.components.DcMenu;
 import org.datacrow.client.console.components.DcTitledBorder;
 import org.datacrow.client.plugins.PluginHelper;
-import org.datacrow.client.util.launcher.URLLauncher;
 import org.datacrow.core.DcConfig;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.fileimporter.FileImporters;
-import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcTemplate;
@@ -58,8 +50,6 @@ import org.datacrow.core.synchronizers.Synchronizers;
 
 public class MainFrameMenuBar extends org.datacrow.client.console.components.DcMenuBar {
 
-    private static Logger logger = DcLogManager.getLogger(MainFrameMenuBar.class.getName());
-    
 	public static final int _SEARCHPANEL = 0;
     public static final int _INSERTPANEL = 1;
     public static final int _NOTEPANEL = 2;
