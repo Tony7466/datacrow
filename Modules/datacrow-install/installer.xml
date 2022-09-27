@@ -9,10 +9,10 @@
         <appname>Data Crow</appname>
         <appversion>@{myproduct.version}</appversion>
         <authors>
-            <author name="Robert Jan van der Waals" email="rwaals@datacrow.net"/>
+            <author name="Robert Jan van der Waals" email="info@datacrow.org"/>
         </authors>
-        <url>http://www.datacrow.net</url>
-        <javaversion>1.8</javaversion>
+        <url>https://www.datacrow.org</url>
+        <javaversion>11</javaversion>
     </info>
     
     <variables>
@@ -27,7 +27,6 @@
     
     <resources>
         <res id="HTMLLicencePanel.licence" src="datacrow-build/staging/dc-client/readme/gpl.html"/>
-        <res id="HTMLInfoPanel.info" src="datacrow-install/donate.html"/>
         <res id="shortcutSpec.xml" src="datacrow-install/shortcutSpec.xml"/>
         <res id="Unix_shortcutSpec.xml" src="datacrow-install/Unix_shortcutSpec.xml"/>
         <res src="datacrow-install/images/border.png" id="Installer.image.0"/>
@@ -43,7 +42,6 @@
     <panels>
         <panel classname="HelloPanel"/>
         <panel classname="HTMLLicencePanel"/>
-        <panel classname="HTMLInfoPanel"/>
         <panel classname="TargetPanel"/> 
         <panel classname="PacksPanel"/>
         <panel classname="InstallPanel"/>
@@ -57,7 +55,6 @@
 			<file src="datacrow-build/staging/dc-client/lib/datacrow-core-@{myproduct.version}.jar" targetdir="$INSTALL_PATH/lib"/>
             <file src="datacrow-build/staging/dc-client/lib/datacrow-server-@{myproduct.version}.jar" targetdir="$INSTALL_PATH/lib"/>
 			<file src="datacrow-build/staging/dc-client/datacrow-client-@{myproduct.version}.jar" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/log4j.properties" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/fonts" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/readme" targetdir="$INSTALL_PATH"/>
             <file src="datacrow-build/staging/dc-client/services" targetdir="$INSTALL_PATH"/>

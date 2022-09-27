@@ -4,16 +4,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>net.datacrow</groupId>
+		<groupId>org.datacrow</groupId>
 		<artifactId>datacrow-main</artifactId>
 		<version>4.3</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>datacrow-installer</artifactId>
 	<name>Datacrow installer</name>
 	<!-- Launch IzPack automatically -->
 	<packaging>izpack-jar</packaging>
-	
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -121,14 +121,11 @@
 								<argument>a</argument>
 								<argument>-tZip</argument>
 								<argument>${project.parent.basedir}/datacrow-build/staging/datacrow_${project.version}_source.zip</argument>
-								<argument>${project.basedir}/../datacrow-beans</argument>
 								<argument>${project.basedir}/../datacrow-client</argument>
 								<argument>${project.basedir}/../datacrow-core</argument>
 								<argument>${project.basedir}/../datacrow-install</argument>
-								<argument>${project.basedir}/../local-dependencies</argument>
 								<argument>${project.basedir}/../datacrow-server</argument>
 								<argument>${project.basedir}/../datacrow-services</argument>
-								<argument>${project.basedir}/../tmdb-api</argument>
 								<argument>${project.basedir}/../pom.xml</argument>
 								<argument>-xr!target</argument>
 								<argument>-xr!.settings</argument>

@@ -28,6 +28,8 @@ package org.datacrow.client;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -204,6 +206,12 @@ public class DataCrow implements IStarterClient {
             }
         }
 
+        if (installationDir.length() == 0) {
+            installationDir = FileSystems.getDefault().getPath(".").toAbsolutePath().getParent().toString();
+            installationDir = !installationDir.endsWith("/") && !installationDir.endsWith("\\") ? installationDir + File.separatorChar : installationDir;
+            System.out.println("install dir: [" + installationDir + "]");
+        }
+        
         if (dataDir.length() > 0)
             dataDir = !dataDir.endsWith("/") && !dataDir.endsWith("\\") ? dataDir + File.separatorChar : dataDir; 
         
