@@ -55,17 +55,19 @@
 			<file src="datacrow-build/staging/dc-client/lib/datacrow-core-@{myproduct.version}.jar" targetdir="$INSTALL_PATH/lib"/>
             <file src="datacrow-build/staging/dc-client/lib/datacrow-server-@{myproduct.version}.jar" targetdir="$INSTALL_PATH/lib"/>
 			<file src="datacrow-build/staging/dc-client/datacrow-client-@{myproduct.version}.jar" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/fonts" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/readme" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/services" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/resources" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/reports" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/plugins" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/icons" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/help" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/modules" targetdir="$INSTALL_PATH"/>
-            <file src="datacrow-build/staging/dc-client/upgrade" targetdir="$INSTALL_PATH"/>
+			<file src="datacrow-build/staging/dc-client/datacrow.exe" targetdir="$INSTALL_PATH"/>
+            <fileset dir="datacrow-build/staging/dc-client/fonts" targetdir="$INSTALL_PATH/fonts"/>
+            <fileset dir="datacrow-build/staging/dc-client/readme" targetdir="$INSTALL_PATH/readme"/>
+            <fileset dir="datacrow-build/staging/dc-client/services" targetdir="$INSTALL_PATH/services"/>
+            <fileset dir="datacrow-build/staging/dc-client/resources" targetdir="$INSTALL_PATH/resources"/>
+            <fileset dir="datacrow-build/staging/dc-client/reports" targetdir="$INSTALL_PATH/reports"/>
+            <fileset dir="datacrow-build/staging/dc-client/plugins" targetdir="$INSTALL_PATH/plugins"/>
+            <fileset dir="datacrow-build/staging/dc-client/icons" targetdir="$INSTALL_PATH/icons"/>
+            <fileset dir="datacrow-build/staging/dc-client/help" targetdir="$INSTALL_PATH/help"/>
+            <fileset dir="datacrow-build/staging/dc-client/modules" targetdir="$INSTALL_PATH/modules"/>
+            <fileset dir="datacrow-build/staging/dc-client/upgrade" targetdir="$INSTALL_PATH/upgrade"/>
             <fileset dir="datacrow-build/staging/dc-client/lib" targetdir="${INSTALL_PATH}/lib"/>
+			<fileset dir="datacrow-build/staging/dc-client/java" targetdir="${INSTALL_PATH}/java"/>
         </pack>
     </packs>
     

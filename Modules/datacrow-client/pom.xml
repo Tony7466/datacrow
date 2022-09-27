@@ -299,20 +299,46 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-resources-log4j-client</id>
+                        <id>copy-java-jre</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.parent.basedir}/datacrow-build/staging/dc-client/</outputDirectory>
+                            <outputDirectory>${project.parent.basedir}/datacrow-build/staging/dc-client/java</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}</directory>
-                                    <include>log4j.properties</include>
-                                    <filtering>false</filtering>
+                                    <directory>${java.home}</directory>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.25</version>
+                <executions>
+                    <execution>
+                        <id>jar-to-exe</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <stayAlive>true</stayAlive>
+                            <jar>${project.parent.basedir}/datacrow-build/staging/dc-client/${project.build.finalName}.jar</jar>
+                            <outfile>${project.parent.basedir}/datacrow-build/staging/dc-client/datacrow.exe</outfile>
+                            <classPath>
+                                <mainClass>org.datacrow.client.DataCrow</mainClass>
+                            </classPath>
+                            <jre>
+                                <minVersion>11</minVersion>
+                                <jdkPreference>preferJre</jdkPreference>
+                                <path>./java</path>
+                            </jre>
                         </configuration>
                     </execution>
                 </executions>

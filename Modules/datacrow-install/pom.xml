@@ -12,12 +12,10 @@
 
 	<artifactId>datacrow-installer</artifactId>
 	<name>Datacrow installer</name>
-	<!-- Launch IzPack automatically -->
 	<packaging>izpack-jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- Installer variables -->
 	    <myproduct.version>${project.version}</myproduct.version>
 	</properties>
 
@@ -38,6 +36,55 @@
 					<autoIncludeDevelopers>false</autoIncludeDevelopers>
 				</configuration>
 			</plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>			
+                    <execution>
+                        <id>copy-java-jre</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.parent.basedir}/datacrow-build/staging/java</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${java.home}</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.25</version>
+                <executions>
+                    <execution>
+                        <id>jar-to-exe</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <stayAlive>true</stayAlive>
+                            <jar>${project.basedir}/target/installer.jar</jar>
+                            <manifest>${project.basedir}/resources/installer.manifest</manifest>
+                            <outfile>${project.basedir}/target/install.exe</outfile>
+                            <classPath>
+                                <mainClass>com.izforge.izpack.installer.bootstrap.Installer</mainClass>
+                            </classPath>
+                            <jre>
+                                <minVersion>11</minVersion>
+                                <jdkPreference>preferJre</jdkPreference>
+                                <path>./java</path>
+                            </jre>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
 			<plugin>
 			    <groupId>org.codehaus.mojo</groupId>
 			    <artifactId>exec-maven-plugin</artifactId>
@@ -47,7 +94,7 @@
 			            <goals>
 			                <goal>exec</goal>
 			            </goals>
-			            <phase>pre-integration-test</phase>
+			            <phase>package</phase>
 			            <configuration>
 			                <executable>7z</executable>
 			                <arguments>
@@ -65,15 +112,15 @@
 			            <goals>
 			                <goal>exec</goal>
 			            </goals>
-			            <phase>pre-integration-test</phase>
+			            <phase>package</phase>
 			            <configuration>
 			                <executable>7z</executable>
 			                <arguments>
 			                	<argument>a</argument>
 			                    <argument>-tZip</argument>
 			                    <argument>${project.parent.basedir}/datacrow-build/staging/datacrow_${project.version}_windows_installer.zip</argument>
-			                    <argument>${project.build.directory}/installer.jar</argument>
-			                    <argument>${project.basedir}/readme.txt</argument>
+			                    <argument>${project.build.directory}/install.exe</argument>
+			                    <argument>${project.parent.basedir}/datacrow-build/staging/java</argument>
 			                </arguments>
 			            </configuration>
 			        </execution>
@@ -82,7 +129,7 @@
 			            <goals>
 			                <goal>exec</goal>
 			            </goals>
-			            <phase>pre-integration-test</phase>
+			            <phase>package</phase>
 			            <configuration>
 			                <executable>7z</executable>
 			                <arguments>
@@ -98,7 +145,7 @@
 			            <goals>
 			                <goal>exec</goal>
 			            </goals>
-			            <phase>pre-integration-test</phase>
+			            <phase>package</phase>
 			            <configuration>
 			                <executable>7z</executable>
 			                <arguments>
@@ -114,7 +161,7 @@
 						<goals>
 							<goal>exec</goal>
 						</goals>
-						<phase>pre-integration-test</phase>
+						<phase>package</phase>
 						<configuration>
 							<executable>7z</executable>
 							<arguments>
@@ -139,5 +186,46 @@
 			    </executions>
 			</plugin>
 		</plugins>
+		
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.7.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>		
 	</build>
 </project>

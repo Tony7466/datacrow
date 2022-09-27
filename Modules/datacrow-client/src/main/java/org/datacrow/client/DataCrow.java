@@ -29,7 +29,6 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.nio.file.FileSystems;
-import java.nio.file.Path;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -209,7 +208,6 @@ public class DataCrow implements IStarterClient {
         if (installationDir.length() == 0) {
             installationDir = FileSystems.getDefault().getPath(".").toAbsolutePath().getParent().toString();
             installationDir = !installationDir.endsWith("/") && !installationDir.endsWith("\\") ? installationDir + File.separatorChar : installationDir;
-            System.out.println("install dir: [" + installationDir + "]");
         }
         
         if (dataDir.length() > 0)
@@ -349,12 +347,6 @@ public class DataCrow implements IStarterClient {
 
             int usage = DcSettings.getInt(DcRepository.Settings.stUsage) + 1;
             DcSettings.set(DcRepository.Settings.stUsage, Long.valueOf(usage));
-
-            // TODO: maybe later;
-            //boolean itsTime = usage == 15 || usage == 150 || usage == 1000
-            //        || usage == 1500 || usage == 500 || usage == 50;
-            //if (itsTime && DcSettings.getBoolean(DcRepository.Settings.stAskForDonation))
-            //    new DonateDialog().setVisible(true);
 
             if (DcSettings.getBoolean(DcRepository.Settings.stDriveScannerRunOnStartup)) {
                 DriveManagerDialog.getInstance();
