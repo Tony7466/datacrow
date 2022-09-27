@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="DataCrow_Log4j2" status="WARN">
+  <Appenders>
+    <CONSOLE name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d [%t] %-5level: %msg%n%throwable"/>
+    </CONSOLE>
+  </Appenders>
+  <Loggers>
+    <Root level="DEBUG">
+      <AppenderRef ref="Console"/>
+    </Root>
+  </Loggers>
+</Configuration>

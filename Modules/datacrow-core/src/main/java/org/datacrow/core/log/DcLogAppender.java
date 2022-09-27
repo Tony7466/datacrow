@@ -39,7 +39,6 @@ public class DcLogAppender extends AbstractAppender {
             layout = PatternLayout.createDefaultLayout();
         }
         return new DcLogAppender(name, filter, layout, true);
- 
     }
     
     public void append(LogEvent event) {
