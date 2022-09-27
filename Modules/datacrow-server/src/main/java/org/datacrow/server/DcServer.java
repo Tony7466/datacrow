@@ -31,6 +31,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.FileSystems;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -156,6 +157,11 @@ public class DcServer implements Runnable, IStarterClient, IClient {
             	printParameterHelp();
                 System.exit(0);
             }
+        }
+        
+        if (installationDir.length() == 0) {
+            installationDir = FileSystems.getDefault().getPath(".").toAbsolutePath().getParent().toString();
+            installationDir = !installationDir.endsWith("/") && !installationDir.endsWith("\\") ? installationDir + File.separatorChar : installationDir;
         }
         
         File file = new File(installationDir, "datacrow.credentials");

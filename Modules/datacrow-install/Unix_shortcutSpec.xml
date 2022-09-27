@@ -15,7 +15,7 @@
      startup="no"
      target="java"
      commandLine="-jar &quot;$INSTALL_PATH/datacrow-client-${myproduct.version.variable}.jar&quot;"
-     workingDirectory=""
+     workingDirectory="$INSTALL_PATH"
      description="Data Crow"
      iconFile="$INSTALL_PATH/icons/datacrow64.png"
      iconIndex="0"

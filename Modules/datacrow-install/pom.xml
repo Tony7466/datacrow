@@ -71,6 +71,7 @@
                             <headerType>gui</headerType>
                             <stayAlive>true</stayAlive>
                             <jar>${project.basedir}/target/installer.jar</jar>
+                            <icon>${project.parent.basedir}/datacrow-client/icons/datacrow.ico</icon>
                             <manifest>${project.basedir}/resources/installer.manifest</manifest>
                             <outfile>${project.basedir}/target/install.exe</outfile>
                             <classPath>

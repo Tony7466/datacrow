@@ -49,6 +49,12 @@ public abstract class XmlObject implements Serializable {
 
     public Class<?> getClass(String tag, String className) throws InvalidValueException {
         String s = className;
+
+        if (s.startsWith("net.datacrow")) {
+            logger.debug("Old class filename encounter [" + s + "], updating to new name.");
+            s = s.replace("net.datacrow", "org.datacrow");
+        }
+        
         try {
             logger.debug("Trying to locate class " + s);
             Class<?> cl = s != null && s.trim().length() > 0 ? Class.forName(s) : null;
@@ -60,6 +66,12 @@ public abstract class XmlObject implements Serializable {
     
     public Class<?> getClass(Element element, String tag) throws InvalidValueException {
         String s = XMLParser.getString(element, tag);
+        
+        if (s.startsWith("net.datacrow")) {
+            logger.debug("Old class filename encounter [" + s + "], updating to new name.");
+            s = s.replace("net.datacrow", "org.datacrow");
+        }
+        
         try {
             logger.debug("Trying to locate class " + s);
             Class<?> cl = s != null && s.trim().length() > 0 ? Class.forName(s) : null;
