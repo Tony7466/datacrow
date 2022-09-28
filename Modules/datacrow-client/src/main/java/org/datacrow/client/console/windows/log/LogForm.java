@@ -53,7 +53,8 @@ public class LogForm extends DcFrame {
     @Override
     public void setVisible(boolean b) {
         super.setVisible(b);
-        if (b) toFront();
+        if (b)
+            toFront();
     }   
     
     private void build() {

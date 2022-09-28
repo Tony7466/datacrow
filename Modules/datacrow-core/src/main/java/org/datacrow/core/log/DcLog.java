@@ -24,6 +24,12 @@ public class DcLog {
     
     public void addListener(ILogListener listener) {
         listeners.add(listener);
+        
+        for (String backlogMsg : backlog) { 
+            listener.add(backlogMsg);
+        }
+        
+        backlog.clear();
     }
     
     public void notify(LogEvent event) {
@@ -34,14 +40,6 @@ public class DcLog {
         
         if (listeners.size() == 0) {
             backlog.add(msg);
-        }
-        
-        for (ILogListener listener : listeners) {
-            for (String backlogMsg : backlog) 
-                listener.add(backlogMsg);
-            
-            listener.add(msg);
-            backlog.clear();
         }
     }
 }
