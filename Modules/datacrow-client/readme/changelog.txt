@@ -1,6 +1,34 @@
 -----------------------------------------------------------------------------------------
-Data Crow version 4.3                                              Released on 2022-xx-xx
+Data Crow version 4.3                                              Released on 2022-09-29
 -----------------------------------------------------------------------------------------
+
+This version is a first after many years. Data Crow is Java based application and 
+it has moved on since 2019. With this release I have updated all 3rd party libraries
+to their latest available version (where possible). The code itself has been first
+tested against Java 18 (latest version at the moment). The release itself however
+has been made compatible with Java 11. 
+
+Is there anything new in this release? Not really, it's more of a maintenance release.
+The next version will focus on the online services. You really should upgrade though, 
+the old version is no longer deemed safe. The 3rd party libraries are potentially 
+even a danger to you system; some will have heard about the Log4J problems where systems
+were exposed. This has been fixed by now in Log4J2, which is now also used by Data 
+Crow. 
+
+I have removed things that were already not working and required a complete rewrite.
+These are the things I will focus on in upcoming releases.
+
+Now onto the positive; everything in this release is working. I have improved the ease
+of use for Windows users by packaging the Java version in the release, that's for 
+both the installer as well as for the application itself. The installer also no longer
+has an issue installing to the Program Files folder, which the old version couldn't.
+
+The server has had its web component removed as it is far too outdated by now. The 
+application server functionality has been left in and has been greatly improved; it's
+much quicker now.
+
+[New requirements]
+- Java Second Edition version 11 (64 bit) or higher.
 
 [Fixed]
 - Java 18 incompatibility issues have been fixed.
@@ -56,6 +84,12 @@ Data Crow version 4.3                                              Released on 2
 [Removed]
 - The web module has been dropped for now. It would need to be completely rebuild to 
   run successfully on the latest version of Java. This will be rebuild at a later stage.
+- The following online services have been removed; Bol.com, Amazon.com (is now a paid for
+  service only, not a fan of Amazon), Imdb.com (paid for service), 
+  Musicbrainz (no longer active), discogs.com (requested for a new API key), 
+  ISBN db (now a paid for service), moviemeter (needs to be investigated, was already not
+  working in the old version back in 2019), the games db (will be replaced with MobyGames).
+
 
 -----------------------------------------------------------------------------------------
 Data Crow version 4.2.2 - Maintenance                              Released on 2017-08-23

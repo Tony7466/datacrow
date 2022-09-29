@@ -4,9 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
-import org.apache.logging.log4j.core.appender.rolling.CompositeTriggeringPolicy;
 import org.apache.logging.log4j.core.appender.rolling.SizeBasedTriggeringPolicy;
-import org.apache.logging.log4j.core.appender.rolling.TimeBasedTriggeringPolicy;
 import org.apache.logging.log4j.core.appender.rolling.TriggeringPolicy;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
@@ -30,17 +28,18 @@ public class DcLogManager {
 	    LoggerConfig loggerConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME); 
 	    loggerConfig.setLevel(level);
 	    
-	    TimeBasedTriggeringPolicy tbtp = TimeBasedTriggeringPolicy.newBuilder()
-                .withInterval(1)
-                .withModulate(false)
-                .build();
-	    TriggeringPolicy tp = SizeBasedTriggeringPolicy.createPolicy("10M");
-	    CompositeTriggeringPolicy policy = CompositeTriggeringPolicy.createPolicy(tbtp, tp);
+//	    TimeBasedTriggeringPolicy tbtp = TimeBasedTriggeringPolicy.newBuilder()
+//                .withInterval(0)
+//                .withModulate(false)
+//                .build();
+//	    CompositeTriggeringPolicy policy = CompositeTriggeringPolicy.createPolicy(tbtp, tp);
 	    
+        TriggeringPolicy tp = SizeBasedTriggeringPolicy.createPolicy("10M");
+                
 	    RollingFileAppender fa = RollingFileAppender.newBuilder().setName("DataCrow_LogFile")
 	            .withFilePattern(DcConfig.getInstance().getDataDir() + "data_crow_%d{MM-dd-yy}.log.gz")
                 .withAppend(true)
-                .withPolicy(policy)
+                .withPolicy(tp)
                 .withFileName(DcConfig.getInstance().getDataDir() + "data_crow.log")
                 .setLayout(PatternLayout.newBuilder().withPattern("%-5p %d  [%t] %C{2} (%F:%L) - %m%n").build())
                 .setConfiguration(config).build();
