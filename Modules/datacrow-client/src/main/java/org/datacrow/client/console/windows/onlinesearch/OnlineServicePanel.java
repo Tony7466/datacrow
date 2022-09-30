@@ -32,6 +32,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -42,6 +45,7 @@ import javax.swing.JTextField;
 
 import org.datacrow.client.console.ComponentFactory;
 import org.datacrow.client.console.Layout;
+import org.datacrow.client.console.components.DcComboBox;
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.objects.DcObject;
@@ -54,8 +58,10 @@ import org.datacrow.core.services.plugin.IServer;
 public class OnlineServicePanel extends JPanel implements ActionListener, KeyListener  {
 
     private JButton buttonSearch;
+    
     private JTextField fldQuery;
-
+    private Map<String, JComboBox<?>> fldAdditionFields = new HashMap<>();
+    
     private JButton buttonStop = ComponentFactory.getButton(DcResources.getText("lblStop"));
     
     private JComboBox<Object> comboRegions = ComponentFactory.getComboBox(new DefaultComboBoxModel<Object> ());
@@ -85,6 +91,16 @@ public class OnlineServicePanel extends JPanel implements ActionListener, KeyLis
     
     public String getQuery() {
         return fldQuery.getText().trim();
+    }
+    
+    public Map<String, Object> getAdditionalFilters() {
+        Map<String, Object> additional = new HashMap<>();
+        
+        for (String key : fldAdditionFields.keySet()) {
+            additional.put(key, fldAdditionFields.get(key).getSelectedItem());
+        }
+        
+        return additional;
     }
     
     public void setQuery(String query) {
@@ -226,6 +242,22 @@ public class OnlineServicePanel extends JPanel implements ActionListener, KeyLis
         }
         
         IServer server = getServer();
+        
+        fldAdditionFields.clear();
+        
+        if (server.getAdditionalFields() != null) {
+            
+            Collection<?> options;
+            DcComboBox cb;
+            Map<String, Collection<?>> fields = server.getAdditionalFields();
+            
+            for (String key : fields.keySet()) {
+                options = fields.get(key);
+                cb = ComponentFactory.getComboBox(options.toArray());
+                fldAdditionFields.put(key, cb);
+            }
+        }
+        
         JLabel labelServer = ComponentFactory.getLabel(DcResources.getText("lblInternetServer"));
         
         int stretchX = server.getSearchModes() != null && server.getSearchModes().size() > 0 ? 1 : 2;
@@ -237,6 +269,22 @@ public class OnlineServicePanel extends JPanel implements ActionListener, KeyLis
                          ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
                           new Insets(5, 5, 5, 5), 0, 0));                
 
+        JLabel lbl;
+        JComboBox<?> cb;
+        int y = 1;
+        for (String key : fldAdditionFields.keySet()) {
+            lbl = ComponentFactory.getLabel(key);
+            cb = fldAdditionFields.get(key);
+            
+            add(lbl, Layout.getGBC( 0, y, 1, 1, 1.0, 1.0
+                    ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
+                     new Insets(5, 5, 5, 5), 0, 0));
+            add(cb,  Layout.getGBC( 1, y, stretchX, 1, 10.0, 10.0
+                    ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
+                     new Insets(5, 5, 5, 5), 0, 0));
+            y++;
+        }
+        
         if (server.getSearchModes() != null && server.getSearchModes().size() > 0) {
             comboModes.removeAllItems();
             for (SearchMode mode : server.getSearchModes()) 
@@ -256,7 +304,6 @@ public class OnlineServicePanel extends JPanel implements ActionListener, KeyLis
         buttonSearch.setActionCommand("search");
         buttonSearch.setMnemonic('F');
         
-        
         // servers panel
         JPanel panelServers = new JPanel();
         panelServers.setLayout(Layout.getGBL());
@@ -274,19 +321,19 @@ public class OnlineServicePanel extends JPanel implements ActionListener, KeyLis
         
 
         // main panel
-        add(labelServer,  Layout.getGBC( 0, 1, 1, 1, 1.0, 1.0
+        add(labelServer,  Layout.getGBC( 0, 2, 1, 1, 1.0, 1.0
                          ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
                           new Insets(5, 5, 5, 5), 0, 0));
-        add(panelServers, Layout.getGBC( 1, 1, 1, 1, 10.0, 10.0
+        add(panelServers, Layout.getGBC( 1, 2, 1, 1, 10.0, 10.0
                          ,GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL,
                           new Insets(0, 0, 0, 0), 0, 0));
-        add(comboRegions, Layout.getGBC( 2, 1, 1, 1, 10.0, 10.0
+        add(comboRegions, Layout.getGBC( 2, 2, 1, 1, 10.0, 10.0
                          ,GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL,
                           new Insets(5, 5, 5, 5), 0, 0));
-        add(buttonSearch, Layout.getGBC( 3, 1, 1, 1, 1.0, 1.0
+        add(buttonSearch, Layout.getGBC( 3, 2, 1, 1, 1.0, 1.0
                          ,GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL,
                           new Insets(5, 5, 5, 5), 0, 0));
-        add(buttonStop,   Layout.getGBC(4, 1, 1, 1, 1.0, 1.0
+        add(buttonStop,   Layout.getGBC(4, 2, 1, 1, 1.0, 1.0
                          ,GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL,
                           new Insets(5, 5, 5, 5), 0, 0));      
     }

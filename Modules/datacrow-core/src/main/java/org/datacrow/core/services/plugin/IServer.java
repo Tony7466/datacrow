@@ -27,6 +27,7 @@ package org.datacrow.core.services.plugin;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map;
 
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
@@ -64,6 +65,9 @@ public interface IServer extends Serializable {
      * @return Collection of search modes or an empty collection.
      */
     java.util.Collection<SearchMode> getSearchModes();
+    
+    
+    Map<String, Collection<?>> getAdditionalFields();
     
     /**
      * Name of the server (must be unique)
@@ -106,5 +110,6 @@ public interface IServer extends Serializable {
                              SearchMode mode, 
                              Region region,
                              String query,
+                             Map<String, Object> additionalFilters,
                              DcObject client);    
 }

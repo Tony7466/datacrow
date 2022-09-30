@@ -1,0 +1,129 @@
+package org.datacrow.onlinesearch.mobygames.server;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import org.apache.logging.log4j.Logger;
+import org.datacrow.core.DcRepository;
+import org.datacrow.core.log.DcLogManager;
+import org.datacrow.core.modules.DcModules;
+import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.services.IOnlineSearchClient;
+import org.datacrow.core.services.Region;
+import org.datacrow.core.services.SearchMode;
+import org.datacrow.core.services.SearchTask;
+import org.datacrow.core.services.plugin.IServer;
+import org.datacrow.core.settings.DcSettings;
+import org.datacrow.core.settings.Setting;
+import org.datacrow.onlinesearch.mobygames.helpers.MobyGamesPlatform;
+import org.datacrow.onlinesearch.mobygames.task.MobyGamesSearch;
+
+
+public class MobyGamesServer implements IServer {
+    
+    private static Logger logger = DcLogManager.getLogger(MobyGamesServer.class.getName());
+    
+    private static final long serialVersionUID = 6451130355747891181L;
+
+    private Collection<Region> regions = new ArrayList<Region>();
+    private Collection<SearchMode> modes = new ArrayList<SearchMode>();
+
+    private final List<MobyGamesPlatform> platforms = new ArrayList<>();
+
+    public MobyGamesServer() {
+        regions.add(new Region("en", "English", "https://mobygames.com/"));
+        
+        try {
+            Properties p = new Properties();
+            p.load(DcResources.class.getResourceAsStream("MobyGamesPlatforms.properties"));
+            
+            Enumeration<?> enums = p.propertyNames();
+            while (enums.hasMoreElements()) {
+                String key = enums.nextElement().toString();
+                String value = p.getProperty(key);
+                
+                platforms.add(new MobyGamesPlatform(key, value));
+            }
+            
+            platforms.sort(Comparator.comparing(MobyGamesPlatform::getDescription));
+        
+        } catch (Exception e) {
+            logger.error(e);
+        }   
+    }
+
+    @Override
+    public int getModule() {
+        return DcModules._SOFTWARE;
+    }
+
+    @Override
+    public Collection<Setting> getSettings() {
+        Collection<Setting> settings = new ArrayList<>();
+        settings.add(DcSettings.getSetting(DcRepository.Settings.stMobyGamesApiKey));
+        return settings;
+    }
+    
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    
+    @Override
+    public boolean isFullModeOnly() {
+        return false;
+    }
+    
+    @Override
+    public String getName() {
+        return "Mobygames.com";
+    }
+
+    @Override
+    public Collection<Region> getRegions() {
+        return regions;
+    }
+
+    @Override
+    public Collection<SearchMode> getSearchModes() {
+        return modes;
+    }
+
+    @Override
+    public String getUrl() {
+        return "https://mobygames.com/";
+    }
+    
+    @Override
+    public Map<String, Collection<?>> getAdditionalFields() {
+        Map<String, Collection<?>> fields = new HashMap<>();
+        fields.put(DcResources.getText("lblPlatform"), platforms);
+        return fields;
+    }
+    
+    @Override
+    public SearchTask getSearchTask(
+            IOnlineSearchClient listener,
+            SearchMode mode,
+            Region region,
+            String query,
+            Map<String, Object> additionalFilters,
+            DcObject client) {
+            
+        MobyGamesSearch task = new MobyGamesSearch(listener, this, mode, query, additionalFilters);
+        task.setClient(client);
+        return task;
+    }
+    
+    @Override
+    public String toString() {
+        return getName();
+    }
+}

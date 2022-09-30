@@ -28,6 +28,7 @@ package org.datacrow.core.services;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 import org.datacrow.core.log.DcLogManager;
@@ -71,6 +72,7 @@ public abstract class SearchTask extends Thread {
     
     private String input;
     private String query;
+    private Map<String, Object> additionalFilters;
     
     // The currently used URL or address
     private String address;
@@ -93,16 +95,22 @@ public abstract class SearchTask extends Thread {
      * @param mode
      * @param query
      */
-    public SearchTask(IOnlineSearchClient listener, IServer server,
-                      Region region, SearchMode mode, String query) {
+    public SearchTask(
+            IOnlineSearchClient listener, 
+            IServer server,
+            Region region,
+            SearchMode mode,
+            String query,
+            Map<String, Object> additionalFilters) {
 
 		this.listener = listener;
 		this.region = region;
 		this.searchMode = mode;
 		this.server = server;
 		this.address = region != null ? region.getUrl() : server.getUrl();
-		this.query = query;//StringUtils.normalize(query);
+		this.query = query;
 		this.input = query;
+		this.additionalFilters = additionalFilters;
 	}
 
     /**
@@ -215,6 +223,10 @@ public abstract class SearchTask extends Thread {
         return s;
     }
 
+    public Map<String, Object> getAdditionalFilters() {
+        return additionalFilters;
+    }
+    
     /**
      * The currently used server
      * @see IServer
@@ -310,7 +322,7 @@ public abstract class SearchTask extends Thread {
         try {
             keys.addAll(getItemKeys());
         } catch (Exception e) {
-            listener.addError(DcResources.getText("msgCouldNotConnectTo", getServer().getName()));
+            listener.addError(e);
             logger.error(e, e);
         }
         

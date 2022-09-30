@@ -29,6 +29,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 import org.datacrow.core.DcRepository;
@@ -48,8 +49,14 @@ public class GoogleSearch extends SearchTask {
 
     private static Logger logger = DcLogManager.getLogger(GoogleSearch.class.getName());
 
-    public GoogleSearch(IOnlineSearchClient listener, IServer server, SearchMode mode, String query) {
-        super(listener, server, null, mode, query);
+    public GoogleSearch(
+            IOnlineSearchClient listener, 
+            IServer server, 
+            SearchMode mode,
+            String query,
+            Map<String, Object> additionalFilters) {
+        
+        super(listener, server, null, mode, query, additionalFilters);
     }
 
     @Override

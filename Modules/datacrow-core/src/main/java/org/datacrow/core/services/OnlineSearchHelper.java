@@ -116,7 +116,7 @@ public class OnlineSearchHelper implements IOnlineSearchClient {
         IServer server = getServer();
         Region region = getRegion(server);
         
-        task = server.getSearchTask(this, getSearchMode(server), region, null, item);
+        task = server.getSearchTask(this, getSearchMode(server), region, null, null, item);
         task.setItemMode(SearchTask._ITEM_MODE_FULL);
         
         try {
@@ -140,7 +140,7 @@ public class OnlineSearchHelper implements IOnlineSearchClient {
         IServer server = getServer();
         Region region = getRegion(server);
         
-        task = server.getSearchTask(this, getSearchMode(server), region, query, base);
+        task = server.getSearchTask(this, getSearchMode(server), region, query, null, base);
         task.setItemMode(itemMode);
         task.setMaximum(maximum);
         task.run();
@@ -157,7 +157,7 @@ public class OnlineSearchHelper implements IOnlineSearchClient {
         IServer server = getServer();
         Region region = getRegion(server);
         
-        task = server.getSearchTask(this, getSearchMode(server), region, query, client);
+        task = server.getSearchTask(this, getSearchMode(server), region, query, null, client);
         task.setItemMode(itemMode);
         task.setMaximum(maximum);
         task.run();

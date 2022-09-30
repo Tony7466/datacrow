@@ -74,7 +74,7 @@ public class DcResources {
         String[] propertyFiles = {"DcLabels.properties", 
                                   "DcMessages.properties", 
                                   "DcTooltips.properties",
-                                  "DcAudioCodecs.properties", 
+                                  "DcAudioCodecs.properties",
                                   "DcTips.properties"}; 
         
         DcLanguageResource english = new DcLanguageResource("English");

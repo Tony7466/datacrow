@@ -28,19 +28,9 @@ package org.datacrow.onlinesearch.tmdb.task;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
-
-import com.omertron.themoviedbapi.MovieDbException;
-import com.omertron.themoviedbapi.TheMovieDbApi;
-import com.omertron.themoviedbapi.enumeration.SearchType;
-import com.omertron.themoviedbapi.model.Genre;
-import com.omertron.themoviedbapi.model.artwork.Artwork;
-import com.omertron.themoviedbapi.model.credits.MediaCreditCast;
-import com.omertron.themoviedbapi.model.credits.MediaCreditCrew;
-import com.omertron.themoviedbapi.model.movie.MovieInfo;
-import com.omertron.themoviedbapi.results.ResultList;
-
 import org.datacrow.core.DcRepository;
 import org.datacrow.core.DcRepository.ExternalReferences;
 import org.datacrow.core.http.HttpConnectionException;
@@ -60,6 +50,16 @@ import org.datacrow.core.services.SearchTaskUtilities;
 import org.datacrow.core.services.plugin.IServer;
 import org.datacrow.core.utilities.CoreUtilities;
 
+import com.omertron.themoviedbapi.MovieDbException;
+import com.omertron.themoviedbapi.TheMovieDbApi;
+import com.omertron.themoviedbapi.enumeration.SearchType;
+import com.omertron.themoviedbapi.model.Genre;
+import com.omertron.themoviedbapi.model.artwork.Artwork;
+import com.omertron.themoviedbapi.model.credits.MediaCreditCast;
+import com.omertron.themoviedbapi.model.credits.MediaCreditCrew;
+import com.omertron.themoviedbapi.model.movie.MovieInfo;
+import com.omertron.themoviedbapi.results.ResultList;
+
 /**
  * Class for handling searches over TheMovieDatabase's API, powered by https://github.com/Omertron/api-themoviedb
  *
@@ -72,9 +72,18 @@ public class TmdbMovieSearch extends SearchTask {
     private static final Logger logger = DcLogManager.getLogger(TmdbMovieSearch.class.getName());
     private TheMovieDbApi tmdb;
 
-    public TmdbMovieSearch(IOnlineSearchClient listener, IServer server, Region region, SearchMode mode, String query) {
-        super(listener, server, region, mode, query);
+    public TmdbMovieSearch(
+            IOnlineSearchClient listener, 
+            IServer server, 
+            Region region,
+            SearchMode mode,
+            String query,
+            Map<String, Object> additionalFilters) {
+        
+        super(listener, server, null, mode, query, additionalFilters);
+        
         try {
+            //TODO: users should request for their own API key, or, the Data Crow server should sign the requests without disclosing the API key.
             String apiKey = "20cdab5da434fda12000fc1bbcbf2afe";
             tmdb = new TheMovieDbApi(apiKey);
         } catch (MovieDbException e) {
@@ -207,8 +216,8 @@ public class TmdbMovieSearch extends SearchTask {
         Collection<Object> keys = new ArrayList<>();
 
         int pg = 0;
-        String language = ""; //make sure this works in API 4.x
-        int year = 0; //make sure this works
+        String language = "";
+        int year = 0;
         boolean adult = true;
         int primeRelYr = 0;
         SearchType searchType = SearchType.PHRASE;
@@ -240,10 +249,6 @@ public class TmdbMovieSearch extends SearchTask {
                 movie.setValue(Movie._L_PLAYLENGTH, (movieInfo.getRuntime() * 60));
             
             movie.addExternalReference(ExternalReferences._TMDB, String.valueOf(movieInfo.getId()));
-            
-            if (!CoreUtilities.isEmpty(movieInfo.getImdbID()))
-                movie.addExternalReference(ExternalReferences._IMDB, movieInfo.getImdbID());
-            
             keys.add(movie);
         }
         return keys;

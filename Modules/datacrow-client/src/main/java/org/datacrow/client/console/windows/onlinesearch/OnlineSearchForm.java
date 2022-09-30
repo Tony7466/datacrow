@@ -220,7 +220,15 @@ public class OnlineSearchForm extends DcFrame implements IOnlineSearchClient, Ac
 
     private DcObject fill(final DcObject dco) { 
         if (!loadedItems.get(items.indexOf(dco)).booleanValue()) {
-            SearchTask task = panelService.getServer().getSearchTask(this, panelService.getMode(), panelService.getRegion(), panelService.getQuery(), dco);
+            
+            SearchTask task = panelService.getServer().getSearchTask(
+                    this, 
+                    panelService.getMode(), 
+                    panelService.getRegion(), 
+                    panelService.getQuery(),
+                    panelService.getAdditionalFilters(),
+                    dco);
+            
             OnlineItemRetriever oir = new OnlineItemRetriever(task, dco);
             if (!SwingUtilities.isEventDispatchThread()) {
                 oir.start();
@@ -479,6 +487,7 @@ public class OnlineSearchForm extends DcFrame implements IOnlineSearchClient, Ac
 
         String query = panelService.getQuery();
         SearchMode mode = panelService.getMode();
+        Map<String, Object> additionalFilters = panelService.getAdditionalFilters();
         
         if (mode != null && !mode.keywordSearch()) {
             try {
@@ -492,7 +501,9 @@ public class OnlineSearchForm extends DcFrame implements IOnlineSearchClient, Ac
             }
         }
         
-        task = panelService.getServer().getSearchTask(this, mode, panelService.getRegion(), query, client);
+        task = panelService.getServer().getSearchTask(
+                this, mode, panelService.getRegion(), query, additionalFilters, client);
+        
         task.setPriority(Thread.NORM_PRIORITY);
         task.setItemMode(panelSettings.isQueryFullDetails() ? SearchTask._ITEM_MODE_FULL : SearchTask._ITEM_MODE_SIMPLE);
         task.start();
@@ -529,7 +540,6 @@ public class OnlineSearchForm extends DcFrame implements IOnlineSearchClient, Ac
     @Override
     public void addError(Throwable t) {
         GUI.getInstance().displayErrorMessage(t.toString());
-        logger.error(t.getMessage(), t);
     }
 
     @Override

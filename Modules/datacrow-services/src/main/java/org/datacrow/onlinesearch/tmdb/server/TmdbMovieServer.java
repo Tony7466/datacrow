@@ -27,6 +27,7 @@ package org.datacrow.onlinesearch.tmdb.server;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
@@ -101,8 +102,20 @@ public class TmdbMovieServer implements IServer {
     }
     
     @Override
-    public SearchTask getSearchTask(IOnlineSearchClient listener, SearchMode mode, Region region, String query, DcObject client) {
-        TmdbMovieSearch task = new TmdbMovieSearch(listener, this, region, mode, query);
+    public Map<String, Collection<?>> getAdditionalFields() {
+        return null;
+    }
+    
+    @Override
+    public SearchTask getSearchTask(
+            IOnlineSearchClient listener,
+            SearchMode mode,
+            Region region,
+            String query,
+            Map<String, Object> additionalFilters,
+            DcObject client) {
+        
+        TmdbMovieSearch task = new TmdbMovieSearch(listener, this, region, mode, query, additionalFilters);
         task.setClient(client);
         return task;
     }

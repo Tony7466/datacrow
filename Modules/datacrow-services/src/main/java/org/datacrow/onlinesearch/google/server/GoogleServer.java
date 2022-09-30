@@ -27,6 +27,7 @@ package org.datacrow.onlinesearch.google.server;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
@@ -70,6 +71,11 @@ public class GoogleServer implements IServer {
     }
     
     @Override
+    public Map<String, Collection<?>> getAdditionalFields() {
+        return null;
+    }
+    
+    @Override
     public String getName() {
         return "Google Books";
     }
@@ -90,8 +96,15 @@ public class GoogleServer implements IServer {
     }
     
     @Override
-    public SearchTask getSearchTask(IOnlineSearchClient listener, SearchMode mode, Region region, String query, DcObject client) {
-        GoogleSearch task = new GoogleSearch(listener, this, mode, query);
+    public SearchTask getSearchTask(
+            IOnlineSearchClient listener,
+            SearchMode mode,
+            Region region,
+            String query,
+            Map<String, Object> additionalFilters,
+            DcObject client) {
+        
+        GoogleSearch task = new GoogleSearch(listener, this, mode, query, additionalFilters);
         task.setClient(client);
         return task;
     }

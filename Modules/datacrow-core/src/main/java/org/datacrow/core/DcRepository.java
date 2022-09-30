@@ -109,6 +109,7 @@ public abstract class DcRepository {
      * The keys for application level settings.
      */
     public static final class Settings {
+        public static final String stMobyGamesApiKey = "mobygames_api_key";
         public static final String stServerAddress = "server_address";
         public static final String stApplicationServerPort = "application_server_port";
         public static final String stImageServerPort = "image_server_port";
@@ -132,10 +133,6 @@ public abstract class DcRepository {
         public static final String stModuleExportWizardFormSize = "module_export_wizard_form_size";
         public static final String stModuleImportWizardFormSize = "module_import_wizard_form_size";
         public static final String stServerSettingsDialogSize = "server_settings_dialog_size";
-        public static final String stAmazonRetrieveFeatureListing = "retrieve_feature_listing";
-        public static final String stMetacriticRetrieveCriticReviews = "metacritic_retrieve_critic_reviews";
-        public static final String stAmazonRetrieveUserReviews = "retrieve_user_reviews";
-        public static final String stAmazonRetrieveEditorialReviews = "retrieve_editorial_reviews";
         public static final String stCheckForNewVersion = "check_for_new_version_on_startup";
         public static final String stItemExporterWizardFormSize = "item_exporter_wizard_form_size";
         public static final String stItemImporterWizardFormSize = "item_importer_wizard_form_size";
@@ -243,47 +240,17 @@ public abstract class DcRepository {
         public static final Collection<String> types = new ArrayList<String>();
         
         public static final String _DISCID = "DISCID";
-        public static final String _ASIN = "ASIN";
-        public static final String _IMDB = "IMDB";
         public static final String _TMDB = "TMDB";
-        public static final String _MCU = "MCU";
-        public static final String _DISCOGS = "DISCOGS";
-        public static final String _MUSICBRAINZ = "MUSICBRAINZ";
         public static final String _MOBYGAMES = "MOBYGAMES";
-        public static final String _OFDB = "OFDB";
-        public static final String _BOL = "BOL";
-        public static final String _ISBNDB = "ISBNDB";
         public static final String _PDCR = "PDCR"; // (P)lain (D)ata (C)row (R)eference ;-)
-        public static final String _METACRITICS = "METACRITICS";
-        public static final String _FREEBOOKSPOT = "FBS";
-        public static final String _SOURCEFORGE = "SF";
-        public static final String _SOFTPEDIA = "SP";
-        public static final String _MOVIEMETER = "MOVIEMETER";
-        public static final String _THEGAMESDB = "THEGAMESDB";
-        public static final String _IGDB = "IGDB";
         public static final String _GOOGLE = "GOOGLE";
         
         static {
-            types.add(_ASIN);
-            types.add(_IMDB);
-            types.add(_MCU);
-            types.add(_DISCOGS);
-            types.add(_MUSICBRAINZ);
             types.add(_MOBYGAMES);
-            types.add(_OFDB);
             types.add(_PDCR);
-            types.add(_BOL);
             types.add(_DISCID);
-            types.add(_METACRITICS);
-            types.add(_FREEBOOKSPOT);
-            types.add(_SOURCEFORGE);
-            types.add(_ISBNDB);
-            types.add(_SOFTPEDIA);
-            types.add(_MOVIEMETER);
             types.add(_GOOGLE);
-            types.add(_IGDB);
             types.add(_TMDB);
-            types.add(_THEGAMESDB);
         }
     }
     
