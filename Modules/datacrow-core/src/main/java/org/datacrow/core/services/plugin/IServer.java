@@ -66,7 +66,8 @@ public interface IServer extends Serializable {
      */
     java.util.Collection<SearchMode> getSearchModes();
     
-    
+
+    // TODO: add filter field object and tie in with a setting
     Map<String, Collection<?>> getAdditionalFields();
     
     /**

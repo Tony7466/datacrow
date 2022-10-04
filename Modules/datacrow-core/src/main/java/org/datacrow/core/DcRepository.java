@@ -109,6 +109,7 @@ public abstract class DcRepository {
      * The keys for application level settings.
      */
     public static final class Settings {
+        // public static final String stMobyGamesDefaultPlatform = "mobygames_default_platform";
         public static final String stMobyGamesApiKey = "mobygames_api_key";
         public static final String stServerAddress = "server_address";
         public static final String stApplicationServerPort = "application_server_port";

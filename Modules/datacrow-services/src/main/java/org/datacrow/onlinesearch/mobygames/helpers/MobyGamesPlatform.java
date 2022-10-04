@@ -18,6 +18,12 @@ public class MobyGamesPlatform {
         return description;
     }
     
+    
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+    
     @Override
     public String toString() {
         return description;
