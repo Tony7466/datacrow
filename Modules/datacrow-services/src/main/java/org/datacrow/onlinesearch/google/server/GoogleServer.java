@@ -109,8 +109,15 @@ public class GoogleServer implements IServer {
         return task;
     }
     
+    
+    
     @Override
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public long getWaitTimeBetweenRequest() {
+        return 500l;
     }
 }

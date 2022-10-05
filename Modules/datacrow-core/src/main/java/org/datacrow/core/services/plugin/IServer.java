@@ -76,6 +76,8 @@ public interface IServer extends Serializable {
      */
     String getName();
     
+    long getWaitTimeBetweenRequest();
+    
     /**
      * Is the service available?
      * @return

@@ -1,4 +1,24 @@
 -----------------------------------------------------------------------------------------
+Data Crow version 4.4                                              Released on 2022-xx-xx
+-----------------------------------------------------------------------------------------
+
+[New]
+- Added MobyGames online search
+
+[Updated]
+- Changed the online search to allow for additional filters to be set.
+- No pop up message anymore when no search results are found for an online search. 
+  Shown in message log instead.
+- Added wait time between requests for all online services.
+
+[Fixed]
+- Fixed a NullPointerException when performing a mass update using previous online search
+  history.
+- None of the online services were set up to take the maximum number of search results
+  into account.
+- UTL field launcher did not work for HTTPS hyper links.
+
+-----------------------------------------------------------------------------------------
 Data Crow version 4.3                                              Released on 2022-09-29
 -----------------------------------------------------------------------------------------
 

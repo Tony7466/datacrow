@@ -39,6 +39,7 @@ public class MobyGamesServer implements IServer {
 
     public MobyGamesServer() {
         regions.add(new Region("en", "English", "https://mobygames.com/"));
+        platforms.add(new MobyGamesPlatform("", ""));
         
         try {
             Properties p = new Properties();
@@ -48,7 +49,6 @@ public class MobyGamesServer implements IServer {
             while (enums.hasMoreElements()) {
                 String key = enums.nextElement().toString();
                 String value = p.getProperty(key);
-                
                 platforms.add(new MobyGamesPlatform(key, value));
             }
             
@@ -64,6 +64,11 @@ public class MobyGamesServer implements IServer {
         return DcModules._SOFTWARE;
     }
 
+    @Override
+    public long getWaitTimeBetweenRequest() {
+        return 1100l;
+    }
+    
     @Override
     public Collection<Setting> getSettings() {
         Collection<Setting> settings = new ArrayList<>();

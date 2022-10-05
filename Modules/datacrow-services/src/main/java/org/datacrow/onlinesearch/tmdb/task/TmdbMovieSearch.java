@@ -222,11 +222,14 @@ public class TmdbMovieSearch extends SearchTask {
         int primeRelYr = 0;
         SearchType searchType = SearchType.PHRASE;
         
+        waitBetweenRequest();
+        
         ResultList<MovieInfo> movieList =
                 tmdb.searchMovie(getQuery(), pg, language, adult, year, primeRelYr, searchType);
 
         String date;
         Movie movie;
+        int count = 0;
 
         for (MovieInfo movieInfo : movieList.getResults()) {
             movieInfo = tmdb.getMovieInfo(movieInfo.getId(), getRegion().getCode());
@@ -236,7 +239,6 @@ public class TmdbMovieSearch extends SearchTask {
             movie.setValue(Movie._G_WEBPAGE, movieInfo.getHomepage());
             movie.setValue(Movie._F_TITLE_LOCAL, movieInfo.getOriginalTitle());
             movie.setValue(DcMediaObject._B_DESCRIPTION, movieInfo.getOverview());
-            
             
             setServiceInfo(movie);
             
@@ -250,6 +252,9 @@ public class TmdbMovieSearch extends SearchTask {
             
             movie.addExternalReference(ExternalReferences._TMDB, String.valueOf(movieInfo.getId()));
             keys.add(movie);
+            
+            count++;
+            if (count == getMaximum()) break;
         }
         return keys;
     }

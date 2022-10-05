@@ -284,6 +284,15 @@ public abstract class SearchTask extends Thread {
         return items;
     }
 
+    
+    protected void waitBetweenRequest() {
+        try {
+            sleep(server.getWaitTimeBetweenRequest());
+        } catch (InterruptedException ie) {
+            logger.debug("Could not wait during image retrieval");
+        }
+    }
+    
     /**
      * Query for the item using the web key. 
      * @param key The item key (The specific implementation decides the meaning of a key)
@@ -329,7 +338,7 @@ public abstract class SearchTask extends Thread {
         listener.processingTotal(keys.size());
 
         if (keys.size() == 0) {
-            listener.addWarning(DcResources.getText("msgNoResultsForKeywords", input));
+            listener.addMessage(DcResources.getText("msgNoResultsForKeywords", input));
             listener.stopped();
             return;
         }

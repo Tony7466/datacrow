@@ -94,10 +94,13 @@ public class DcUrlField extends JComponent implements IComponent, ActionListener
     
     public URL getURL() throws MalformedURLException {
         String s = text.getText();
-        if (s != null && s.trim().length() > 0)
-            return new URL(s.toUpperCase().startsWith("HTTP://") ? s : "http://" + s);
-        else
+        if (s != null && s.trim().length() > 0) {
+            s = !s.toUpperCase().startsWith("HTTP://") && !s.toUpperCase().startsWith("HTTPS://") ?
+                "https://" + s : s;
+            return new URL(s);
+        } else {
             return null;
+        }
     }
     
     public void openURL() {

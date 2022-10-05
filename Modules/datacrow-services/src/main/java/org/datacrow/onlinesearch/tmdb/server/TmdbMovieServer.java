@@ -124,4 +124,9 @@ public class TmdbMovieServer implements IServer {
     public String toString() {
         return getName();
     }
+
+    @Override
+    public long getWaitTimeBetweenRequest() {
+        return 1000l;
+    }
 }

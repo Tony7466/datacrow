@@ -49,7 +49,27 @@ public class MobyGamesSearch extends SearchTask {
     @Override
     protected DcObject getItem(Object key, boolean full) throws Exception {
         
-        return ((MobyGamesResult) key).getDco();
+        MobyGamesResult mgr = (MobyGamesResult) key;
+        DcObject item = mgr.getDco();
+        
+        String serviceUrl = (String) item.getValue(Software._SYS_SERVICEURL);
+        
+        waitBetweenRequest();
+        
+        URL url = new URL(serviceUrl);
+        HttpConnection connection = HttpConnectionUtil.getConnection(url);
+        String result = connection.getString(StandardCharsets.UTF_8);
+        
+        Gson gson = new Gson();
+        Map<?, ?> game = gson.fromJson(result, Map.class);
+        
+        setAttributes(game, item);
+        setScreenshots(mgr, item);
+        
+        setServiceInfo(item);
+        
+        
+        return item; 
     }
 
     @Override
@@ -59,7 +79,7 @@ public class MobyGamesSearch extends SearchTask {
 
     @Override
     public String getWhiteSpaceSubst() {
-        return "+";
+        return "%20";
     }
 
     @Override
@@ -86,11 +106,16 @@ public class MobyGamesSearch extends SearchTask {
         
         Map<String, Object> additionalFilters = getAdditionalFilters();
         
-        MobyGamesPlatform platform =
-                (MobyGamesPlatform) additionalFilters.get(DcResources.getText("lblPlatform"));
-
-        sUrl += "&platform=" + platform.getId();
-
+        if (additionalFilters != null) {
+            MobyGamesPlatform platform =
+                    (MobyGamesPlatform) additionalFilters.get(DcResources.getText("lblPlatform"));
+    
+            if (platform != null && !CoreUtilities.isEmpty(platform.getId()))
+                sUrl += "&platform=" + platform.getId();
+        }
+            
+        waitBetweenRequest(); // prevent button smashing
+        
         URL url = new URL(sUrl);
         
         HttpConnection connection = HttpConnectionUtil.getConnection(url);
@@ -104,36 +129,72 @@ public class MobyGamesSearch extends SearchTask {
         List<LinkedTreeMap> games = (List<LinkedTreeMap>) map.get("games");
         
         Software item;
-        String serviceUrl;
+        int mobygamesId;
+        int count = 0;
 
         for (LinkedTreeMap game : games) {
             item = new Software();
+            
+            mobygamesId = ((Double) game.get("game_id")).intValue();
+            
+            item.addExternalReference(DcRepository.ExternalReferences._MOBYGAMES, String.valueOf(mobygamesId));
             
             setTitle(game, item);
             setUrl(game, item);
             setDescription(game, item);
             setRating(game, item);
             setCategories(game, item);
-            setYear(game, item, platform);
-            
-            item.createReference(Software._H_PLATFORM, platform.getDescription());
-            
+            setPlatformDetails(game, item, mobygamesId);
             setPictureFront(game, item);
-            
-            serviceUrl = "https://api.mobygames.com/v1/games/" + 
-                    game.get("game_id") + "/platforms/" + platform.getId() + 
-                    "?api_key=jI2EJMdA7RG8d/vl4uf3Aw==";
-            
-            
-            item.setValue(Software._SYS_SERVICEURL, serviceUrl);
 
             MobyGamesResult mgr = new MobyGamesResult(item);
             setScreenshots(game, mgr);
             
             keys.add(mgr);
+            
+            count++;
+            
+            if (count == getMaximum()) break;
         }
         
         return keys;
+    }
+    
+    private void setAttributes(Map<?, ?> game, DcObject item) {
+        
+        List attributes = (List) game.get("attributes");
+        
+        LinkedTreeMap attribute;
+        for (Object o : attributes) {
+            attribute = (LinkedTreeMap) o;
+            
+            // multiplayer stuff
+            if (attribute.get("attribute_category_name").equals("Multiplayer Game Modes")) {
+                item.setValue(Software._AB_MULTI, Boolean.TRUE);
+
+                if (attribute.get("attribute_name").equals("Team"))
+                    item.setValue(Software._AA_COOP, Boolean.TRUE);
+            }
+
+            // storage medium
+            if (attribute.get("attribute_category_name").equals("Media Type")) {
+                item.createReference(Software._W_STORAGEMEDIUM, attribute.get("attribute_name"));
+            }
+        }
+    }
+    
+    private void setScreenshots(MobyGamesResult mgr, DcObject item) {
+        int[] fields = new int[] {Software._P_SCREENSHOTONE, Software._Q_SCREENSHOTTWO, Software._R_SCREENSHOTTHREE};
+        int fieldIdx = 0;
+        
+        byte[] image;
+        for (String link : mgr.getScreenshotLinks()) {
+            image = getImageBytes(link);
+            if (image != null)
+                item.setValue(fields[fieldIdx++], image);
+            
+            if (fieldIdx > 2) break;
+        }
     }
     
     private void setTitle(LinkedTreeMap game, Software item) {
@@ -155,6 +216,7 @@ public class MobyGamesSearch extends SearchTask {
         
         for (LinkedTreeMap screenshot : screenshots) {
             String link = (String) screenshot.get("image");
+            link = link.replace("http://", "https://");
             result.addScreenshot(link);
         }
     }
@@ -174,11 +236,7 @@ public class MobyGamesSearch extends SearchTask {
     private byte[] getImageBytes(String url) {
         url = url.replace("http://", "https://");
         
-        try {
-            sleep(1000);
-        } catch (InterruptedException ie) {
-            logger.debug("Could not wait during image retrieval");
-        }
+        // waitBetweenRequest();
                   
         try {
             if (url != null && url.length() > 0) {
@@ -214,18 +272,28 @@ public class MobyGamesSearch extends SearchTask {
     }
 
     @SuppressWarnings("unchecked")
-    private void setYear(LinkedTreeMap game, Software item, MobyGamesPlatform mgp) {
+    private void setPlatformDetails(LinkedTreeMap game, Software item, int mobygamesId) {
         List<LinkedTreeMap> platforms = (List<LinkedTreeMap>) game.get("platforms");
         
         if (platforms == null)
             return;
         
         for (LinkedTreeMap platform : platforms) {
-            if (platform.get("platform_id").equals(Double.valueOf(mgp.getId()))) {
-                String releasedOn = (String) platform.get("first_release_date");
-                if (releasedOn != null && releasedOn.length() >= 4)
-                    item.setValue(Software._C_YEAR, releasedOn.substring(0, 4));
-            }
+            int platformId = ((Double) platform.get("platform_id")).intValue();
+            String platformName = (String) platform.get("platform_name");
+            String releasedOn = (String) platform.get("first_release_date");
+
+            item.createReference(Software._H_PLATFORM, platformName);
+            
+            String serviceUrl = "https://api.mobygames.com/v1/games/" + mobygamesId 
+                    + "/platforms/" + platformId + "?api_key=jI2EJMdA7RG8d/vl4uf3Aw==";
+           
+            item.setValue(Software._SYS_SERVICEURL, serviceUrl);
+            
+            if (releasedOn != null && releasedOn.length() >= 4)
+                item.setValue(Software._C_YEAR, releasedOn.substring(0, 4));
+            
+            break;
         }
     }
     

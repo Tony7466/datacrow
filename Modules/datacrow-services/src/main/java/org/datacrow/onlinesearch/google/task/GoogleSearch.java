@@ -180,11 +180,13 @@ public class GoogleSearch extends SearchTask {
 
         URL url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + getQuery());
 
+        waitBetweenRequest();
+        
         HttpConnection connection = HttpConnectionUtil.getConnection(url);
         String result = connection.getString(StandardCharsets.UTF_8);
-     
         Collection<String> googleBooks = StringUtils.getValuesBetween("\"books#volume\"", "\"books#volume\"", result);
 
+        int count = 0;
         Book book;
         for (String googleBook : googleBooks) {
             book = new Book();
@@ -208,6 +210,10 @@ public class GoogleSearch extends SearchTask {
             setImages(googleBook, book);
             
             keys.add(book);
+            
+            count++;
+            
+            if (count == getMaximum()) break;
         }
         return keys;
     }

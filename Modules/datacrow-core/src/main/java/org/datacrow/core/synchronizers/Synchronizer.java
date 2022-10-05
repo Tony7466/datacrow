@@ -97,7 +97,9 @@ public abstract class Synchronizer implements Serializable{
     protected void merge(DcObject target, DcObject source, OnlineSearchHelper osh) {
         if (source == null) return;
         
+        // fetches the item using the service URL:
         DcObject queried = osh != null ? osh.query(source) : source;
+        queried = queried == null ? source : queried;
         
         // External references need to be merged manually - not part of the field settings
         if (target.getField(DcObject._SYS_EXTERNAL_REFERENCES) != null)
