@@ -64,10 +64,11 @@ public class MobyGamesSearch extends SearchTask {
         Map<?, ?> game = gson.fromJson(result, Map.class);
         
         setAttributes(game, item);
+        setCompanies(game, item);
+        setCountries(game, item);
+        
         setScreenshots(mgr, item);
-        
         setServiceInfo(item);
-        
         
         return item; 
     }
@@ -146,7 +147,7 @@ public class MobyGamesSearch extends SearchTask {
             setCategories(game, item);
             setPlatformDetails(game, item, mobygamesId);
             setPictureFront(game, item);
-
+            
             MobyGamesResult mgr = new MobyGamesResult(item);
             setScreenshots(game, mgr);
             
@@ -163,6 +164,8 @@ public class MobyGamesSearch extends SearchTask {
     private void setAttributes(Map<?, ?> game, DcObject item) {
         
         List attributes = (List) game.get("attributes");
+        
+        if (attributes == null) return;
         
         LinkedTreeMap attribute;
         for (Object o : attributes) {
@@ -182,6 +185,71 @@ public class MobyGamesSearch extends SearchTask {
             }
         }
     }
+    
+    private void setCountries(Map<?, ?> game, DcObject item) {
+        List releases = (List) game.get("releases");
+        
+        if (releases == null) return;
+        
+        LinkedTreeMap release;
+        
+        List<String> countries = new ArrayList<>();
+        
+        for (Object o : releases) {
+            release = (LinkedTreeMap) o;
+            List<String> c = (List<String>) release.get("countries");
+            
+            if (c != null) {
+                for (String s : c) {
+                    if (!countries.contains(s)) {
+                        countries.add(s);
+                    }
+                }
+            }
+        }
+
+        for (String country : countries) 
+            item.createReference(Software._F_COUNTRY, country);
+    }
+    
+    private void setCompanies(Map<?, ?> game, DcObject item) {
+        
+        List releases = (List) game.get("releases");
+        
+        if (releases == null) return;
+        
+        LinkedTreeMap release;
+        
+        String role;
+        String companyName;
+        
+        List<String> developers = new ArrayList<>();
+        List<String> publishers = new ArrayList<>();
+        
+        for (Object o : releases) {
+            release = (LinkedTreeMap) o;
+            
+            @SuppressWarnings("unchecked")
+            List<LinkedTreeMap> companies = (List<LinkedTreeMap>) release.get("companies");
+            
+            for (LinkedTreeMap company : companies) { 
+                role = (String) company.get("role");
+                companyName = (String) company.get("company_name");
+                
+                if (role.equals("Developed by") && !developers.contains(companyName))
+                    developers.add(companyName);
+
+                if (role.equals("Published by") && !publishers.contains(companyName))
+                    publishers.add(companyName);
+            }
+        }
+        
+        for (String developer : developers)
+            item.createReference(Software._F_DEVELOPER, developer);
+        
+        for (String publisher : publishers)
+            item.createReference(Software._G_PUBLISHER, publisher);
+    }    
     
     private void setScreenshots(MobyGamesResult mgr, DcObject item) {
         int[] fields = new int[] {Software._P_SCREENSHOTONE, Software._Q_SCREENSHOTTWO, Software._R_SCREENSHOTTHREE};

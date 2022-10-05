@@ -100,7 +100,7 @@ public class DcLongTextField extends JTextArea implements IComponent, MouseListe
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.getClickCount() == 2)
+        if (e.getClickCount() == 1 && e.isControlDown())
             openTextWindow();
     }
     @Override
