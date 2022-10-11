@@ -4,6 +4,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,21 @@ public class MobyGamesSearch extends SearchTask {
             Map<String, Object> additionalFilters) {
         
         super(listener, server, null, mode, query, additionalFilters);
+        
+        attributes.put("Minimum RAM Required", DcResources.getText("lblMobyGamesAttribRAM"));
+        attributes.put("Minimum CPU Class Required", DcResources.getText("lblMobyGamesAttribMinCPU"));
+        attributes.put("Minimum OS Class Required", DcResources.getText("lblMobyGamesAttribMinOS"));
+        attributes.put("Video Resolutions Supported", DcResources.getText("lblMobyGamesAttribVidRes"));
+        attributes.put("Video Modes Supported", DcResources.getText("lblMobyGamesAttribVidModes"));
+        attributes.put("Minimum DirectX Version Required", DcResources.getText("lblMobyGamesAttribMinDirectX"));
+        attributes.put("Input Devices Required", DcResources.getText("lblMobyGamesAttribInputDevices"));
+        attributes.put("Supported Systems/Models", DcResources.getText("lblMobyGamesAttribSupportedSystems"));
+        attributes.put("Minimum Video Memory Required", DcResources.getText("lblMobyGamesAttribMinVidMem"));
+        attributes.put("Multiplayer Options", DcResources.getText("lblMobyGamesAttribMultiplayerOptions"));
+        attributes.put("Number of Online Players", DcResources.getText("lblMobyGamesAttribNrOfOnlinePlayer"));
+        attributes.put("Number of Offline Players", DcResources.getText("lblMobyGamesAttribNrOfOfflinePlayer"));
+        attributes.put("Multiplayer Game Modes", DcResources.getText("lblMobyGamesAttribMultiplayerGameModes"));
+        attributes.put("Save Game Methods", DcResources.getText("lblMobyGamesAttribSaveGameMethods"));
     }
 
     @Override
@@ -69,6 +85,8 @@ public class MobyGamesSearch extends SearchTask {
         
         setScreenshots(mgr, item);
         setServiceInfo(item);
+        
+        extendDescription(game, item);
         
         return item; 
     }
@@ -186,6 +204,111 @@ public class MobyGamesSearch extends SearchTask {
         }
     }
     
+    private static final Map<String, String> attributes = new HashMap<>();
+    
+    private void extendDescription(Map<?, ?> game, DcObject item) {
+        
+        List attributes = (List) game.get("attributes");
+        
+        if (attributes == null) return;
+        
+        String attributeName;
+        String attributeValue;
+        
+        HashMap<String, List<String>> properties = new HashMap<>();
+        properties.put("Minimum RAM Required", new ArrayList<String>());
+        properties.put("Minimum CPU Class Required", new ArrayList<String>());
+        properties.put("Minimum OS Class Required", new ArrayList<String>());
+        properties.put("Video Resolutions Supported", new ArrayList<String>());
+        properties.put("Video Modes Supported", new ArrayList<String>());
+        properties.put("Minimum DirectX Version Required", new ArrayList<String>());
+        properties.put("Input Devices Required", new ArrayList<String>());
+        properties.put("Supported Systems/Models", new ArrayList<String>());
+        properties.put("Minimum Video Memory Required", new ArrayList<String>());
+        
+        properties.put("Multiplayer Options", new ArrayList<String>());
+        properties.put("Number of Online Players", new ArrayList<String>());
+        properties.put("Number of Offline Players", new ArrayList<String>());
+        properties.put("Multiplayer Game Modes", new ArrayList<String>());
+
+        properties.put("Save Game Methods", new ArrayList<String>());
+
+        LinkedTreeMap attribute;
+        for (Object o : attributes) {
+            attribute = (LinkedTreeMap) o;
+            
+            attributeName = (String) attribute.get("attribute_category_name");
+            attributeValue = (String) attribute.get("attribute_name");
+            
+            if (properties.containsKey(attributeName))
+                properties.get(attributeName).add(attributeValue);
+        }
+        
+        String description = (String) item.getValue(Software._B_DESCRIPTION);
+        
+        String part = createSection(
+                DcResources.getText("lblTechnicalInfo"), 
+                properties, new String[] {
+                        "Minimum RAM Required", 
+                        "Minimum CPU Class Required",
+                        "Minimum OS Class Required",
+                        "Video Resolutions Supported",
+                        "Video Modes Supported",
+                        "Minimum DirectX Version Required",
+                        "Input Devices Required",
+                        "Supported Systems/Models",
+                        "Minimum Video Memory Required"});
+        
+        if (part.trim().length() > 0)
+            description += "\r\n\r\n" + part;
+        
+        part = createSection(
+                DcResources.getText("lblMultiplayer"), 
+                properties, new String[] {
+                        "Multiplayer Options", 
+                        "Number of Online Players",
+                        "Number of Offline Players",
+                        "Multiplayer Game Modes"});
+        
+        if (part.trim().length() > 0)
+            description += "\r\n\r\n" + part;        
+        
+        item.setValue(Software._B_DESCRIPTION, description);
+    }
+    
+    private String createSection(String title, HashMap<String, List<String>> values, String[] selection) {
+        String section = "";
+        
+        int groupCount = 0;
+        int valueCount = 0;
+        for (String key : selection) {
+            
+            valueCount = 0;
+            
+            if (values.containsKey(key) && values.get(key).size() > 0) {
+            
+                if (groupCount == 0) {
+                    section += title + ":\r\n";
+                }
+                
+                if (groupCount > 0) section += " / ";
+                    
+                section += attributes.get(key) + ": ";
+                    
+                for (String value : values.get(key)) {
+                    if (valueCount > 0) section += ", ";
+                    section += value.replace(" / ", ", ");
+                    valueCount++;
+                }
+                
+                groupCount++;
+            }
+        }
+
+        return section;
+    }
+    
+    
     private void setCountries(Map<?, ?> game, DcObject item) {
         List releases = (List) game.get("releases");
         
@@ -197,6 +320,7 @@ public class MobyGamesSearch extends SearchTask {
         
         for (Object o : releases) {
             release = (LinkedTreeMap) o;
+            @SuppressWarnings("unchecked")
             List<String> c = (List<String>) release.get("countries");
             
             if (c != null) {
