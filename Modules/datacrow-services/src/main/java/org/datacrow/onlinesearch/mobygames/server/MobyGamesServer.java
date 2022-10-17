@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -15,6 +14,7 @@ import org.datacrow.core.log.DcLogManager;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.services.FilterField;
 import org.datacrow.core.services.IOnlineSearchClient;
 import org.datacrow.core.services.Region;
 import org.datacrow.core.services.SearchMode;
@@ -107,9 +107,9 @@ public class MobyGamesServer implements IServer {
     }
     
     @Override
-    public Map<String, Collection<?>> getAdditionalFields() {
-        Map<String, Collection<?>> fields = new HashMap<>();
-        fields.put(DcResources.getText("lblPlatform"), platforms);
+    public Collection<FilterField> getFilterFields() {
+        Collection<FilterField> fields = new ArrayList<>();
+        fields.add(new FilterField(DcResources.getText("lblPlatform"), platforms));
         return fields;
     }
     

@@ -32,6 +32,7 @@ import java.util.Map;
 import org.datacrow.core.modules.DcModule;
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.services.FilterField;
 import org.datacrow.core.services.IOnlineSearchClient;
 import org.datacrow.core.services.Region;
 import org.datacrow.core.services.SearchMode;
@@ -66,9 +67,7 @@ public interface IServer extends Serializable {
      */
     java.util.Collection<SearchMode> getSearchModes();
     
-
-    // TODO: add filter field object and tie in with a setting
-    Map<String, Collection<?>> getAdditionalFields();
+    Collection<FilterField> getFilterFields();
     
     /**
      * Name of the server (must be unique)

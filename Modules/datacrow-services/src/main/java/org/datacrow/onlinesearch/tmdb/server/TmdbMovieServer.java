@@ -31,6 +31,7 @@ import java.util.Map;
 
 import org.datacrow.core.modules.DcModules;
 import org.datacrow.core.objects.DcObject;
+import org.datacrow.core.services.FilterField;
 import org.datacrow.core.services.IOnlineSearchClient;
 import org.datacrow.core.services.Region;
 import org.datacrow.core.services.SearchMode;
@@ -102,8 +103,8 @@ public class TmdbMovieServer implements IServer {
     }
     
     @Override
-    public Map<String, Collection<?>> getAdditionalFields() {
-        return null;
+    public Collection<FilterField> getFilterFields() {
+        return new ArrayList<>();
     }
     
     @Override

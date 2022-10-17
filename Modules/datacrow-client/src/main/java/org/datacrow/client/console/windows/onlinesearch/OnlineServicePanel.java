@@ -32,7 +32,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +49,7 @@ import org.datacrow.core.DcRepository;
 import org.datacrow.core.IconLibrary;
 import org.datacrow.core.objects.DcObject;
 import org.datacrow.core.resources.DcResources;
+import org.datacrow.core.services.FilterField;
 import org.datacrow.core.services.OnlineServices;
 import org.datacrow.core.services.Region;
 import org.datacrow.core.services.SearchMode;
@@ -245,16 +245,11 @@ public class OnlineServicePanel extends JPanel implements ActionListener, KeyLis
         
         fldAdditionFields.clear();
         
-        if (server.getAdditionalFields() != null) {
-            
-            Collection<?> options;
+        if (server.getFilterFields() != null) {
             DcComboBox cb;
-            Map<String, Collection<?>> fields = server.getAdditionalFields();
-            
-            for (String key : fields.keySet()) {
-                options = fields.get(key);
-                cb = ComponentFactory.getComboBox(options.toArray());
-                fldAdditionFields.put(key, cb);
+            for (FilterField field : server.getFilterFields()) {
+                cb = ComponentFactory.getComboBox(field.getOptions().toArray());
+                fldAdditionFields.put(field.getName(), cb);                
             }
         }
         
