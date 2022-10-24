@@ -18,7 +18,12 @@ Data Crow version 4.4                                              Released on 2
   history.
 - None of the online services were set up to take the maximum number of search results
   into account.
-- UTL field launcher did not work for HTTPS hyper links.
+- URL field launcher did not work for HTTPS hyper links.
+
+[ToDO]
+- Add a timestamp button
+- Add preview for pictures to explorer
+
 
 -----------------------------------------------------------------------------------------
 Data Crow version 4.3                                              Released on 2022-09-29
