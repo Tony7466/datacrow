@@ -93,11 +93,16 @@ public class ImageUpgradeConverter extends Thread {
 	    
 	    for (String filename : filenames) {
 	    	file = new File(filename);
-	    	ID = file.getName().substring(0, file.getName().indexOf("_"));
 	    	
-	    	files = images.containsKey(ID) ? images.get(ID) : new ArrayList<File>();
-	    	files.add(file);
-	    	images.put(ID, files);
+	    	if (file.getName().indexOf("_") > -1) {
+		    	ID = file.getName().substring(0, file.getName().indexOf("_"));
+		    	
+		    	files = images.containsKey(ID) ? images.get(ID) : new ArrayList<File>();
+		    	files.add(file);
+		    	images.put(ID, files);
+	    	} else {
+	    		logger.debug("Image filename is incorrect - skipping for conversion; " + file);
+	    	}
 	    }
 	    
 	    return images;
