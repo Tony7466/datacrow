@@ -24,3 +24,12 @@ Data Crow is a powerful media cataloger and organizer for your collections. It h
 1. Clone the repository:
    ```bash
    git clone https://github.com/Tony7466/datacrow.git
+
+# License
+ - See datacrow.org for licensing information.
+
+# Credits
+
+- Data Crow is developed and maintained by the Data Crow team and community.
+
+For more information, visit the homepage.
